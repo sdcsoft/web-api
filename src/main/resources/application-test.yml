@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    boilermanage:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://192.168.0.110:3306/Customer_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      username: tomcat
+      password: 80201288@qq.com
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.0.110:8761/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+server:
+  port: 8080
+token:
+  cookie:
+    name: sdcsoft.ucookie
+    domain:
+    path: /

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: web-api
+  profiles:
+    active: test
+logging:
+  level:
+    cn:
+      com:
+        sdcsoft:
+          webapi:
+            web:
+              boilermanage:
+                mapper: DEBUG
