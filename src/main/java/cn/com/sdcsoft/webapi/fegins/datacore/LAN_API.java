@@ -88,20 +88,20 @@ public interface LAN_API {
     @PostMapping(value = "/datacore/employee/create")
     String employeeCreate(@RequestBody Employee employee);
 
-    @GetMapping(value = "/datacore/employee/list")
+    @GetMapping(value = "/datacore/employee/find")
     String employeeFind(@RequestParam("loginId") String loginId);
 
-    @GetMapping(value = "/datacore/employee/list/company")
+    @GetMapping(value = "/datacore/employee/find/company")
     String EmployeeFindCompanyUser(@RequestParam("loginId") String loginId);
 
 
-    @GetMapping(value = "/datacore/employee/list/customer")
+    @GetMapping(value = "/datacore/employee/find/customer")
     String EmployeeFindCustomerUser(@RequestParam("loginId") String loginId);
 
-    @GetMapping(value = "/datacore/employee/list/agent")
+    @GetMapping(value = "/datacore/employee/find/agent")
     String EmployeeFindAgentUser(@RequestParam("loginId") String loginId);
 
-    @GetMapping(value = "/datacore/employee/list/enduser")
+    @GetMapping(value = "/datacore/employee/find/enduser")
     String EmployeeFindEndUser(@RequestParam("loginId") String loginId);
 
     @PostMapping(value = "/datacore/employee/modify")

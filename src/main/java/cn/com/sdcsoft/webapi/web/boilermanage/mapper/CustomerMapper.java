@@ -32,11 +32,14 @@ public interface CustomerMapper {
     @Update("update Customer set Phone=#{phone},WeiXin=#{weiXin},Province=#{province},City=#{city},District=#{district} where Id = #{id} and OrgId=#{orgId}")
     void modifyCustomerExtendsInfo(Customer boilerCustomer);
 
-    @Insert("select count(*) Customer where OrgId=#{orgId} and Name=#{name})")
+    @Select("select count(*) from Customer where OrgId=#{orgId} and Name=#{name}")
     int checkExist(Customer boilerCustomer);
 
     @Insert("insert into Customer (Name,Phone,WeiXin,Province,City,District,OrgId) values (#{name},#{phone},#{weiXin},#{province},#{city},#{district},#{orgId})")
     void createCustomer(Customer boilerCustomer);
+
+    @Select("select count(*) from Product where CustomerId=#{customerId}")
+    int checkProductExist(@Param("customerId") Integer customerId);
 
     @Delete("delete from Customer where Id=#{id} and OrgId=#{orgId}")
     void removeCustomer(@Param("orgId") int orgId,@Param("id") int id);

@@ -97,7 +97,10 @@ public class BoilerManage_CustomerController {
      * @return
      */
     @PostMapping(value = "/remove")
-    public Result remove(@RequestParam int id, HttpServletRequest request) {
+    public Result remove(@RequestParam Integer id, HttpServletRequest request) {
+        if(0 < customerMapper.checkProductExist(id)){
+            return Result.getFailResult("因为该客户用户锅炉数据，所以不能删除！");
+        }
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         customerMapper.removeCustomer(orgId, id);
         return Result.getSuccessResult();
