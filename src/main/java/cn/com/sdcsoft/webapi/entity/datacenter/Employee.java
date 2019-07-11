@@ -17,6 +17,16 @@ public class Employee implements Serializable {
     private String password, mobile, email, weiXin, qQ, realName, mark;
     private String OrgName;
 
+    public Integer getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Integer isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    private Integer isAdmin;
+
     public String getOrgName() {
         return OrgName;
     }

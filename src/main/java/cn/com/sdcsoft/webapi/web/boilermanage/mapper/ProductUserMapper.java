@@ -19,10 +19,10 @@ public interface ProductUserMapper {
     void createProductUser(int userId, int productId);
 
     @Insert("<script>" +
-            "insert into Product_User(UserId,ProductId)"
+            "insert into Product_User(UserId,ProductId) "
             + "values "
-            + "<foreach collection =\"productUserList\" item=\"productUser\" index=\"index\" separator =\",\"> "
-            + "(#{productUser.userId},#{productUser.productId}) "
+            + "<foreach collection =\"productUserList\" item=\"i\" index=\"index\" separator =\",\"> "
+            + "(#{i.userId},#{i.productId}) "
             + "</foreach > " +
             "</script>")
     void createProductUserMap(@Param("productUserList") List<ProductUser> productUserList);

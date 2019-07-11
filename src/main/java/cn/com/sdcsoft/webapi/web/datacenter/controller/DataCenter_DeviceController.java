@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.datacenter;
+package cn.com.sdcsoft.webapi.web.datacenter.controller;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.entity.datacenter.Device;
@@ -51,7 +51,7 @@ public class DataCenter_DeviceController extends BaseController{
      */
     @GetMapping(value = "/get/deviceno")
     public String findByNo(@RequestParam("deviceNo") String deviceNo) {
-        return lan_api.deviceFindByNo(deviceNo);
+        return lan_api.deviceFindByDeviceNo(deviceNo);
     }
 
     /**

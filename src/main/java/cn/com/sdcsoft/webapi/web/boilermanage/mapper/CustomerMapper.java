@@ -26,16 +26,16 @@ public interface CustomerMapper {
     @Select("select * from Customer where Id=#{id} and OrgId=#{orgId}")
     Customer getCustomerById(@Param("orgId") int orgId, @Param("id") int id);
 
-    @Update("update Customer set Name=#{name},Phone=#{phone},WeiXin=#{weiXin},Province=#{province},City=#{city},District=#{district} where Id = #{id} and OrgId=#{orgId}")
+    @Update("update Customer set Name=#{name},Phone=#{phone}=Province=#{province},City=#{city},District=#{district},Address=#{address} where Id = #{id} and OrgId=#{orgId}")
     void modifyCustomer(Customer boilerCustomer);
 
-    @Update("update Customer set Phone=#{phone},WeiXin=#{weiXin},Province=#{province},City=#{city},District=#{district} where Id = #{id} and OrgId=#{orgId}")
+    @Update("update Customer set Phone=#{phone},Province=#{province},City=#{city},District=#{district},Address=#{address} where Id = #{id} and OrgId=#{orgId}")
     void modifyCustomerExtendsInfo(Customer boilerCustomer);
 
     @Select("select count(*) from Customer where OrgId=#{orgId} and Name=#{name}")
     int checkExist(Customer boilerCustomer);
 
-    @Insert("insert into Customer (Name,Phone,WeiXin,Province,City,District,OrgId) values (#{name},#{phone},#{weiXin},#{province},#{city},#{district},#{orgId})")
+    @Insert("insert into Customer (Name,Phone,Province,City,District,Address,OrgId) values (#{name},#{phone},#{province},#{city},#{district},#{address},#{orgId})")
     void createCustomer(Customer boilerCustomer);
 
     @Select("select count(*) from Product where CustomerId=#{customerId}")

@@ -1,5 +1,6 @@
 package cn.com.sdcsoft.webapi.fegins.datacore;
 
+import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Device;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -59,7 +60,7 @@ public interface LAN_API {
     String deviceFindByCustomer(@RequestParam("customerId") int customerId);
 
     @GetMapping(value = "/datacore/device/get/deviceno")
-    String deviceFindByNo(@RequestParam("deviceNo") String deviceNo);
+    String deviceFindByDeviceNo(@RequestParam("deviceNo") String deviceNo);
 
     @GetMapping(value = "/datacore/device/get/suffix")
     String deviceFindSuffix(@RequestParam("id") String suffix);
@@ -82,6 +83,15 @@ public interface LAN_API {
     @PostMapping("/datacore/device/type/modify")
     String deviceTypeModify(@RequestParam("id") int id, @RequestParam("typeName") String typeName);
 
+    @PostMapping(value = "/datacore/device/modify/customerid")
+    String deviceModifyCustomerId(@RequestParam("suffix") String suffix, @RequestParam("customerId") Integer customerId);
+
+    @PostMapping(value = "/datacore/device/modify/agentid")
+    String deviceModifyAgentId(@RequestParam("suffix") String suffix, @RequestParam("agentId") Integer agentId);
+
+    @PostMapping(value = "/datacore/device/modify/endUserId")
+    String deviceModifyEndUserId(@RequestParam("suffix") String suffix, @RequestParam("endUserId") Integer endUserId);
+
     @GetMapping(value = "/datacore/employee/list")
     String employeeList();
 
@@ -90,6 +100,12 @@ public interface LAN_API {
 
     @GetMapping(value = "/datacore/employee/find")
     String employeeFind(@RequestParam("loginId") String loginId);
+
+    @GetMapping(value = "/datacore/employee/wechat")
+    Result employeeFindWechat(@RequestParam("openId") String openId);
+
+    @PostMapping(value = "/datacore/employee/wechat/bind")
+    Result employeeBindWechat(@RequestParam("loginId") String loginId,@RequestParam("openId") String openId);
 
     @GetMapping(value = "/datacore/employee/find/company")
     String EmployeeFindCompanyUser(@RequestParam("loginId") String loginId);
@@ -113,8 +129,12 @@ public interface LAN_API {
     @PostMapping(value = "/datacore/employee/change/infos")
     String employeeChangeInfos(@RequestParam("loginId") String loginId, @RequestParam("mobile") String mobile, @RequestParam("email") String email, @RequestParam("qq") String qq, @RequestParam("realName") String realName);
 
+    @PostMapping(value = "/datacore/employee/change/password2")
+    String employeeChangePassword2(@RequestParam("loginId") String loginId, @RequestParam("password") String password);
+
     @PostMapping(value = "/datacore/employee/change/password")
-    String employeeChangePassword(@RequestParam("loginId") String loginId, @RequestParam("password") String password);
+    String employeeChangePassword(@RequestParam("id") String id, @RequestParam("password") String password);
+
 
     @GetMapping("/datacore/enduser/list")
     String enduserList();
@@ -172,4 +192,10 @@ public interface LAN_API {
 
     @PostMapping("/datacore/org/modify")
     String orgModify(@RequestParam("orgType") int orgType, @RequestParam("orgTypeName") String orgTypeName);
+
+    @GetMapping(value="/datacore/sms/send/zh")
+    Result smsSendZh(String number);
+
+    @GetMapping(value="/datacore/sms/send/en")
+    Result smsSendEn(String number);
 }

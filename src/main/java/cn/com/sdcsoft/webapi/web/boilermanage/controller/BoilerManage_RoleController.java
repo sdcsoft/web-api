@@ -101,7 +101,9 @@ public class BoilerManage_RoleController {
     @PostMapping("/resource/map")
     public Result map(Integer roleId, @RequestBody List<RoleResource> roleResources) {
         roleMapper.clearRoleResourceMap(roleId);
-        roleMapper.createRoleResourceMap(roleResources);
+        if(roleResources.size()>0) {
+            roleMapper.createRoleResourceMap(roleResources);
+        }
         return Result.getSuccessResult();
     }
 }

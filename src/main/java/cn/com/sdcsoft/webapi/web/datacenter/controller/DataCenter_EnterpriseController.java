@@ -1,14 +1,11 @@
-package cn.com.sdcsoft.webapi.web.datacenter;
+package cn.com.sdcsoft.webapi.web.datacenter.controller;
 
-import cn.com.sdcsoft.webapi.annotation.Auth;
-import cn.com.sdcsoft.webapi.entity.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * 企业管理接口

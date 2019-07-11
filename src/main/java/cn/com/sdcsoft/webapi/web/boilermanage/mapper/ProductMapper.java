@@ -94,9 +94,6 @@ public interface ProductMapper {
             "</script>")
     List<Product> find(@Param("userId") int userId);
 
-//    @Select("select * from Product where BoilerNo=#{boilerNo} and ControllerNo=#{controllerNo}")
-//    Product getProductByBoilerNo(@Param("userId") int userId,@Param("boilerNo") String boilerNo, @Param("controllerNo") String controllerNo);
-
     @Select("SELECT COUNT(*) AS Amount,case Media WHEN 0 THEN '热水' when 1 then '蒸汽' when 2 then '导热油' when 3 then '热风' ELSE '真空' END as mediaType,case Power WHEN 0 THEN '燃油气' when 1 then '电' when 2 then '煤' when 3 then '生物质' ELSE '余热' END powerType FROM (SELECT ControllerNo,Media,Power FROM Product INNER JOIN Product_User ON Product.Id = Product_User.ProductId WHERE UserId = #{userId}) AS tb GROUP BY Media,Power")
     List<ProductTypeAmountClass> getProductTypeAmountByUserId(@Param("userId") int userId);
 

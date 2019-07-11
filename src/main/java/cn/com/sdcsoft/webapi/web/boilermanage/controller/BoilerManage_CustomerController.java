@@ -36,11 +36,10 @@ public class BoilerManage_CustomerController {
     @GetMapping(value = "/list")
     public Result list(int pageNum, int pageSize, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
-        List<Customer> list = customerMapper.find(orgId);
         PageHelper.startPage(pageNum, pageSize);
+        List<Customer> list = customerMapper.find(orgId);
         PageInfo pageInfo = new PageInfo(list);
         return Result.getSuccessResult(pageInfo);
-
     }
 
     /**

@@ -29,12 +29,14 @@ public class BoilerManage_ProductPartInfoController {
 
     @PostMapping(value = "/create")
     public Result createProductPartInfos(@RequestBody List<ProductPartInfo> productPartInfos){
-        productPartInfoMapper.createProductPartInfoList(productPartInfos);
+        if(productPartInfos.size()>0) {
+            productPartInfoMapper.createProductPartInfoList(productPartInfos);
+        }
         return Result.getSuccessResult();
     }
 
     @PostMapping(value = "/modify")
-    public Result modifyProductPartInfo(ProductPartInfo productPartInfo){
+    public Result modifyProductPartInfo(@RequestBody ProductPartInfo productPartInfo){
         productPartInfoMapper.modifyProductPartInfo(productPartInfo);
         return Result.getSuccessResult();
     }

@@ -1,7 +1,11 @@
-package cn.com.sdcsoft.webapi.web.datacenter;
+package cn.com.sdcsoft.webapi.web.datacenter.controller;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
+import cn.com.sdcsoft.webapi.web.boilermanage.service.UserService;
+import cn.com.sdcsoft.webapi.web.datacenter.entity.OrgType;
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @Auth
 public class DataCenter_EmployeeController extends BaseController{
 
+    @Autowired
+    UserService boilerUserService;
     /**
      * 获取注册用户列表
      * @return
@@ -28,7 +34,20 @@ public class DataCenter_EmployeeController extends BaseController{
      */
     @PostMapping(value = "/create")
     public String create(@RequestBody Employee employee) {
-        return lan_api.employeeCreate(employee);
+        String str = lan_api.employeeCreate(employee);
+        JSONObject obj = JSONObject.parseObject(str);
+        if (0 == obj.getIntValue("code")) {
+            Employee resultEmployee = JSONObject.parseObject(obj.getString("data"), Employee.class);
+            if(resultEmployee.getOrgType() == OrgType.ORG_TYPE_Boiler){
+                if(null == employee.getIsAdmin() || employee.getIsAdmin() == 0){
+                    boilerUserService.createUser(resultEmployee);
+                }
+                else {
+                    boilerUserService.createAdmin(resultEmployee);
+                }
+            }
+        }
+        return str;
     }
 
     /**

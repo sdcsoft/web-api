@@ -8,7 +8,7 @@ public class Customer implements Serializable {
     private String customerNo;
     private String name;
     private String phone;
-    private String weiXin;
+    private String address;
     private String province;
     private String city;
     private String district;
@@ -46,12 +46,12 @@ public class Customer implements Serializable {
         this.phone = phone;
     }
 
-    public String getWeiXin() {
-        return weiXin;
+    public String getAddress() {
+        return address;
     }
 
-    public void setWeiXin(String weiXin) {
-        this.weiXin = weiXin;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getProvince() {

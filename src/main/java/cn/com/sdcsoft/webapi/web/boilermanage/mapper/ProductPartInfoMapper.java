@@ -27,16 +27,16 @@ public interface ProductPartInfoMapper {
     @Update("update Product_Part_Info " +
             "set PartCategoryId=#{partCategoryId}," +
             "PartSubCategoryId=#{partSubCategoryId}," +
-            "BrandName=#{prandName}," +
+            "BrandName=#{brandName}," +
             "ModelName=#{modelName}," +
             "AmountOfUser=#{amountOfUser}," +
             "Supplier=#{supplier}," +
             "Remarks=#{remarks} " +
-            "where Id=#{partId}")
+            "where Id=#{id}")
     void modifyProductPartInfo(ProductPartInfo partInfo);
 
     @Delete("delete from Product_Part_Info where ProductId=#{productId} and Id=#{partId}")
-    void removeProductPartInfo(Integer productId,Integer partId);
+    void removeProductPartInfo(@Param("productId") Integer productId,@Param("partId") Integer partId);
 
     @Delete("delete from Product_Part_Info where ProductId=#{productId}")
     void clearProductPartInfos(Integer productId);

@@ -51,6 +51,22 @@ public class BoilerManage_UserController {
         }
     }
 
+    @GetMapping("/find")
+    public Result findUserInfo(Integer userId){
+        User user = userMapper.findUserById(userId);
+        if(null != user){
+            //判断是否为企业管理员
+            if(null != user.getRoleId() && 1 == user.getRoleId()){//企业管理员加载企业资源信息
+                return Result.getFailResult("无法对系统管理员进行操作！");
+            }
+            return Result.getSuccessResult(user);
+        }
+        else{
+            return Result.getFailResult("系统中不存在当前用户信息！");
+        }
+    }
+
+
     @PostMapping("/resources")
     public Result getUserResources(Integer employeeId){
         User user = userMapper.findUserByEmployeeId(employeeId);
@@ -71,13 +87,16 @@ public class BoilerManage_UserController {
     /**
      * 获得员工列表
      *
-     * @param orgId
      * @param pageNum
      * @param pageSize
      * @return
      */
     @GetMapping("/list")
-    public Result list(int orgId, int pageNum, int pageSize) {
+    public Result list(Integer pageNum, Integer pageSize,HttpServletRequest request) {
+        Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
+        if(null == pageNum || null == pageSize){
+            return Result.getSuccessResult(userMapper.findAll(orgId));
+        }
         PageHelper.startPage(pageNum, pageSize);
         List<User> list = userMapper.findAll(orgId);
         PageInfo pageInfo = new PageInfo(list);
@@ -87,7 +106,7 @@ public class BoilerManage_UserController {
 
 
     /**
-     * 编辑用户信息
+     * 编辑员工信息
      *
      * @param user
      * @return
@@ -130,5 +149,6 @@ public class BoilerManage_UserController {
         userMapper.removeUser(id);
         return Result.getSuccessResult();
     }
+
 
 }

@@ -1,5 +1,6 @@
 package cn.com.sdcsoft.webapi.commcontroller;
 
+import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
@@ -16,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 
 @RestController
-@RequestMapping(value = "/webapi")
-public class loginController {
+@RequestMapping(value = "/account")
+public class AccountController {
 
     @Autowired
     private CookieService cookieService;
@@ -55,59 +56,49 @@ public class loginController {
         }
     }
 
-//    @PostMapping(value = "/login")
-//    public Result login(String loginId, String password, HttpServletResponse response) {
-//        JSONObject obj = JSONObject.parseObject(lan_api.employeeFind(loginId));
-//        obj.getJSONObject("data").put("orgName","测试锅炉厂");
-//        obj.getJSONObject("data").put("orgStatus",1);
-//        if (0 == obj.getIntValue("code")) {
-//            return getResult(loginId,password,obj,response);
-//        } else {
-//            return Result.getFailResult(obj.getString("msg"));
-//        }
-//    }
-
-
-
     @PostMapping(value = "/datamanage/login")
-    public Result dataManageLogin(String loginId, String password,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    public Result dataManageLogin(String loginId, String password, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         JSONObject obj = JSONObject.parseObject(lan_api.EmployeeFindCompanyUser(loginId));
         if (0 == obj.getIntValue("code")) {
-           return getResult(loginId,password,obj,request,response);
+            return getResult(loginId, password, obj, request, response);
         } else {
             return Result.getFailResult(obj.getString("msg"));
         }
     }
-
 
 
     @PostMapping(value = "/customer/login")
     public Result customerLogin(String loginId, String password, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         JSONObject obj = JSONObject.parseObject(lan_api.EmployeeFindCustomerUser(loginId));
         if (0 == obj.getIntValue("code")) {
-            return  getResult(loginId,password,obj,request,response);
+            return getResult(loginId, password, obj, request, response);
         } else {
             return Result.getFailResult(obj.getString("msg"));
         }
     }
 
     @PostMapping(value = "/agent/login")
-    public Result agentLogin(String loginId, String password, int orgType, HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+    public Result agentLogin(String loginId, String password, int orgType, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         JSONObject obj = JSONObject.parseObject(lan_api.EmployeeFindAgentUser(loginId));
         if (0 == obj.getIntValue("code")) {
-            return  getResult(loginId,password,obj,request,response);
+            return getResult(loginId, password, obj, request, response);
         } else {
             return Result.getFailResult(obj.getString("msg"));
         }
     }
 
     @PostMapping(value = "/enduser/login")
-    public Result endUserLogin(String loginId, String password, int orgType,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    public Result endUserLogin(String loginId, String password, int orgType, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         JSONObject obj = JSONObject.parseObject(lan_api.employeeFind(loginId));
         if (0 == obj.getIntValue("code")) {
-            return getResult(loginId,password,obj,request,response);
+            return getResult(loginId, password, obj, request, response);
         } else {
             return Result.getFailResult(obj.getString("msg"));
         }
+    }
+
+    @RequestMapping(value = "/hello")
+    public String hello()  {
+        return "hello world.";
     }
 }

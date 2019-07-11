@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.datacenter;
+package cn.com.sdcsoft.webapi.web.datacenter.controller;
 
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import org.springframework.beans.factory.annotation.Autowired;

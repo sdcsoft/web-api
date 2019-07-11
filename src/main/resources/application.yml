@@ -3,6 +3,11 @@ spring:
     name: web-api
   profiles:
     active: test
+wechat:
+  wx-openid: https://api.weixin.qq.com
+device:
+  cache: http://output.sdcsoft.com.cn
+  command: http://commands.sdcsoft.com.cn
 logging:
   level:
     cn:
