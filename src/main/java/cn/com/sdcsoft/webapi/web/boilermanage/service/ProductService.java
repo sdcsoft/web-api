@@ -49,9 +49,9 @@ public class ProductService {
     }
 
     public int deleteProduct(int id,String controllerNo){
-        productMapper.removerProduct(id);
         productUserMapper.clearProductMap(id);
         productPartInfoMapper.clearProductPartInfos(id);
+        productMapper.removerProduct(id);
         return 0;
     }
 }
