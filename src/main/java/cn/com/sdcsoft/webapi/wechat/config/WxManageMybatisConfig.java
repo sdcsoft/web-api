@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@MapperScan(basePackages = "cn.com.sdcsoft.webapi.web.wechat.mapper",sqlSessionFactoryRef = "wxManageSqlSessionFactory")
+@MapperScan(basePackages = "cn.com.sdcsoft.webapi.wechat.mapper",sqlSessionFactoryRef = "wxManageSqlSessionFactory")
 public class WxManageMybatisConfig {
     @Bean(name = "wxManageDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.wxmanage")
