@@ -2,12 +2,16 @@ spring:
   application:
     name: web-api
   profiles:
-    active: test
+    active: dev
 wechat:
   wx-openid: https://api.weixin.qq.com
 device:
   cache: http://output.sdcsoft.com.cn
   command: http://commands.sdcsoft.com.cn
+fileupload:
+  boiler:
+    path: E:/Projects/Github/Java/SdcSoft.com.cn/aupload/boiler/
+    return-image-prefix: /boiler
 logging:
   level:
     cn:

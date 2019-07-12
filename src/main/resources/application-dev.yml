@@ -11,7 +11,7 @@ eureka:
       defaultZone: http://192.168.0.110:8761/eureka
   instance:
     prefer-ip-address: true
-    ip-address: 192.168.0.118
+    ip-address: 19.168.0.106
 server:
   port: 8080
 token:

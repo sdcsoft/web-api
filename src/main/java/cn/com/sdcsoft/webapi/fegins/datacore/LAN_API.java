@@ -17,7 +17,7 @@ public interface LAN_API {
     @GetMapping("/datacore/agent/list")
     String agentList();
 
-    @GetMapping(value = "/datacore/agent/list")
+    @GetMapping(value = "/datacore/agent/find")
     String agentFindById(@RequestParam("id") int id);
 
     @PostMapping("/datacore/agent/create")
@@ -38,7 +38,7 @@ public interface LAN_API {
     @GetMapping("/datacore/customer/list")
     String customerList();
 
-    @GetMapping(value = "/datacore/customer/list")
+    @GetMapping(value = "/datacore/customer/find")
     String customerFindById(@RequestParam("id") int id);
 
     @PostMapping("/datacore/customer/create")
@@ -139,7 +139,7 @@ public interface LAN_API {
     @GetMapping("/datacore/enduser/list")
     String enduserList();
 
-    @GetMapping(value = "/datacore/enduser/list")
+    @GetMapping(value = "/datacore/enduser/find")
     String endUserFindById(@RequestParam("id") int id);
 
     @PostMapping("/datacore/enduser/create")
