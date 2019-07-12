@@ -24,6 +24,4 @@ public class Wechat_EmployeeController {
         // TODO ......
         return result;
     }
-
-
 }

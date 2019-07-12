@@ -1,6 +1,9 @@
 package cn.com.sdcsoft.webapi.wechat.controller;
+import cn.com.sdcsoft.webapi.entity.Result;
+import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.wechat.client.TemplateClient;
+import cn.com.sdcsoft.webapi.wechat.entity.Relation_DeviceControlMap;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,5 +71,14 @@ public class Wechat_DeviceController {
         Map<String,String> mapp=new HashMap<>();
         mapp.put("command",command);
         return wxClient.post(mapp,map);
+    }
+
+    @GetMapping(value = "/getdevicecontrolList")
+    public Result getdevicecontrolList(String openid) {
+        Result result = lan_api.employeeFindWechat(openid);
+        //Employee e= employeeMapper.loginByOpenid(openid);
+        Relation_DeviceControlMap rdc =new Relation_DeviceControlMap();
+        //rdc.setEmployeeMobile(e.getMobile());
+        return null;
     }
 }
