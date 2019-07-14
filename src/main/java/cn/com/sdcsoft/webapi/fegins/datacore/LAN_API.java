@@ -194,8 +194,8 @@ public interface LAN_API {
     String orgModify(@RequestParam("orgType") int orgType, @RequestParam("orgTypeName") String orgTypeName);
 
     @GetMapping(value="/datacore/sms/send/zh")
-    Result smsSendZh(String number);
+    Result smsSendZh(@RequestParam("number") String number);
 
     @GetMapping(value="/datacore/sms/send/en")
-    Result smsSendEn(String number);
+    Result smsSendEn(@RequestParam("number") String number);
 }

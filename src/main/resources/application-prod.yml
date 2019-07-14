@@ -2,16 +2,21 @@ spring:
   datasource:
     boilermanage:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://192.168.0.110:3306/Customer_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-      username: root
-      password: 123456
+      jdbc-url: jdbc:mysql://172.17.201.251:3306/Customer_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      username: dba_user
+      password: Test@163.com
+    wxmanage:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://172.17.201.251:3306/Wx_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      username: dba_user
+      password: Test@163.com
 eureka:
   client:
     service-url:
-      defaultZone: http://192.168.0.110:8761/eureka
+      defaultZone: http://172.17.30.183:8761/eureka
   instance:
     prefer-ip-address: true
-    ip-address: 192.168.0.156
+    ip-address: 172.17.30.183
 server:
   port: 8080
 token:
@@ -19,3 +24,7 @@ token:
     name: sdcsoft.ucookie
     domain:  sdcsoft.com.cn
     path: /
+fileupload:
+  boiler:
+    path: /boiler #docker容器中文件上传目录
+    return-image-prefix: /files #nginx中访问文件的路径

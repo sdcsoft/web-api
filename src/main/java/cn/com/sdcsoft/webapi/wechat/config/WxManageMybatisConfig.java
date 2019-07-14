@@ -20,13 +20,11 @@ import javax.sql.DataSource;
 public class WxManageMybatisConfig {
     @Bean(name = "wxManageDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.wxmanage")
-    @Primary
     public DataSource wxManageDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "wxManageSqlSessionFactory")
-    @Primary
     public SqlSessionFactory wxManageSqlSessionFactory(@Qualifier("wxManageDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
@@ -36,13 +34,11 @@ public class WxManageMybatisConfig {
     }
 
     @Bean(name = "wxManageTransactionManager")
-    @Primary
     public DataSourceTransactionManager wxManageTransactionManager(@Qualifier("wxManageDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean(name = "wxManageSqlSessionTemplate")
-    @Primary
     public SqlSessionTemplate wxManageSqlSessionTemplate(@Qualifier("wxManageSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }

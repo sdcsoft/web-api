@@ -23,7 +23,7 @@ public interface ResourceMapper {
             "where rr.RoleId=#{roleId} order by Sort asc")
     List<Resource> getRoleResources(Integer roleId);
 
-    @Select("delete from Role_Resource rr where rr.RoleId=#{roleId}")
+    @Delete("delete from Role_Resource where RoleId=#{roleId}")
     void clearRoleResources(Integer roleId);
 
 //    @Select("select r.* from Resource r " +

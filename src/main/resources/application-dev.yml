@@ -19,3 +19,16 @@ token:
     name: sdcsoft.ucookie
     domain:
     path: /
+fileupload:
+  boiler:
+    path: E:/Projects/Github/Java/SdcSoft.com.cn/aupload/boiler/
+    return-image-prefix: /boiler
+logging:
+  level:
+    cn:
+      com:
+        sdcsoft:
+          webapi:
+            web:
+              boilermanage:
+                mapper: DEBUG
