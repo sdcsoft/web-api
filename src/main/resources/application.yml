@@ -1,6 +1,6 @@
 spring:
   application:
-    name: web-api
+    name: wxmanage
   profiles:
     active: prod
 wechat:
