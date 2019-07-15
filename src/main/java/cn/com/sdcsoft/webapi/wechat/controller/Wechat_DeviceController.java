@@ -4,6 +4,8 @@ import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.wechat.client.TemplateClient;
 import cn.com.sdcsoft.webapi.wechat.entity.Relation_DeviceControlMap;
+import cn.com.sdcsoft.webapi.wechat.mapper.Relation_DeviceControlMapMapper;
+import com.alibaba.fastjson.JSONObject;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -73,12 +76,15 @@ public class Wechat_DeviceController {
         return wxClient.post(mapp,map);
     }
 
+    @Autowired
+    private Relation_DeviceControlMapMapper rdcMapper;
+
     @GetMapping(value = "/getdevicecontrolList")
     public Result getdevicecontrolList(String openid) {
         Result result = lan_api.employeeFindWechat(openid);
-        //Employee e= employeeMapper.loginByOpenid(openid);
+        LinkedHashMap data=(LinkedHashMap)result.getData();
         Relation_DeviceControlMap rdc =new Relation_DeviceControlMap();
-        //rdc.setEmployeeMobile(e.getMobile());
-        return null;
+        rdc.setEmployeeMobile(data.get("mobile").toString());
+        return Result.getSuccessResult(rdcMapper.getRelation_DeviceControlMapListByCondition(rdc));
     }
 }
