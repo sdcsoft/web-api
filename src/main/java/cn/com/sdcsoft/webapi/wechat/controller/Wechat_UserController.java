@@ -57,7 +57,7 @@ public class Wechat_UserController {
     @GetMapping(value = "/saveEmployee")
     public Result saveEmployee(String validate, String password, String realName, String mobile, String openid, String wxEnterpriseName, HttpServletRequest request, Map<String, String> map) {
         //从session中获取验证码
-        String code = request.getSession().getAttribute(SmsCode).toString();
+        //String code = request.getSession().getAttribute(SmsCode).toString();
         Employee employee = new Employee();
         employee.setMobile(mobile);
         employee.setEmail(mobile);
@@ -108,16 +108,12 @@ public class Wechat_UserController {
     /**
      * 绑定微信号
      * @param mobileNumber
-     * @param code
      * @param openId
-     * @param request
      * @return
      */
     @GetMapping(value = "/bind/wechat")
-    public Result bindWechat(String mobileNumber,String code,String openId,HttpServletRequest request){
-        if(code.toLowerCase().equals(request.getSession(true).getAttribute(SmsCode).toString().toLowerCase())){
-            Result result = lan_api.employeeBindWechat(mobileNumber,openId);
-        }
-        return Result.getFailResult(-1,"输入的验证码无效！");
+    public Result bindWechat(String mobileNumber,String openId){
+        Result result = lan_api.employeeBindWechat(mobileNumber,openId);
+        return result;
     }
 }

@@ -18,7 +18,7 @@ eureka:
     prefer-ip-address: true
     ip-address: 19.168.0.106
 server:
-  port: 8080
+  port: 8088
 token:
   cookie:
     name: sdcsoft.ucookie

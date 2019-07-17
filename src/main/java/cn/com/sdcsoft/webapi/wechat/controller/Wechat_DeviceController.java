@@ -59,6 +59,23 @@ public class Wechat_DeviceController {
     public String getdecode(String deviceNo) {
         return lan_api.deviceFindByDeviceNo(deviceNo);
     }
+
+
+    @GetMapping(value = "/modifydevice", produces = { "application/json;charset=UTF-8" })
+    public String modifydevice(String deviceNo,int prefix,String deviceType,int status) {
+        return lan_api.deviceModifyForEnterpriseUser(deviceNo,prefix,deviceType,status);
+    }
+
+    @GetMapping(value = "/getsuffix", produces = { "application/json;charset=UTF-8" })
+    public String getsuffix(String deviceNo) {
+        return lan_api.deviceFindBySuffixForEnterpriseUser(deviceNo);
+    }
+
+    @GetMapping(value = "/gettypelist", produces = { "application/json;charset=UTF-8" })
+    public String gettypelist() {
+        return lan_api.deviceTypeList();
+    }
+
     @GetMapping(value = "/sendcmd")
     public String sendcmd(String command,HttpServletRequest request) {
         Map<String, String> map = new HashMap<String, String>();
