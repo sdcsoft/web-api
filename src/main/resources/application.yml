@@ -2,7 +2,7 @@ spring:
   application:
     name: wxmanage
   profiles:
-    active: prod
+    active: dev
 wechat:
   wx-openid: https://api.weixin.qq.com
 device:
