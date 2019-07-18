@@ -14,15 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/webapi/datacenter/org", produces = "application/json;charset=utf-8")
 @Auth
 public class DataCenter_OrgTypeController extends BaseController{
-    @Autowired
-
 
     /**
      * 获取组织类型列表
      * @return
      */
     @GetMapping("/list")
-    public String getList() {
+    public String getList2() {
        return lan_api.orgList();
  }
 
