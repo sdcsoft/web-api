@@ -16,10 +16,10 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@MapperScan(basePackages = "cn.com.sdcsoft.webapi.web.boilermanage.mapper",sqlSessionFactoryRef = "boilerManageSqlSessionFactory")
+@MapperScan(basePackages = "cn.com.sdcsoft.webapi.web.boiler.mapper",sqlSessionFactoryRef = "boilerManageSqlSessionFactory")
 public class BoilerManageMybatisConfig {
     @Bean(name = "boilerManageDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.boilermanage")
+    @ConfigurationProperties(prefix = "spring.datasource.boiler")
     @Primary
     public DataSource boilerManageDataSource() {
         return DataSourceBuilder.create().build();

@@ -14,7 +14,7 @@ import java.util.List;
  * 字典信息
  */
 @RestController
-@RequestMapping(value = "/webapi/boilermanage/dictionary", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boiler/dictionary", produces = "application/json;charset=utf-8")
 public class BoilerManage_DictionaryController {
 
     @Autowired

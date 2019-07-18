@@ -15,7 +15,7 @@ import java.util.List;
  * 产品辅机信息
  */
 @RestController
-@RequestMapping(value = "/webapi/boilermanage/productpartinfo", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boiler/productpartinfo", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_ProductPartInfoController {
 

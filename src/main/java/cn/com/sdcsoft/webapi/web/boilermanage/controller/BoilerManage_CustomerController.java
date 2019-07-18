@@ -19,7 +19,7 @@ import java.util.List;
  * 客户管理
  */
 @RestController
-@RequestMapping(value = "/webapi/boilermanage/customer", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boiler/customer", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_CustomerController {
 

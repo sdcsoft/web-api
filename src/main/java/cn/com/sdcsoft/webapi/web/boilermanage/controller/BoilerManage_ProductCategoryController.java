@@ -17,7 +17,7 @@ import java.util.List;
  * 锅炉型号
  */
 @RestController
-@RequestMapping(value = "/webapi/boilermanage/productcategory", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boiler/productcategory", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_ProductCategoryController {
 

@@ -21,7 +21,7 @@ import java.util.List;
  * 企业员工
  */
 @RestController
-@RequestMapping(value = "/webapi/boilermanage/user", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boiler/user", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_UserController {
 

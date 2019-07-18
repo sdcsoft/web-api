@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.datacenter.controller;
+package cn.com.sdcsoft.webapi.web.datacenter.controller.core;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
  * 注意：终端用户是一个组织，类似与企业
  */
 @RestController
-@RequestMapping(value = "/webapi/datacenter/enduser", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/datacenter/core/coreenduser", produces = "application/json;charset=utf-8")
 @Auth
-public class DataCenter_EndUserController extends BaseController {
+public class Core_EndUserController extends BaseController {
 
     /**
      * 获取终端用户列表

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * 字典对应值
  */
 @RestController
-@RequestMapping(value = "/webapi/boilermanage/dictionaryvalue", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boiler/dictionaryvalue", produces = "application/json;charset=utf-8")
 public class BoilerManage_DictionaryValueController {
 
     @Autowired

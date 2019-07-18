@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.datacenter.controller;
+package cn.com.sdcsoft.webapi.web.datacenter.controller.core;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/webapi/datacenter/customer", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/datacenter/core/customer", produces = "application/json;charset=utf-8")
 @Auth
-public class DataCenter_CustomerController extends BaseController {
+public class Core_CustomerController extends BaseController {
 
     /**
      * 获取锅炉厂列表

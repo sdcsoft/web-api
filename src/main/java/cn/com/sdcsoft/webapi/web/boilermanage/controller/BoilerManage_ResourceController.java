@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * 资源
  */
 @RestController
-@RequestMapping(value = "/webapi/boilermanage/resource", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boiler/resource", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_ResourceController {
     @Autowired

@@ -19,7 +19,7 @@ import java.util.List;
  * 角色管理
  */
 @RestController
-@RequestMapping(value = "/webapi/boilermanage/role", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boiler/role", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_RoleController {
 

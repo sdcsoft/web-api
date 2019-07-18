@@ -1,5 +1,6 @@
-package cn.com.sdcsoft.webapi.web.datacenter.controller;
+package cn.com.sdcsoft.webapi.web.datacenter.controller.core;
 
+import cn.com.sdcsoft.webapi.annotation.Auth;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @RestController
-@RequestMapping(value = "/webapi/datacenter/enterprise", produces = "application/json;charset=utf-8")
-//@Auth
-public class DataCenter_EnterpriseController extends BaseController{
+@RequestMapping(value = "/webapi/datacenter/core/enterprise", produces = "application/json;charset=utf-8")
+@Auth
+public class Core_EnterpriseController extends BaseController{
 
     /**
      * 获取企业列表

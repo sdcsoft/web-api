@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.datacenter.controller;
+package cn.com.sdcsoft.webapi.web.datacenter.controller.core;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.entity.datacenter.Device;
@@ -10,9 +10,9 @@ import java.util.List;
  * 设备管理接口
  */
 @RestController
-@RequestMapping(value = "/webapi/datacenter/device", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/datacenter/core/device", produces = "application/json;charset=utf-8")
 @Auth
-public class DataCenter_DeviceController extends BaseController{
+public class Core_DeviceController extends BaseController{
 
     /**
      * 获取控制器列表

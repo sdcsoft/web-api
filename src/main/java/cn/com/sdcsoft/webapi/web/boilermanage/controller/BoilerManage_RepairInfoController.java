@@ -14,7 +14,7 @@ import java.sql.Timestamp;
  *
  */
 @RestController
-@RequestMapping(value = "/webapi/boilermanage/repairinfo", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boiler/repairinfo", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_RepairInfoController {
 

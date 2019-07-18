@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.datacenter.controller;
+package cn.com.sdcsoft.webapi.web.datacenter.controller.core;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
  * 注册用户管理接口
  */
 @RestController
-@RequestMapping(value = "/webapi/datacenter/employee", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/datacenter/core/employee", produces = "application/json;charset=utf-8")
 @Auth
-public class DataCenter_EmployeeController extends BaseController{
+public class Core_EmployeeController extends BaseController{
 
     @Autowired
     UserService boilerUserService;

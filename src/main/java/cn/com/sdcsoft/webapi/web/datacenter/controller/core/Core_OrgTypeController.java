@@ -1,7 +1,6 @@
-package cn.com.sdcsoft.webapi.web.datacenter.controller;
+package cn.com.sdcsoft.webapi.web.datacenter.controller.core;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
  * 组织类型管理接口
  */
 @RestController
-@RequestMapping(value = "/webapi/datacenter/org", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/datacenter/core/org", produces = "application/json;charset=utf-8")
 @Auth
-public class DataCenter_OrgTypeController extends BaseController{
+public class Core_OrgTypeController extends BaseController{
 
     /**
      * 获取组织类型列表

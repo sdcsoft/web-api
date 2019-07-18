@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.datacenter.controller;
+package cn.com.sdcsoft.webapi.web.datacenter.controller.core;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/webapi/datacenter/agent", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/datacenter/core/agent", produces = "application/json;charset=utf-8")
 @Auth
-public class DataCenter_AgentController extends BaseController{
+public class Core_AgentController extends BaseController{
     /**
      * 获取代理商列表
      * @return
