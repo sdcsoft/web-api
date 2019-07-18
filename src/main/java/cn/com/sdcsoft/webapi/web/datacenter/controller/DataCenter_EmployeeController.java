@@ -103,9 +103,9 @@ public class DataCenter_EmployeeController extends BaseController{
      * @param password
      * @return
      */
-    @PostMapping(value = "/change/password")
+    @PostMapping(value = "/change/user/password")
     public String changeEmployeePassword(String loginId, String password) {
-        return lan_api.employeeChangePassword(loginId,password);
+        return lan_api.employeeChangeUserPassword(loginId,password);
     }
 
 }

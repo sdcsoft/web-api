@@ -65,11 +65,19 @@ public class BoilerManage_RoleController {
     public Result modify(@RequestBody Role role,HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         role.setOrgId(orgId);
-        if(roleMapper.checkExist(role)>0){
+        Role item = roleMapper.findRole(role);
+        if(null == item){
+            return Result.getFailResult("无法查询到有效数据并修改！");
+        }
+        if(item.getRoleName().equals(role.getRoleName())){
             roleMapper.modifyRoleExtendsInfo(role);
             return Result.getSuccessResult();
         }
+        if(roleMapper.checkExist(role)>0){
+            return Result.getFailResult("该名称已经被占用！");
+        }
         roleMapper.modifyRole(role);
+        roleMapper.changeUsersRoleInfo(role);
         return Result.getSuccessResult();
     }
 

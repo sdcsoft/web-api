@@ -129,8 +129,8 @@ public interface LAN_API {
     @PostMapping(value = "/datacore/employee/change/infos")
     String employeeChangeInfos(@RequestParam("loginId") String loginId, @RequestParam("mobile") String mobile, @RequestParam("email") String email, @RequestParam("qq") String qq, @RequestParam("realName") String realName);
 
-    @PostMapping(value = "/datacore/employee/change/password2")
-    String employeeChangePassword2(@RequestParam("loginId") String loginId, @RequestParam("password") String password);
+    @PostMapping(value = "/datacore/employee/change/user/password")
+    String employeeChangeUserPassword(@RequestParam("loginId") String loginId, @RequestParam("password") String password);
 
     @PostMapping(value = "/datacore/employee/change/password")
     String employeeChangePassword(@RequestParam("id") String id, @RequestParam("password") String password);

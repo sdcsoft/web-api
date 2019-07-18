@@ -26,7 +26,7 @@ public interface CustomerMapper {
     @Select("select * from Customer where Id=#{id} and OrgId=#{orgId}")
     Customer getCustomerById(@Param("orgId") int orgId, @Param("id") int id);
 
-    @Update("update Customer set Name=#{name},Phone=#{phone}=Province=#{province},City=#{city},District=#{district},Address=#{address} where Id = #{id} and OrgId=#{orgId}")
+    @Update("update Customer set Name=#{name},Phone=#{phone},Province=#{province},City=#{city},District=#{district},Address=#{address} where Id = #{id} and OrgId=#{orgId}")
     void modifyCustomer(Customer boilerCustomer);
 
     @Update("update Customer set Phone=#{phone},Province=#{province},City=#{city},District=#{district},Address=#{address} where Id = #{id} and OrgId=#{orgId}")

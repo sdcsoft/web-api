@@ -11,9 +11,9 @@ import java.util.List;
 public interface ProductMapper {
 
     @Select("<script>" +
-            "select pt.* from Product pt "+
-            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id "+
-            "left join Customer c on pt.CustomerId=c.Id "+
+            "select pt.* from Product pt " +
+            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
+            "left join Customer c on pt.CustomerId=c.Id " +
             "<where>" +
             "pt.OrgId=#{orgId} " +
             "<if test='product.customerId != null'> " +
@@ -46,49 +46,52 @@ public interface ProductMapper {
             "</where>" +
             " order by EditDateTime desc" +
             "</script>")
-    List<Product> searchForAdmin(@Param("orgId")Integer orgId, @Param("product") Product product);
+    List<Product> searchForAdmin(@Param("orgId") Integer orgId, @Param("product") Product product);
 
     @Select("<script>" +
             "select pt.* from Product_User pu" +
-            "inner join Product pt on pu.ProductId=pt.Id"+
-            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id "+
-            "left join Customer c on pt.CustomerId=c.Id"+
+            "inner join Product pt on pu.ProductId=pt.Id" +
+            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
+            "left join Customer c on pt.CustomerId=c.Id" +
             "<where>" +
-            "pu.UserId=#{product.userId} " +
+            "pu.UserId=#{userId} " +
             "<if test='product.customerId != null'> " +
             "AND pt.CustomerId = #{product.customerId}" +
+            "</if>" +
+            "<if test='product.customerName != null and product.customerName.length > 0'> " +
+            "AND c.Name LIKE CONCAT('%',#{product.customerName},'%')" +
             "</if>" +
             "<if test='product.saleDate != null'> " +
             " AND SaleDate=DATE_FORMAT(DATE_ADD(#{product.saleDate},INTERVAL 1 DAY), '%Y-%m-%d') " +
             "</if>" +
             "<if test='product.boilerNo != null and product.boilerNo.length>0'> " +
-            " AND BoilerNo LIKE CONCAT('%',#{product.boilerNo},'%')" +
+            " AND BoilerNo LIKE CONCAT('%',#{product.boilerNo},'%') " +
             "</if>" +
             "<if test='product.productCategoryId != null'> " +
-            " AND ProductCategoryId=#{product.productCategoryId}" +
+            " AND ProductCategoryId=#{product.productCategoryId} " +
             "</if>" +
             "<if test='product.controllerNo != null and product.controllerNo.length>0'> " +
-            " AND ControllerNo LIKE CONCAT('%',#{product.controllerNo},'%')" +
+            " AND ControllerNo LIKE CONCAT('%',#{product.controllerNo},'%') " +
             "</if>" +
             "<if test='product.tonnageNum != null'> " +
-            " AND TonnageNum=#{product.tonnageNum}" +
+            " AND TonnageNum=#{product.tonnageNum} " +
             "</if>" +
             "<if test='product.media != null'> " +
-            " AND Media=#{product.media}" +
+            " AND Media=#{product.media} " +
             "</if>" +
             "<if test='product.power != null'> " +
-            " AND Power=#{product.power}" +
+            " AND Power=#{product.power} " +
             "</if>" +
             "</where>" +
             " order by EditDateTime desc" +
             "</script>")
-    List<Product> search(@Param("userId")Integer userId, @Param("product") Product product);
+    List<Product> search(@Param("userId") Integer userId, @Param("product") Product product);
 
     @Select("<script>" +
             "select * from Product_User pu" +
-            "inner join Product pt on pu.ProductId=pt.Id"+
-            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id "+
-            "left join Customer c on pt.CustomerId=c.Id"+
+            "inner join Product pt on pu.ProductId=pt.Id" +
+            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
+            "left join Customer c on pt.CustomerId=c.Id" +
             "<where> pu.UserId=#{userId} </where>" +
             "order by EditDateTime desc" +
             "</script>")

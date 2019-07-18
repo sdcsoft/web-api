@@ -19,6 +19,9 @@ public interface RoleMapper {
     @Update("update Role set RoleDesc=#{roleDesc} where Id = #{id}")
     void modifyRoleExtendsInfo(Role role);
 
+    @Update("update User set RoleName=#{roleName} where RoleId=#{id}")
+    void changeUsersRoleInfo(Role role);
+
     @Insert("insert into Role (OrgId,RoleName,RoleDesc) values (#{orgId},#{roleName},#{roleDesc})")
     void createRole(Role role);
 
@@ -36,6 +39,9 @@ public interface RoleMapper {
 
     @Select("select count(*) from Role where OrgId=#{orgId} and RoleName=#{roleName}")
     int checkExist(Role role);
+
+    @Select("select * from Role where OrgId=#{orgId} and Id=#{id}")
+    Role findRole(Role role);
     @Select("select count(*) from User where RoleId=#{roleId}")
     int checkUsersInRole(@Param("roleId") Integer roleId);
     @Delete("Delete from Role_Resource  where RoleId=#{roleId}")

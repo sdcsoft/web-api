@@ -23,8 +23,7 @@ public class DataCenter_OrgTypeController extends BaseController{
      */
     @GetMapping("/list")
     public String getList() {
-//        return lan_api.orgList();
-        return "";
+       return lan_api.orgList();
  }
 
     /**
@@ -35,7 +34,7 @@ public class DataCenter_OrgTypeController extends BaseController{
      */
     @PostMapping("/modify")
     public String modify(int orgType, String orgTypeName) {
-        return lan_api.orgCreate(orgType,orgTypeName);
+        return lan_api.orgModify(orgType,orgTypeName);
     }
 
     /**
@@ -46,7 +45,7 @@ public class DataCenter_OrgTypeController extends BaseController{
      */
     @PostMapping("/create")
     public String create(int orgType, String orgTypeName) {
-        return lan_api.orgModify(orgType,orgTypeName);
+        return lan_api.orgCreate(orgType,orgTypeName);
     }
 
 
