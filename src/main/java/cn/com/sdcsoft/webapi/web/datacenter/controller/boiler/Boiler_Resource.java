@@ -1,21 +1,28 @@
 package cn.com.sdcsoft.webapi.web.datacenter.controller.boiler;
 
+import cn.com.sdcsoft.webapi.annotation.Auth;
+import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Resource;
-import cn.com.sdcsoft.webapi.web.datacenter.entity.OrgResource;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ResourceMapper;
+import cn.com.sdcsoft.webapi.web.entity.OrgResource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/webapi/datacenter/boiler/resource")
+@Auth
 public class Boiler_Resource {
 
+    @Autowired
+    Boiler_ResourceMapper resourceMapper;
     /**
      * 获取锅炉厂所有功能项
      */
     @GetMapping(value = "/list")
-    public void list(){
-
+    public Result list(){
+        return Result.getSuccessResult(resourceMapper.list());
     }
 
     /**
@@ -23,8 +30,9 @@ public class Boiler_Resource {
      * @param resource
      */
     @PostMapping(value = "/create")
-    public void create(@RequestBody Resource resource){
-
+    public Result create(@RequestBody Resource resource){
+        resourceMapper.createResource(resource);
+        return Result.getSuccessResult();
     }
 
     /**
@@ -32,8 +40,9 @@ public class Boiler_Resource {
      * @param resource
      */
     @PostMapping(value = "/modify")
-    public void modify(@RequestBody Resource resource){
-
+    public Result modify(@RequestBody Resource resource){
+        resourceMapper.modifyResource(resource);
+        return Result.getSuccessResult();
     }
 
     /**
@@ -41,8 +50,8 @@ public class Boiler_Resource {
      * @param orgId
      */
     @GetMapping(value = "/org")
-    public void org(@RequestParam Integer orgId){
-
+    public Result org(@RequestParam Integer orgId){
+        return Result.getSuccessResult(resourceMapper.getOrgResources(orgId));
     }
 
     /**
@@ -51,7 +60,9 @@ public class Boiler_Resource {
      * @param orgResources
      */
     @PostMapping(value = "/map")
-    public void map(@RequestParam Integer orgId, @RequestBody List<OrgResource> orgResources){
-
+    public Result map(@RequestParam Integer orgId, @RequestBody List<OrgResource> orgResources){
+        resourceMapper.clearOrgResources(orgId);
+        resourceMapper.createOrgResourceMap(orgResources);
+        return Result.getSuccessResult();
     }
 }

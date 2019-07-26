@@ -1,10 +1,10 @@
 package cn.com.sdcsoft.webapi.web.boilermanage.service;
 
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Product;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ProductMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ProductPartInfoMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ProductUserMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.RoleMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductPartInfoMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductUserMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,16 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
     @Autowired
-    ProductMapper productMapper;
+    Boiler_ProductMapper productMapper;
 
     @Autowired
-    ProductUserMapper productUserMapper;
+    Boiler_ProductUserMapper productUserMapper;
 
     @Autowired
-    ProductPartInfoMapper productPartInfoMapper;
+    Boiler_ProductPartInfoMapper productPartInfoMapper;
 
     @Autowired
-    RoleMapper roleMapper;
+    Boiler_RoleMapper roleMapper;
 
 
     /**

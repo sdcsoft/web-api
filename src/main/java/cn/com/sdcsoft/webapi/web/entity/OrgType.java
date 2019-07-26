@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.datacenter.entity;
+package cn.com.sdcsoft.webapi.web.entity;
 
 public class OrgType {
     public static final int ORG_TYPE_Company = 0;

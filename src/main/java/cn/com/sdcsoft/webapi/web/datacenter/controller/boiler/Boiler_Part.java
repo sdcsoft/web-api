@@ -1,18 +1,26 @@
 package cn.com.sdcsoft.webapi.web.datacenter.controller.boiler;
 
+import cn.com.sdcsoft.webapi.annotation.Auth;
+import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.PartCategory;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.PartCategoryMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/webapi/datacenter/boiler/part")
+@Auth
 public class Boiler_Part {
+
+    @Autowired
+    PartCategoryMapper partCategoryMapper;
 
     /**
      * 获取辅机大类列表
      */
     @GetMapping(value = "/list")
-    public void List(){
-
+    public Result List(){
+        return Result.getSuccessResult(partCategoryMapper.findAll());
     }
 
     /**
@@ -20,8 +28,9 @@ public class Boiler_Part {
      * @param partCategory
      */
     @PostMapping(value = "/create")
-    public void create(@RequestBody PartCategory partCategory){
-
+    public Result create(@RequestBody PartCategory partCategory){
+        partCategoryMapper.create(partCategory);
+        return Result.getSuccessResult();
     }
 
     /**
@@ -29,8 +38,9 @@ public class Boiler_Part {
      * @param partCategory
      */
     @PostMapping(value = "/modify")
-    public void modify(@RequestBody PartCategory partCategory){
-
+    public Result<Object> modify(@RequestBody PartCategory partCategory){
+        partCategoryMapper.modify(partCategory);
+        return Result.getSuccessResult();
     }
 
     /**
@@ -38,7 +48,8 @@ public class Boiler_Part {
      * @param partId
      */
     @PostMapping(value = "/remove")
-    public void remove(@RequestBody Integer partId){
-
+    public Result remove(@RequestParam Integer partId){
+        partCategoryMapper.remove(partId);
+        return Result.getSuccessResult();
     }
 }

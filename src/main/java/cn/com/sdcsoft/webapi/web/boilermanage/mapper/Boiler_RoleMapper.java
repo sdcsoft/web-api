@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface RoleMapper {
+public interface Boiler_RoleMapper {
 
     @Select("select * from Role where OrgId = #{orgId}")
     List<Role> list(Integer orgId);

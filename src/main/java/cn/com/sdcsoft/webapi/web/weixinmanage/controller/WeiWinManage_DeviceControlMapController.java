@@ -15,7 +15,7 @@ import java.util.LinkedHashMap;
 
 
 @RestController
-@RequestMapping(value = "/weixinmanage/devicecontrol")
+@RequestMapping(value = "/webapi/weixinmanage/devicecontrol")
 public class WeiWinManage_DeviceControlMapController {
 
 

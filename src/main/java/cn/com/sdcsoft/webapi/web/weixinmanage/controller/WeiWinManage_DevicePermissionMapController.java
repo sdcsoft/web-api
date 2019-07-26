@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 
 
 @RestController
-@RequestMapping(value = "/weixinmanage/devicePermission")
+@RequestMapping(value = "/webapi/weixinmanage/devicePermission")
 public class WeiWinManage_DevicePermissionMapController {
 
     @Autowired

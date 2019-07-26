@@ -3,8 +3,7 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.CustomerMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_CustomerMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Customer;
@@ -12,19 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
  * 客户管理
  */
 @RestController
-@RequestMapping(value = "/webapi/boiler/customer", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boilermanage/customer", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_CustomerController {
 
     @Autowired
-    private CustomerMapper customerMapper;
+    private Boiler_CustomerMapper customerMapper;
 
     /**
      * 查询客户

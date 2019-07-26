@@ -15,7 +15,7 @@ import java.util.List;
  * 辅机大类信息
  */
 @RestController
-@RequestMapping(value = "/webapi/boiler/partcategory", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boilermanage/partcategory", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_PartCategoryController {
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface ProductMapper {
+public interface Boiler_ProductMapper {
 
     @Select("<script>" +
             "select pt.* from Product pt " +

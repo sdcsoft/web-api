@@ -3,7 +3,8 @@ package cn.com.sdcsoft.webapi.web.datacenter.controller.core;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.web.boilermanage.service.UserService;
-import cn.com.sdcsoft.webapi.web.datacenter.entity.OrgType;
+import cn.com.sdcsoft.webapi.web.entity.OrgType;
+import cn.com.sdcsoft.webapi.web.entity.OrgUser;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class Core_EmployeeController extends BaseController{
         String str = lan_api.employeeCreate(employee);
         JSONObject obj = JSONObject.parseObject(str);
         if (0 == obj.getIntValue("code")) {
-            Employee resultEmployee = JSONObject.parseObject(obj.getString("data"), Employee.class);
+            OrgUser resultEmployee = JSONObject.parseObject(obj.getString("data"), OrgUser.class);
             if(resultEmployee.getOrgType() == OrgType.ORG_TYPE_Boiler){
                 if(null == employee.getIsAdmin() || employee.getIsAdmin() == 0){
                     boilerUserService.createUser(resultEmployee);

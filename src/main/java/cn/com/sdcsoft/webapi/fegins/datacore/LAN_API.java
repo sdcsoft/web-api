@@ -123,8 +123,11 @@ public interface LAN_API {
     @PostMapping(value = "/datacore/employee/modify")
     String employeeModify(@RequestParam("employee") Employee employee);
 
+    @PostMapping(value = "/datacore/employee/modify/org")
+    Result employeeModifyOrg(@RequestParam("employeeId") Integer employeeId,@RequestParam("orgType") int orgType,@RequestParam("orgId") int orgId);
+
     @PostMapping(value = "/datacore/employee/change/status")
-    public String employeeChangeStatus(@RequestParam("loginId") String loginId, @RequestParam("status") int status);
+    String employeeChangeStatus(@RequestParam("loginId") String loginId, @RequestParam("status") int status);
 
     @PostMapping(value = "/datacore/employee/change/infos")
     String employeeChangeInfos(@RequestParam("loginId") String loginId, @RequestParam("mobile") String mobile, @RequestParam("email") String email, @RequestParam("qq") String qq, @RequestParam("realName") String realName);

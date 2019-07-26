@@ -4,13 +4,13 @@ import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.*;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.UserMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_UserMapper;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ProductPartInfoMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ProductMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ProductUserMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductPartInfoMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductUserMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.service.ProductService;
 
 import cn.com.sdcsoft.webapi.entity.Result;
@@ -24,7 +24,7 @@ import java.util.List;
  * 产品信息
  */
 @RestController
-@RequestMapping(value = "/webapi/boiler/product", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boilermanage/product", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_ProductController {
 
@@ -32,16 +32,16 @@ public class BoilerManage_ProductController {
     LAN_API lan_api;
 
     @Autowired
-    ProductMapper productMapper;
+    Boiler_ProductMapper productMapper;
 
     @Autowired
-    ProductUserMapper productUserMapper;
+    Boiler_ProductUserMapper productUserMapper;
 
     @Autowired
     ProductService productService;
 
     @Autowired
-    ProductPartInfoMapper productAuxiliaryMachineInfoMapper;
+    Boiler_ProductPartInfoMapper productAuxiliaryMachineInfoMapper;
 
     /**
      * 获得产品列表数据
@@ -144,7 +144,7 @@ public class BoilerManage_ProductController {
     }
 
     @Autowired
-    UserMapper userMapper;
+    Boiler_UserMapper userMapper;
 
     /**
      * 插入产品数据

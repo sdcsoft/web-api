@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 
 @RestController
-@RequestMapping(value = "/weixinmanage/deviceSms")
+@RequestMapping(value = "/webapi/weixinmanage/deviceSms")
 public class WeiWinManage_DeviceSmsMapController {
     @Autowired(required=true)
     private WeiWinManage_DeviceSmsMapMapper deviceSmsMapMapper;

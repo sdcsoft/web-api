@@ -4,7 +4,7 @@ import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.RepairInfo;
 
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.RepairInfoMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_RepairInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +14,12 @@ import java.sql.Timestamp;
  *
  */
 @RestController
-@RequestMapping(value = "/webapi/boiler/repairinfo", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boilermanage/repairinfo", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_RepairInfoController {
 
     @Autowired
-    RepairInfoMapper repairInfoMapper;
+    Boiler_RepairInfoMapper repairInfoMapper;
 
     @GetMapping(value = "/list/product")
     public Result getRepairInfoListByProductId(Integer productId){

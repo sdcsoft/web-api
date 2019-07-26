@@ -1,18 +1,26 @@
 package cn.com.sdcsoft.webapi.web.datacenter.controller.boiler;
 
+import cn.com.sdcsoft.webapi.annotation.Auth;
+import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.PartSubCategory;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.PartSubCategoryMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping(value = "/webapi/datacenter/boiler/subpart")
+@Auth
 public class Boiler_SubPart {
 
+    @Autowired
+    PartSubCategoryMapper subCategoryMapper;
     /**
      * 获取辅机小类列表
      */
     @GetMapping(value = "/list")
-    public void List(@RequestParam Integer partId){
-
+    public Result List(@RequestParam Integer partId){
+        return Result.getSuccessResult(subCategoryMapper.findAllPartCategoryId(partId));
     }
 
     /**
@@ -20,8 +28,9 @@ public class Boiler_SubPart {
      * @param partSubCategory
      */
     @PostMapping(value = "/create")
-    public void create(@RequestBody PartSubCategory partSubCategory){
-
+    public Result create(@RequestBody PartSubCategory partSubCategory){
+        subCategoryMapper.create(partSubCategory);
+        return Result.getSuccessResult();
     }
 
     /**
@@ -29,8 +38,9 @@ public class Boiler_SubPart {
      * @param partSubCategory
      */
     @PostMapping(value = "/modify")
-    public void modify(@RequestBody PartSubCategory partSubCategory){
-
+    public Result modify(@RequestBody PartSubCategory partSubCategory){
+        subCategoryMapper.modify(partSubCategory);
+        return Result.getSuccessResult();
     }
 
 
@@ -39,7 +49,8 @@ public class Boiler_SubPart {
      * @param subPartId
      */
     @PostMapping(value = "/remove")
-    public void remove(@RequestBody Integer subPartId){
-
+    public Result remove(@RequestParam Integer subPartId){
+        subCategoryMapper.remove(subPartId);
+        return Result.getSuccessResult();
     }
 }

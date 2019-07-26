@@ -6,7 +6,7 @@ import cn.com.sdcsoft.webapi.entity.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.ProductCategory;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ProductCategoryMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductCategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +17,12 @@ import java.util.List;
  * 锅炉型号
  */
 @RestController
-@RequestMapping(value = "/webapi/boiler/productcategory", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boilermanage/productcategory", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_ProductCategoryController {
 
     @Autowired
-    private ProductCategoryMapper productCategoryMapper;
+    private Boiler_ProductCategoryMapper productCategoryMapper;
 
 
     /**

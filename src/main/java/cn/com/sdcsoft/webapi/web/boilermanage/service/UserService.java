@@ -1,20 +1,20 @@
 package cn.com.sdcsoft.webapi.web.boilermanage.service;
 
-import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.UserMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_UserMapper;
+import cn.com.sdcsoft.webapi.web.entity.OrgUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
     @Autowired
-    UserMapper userMapper;
+    Boiler_UserMapper userMapper;
 
-    public void createUser(Employee employee){
-        userMapper.createUser(employee);
+    public void createUser(OrgUser user){
+        userMapper.createUser(user);
     }
 
-    public void createAdmin(Employee employee){
-        userMapper.createAdmin(employee);
+    public void createAdmin(OrgUser user){
+        userMapper.createAdmin(user);
     }
 }

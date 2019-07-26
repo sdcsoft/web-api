@@ -13,4 +13,13 @@ import java.util.List;
 public interface PartSubCategoryMapper {
     @Select("select * from Part_SubCategory where CategoryId=#{partCategoryId} order by Sort asc")
     List<PartSubCategory> findAllPartCategoryId(int partCategoryId);
+
+    @Update("update Part_SubCategory set CategoryId=#{categoryId},Name=#{name},Sort=#{sort} where Id = #{id}")
+    void modify(PartSubCategory partSubCategory);
+
+    @Insert("insert into Part_SubCategory (CategoryId,Name,Sort) values (#{categoryId},#{name},#{sort})")
+    void create(PartSubCategory partSubCategory);
+
+    @Delete("delete from Part_SubCategory where Id=#{id}")
+    void remove(Integer id);
 }

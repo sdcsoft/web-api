@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface ProductPartInfoMapper {
+public interface Boiler_ProductPartInfoMapper {
 
     @Select("select i.*,c.Name PartCategoryName,s.Name PartSubCategoryName from Product_Part_Info i " +
             "inner join Part_Category c on i.PartCategoryId=c.id " +

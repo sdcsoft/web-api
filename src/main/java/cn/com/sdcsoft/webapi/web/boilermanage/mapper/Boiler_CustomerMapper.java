@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface CustomerMapper {
+public interface Boiler_CustomerMapper {
 
     @Select("select * from Customer where OrgId=#{orgId}")
     List<Customer> find(@Param("orgId") int orgId);

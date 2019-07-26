@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface ProductCategoryMapper {
+public interface Boiler_ProductCategoryMapper {
 
     @Select("select * from Product_Category where OrgId=#{orgId}")
     List<ProductCategory> findProductCategory(@Param("orgId") int orgId);

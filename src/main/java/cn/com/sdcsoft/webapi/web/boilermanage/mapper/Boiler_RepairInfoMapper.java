@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Component
-public interface RepairInfoMapper {
+public interface Boiler_RepairInfoMapper {
 
     @Select("select r.*,p.ControllerNo from Repair r inner join Product p on r.productId=p.Id where productId = #{productId}")
     List<RepairInfo> getProductRepairInfos(Integer productId);

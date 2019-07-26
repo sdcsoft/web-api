@@ -3,12 +3,12 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Role;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ResourceMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.UserMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ResourceMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_UserMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.User;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ProductUserMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductUserMapper;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +21,17 @@ import java.util.List;
  * 企业员工
  */
 @RestController
-@RequestMapping(value = "/webapi/boiler/user", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boilermanage/user", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_UserController {
 
     @Autowired
-    private ProductUserMapper productUserMapper;
+    private Boiler_ProductUserMapper productUserMapper;
     @Autowired
-    private UserMapper userMapper;
+    private Boiler_UserMapper userMapper;
 
     @Autowired
-    private ResourceMapper resourceMapper;
+    private Boiler_ResourceMapper resourceMapper;
 
     @GetMapping("/info")
     public Result getUserInfo(Integer employeeId){

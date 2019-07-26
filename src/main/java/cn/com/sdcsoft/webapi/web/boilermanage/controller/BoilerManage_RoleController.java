@@ -5,8 +5,8 @@ import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Role;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.RoleResource;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.ResourceMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.RoleMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ResourceMapper;
+import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_RoleMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +19,15 @@ import java.util.List;
  * 角色管理
  */
 @RestController
-@RequestMapping(value = "/webapi/boiler/role", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boilermanage/role", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_RoleController {
 
     @Autowired
-    private RoleMapper roleMapper;
+    private Boiler_RoleMapper roleMapper;
 
     @Autowired
-    private ResourceMapper resourceMapper;
+    private Boiler_ResourceMapper resourceMapper;
 
     @GetMapping("/list")
     public Result list(Integer pageNum,Integer pageSize, HttpServletRequest request) {

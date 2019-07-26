@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * 辅机小类信息
  */
 @RestController
-@RequestMapping(value = "/webapi/boiler/partsubcategory", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/webapi/boilermanage/partsubcategory", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_PartSubCategoryController {
 

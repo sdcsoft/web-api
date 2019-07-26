@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface ProductUserMapper {
+public interface Boiler_ProductUserMapper {
 
     @Select("select pu.* from Product_User pu where ProductId=#{productId} ")
     List<ProductUser> getProductUserListByProduct(@Param("productId") int productId);

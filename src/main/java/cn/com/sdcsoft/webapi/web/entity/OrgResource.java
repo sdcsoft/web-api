@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.datacenter.entity;
+package cn.com.sdcsoft.webapi.web.entity;
 
 import java.io.Serializable;
 
