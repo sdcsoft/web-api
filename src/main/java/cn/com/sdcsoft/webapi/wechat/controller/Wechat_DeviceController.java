@@ -62,8 +62,8 @@ public class Wechat_DeviceController {
 
 
     @GetMapping(value = "/modifydevice", produces = { "application/json;charset=UTF-8" })
-    public String modifydevice(String deviceNo,int prefix,String deviceType,int status) {
-        return lan_api.deviceModifyForEnterpriseUser(deviceNo,prefix,deviceType,status);
+    public String modifydevice(String deviceNo,int prefix,String deviceType,int status,int power,int media) {
+        return lan_api.deviceModifyForEnterpriseUser(deviceNo,prefix,deviceType,status,power,media);
     }
 
     @GetMapping(value = "/getsuffix", produces = { "application/json;charset=UTF-8" })

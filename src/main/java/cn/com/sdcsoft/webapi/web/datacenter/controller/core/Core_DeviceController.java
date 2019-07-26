@@ -77,19 +77,19 @@ public class Core_DeviceController extends BaseController{
         return lan_api.deviceFindBySuffixForEnterpriseUser(suffix);
     }
 
-    /**
-     * 根据suffix修改设备信息
-     * 专为微信小程序提供的企业内部员工修改设备的接口
-     * @param suffix
-     * @param prefix 设备类型 1为控制器 2为PLC
-     * @param deviceType 设备类型信息
-     * @param saleStatus 销售状态 0 未销售 1 已销售
-     * @return
-     */
-    @PostMapping(value = "/fix/modify")
-    public String modifyDevice(String suffix, int prefix, String deviceType, int saleStatus) {
-        return lan_api.deviceModifyForEnterpriseUser(suffix,prefix,deviceType,saleStatus);
-    }
+//    /**
+//     * 根据suffix修改设备信息
+//     * 专为微信小程序提供的企业内部员工修改设备的接口
+//     * @param suffix
+//     * @param prefix 设备类型 1为控制器 2为PLC
+//     * @param deviceType 设备类型信息
+//     * @param saleStatus 销售状态 0 未销售 1 已销售
+//     * @return
+//     */
+//    @PostMapping(value = "/fix/modify")
+//    public String modifyDevice(String suffix, int prefix, String deviceType, int saleStatus) {
+//        return lan_api.deviceModifyForEnterpriseUser(suffix,prefix,deviceType,saleStatus);
+//    }
 
     /**
      * 批量创建设备

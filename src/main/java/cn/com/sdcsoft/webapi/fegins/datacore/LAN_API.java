@@ -69,7 +69,7 @@ public interface LAN_API {
     String deviceFindBySuffixForEnterpriseUser(@RequestParam("suffix") String suffix);
 
     @PostMapping(value = "/datacore/device/fix/modify")
-    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus);
+    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media);
 
     @PostMapping(value = "/datacore/device/create")
     String deviceCreate(@RequestBody List<Device> deviceList);
