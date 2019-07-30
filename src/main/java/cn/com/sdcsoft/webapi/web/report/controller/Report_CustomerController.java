@@ -81,6 +81,7 @@ public class Report_CustomerController {
 
     @RequestMapping(value = "/exception/devices", method = RequestMethod.GET)
     public Result customerDevicesCausedTheException(int CustomerId, String key, long timestamp, int day) throws Exception {
+        List<Object> dataList = new ArrayList<>();
         Date startTime = new Date(timestamp);
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(startTime);
@@ -94,14 +95,17 @@ public class Report_CustomerController {
 
         List<Map> mappedResults = result.getMappedResults();
         if (mappedResults != null && mappedResults.size() > 0) {
-            Map<Object, Object> map = new HashMap<>();
+
             for (int i = 0; i < mappedResults.size(); i++) {
                 ArrayList list = (ArrayList) mappedResults.get(i).get("list");
                 if (list.size() > 0) {
-                    map.put(mappedResults.get(i).get("_id"), mappedResults.get(i).get("list"));
+                    Map<Object, Object> map = new HashMap<>();
+                    map.put("deviceNo",mappedResults.get(i).get("_id"));
+                    map.put(key, mappedResults.get(i).get("list"));
+                    dataList.add(map);
                 }
             }
-            return Result.getSuccessResult(map);
+            return Result.getSuccessResult(dataList);
         } else {
             return Result.getFailResult("未能查询到符合条件的数据");
         }
