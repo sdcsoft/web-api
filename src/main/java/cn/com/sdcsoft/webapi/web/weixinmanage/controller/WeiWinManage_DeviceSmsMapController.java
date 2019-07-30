@@ -1,7 +1,7 @@
 package cn.com.sdcsoft.webapi.web.weixinmanage.controller;
 import cn.com.sdcsoft.webapi.entity.Result;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceSmsMapMapper;
 import cn.com.sdcsoft.webapi.web.weixinmanage.entity.Relation_DeviceSmsMap;
-import cn.com.sdcsoft.webapi.web.weixinmanage.mapper.WeiWinManage_DeviceSmsMapMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @RequestMapping(value = "/webapi/weixinmanage/deviceSms")
 public class WeiWinManage_DeviceSmsMapController {
     @Autowired(required=true)
-    private WeiWinManage_DeviceSmsMapMapper deviceSmsMapMapper;
+    private Wechat_DB_DeviceSmsMapMapper deviceSmsMapMapper;
 
 
 

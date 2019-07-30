@@ -1,10 +1,9 @@
 package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_RepairInfoMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.RepairInfo;
-
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_RepairInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,7 @@ import java.sql.Timestamp;
 public class BoilerManage_RepairInfoController {
 
     @Autowired
-    Boiler_RepairInfoMapper repairInfoMapper;
+    Customer_DB_RepairInfoMapper repairInfoMapper;
 
     @GetMapping(value = "/list/product")
     public Result getRepairInfoListByProductId(Integer productId){

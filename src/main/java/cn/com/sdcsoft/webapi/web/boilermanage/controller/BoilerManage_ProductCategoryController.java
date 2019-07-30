@@ -3,10 +3,10 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.entity.Result;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductCategoryMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.ProductCategory;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductCategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +22,7 @@ import java.util.List;
 public class BoilerManage_ProductCategoryController {
 
     @Autowired
-    private Boiler_ProductCategoryMapper productCategoryMapper;
+    private Customer_DB_ProductCategoryMapper productCategoryMapper;
 
 
     /**

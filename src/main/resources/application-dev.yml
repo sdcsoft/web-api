@@ -1,11 +1,11 @@
 spring:
   datasource:
-    boilermanage:
+    customer-db:
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://192.168.0.110:3306/Customer_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: tomcat
       password: 80201288@qq.com
-    wxmanage:
+    wechat-db:
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://192.168.0.110:3306/Wx_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: tomcat
@@ -27,7 +27,7 @@ server:
 token:
   cookie:
     name: sdcsoft.ucookie
-    domain:
+    domain: kuaixin.picp.net
     path: /
 fileupload:
   boiler:

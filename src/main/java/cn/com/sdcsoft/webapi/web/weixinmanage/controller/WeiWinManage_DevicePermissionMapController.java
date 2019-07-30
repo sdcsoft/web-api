@@ -2,8 +2,8 @@ package cn.com.sdcsoft.webapi.web.weixinmanage.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DevicePermissionMapMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.Relation_DevicePermissionMap;
-import cn.com.sdcsoft.webapi.wechat.mapper.Relation_DevicePermissionMapMapper;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 public class WeiWinManage_DevicePermissionMapController {
 
     @Autowired
-    private Relation_DevicePermissionMapMapper rdpMapper;
+    private Wechat_DB_DevicePermissionMapMapper rdpMapper;
 
     @Autowired
     LAN_API lan_api;

@@ -1,10 +1,9 @@
 package cn.com.sdcsoft.webapi.web.weixinmanage.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceControlMapMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.Relation_DeviceControlMap;
-import cn.com.sdcsoft.webapi.wechat.mapper.Relation_DeviceControlMapMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class WeiWinManage_DeviceControlMapController {
 
 
     @Autowired
-    private Relation_DeviceControlMapMapper rdcMapper;
+    private Wechat_DB_DeviceControlMapMapper rdcMapper;
 
     @Autowired
     LAN_API lan_api;

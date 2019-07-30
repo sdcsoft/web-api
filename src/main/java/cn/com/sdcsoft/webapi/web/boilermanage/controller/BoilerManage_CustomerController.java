@@ -3,7 +3,7 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_CustomerMapper;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_CustomerMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Customer;
@@ -22,7 +22,7 @@ import java.util.List;
 public class BoilerManage_CustomerController {
 
     @Autowired
-    private Boiler_CustomerMapper customerMapper;
+    private Customer_DB_CustomerMapper customerMapper;
 
     /**
      * 查询客户

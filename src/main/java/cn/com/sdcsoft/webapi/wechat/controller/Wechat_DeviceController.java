@@ -1,11 +1,10 @@
 package cn.com.sdcsoft.webapi.wechat.controller;
+
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceControlMapMapper;
 import cn.com.sdcsoft.webapi.wechat.client.TemplateClient;
 import cn.com.sdcsoft.webapi.wechat.entity.Relation_DeviceControlMap;
-import cn.com.sdcsoft.webapi.wechat.mapper.Relation_DeviceControlMapMapper;
-import com.alibaba.fastjson.JSONObject;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -94,7 +93,7 @@ public class Wechat_DeviceController {
     }
 
     @Autowired
-    private Relation_DeviceControlMapMapper rdcMapper;
+    private Wechat_DB_DeviceControlMapMapper rdcMapper;
 
     @GetMapping(value = "/getdevicecontrolList")
     public Result getdevicecontrolList(String openid) {

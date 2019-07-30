@@ -4,12 +4,9 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DevicePermissionMapMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.Relation_DevicePermissionMap;
-import cn.com.sdcsoft.webapi.wechat.mapper.Relation_DevicePermissionMapMapper;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.mysql.cj.xdevapi.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +21,7 @@ public class Wechat_EmployeeController {
     LAN_API lan_api;
 
     @Autowired
-    private Relation_DevicePermissionMapMapper relation_devicePermissionMapMapper;
+    private Wechat_DB_DevicePermissionMapMapper relation_devicePermissionMapMapper;
 
     @GetMapping(value = "/getwx")
     public Result getWx(String openid) {

@@ -2,14 +2,13 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductUserMapper;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ResourceMapper;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_UserMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Role;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ResourceMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_UserMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.User;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductUserMapper;
-
 import cn.com.sdcsoft.webapi.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +25,12 @@ import java.util.List;
 public class BoilerManage_UserController {
 
     @Autowired
-    private Boiler_ProductUserMapper productUserMapper;
+    private Customer_DB_ProductUserMapper productUserMapper;
     @Autowired
-    private Boiler_UserMapper userMapper;
+    private Customer_DB_UserMapper userMapper;
 
     @Autowired
-    private Boiler_ResourceMapper resourceMapper;
+    private Customer_DB_ResourceMapper resourceMapper;
 
     @GetMapping("/info")
     public Result getUserInfo(Integer employeeId){

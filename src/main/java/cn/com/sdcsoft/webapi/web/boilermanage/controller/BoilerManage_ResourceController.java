@@ -1,12 +1,11 @@
 package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ResourceMapper;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_UserMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Role;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.User;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ResourceMapper;
-
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @Auth
 public class BoilerManage_ResourceController {
     @Autowired
-    private Boiler_ResourceMapper resourceMapper;
+    private Customer_DB_ResourceMapper resourceMapper;
     @Autowired
-    private Boiler_UserMapper userMapper;
+    private Customer_DB_UserMapper userMapper;
     /**
      * 通过角色Id获得角色资源列表
      * @param employeeId

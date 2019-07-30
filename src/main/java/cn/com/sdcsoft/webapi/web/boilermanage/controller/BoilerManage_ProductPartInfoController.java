@@ -2,9 +2,8 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductPartInfoMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.ProductPartInfo;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductPartInfoMapper;
-
 import cn.com.sdcsoft.webapi.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ import java.util.List;
 public class BoilerManage_ProductPartInfoController {
 
     @Autowired
-    Boiler_ProductPartInfoMapper productPartInfoMapper;
+    Customer_DB_ProductPartInfoMapper productPartInfoMapper;
 
     @GetMapping(value = "/list")
     public Result getProductPartInfos(Integer productId){

@@ -3,16 +3,15 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductMapper;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductPartInfoMapper;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductUserMapper;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_UserMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.*;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_UserMapper;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductPartInfoMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ProductUserMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.service.ProductService;
-
 import cn.com.sdcsoft.webapi.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,16 +31,16 @@ public class BoilerManage_ProductController {
     LAN_API lan_api;
 
     @Autowired
-    Boiler_ProductMapper productMapper;
+    Customer_DB_ProductMapper productMapper;
 
     @Autowired
-    Boiler_ProductUserMapper productUserMapper;
+    Customer_DB_ProductUserMapper productUserMapper;
 
     @Autowired
     ProductService productService;
 
     @Autowired
-    Boiler_ProductPartInfoMapper productAuxiliaryMachineInfoMapper;
+    Customer_DB_ProductPartInfoMapper productAuxiliaryMachineInfoMapper;
 
     /**
      * 获得产品列表数据
@@ -144,7 +143,7 @@ public class BoilerManage_ProductController {
     }
 
     @Autowired
-    Boiler_UserMapper userMapper;
+    Customer_DB_UserMapper userMapper;
 
     /**
      * 插入产品数据

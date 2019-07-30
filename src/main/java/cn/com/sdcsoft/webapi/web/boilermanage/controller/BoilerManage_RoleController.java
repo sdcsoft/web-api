@@ -3,15 +3,14 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.entity.Result;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ResourceMapper;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_RoleMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Role;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.RoleResource;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_ResourceMapper;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.Boiler_RoleMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -24,10 +23,10 @@ import java.util.List;
 public class BoilerManage_RoleController {
 
     @Autowired
-    private Boiler_RoleMapper roleMapper;
+    private Customer_DB_RoleMapper roleMapper;
 
     @Autowired
-    private Boiler_ResourceMapper resourceMapper;
+    private Customer_DB_ResourceMapper resourceMapper;
 
     @GetMapping("/list")
     public Result list(Integer pageNum,Integer pageSize, HttpServletRequest request) {

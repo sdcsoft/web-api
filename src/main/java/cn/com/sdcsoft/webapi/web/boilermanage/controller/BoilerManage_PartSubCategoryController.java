@@ -2,8 +2,7 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.web.boilermanage.entity.PartSubCategory;
-import cn.com.sdcsoft.webapi.web.boilermanage.mapper.PartSubCategoryMapper;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_PartSubCategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class BoilerManage_PartSubCategoryController {
 
     @Autowired
-    PartSubCategoryMapper partSubCategoryMapper;
+    Customer_DB_PartSubCategoryMapper partSubCategoryMapper;
 
     /**
      * 查询数据列表-不带分页
