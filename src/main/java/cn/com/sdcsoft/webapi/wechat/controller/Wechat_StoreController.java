@@ -2,26 +2,20 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
-import cn.com.sdcsoft.webapi.wechat.entity.Relation_DevicePermissionMap;
-import cn.com.sdcsoft.webapi.wechat.entity.WxDevice;
-import cn.com.sdcsoft.webapi.wechat.mapper.Relation_DevicePermissionMapMapper;
-import cn.com.sdcsoft.webapi.wechat.mapper.WxDeviceMapper;
-import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import cn.com.sdcsoft.webapi.wechat.entity.Store;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/WxDevice")
-public class WxDeviceController {
+@RequestMapping(value = "/webapi/wechat/store")
+public class Wechat_StoreController {
 
     @Autowired
-    private WxDeviceMapper wxDeviceMapper;
+    private Wechat_DB_DeviceMapper wechatDBDeviceMapper;
 
     @Autowired
     LAN_API lan_api;
@@ -31,7 +25,7 @@ public class WxDeviceController {
     public Result WxDevicelistbyemployeeMobile(String openId) {
         Result result = lan_api.employeeFindWechat(openId);
         LinkedHashMap data=(LinkedHashMap)result.getData();
-        return Result.getSuccessResult(wxDeviceMapper.getWxDeviceListByemployeeMobile(data.get("mobile").toString()));
+        return Result.getSuccessResult(wechatDBDeviceMapper.getWxDeviceListByemployeeMobile(data.get("mobile").toString()));
     }
 
 
@@ -39,14 +33,14 @@ public class WxDeviceController {
     public Result editWxDevice(String openId,String deviceNo,String deviceType,String mqttName,int type){
         Result result = lan_api.employeeFindWechat(openId);
         LinkedHashMap data=(LinkedHashMap)result.getData();
-        WxDevice wxDevice=new WxDevice();
-        wxDevice.setEmployeeMobile(data.get("mobile").toString());
-        wxDevice.setDeviceNo(deviceNo);
-        wxDevice.setDeviceType(deviceType);
-        wxDevice.setMqttName(mqttName);
-        wxDevice.setType(type);
-        wxDevice.setImgstyle(0);
-        wxDeviceMapper.insertWxDevice(wxDevice);
+        Store store =new Store();
+        store.setEmployeeMobile(data.get("mobile").toString());
+        store.setDeviceNo(deviceNo);
+        store.setDeviceType(deviceType);
+        store.setMqttName(mqttName);
+        store.setType(type);
+        store.setImgstyle(0);
+        wechatDBDeviceMapper.insertWxDevice(store);
         return Result.getSuccessResult();
     }
 
@@ -55,7 +49,7 @@ public class WxDeviceController {
     public Result deleteWxDevice(String openId,String deviceNo){
         Result result = lan_api.employeeFindWechat(openId);
         LinkedHashMap data=(LinkedHashMap)result.getData();
-        wxDeviceMapper.deleteWxDevice(deviceNo,data.get("mobile").toString());
+        wechatDBDeviceMapper.deleteWxDevice(deviceNo,data.get("mobile").toString());
         return Result.getSuccessResult();
     }
 }

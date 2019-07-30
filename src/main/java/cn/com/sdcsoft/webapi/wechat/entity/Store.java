@@ -1,11 +1,8 @@
 package cn.com.sdcsoft.webapi.wechat.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
-import java.sql.Timestamp;
 
-public class WxDevice implements Serializable {
+public class Store implements Serializable {
     private Integer id,imgstyle,type;
     private String deviceNo,employeeMobile,deviceName,deviceType,mqttName;
 
