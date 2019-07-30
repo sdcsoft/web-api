@@ -27,8 +27,9 @@ public class Wechat_DeviceController {
 
     @Value("${device.cache}")
     private String deviceCacheUrl;
+
     @Value("${device.command}")
-    private static String deviceCommandUrl;
+    private  String deviceCommandUrl;
 
 
     @Value("${wechat.wx-openid}")
@@ -76,22 +77,15 @@ public class Wechat_DeviceController {
     }
 
     @GetMapping(value = "/sendcmd")
-    public String sendcmd(String command,HttpServletRequest request) {
+    public String sendcmd(String command,String deviceSuffix,String userId) {
         Map<String, String> map = new HashMap<String, String>();
-        Enumeration headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String key = (String) headerNames.nextElement();
-            String value = request.getHeader(key);
-            if(key.equals("userid") ||key.equals("devicesuffix")){
-                map.put(key, value);
-            }
-        }
+        map.put("DeviceSuffix",deviceSuffix);
+        map.put("UserId",userId);
         TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", deviceCommandUrl,"/commands/send"));
         Map<String,String> mapp=new HashMap<>();
         mapp.put("command",command);
         return wxClient.post(mapp,map);
     }
-
     @Autowired
     private Wechat_DB_DeviceControlMapMapper rdcMapper;
 
