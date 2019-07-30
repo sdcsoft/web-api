@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/webapi/wechat/report")
-public class ReportController {
+public class Wechat_ReportController {
 
     @Autowired
     RPT_DATA_SERVICE rptapi;

@@ -59,6 +59,9 @@ public interface LAN_API {
     @GetMapping(value = "/datacore/device/list/customer")
     String deviceFindByCustomer(@RequestParam("customerId") int customerId);
 
+    @GetMapping(value = "/datacore/device/list/suffix5")
+    Result deviceFindBySuffix5(@RequestParam("suffix5")  String suffix5);
+
     @GetMapping(value = "/datacore/device/get/deviceno")
     String deviceFindByDeviceNo(@RequestParam("deviceNo") String deviceNo);
 
