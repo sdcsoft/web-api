@@ -1,6 +1,7 @@
 package cn.com.sdcsoft.webapi.web.datacenter.core.controller;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
+import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Device;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +42,15 @@ public class Core_DeviceController extends BaseController{
     @GetMapping(value = "/list/customer")
     public String getCustomer(int customerId) {
         return lan_api.deviceFindByCustomer(customerId);
+    }
+
+    @GetMapping(value = "/list/suffix5")
+    public Result getSuffix5(String suffix5) {
+        try {
+            return lan_api.deviceFindBySuffix5(suffix5);
+        } catch (Exception ex) {
+            return Result.getFailResult(ex.getMessage());
+        }
     }
 
     /**
