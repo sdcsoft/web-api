@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/webapi/wechat/report")
+@RequestMapping(value = "/wechat/report")
 public class ReportController {
 
     @Autowired
     RPT_DATA_SERVICE rptapi;
 
-    @GetMapping("/device")
+    @GetMapping(value = "/device")
     public String getDeviceReportData(@RequestParam String deviceType, @RequestParam String begintime, @RequestParam String endtime, @RequestParam String deviceNo) {
         return rptapi.getDeviceReportDataForWechat(deviceType,begintime, endtime, deviceNo);
     }

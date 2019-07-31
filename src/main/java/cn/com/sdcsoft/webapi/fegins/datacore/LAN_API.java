@@ -108,17 +108,19 @@ public interface LAN_API {
     Result employeeBindWechat(@RequestParam("loginId") String loginId,@RequestParam("openId") String openId);
 
     @GetMapping(value = "/datacore/employee/find/company")
-    String EmployeeFindCompanyUser(@RequestParam("loginId") String loginId);
+    String employeeFindCompanyUser(@RequestParam("loginId") String loginId);
 
+    @GetMapping(value = "/datacore/employee/find/enterprise")
+    String employeeFindEnterprise(@RequestParam("loginId") String loginId);
 
     @GetMapping(value = "/datacore/employee/find/customer")
-    String EmployeeFindCustomerUser(@RequestParam("loginId") String loginId);
+    String employeeFindCustomerUser(@RequestParam("loginId") String loginId);
 
     @GetMapping(value = "/datacore/employee/find/agent")
-    String EmployeeFindAgentUser(@RequestParam("loginId") String loginId);
+    String employeeFindAgentUser(@RequestParam("loginId") String loginId);
 
     @GetMapping(value = "/datacore/employee/find/enduser")
-    String EmployeeFindEndUser(@RequestParam("loginId") String loginId);
+    String employeeFindEndUser(@RequestParam("loginId") String loginId);
 
     @PostMapping(value = "/datacore/employee/modify")
     String employeeModify(@RequestParam("employee") Employee employee);
@@ -154,7 +156,7 @@ public interface LAN_API {
     @GetMapping(value = "/datacore/enterprise/list")
     String enterpriseList();
 
-    @GetMapping(value = "/datacore/enterprise/list")
+    @GetMapping(value = "/datacore/enterprise/find")
     String enterpriseFindById(@RequestParam("id") int id);
 
     @PostMapping(value = "/datacore/enterprise/create")
