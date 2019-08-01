@@ -3,8 +3,8 @@ package cn.com.sdcsoft.webapi.wechat.entity;
 import java.io.Serializable;
 
 public class Store implements Serializable {
-    private Integer id,imgstyle,type;
-    private String deviceNo,employeeMobile,deviceName,deviceType,mqttName;
+    private Integer id,imgStyle;
+    private String deviceNo,openId,deviceName,deviceType,mqttName;
 
     public Integer getId() {
         return id;
@@ -14,20 +14,12 @@ public class Store implements Serializable {
         this.id = id;
     }
 
-    public Integer getImgstyle() {
-        return imgstyle;
+    public Integer getImgStyle() {
+        return imgStyle;
     }
 
-    public void setImgstyle(Integer imgstyle) {
-        this.imgstyle = imgstyle;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
+    public void setImgStyle(Integer imgStyle) {
+        this.imgStyle = imgStyle;
     }
 
     public String getDeviceNo() {
@@ -38,12 +30,12 @@ public class Store implements Serializable {
         this.deviceNo = deviceNo;
     }
 
-    public String getEmployeeMobile() {
-        return employeeMobile;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setEmployeeMobile(String employeeMobile) {
-        this.employeeMobile = employeeMobile;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     public String getDeviceName() {

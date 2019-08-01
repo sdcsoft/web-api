@@ -23,34 +23,27 @@ public class Wechat_StoreController {
 
     @GetMapping(value = "/list")
     public Result WxDevicelistbyemployeeMobile(String openId) {
-        Result result = lan_api.employeeFindWechat(openId);
-        LinkedHashMap data=(LinkedHashMap)result.getData();
-        return Result.getSuccessResult(wechatDBDeviceMapper.getWxDeviceListByemployeeMobile(data.get("mobile").toString()));
+        return Result.getSuccessResult(wechatDBDeviceMapper.getWxDeviceListByopenId(openId));
     }
 
 
-    @GetMapping("/add")
-    public Result editWxDevice(String openId,String deviceNo,String deviceType,String mqttName,int type){
-        Result result = lan_api.employeeFindWechat(openId);
-        LinkedHashMap data=(LinkedHashMap)result.getData();
-        Store store =new Store();
-        store.setEmployeeMobile(data.get("mobile").toString());
-        store.setDeviceNo(deviceNo);
-        store.setDeviceType(deviceType);
-        store.setMqttName(mqttName);
-        store.setType(type);
-        store.setImgstyle(0);
+    @PostMapping("/add")
+    public Result editWxDevice(@RequestBody Store store){
         wechatDBDeviceMapper.insertWxDevice(store);
         return Result.getSuccessResult();
     }
 
+    @PostMapping("/modify")
+    public Result modifyWxDevice(@RequestBody Store store){
+        wechatDBDeviceMapper.updateStore(store);
+        return Result.getSuccessResult();
+    }
 
     @GetMapping(value = "/delete")
     public Result deleteWxDevice(String openId,String deviceNo){
-        Result result = lan_api.employeeFindWechat(openId);
-        LinkedHashMap data=(LinkedHashMap)result.getData();
-        wechatDBDeviceMapper.deleteWxDevice(deviceNo,data.get("mobile").toString());
+        wechatDBDeviceMapper.deleteWxDevice(deviceNo,openId);
         return Result.getSuccessResult();
     }
+
 }
 
