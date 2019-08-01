@@ -55,29 +55,17 @@ public class BoilerManage_ProductController {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
         if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
-            List<Product> list = productMapper.searchForAdmin(user.getOrgId(), product);
             PageHelper.startPage(pageNum, pageSize);
+            List<Product> list = productMapper.searchForAdmin(user.getOrgId(), product,false);
             PageInfo pageInfo = new PageInfo(list);
             return Result.getSuccessResult(pageInfo);
         } else {
-            List<Product> list = productMapper.search(user.getId(), product);
             PageHelper.startPage(pageNum, pageSize);
+            List<Product> list = productMapper.search(user.getId(), product);
             PageInfo pageInfo = new PageInfo(list);
             return Result.getSuccessResult(pageInfo);
         }
 
-    }
-
-    /**
-     * 临时模拟统计报表
-     *
-     * @param userId
-     * @return
-     */
-    @GetMapping("/productTypeAmountByCondition")
-    public Result typeCount(int userId) {
-        List<ProductTypeAmountClass> list = productMapper.getProductTypeAmountByUserId(userId);
-        return Result.getSuccessResult(list);
     }
 
     /**
@@ -108,19 +96,18 @@ public class BoilerManage_ProductController {
     }
 
     /**
-     * 展示数据在地图上
-     *
-     * @param product
+     * 获取售出的产品信息
+     * @param request
      * @return
      */
-    @GetMapping("/map")
-    public Result map(@RequestBody Product product, HttpServletRequest request) {
+    @GetMapping("/sold")
+    public Result sold(HttpServletRequest request) {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
         if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
-            return Result.getSuccessResult(productMapper.searchForAdmin(user.getOrgId(), product));
+            return Result.getSuccessResult(productMapper.findSoldForAdmin(user.getOrgId()));
         } else {
-            return Result.getSuccessResult(productMapper.search(user.getId(), product));
+            return Result.getSuccessResult(productMapper.find(user.getId()));
         }
     }
 

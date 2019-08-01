@@ -16,6 +16,9 @@ public interface Customer_DB_ProductMapper {
             "left join Customer c on pt.CustomerId=c.Id " +
             "<where>" +
             "pt.OrgId=#{orgId} " +
+            "<if test='isSell'> " +
+            "AND pt.IsSell = 1" +
+            "</if>" +
             "<if test='product.customerId != null'> " +
             "AND pt.CustomerId = #{product.customerId}" +
             "</if>" +
@@ -46,7 +49,15 @@ public interface Customer_DB_ProductMapper {
             "</where>" +
             " order by EditDateTime desc" +
             "</script>")
-    List<Product> searchForAdmin(@Param("orgId") Integer orgId, @Param("product") Product product);
+    List<Product> searchForAdmin(@Param("orgId") Integer orgId, @Param("product") Product product, @Param("isSell") boolean isSell);
+
+    @Select("select pt.* from Product pt " +
+            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
+            "left join Customer c on pt.CustomerId=c.Id " +
+            "where pt.OrgId=#{orgId}  AND pt.IsSell = 1 " +
+            "order by EditDateTime desc")
+    List<Product> findSoldForAdmin(@Param("orgId") Integer orgId);
+
 
     @Select("<script>" +
             "select pt.* from Product_User pu" +
@@ -86,6 +97,8 @@ public interface Customer_DB_ProductMapper {
             " order by EditDateTime desc" +
             "</script>")
     List<Product> search(@Param("userId") Integer userId, @Param("product") Product product);
+
+
 
     @Select("<script>" +
             "select * from Product_User pu" +
