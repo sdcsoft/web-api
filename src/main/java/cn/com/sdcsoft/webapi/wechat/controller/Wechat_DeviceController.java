@@ -65,6 +65,10 @@ public class Wechat_DeviceController {
     public String modifydevice(String deviceNo,int prefix,String deviceType,int status,int power,int media) {
         return lan_api.deviceModifyForEnterpriseUser(deviceNo,prefix,deviceType,status,power,media);
     }
+    @GetMapping(value = "/modify/type", produces = { "application/json;charset=UTF-8" })
+    public String deviceModifyType(String suffix,String deviceType,String subType) {
+        return lan_api.deviceModifyType(suffix,deviceType,subType);
+    }
 
     @GetMapping(value = "/getsuffix", produces = { "application/json;charset=UTF-8" })
     public String getsuffix(String deviceNo) {
