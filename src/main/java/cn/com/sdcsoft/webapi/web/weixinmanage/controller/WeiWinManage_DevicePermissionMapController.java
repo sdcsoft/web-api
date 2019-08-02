@@ -23,25 +23,16 @@ public class WeiWinManage_DevicePermissionMapController {
     @Autowired
     LAN_API lan_api;
 
-    /**
-     * 查询设备列表-分页
-     * @param rdc
-     * @param pageNum
-     * @param pageSize
-     * @return
-     */
-    @GetMapping(value = "/relation_devicePermissionlistbyconditionandpage")
-    public Result relation_devicePermissionlistbyconditionandpage(Relation_DevicePermissionMap rdc, int pageNum, int pageSize) {
+
+    @GetMapping(value = "/list/page")
+    public Result relation_devicePermissionListByConditionAndPage(Relation_DevicePermissionMap rdc, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return Result.getSuccessResult(new PageInfo(rdpMapper.getRelation_DevicePermissionMapListByCondition(rdc)));
     }
-    /**
-     * 编辑设备
-     * @param rdc
-     * @return
-     */
-    @PostMapping("/editrelation_devicePermission")
-    public Result editrelation_devicePermission(@RequestBody Relation_DevicePermissionMap rdc){
+
+
+    @PostMapping("/edit")
+    public Result editRelation_devicePermission(@RequestBody Relation_DevicePermissionMap rdc){
         if(rdc.getId()!=null){
             rdpMapper.updateRelation_DevicePermissionMap(rdc);
         }else{
@@ -55,13 +46,9 @@ public class WeiWinManage_DevicePermissionMapController {
         return Result.getSuccessResult();
     }
 
-    /**
-     * 删除设备
-     * @param id
-     * @return
-     */
-    @PostMapping(value = "/deleterelation_devicePermissionbyid")
-    public Result deleterelation_devicePermissionbyid(@RequestParam int id){
+
+    @PostMapping(value = "/delete")
+    public Result deleteRelation_devicePermissionById(@RequestParam int id){
         rdpMapper.deleteRelation_DevicePermissionMap(id);
         return Result.getSuccessResult();
     }

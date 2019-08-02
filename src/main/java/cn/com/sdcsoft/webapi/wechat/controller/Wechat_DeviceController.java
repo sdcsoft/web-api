@@ -2,9 +2,8 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
-import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceControlMapMapper;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceUserControlMapMapper;
 import cn.com.sdcsoft.webapi.wechat.client.TemplateClient;
-import cn.com.sdcsoft.webapi.wechat.entity.Relation_DeviceControlMap;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,10 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -36,7 +32,7 @@ public class Wechat_DeviceController {
     private String wxOpenIdUrl;
 
     @GetMapping(value = "/getdata")
-    public byte[] getWx(String deviceNo) {
+    public byte[] getData(String deviceNo) {
         TemplateClient deviceInfoClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", deviceCacheUrl,"/device2/get2"));
         Map<String,String> map=new HashMap<>();
         map.put("id",deviceNo);
@@ -56,13 +52,13 @@ public class Wechat_DeviceController {
     @Autowired
     LAN_API lan_api;
     @GetMapping(value = "/getdecode", produces = { "application/json;charset=UTF-8" })
-    public String getdecode(String deviceNo) {
+    public String getDecode(String deviceNo) {
         return lan_api.deviceFindByDeviceNo(deviceNo);
     }
 
 
-    @GetMapping(value = "/modifydevice", produces = { "application/json;charset=UTF-8" })
-    public String modifydevice(String deviceNo,int prefix,String deviceType,int status,int power,int media) {
+    @GetMapping(value = "/modify", produces = { "application/json;charset=UTF-8" })
+    public String modifyDevice(String deviceNo,int prefix,String deviceType,int status,int power,int media) {
         return lan_api.deviceModifyForEnterpriseUser(deviceNo,prefix,deviceType,status,power,media);
     }
     @GetMapping(value = "/modify/type", produces = { "application/json;charset=UTF-8" })
@@ -71,17 +67,17 @@ public class Wechat_DeviceController {
     }
 
     @GetMapping(value = "/getsuffix", produces = { "application/json;charset=UTF-8" })
-    public String getsuffix(String deviceNo) {
+    public String getSuffix(String deviceNo) {
         return lan_api.deviceFindBySuffixForEnterpriseUser(deviceNo);
     }
 
-    @GetMapping(value = "/gettypelist", produces = { "application/json;charset=UTF-8" })
-    public String gettypelist() {
+    @GetMapping(value = "/type/list", produces = { "application/json;charset=UTF-8" })
+    public String getTypeList() {
         return lan_api.deviceTypeList();
     }
 
     @GetMapping(value = "/sendcmd")
-    public String sendcmd(String command,String deviceSuffix,String userId) {
+    public String sendCmd(String command,String deviceSuffix,String userId) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("DeviceSuffix",deviceSuffix);
         map.put("UserId",userId);
@@ -91,14 +87,10 @@ public class Wechat_DeviceController {
         return wxClient.post(mapp,map);
     }
     @Autowired
-    private Wechat_DB_DeviceControlMapMapper rdcMapper;
+    private Wechat_DB_DeviceUserControlMapMapper rdcMapper;
 
-    @GetMapping(value = "/getdevicecontrolList")
-    public Result getdevicecontrolList(String openid) {
-        Result result = lan_api.employeeFindWechat(openid);
-        LinkedHashMap data=(LinkedHashMap)result.getData();
-        Relation_DeviceControlMap rdc =new Relation_DeviceControlMap();
-        rdc.setEmployeeMobile(data.get("mobile").toString());
-        return Result.getSuccessResult(rdcMapper.getRelation_DeviceControlMapListByCondition(rdc));
+    @GetMapping(value = "/control/List")
+    public Result getControlList(String openid) {
+        return Result.getSuccessResult(rdcMapper.getDeviceUserControlMapListByopenId(openid));
     }
 }

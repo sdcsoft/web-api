@@ -20,34 +20,16 @@ public class WeiWinManage_DeviceSmsMapController {
 
 
 
-    /**
-     * 查询设备列表-分页
-     * @param rdc
-     * @param pageNum
-     * @param pageSize
-     * @return
-     */
-    @GetMapping(value = "/relation_deviceSmslistbyconditionandpage")
+
+    @GetMapping(value = "/list/page")
     public Result getRelation_DeviceSmsMapMapperListByConditionAndPage(Relation_DeviceSmsMap rdc, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return Result.getSuccessResult(new PageInfo(deviceSmsMapMapper.getRelation_DeviceSmsMapListByCondition(rdc)));
     }
 
-    /**
-     * 查询设备列表
-     * @param rdc
-     * @return
-     */
-    @GetMapping(value = "/relation_deviceSmslistbycondition")
-    public Result getRelation_DeviceSmsMapMapperListByCondition(Relation_DeviceSmsMap rdc) {
-        return Result.getSuccessResult(deviceSmsMapMapper.getRelation_DeviceSmsMapList(rdc));
-    }
-    /**
-     * 编辑设备
-     * @param rdc
-     * @return
-     */
-    @PostMapping("/editrelation_DeviceSmsMap")
+
+
+    @PostMapping("/edit")
     public Result editRelation_DeviceSmsMap(@RequestBody Relation_DeviceSmsMap rdc){
         if(rdc.getId()!=null){
             deviceSmsMapMapper.updateRelation_DeviceSmsMap(rdc);
@@ -59,12 +41,8 @@ public class WeiWinManage_DeviceSmsMapController {
         return Result.getSuccessResult();
     }
 
-    /**
-     * 删除设备
-     * @param id
-     * @return
-     */
-    @PostMapping(value = "/deleterelation_DeviceSmsMapbyid")
+
+    @PostMapping(value = "/delete")
     public Result deleteRelation_DeviceSmsMapById(@RequestParam int id){
         deviceSmsMapMapper.deleteRelation_DeviceSmsMap(id);
         return Result.getSuccessResult();

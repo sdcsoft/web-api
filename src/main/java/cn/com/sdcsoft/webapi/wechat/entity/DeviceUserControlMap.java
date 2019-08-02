@@ -5,13 +5,22 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Relation_DeviceControlMap implements Serializable {
+public class DeviceUserControlMap implements Serializable {
 
     public static final int STATUS_ENABLE=1;
     public static final int STATUS_DISABLE=0;
     private Integer id;
-    private String deviceNo,employeeMobile;
+    private String deviceNo,employeeMobile,openId;
     private Timestamp createDatetime;
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
     public Integer getId() {
         return id;
     }

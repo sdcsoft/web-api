@@ -12,7 +12,13 @@ public interface Wechat_DB_DevicePermissionMapMapper {
     @Select("select * from Relation_DevicePermissionMap where OpenId=#{OpenId}")
     List<Relation_DevicePermissionMap> getRelation_DevicePermissionMapListByOpenId(@Param("OpenId") String OpenId);
     @Select("<script>" +
-            "select * from Relation_DevicePermissionMap "+
+            "select ee.* from Relation_DevicePermissionMap ee"+
+            "<where>"+
+            " 1=1 "+
+            "<if test='employeeMobile != null '> "+
+            " AND ee.EmployeeMobile LIKE CONCAT(CONCAT('%',#{employeeMobile}),'%')"+
+            "</if>"+
+            "</where>"+
             "</script>")
     List<Relation_DevicePermissionMap> getRelation_DevicePermissionMapListByCondition(Relation_DevicePermissionMap relation_devicePermissionMap);
 

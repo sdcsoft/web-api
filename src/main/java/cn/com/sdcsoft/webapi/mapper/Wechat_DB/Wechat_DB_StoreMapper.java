@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface Wechat_DB_DeviceMapper {
+public interface Wechat_DB_StoreMapper {
 
     @Select("select ImgStyle,DeviceNo,DeviceName,DeviceType,MqttName from Store where OpenId=#{openId}")
     List<Store> getWxDeviceListByopenId(@Param("openId") String openId);

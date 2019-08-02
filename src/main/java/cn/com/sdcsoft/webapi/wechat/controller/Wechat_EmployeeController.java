@@ -46,22 +46,5 @@ public class Wechat_EmployeeController {
     public String find(String loginId) {
         return lan_api.employeeFind(loginId);
     }
-    //微信管理后台登录
-    @PostMapping(value = "/login", produces = { "application/json;charset=UTF-8" })
-    public Result login(String account,String passWord) {
-        JSONObject json = JSONObject.parseObject(lan_api.employeeFind(account));
-        JSONObject employee=(JSONObject)json.get("data");
-        String password=employee.get("password").toString();
-        if (null == employee)
-            return Result.getFailResult(0,"用户名或者密码输入错误");
-        if (employee.getString("password").equals(passWord)) {
-            if (Employee.STATUS_ENABLE == employee.getIntValue("status")) {
-                return Result.getFailResult(1,"success");
-            } else {
-                return Result.getFailResult(0,"您的用户账号被禁用，请联系系统管理人员！");
-            }
-        } else {
-            return Result.getFailResult(0,"用户名或者密码输入错误");
-        }
-    }
+
 }
