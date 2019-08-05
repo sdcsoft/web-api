@@ -1,16 +1,11 @@
 package cn.com.sdcsoft.webapi.wechat.controller;
 
-
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DevicePermissionMapMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.Relation_DevicePermissionMap;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.LinkedHashMap;
 import java.util.List;
 
 @RestController
