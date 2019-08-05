@@ -2,6 +2,7 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
+import cn.com.sdcsoft.webapi.entity.SoldProductSearchOptions;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductMapper;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductPartInfoMapper;
@@ -97,17 +98,18 @@ public class BoilerManage_ProductController {
 
     /**
      * 获取售出的产品信息
+     * @param searchOptions
      * @param request
      * @return
      */
-    @GetMapping("/sold")
-    public Result sold(HttpServletRequest request) {
+    @PostMapping("/sold")
+    public Result sold(@RequestBody SoldProductSearchOptions searchOptions, HttpServletRequest request) {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
         if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
-            return Result.getSuccessResult(productMapper.findSoldForAdmin(user.getOrgId()));
+            return Result.getSuccessResult(productMapper.findSoldForAdmin(user.getOrgId(),searchOptions));
         } else {
-            return Result.getSuccessResult(productMapper.find(user.getId()));
+            return Result.getSuccessResult(productMapper.find(user.getId(),searchOptions));
         }
     }
 

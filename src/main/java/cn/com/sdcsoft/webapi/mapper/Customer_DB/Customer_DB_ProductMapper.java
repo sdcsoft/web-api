@@ -1,5 +1,6 @@
 package cn.com.sdcsoft.webapi.mapper.Customer_DB;
 
+import cn.com.sdcsoft.webapi.entity.SoldProductSearchOptions;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Product;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.ProductTypeAmountClass;
 import org.apache.ibatis.annotations.*;
@@ -51,12 +52,6 @@ public interface Customer_DB_ProductMapper {
             "</script>")
     List<Product> searchForAdmin(@Param("orgId") Integer orgId, @Param("product") Product product, @Param("isSell") boolean isSell);
 
-    @Select("select pt.* from Product pt " +
-            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
-            "left join Customer c on pt.CustomerId=c.Id " +
-            "where pt.OrgId=#{orgId}  AND pt.IsSell = 1 " +
-            "order by EditDateTime desc")
-    List<Product> findSoldForAdmin(@Param("orgId") Integer orgId);
 
 
     @Select("<script>" +
@@ -99,16 +94,55 @@ public interface Customer_DB_ProductMapper {
     List<Product> search(@Param("userId") Integer userId, @Param("product") Product product);
 
 
+    @Select("<script>select pt.* from Product pt " +
+            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
+            "left join Customer c on pt.CustomerId=c.Id " +
+            "<where>" +
+            "pt.OrgId=#{orgId}  AND pt.IsSell = 1 " +
+            "<if test='searchOptions.customerId != null'> " +
+            " AND pt.CustomerId=#{searchOptions.customerId} " +
+            "</if>" +
+            "<if test='searchOptions.categoryId != null'> " +
+            " AND pt.ProductCategoryId=#{searchOptions.categoryId} " +
+            "</if>" +
+            "<if test='searchOptions.power != null'> " +
+            " AND pt.Power=#{searchOptions.power} " +
+            "</if>" +
+            "<if test='searchOptions.media != null'> " +
+            " AND pt.Media=#{searchOptions.media} " +
+            "</if>" +
+            "<if test='searchOptions.boilerNo != null and searchOptions.boilerNo.length>0'> " +
+            " AND pt.BoilerNo LIKE CONCAT('%',#{searchOptions.boilerNo},'%') " +
+            "</if>" +
+            "</where>" +
+            "order by EditDateTime desc</script>")
+    List<Product> findSoldForAdmin(@Param("orgId") Integer orgId, @Param("searchOptions") SoldProductSearchOptions searchOptions);
 
     @Select("<script>" +
             "select * from Product_User pu" +
             "inner join Product pt on pu.ProductId=pt.Id" +
             "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
             "left join Customer c on pt.CustomerId=c.Id" +
-            "<where> pu.UserId=#{userId} </where>" +
+            "<where> pu.UserId=#{userId} " +
+            "<if test='searchOptions.customerId != null'> " +
+            " AND pt.CustomerId=#{searchOptions.customerId} " +
+            "</if>" +
+            "<if test='searchOptions.categoryId != null'> " +
+            " AND pt.ProductCategoryId=#{searchOptions.categoryId} " +
+            "</if>" +
+            "<if test='searchOptions.power != null'> " +
+            " AND pt.Power=#{searchOptions.power} " +
+            "</if>" +
+            "<if test='searchOptions.media != null'> " +
+            " AND pt.Media=#{searchOptions.media} " +
+            "</if>" +
+            "<if test='searchOptions.boilerNo != null and searchOptions.boilerNo.length>0'> " +
+            " AND pt.BoilerNo LIKE CONCAT('%',#{searchOptions.boilerNo},'%') " +
+            "</if>" +
+            "</where>" +
             "order by EditDateTime desc" +
             "</script>")
-    List<Product> find(@Param("userId") int userId);
+    List<Product> find(@Param("userId") int userId, @Param("searchOptions") SoldProductSearchOptions searchOptions);
 
     @Select("SELECT COUNT(*) AS Amount,case Media WHEN 0 THEN '热水' when 1 then '蒸汽' when 2 then '导热油' when 3 then '热风' ELSE '真空' END as mediaType,case Power WHEN 0 THEN '燃油气' when 1 then '电' when 2 then '煤' when 3 then '生物质' ELSE '余热' END powerType FROM (SELECT ControllerNo,Media,Power FROM Product INNER JOIN Product_User ON Product.Id = Product_User.ProductId WHERE UserId = #{userId}) AS tb GROUP BY Media,Power")
     List<ProductTypeAmountClass> getProductTypeAmountByUserId(@Param("userId") int userId);
