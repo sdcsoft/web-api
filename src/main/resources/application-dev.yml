@@ -5,6 +5,11 @@ spring:
       jdbc-url: jdbc:mysql://192.168.0.110:3306/Customer_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: tomcat
       password: 80201288@qq.com
+    enduser-db:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://192.168.0.110:3306/EndUser_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      username: tomcat
+      password: 80201288@qq.com
     wechat-db:
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://192.168.0.110:3306/Wx_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
@@ -21,13 +26,13 @@ eureka:
       defaultZone: http://192.168.0.110:8761/eureka
   instance:
     prefer-ip-address: true
-    ip-address: 19.168.0.106
+    ip-address: 19.168.0.116
 server:
   port: 8080
 token:
   cookie:
     name: sdcsoft.ucookie
-    domain: kuaixin.picp.net
+    domain:
     path: /
 fileupload:
   boiler:

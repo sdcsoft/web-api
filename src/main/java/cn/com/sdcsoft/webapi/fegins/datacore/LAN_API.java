@@ -92,7 +92,7 @@ public interface LAN_API {
     @PostMapping(value = "/datacore/device/modify/agentid")
     String deviceModifyAgentId(@RequestParam("suffix") String suffix, @RequestParam("agentId") Integer agentId);
 
-    @PostMapping(value = "/datacore/device/modify/endUserId")
+    @PostMapping(value = "/datacore/device/modify/enduserid")
     String deviceModifyEndUserId(@RequestParam("suffix") String suffix, @RequestParam("endUserId") Integer endUserId);
 
     @GetMapping(value = "/datacore/employee/list")
