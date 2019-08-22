@@ -150,7 +150,7 @@ public interface Customer_DB_ProductMapper {
     @Insert("INSERT into Product(OrgId,BoilerNo,ProductCategoryId,ControllerNo,TonnageNum,Media,Power,IsSell,SaleDate,Longitude,Latitude,Province,City,District,Street,CreateDateTime,EditDateTime,CustomerId,CustomerName) " +
             " VALUES(#{orgId},#{boilerNo},#{productCategoryId},#{controllerNo},#{tonnageNum},#{media},#{power},#{isSell},DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d'),#{longitude},#{latitude},#{province},#{city}," +
             "#{district},#{street},#{createDateTime},#{editDateTime},#{customerId},#{customerName})")
-    @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "Id")
     void createProduct(Product product);
 
     @Update("update Product set BoilerNo=#{boilerNo},ProductCategoryId=#{productCategoryId}, TonnageNum=#{tonnageNum},Media=#{media}," +

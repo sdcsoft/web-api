@@ -113,7 +113,7 @@ public class Wechat_UserController {
      */
     @GetMapping(value = "/bind/wechat")
     public Result bindWechat(String mobileNumber,String openId){
-        Result result = lan_api.employeeBindWechat(mobileNumber,openId);
+        Result result = lan_api.employeeBindWechat(mobileNumber,openId,"");
         return result;
     }
 }

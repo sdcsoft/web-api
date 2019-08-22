@@ -6,6 +6,8 @@ import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.*;
 import com.alibaba.fastjson.JSONObject;
 
@@ -24,9 +26,13 @@ public class AccountController {
     static final int ORG_TYPE_Agent =3;
     static final int ORG_TYPE_EndUser =4;
 
+
     interface IOrgInfo {
         JSONObject getOrgInfo(int orgId);
     }
+
+    @Autowired
+    LoadBalancerClient loadBalancerClient;
 
     @Autowired
     private CookieService cookieService;
@@ -90,6 +96,8 @@ public class AccountController {
 
     @PostMapping(value = "/enterprise/login")
     public Result enterpriseLogin(String loginId, String password, HttpServletResponse response) {
+//        ServiceInstance serviceInstance = loadBalancerClient.choose("LAN-API");
+//        System.out.println(String.format("http://%s:%s",serviceInstance.getHost(),serviceInstance.getPort()));
         JSONObject obj = JSONObject.parseObject(lan_api.employeeFindEnterprise(loginId));
         return getLoginResult(obj, password, ORG_TYPE_Enterprise, (orgid) -> JSON.parseObject(lan_api.enterpriseFindById(orgid)), response);
     }

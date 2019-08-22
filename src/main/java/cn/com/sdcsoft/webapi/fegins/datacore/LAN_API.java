@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "LAN-API")
+@FeignClient(name = "LAN-API2")
 public interface LAN_API {
 
     @GetMapping("/datacore/agent/list")
@@ -107,8 +107,11 @@ public interface LAN_API {
     @GetMapping(value = "/datacore/employee/wechat")
     Result employeeFindWechat(@RequestParam("openId") String openId);
 
+    @GetMapping(value = "/datacore/employee/wechat2")
+    Result employeeFindWechat2(@RequestParam("unionId") String unionId);
+
     @PostMapping(value = "/datacore/employee/wechat/bind")
-    Result employeeBindWechat(@RequestParam("loginId") String loginId,@RequestParam("openId") String openId);
+    Result employeeBindWechat(@RequestParam("loginId") String loginId,@RequestParam("openId") String openId,@RequestParam("unionId") String unionId);
 
     @GetMapping(value = "/datacore/employee/find/company")
     String employeeFindCompanyUser(@RequestParam("loginId") String loginId);
