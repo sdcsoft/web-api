@@ -44,6 +44,7 @@ public class ProductService {
      */
     public boolean createProduct(Product product,Integer userId){
         productMapper.createProduct(product);
+
         productUserMapper.createProductUser(userId,product.getId());
         return true;
     }

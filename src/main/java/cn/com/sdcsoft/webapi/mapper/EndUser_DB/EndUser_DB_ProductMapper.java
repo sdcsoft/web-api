@@ -38,15 +38,12 @@ public interface EndUser_DB_ProductMapper {
 
 
     @Select("<script>" +
-            "select pt.* from Product_User pu" +
+            "select pt.* from Product_User pu " +
             "inner join Product pt on pu.ProductId=pt.Id" +
             "<where>" +
             "pu.UserId=#{userId} " +
             "<if test='product.boilerNo != null and product.boilerNo.length>0'> " +
             " AND BoilerNo LIKE CONCAT('%',#{product.boilerNo},'%') " +
-            "</if>" +
-            "<if test='product.productCategoryId != null'> " +
-            " AND ProductCategoryId=#{product.productCategoryId} " +
             "</if>" +
             "<if test='product.controllerNo != null and product.controllerNo.length>0'> " +
             " AND ControllerNo LIKE CONCAT('%',#{product.controllerNo},'%') " +
@@ -65,13 +62,12 @@ public interface EndUser_DB_ProductMapper {
             "</script>")
     List<Product> search(@Param("userId") Integer userId, @Param("product") Product product);
 
+    @Select("select * from Product where OrgId=#{userId} and ControllerNo=#{controllerNo}")
+    Product searchone(@Param("userId") Integer userId, @Param("controllerNo") String controllerNo);
 
     @Select("<script>select pt.* from Product pt " +
             "<where>" +
             "pt.OrgId=#{orgId}" +
-            "<if test='searchOptions.categoryId != null'> " +
-            " AND pt.ProductCategoryId=#{searchOptions.categoryId} " +
-            "</if>" +
             "<if test='searchOptions.power != null'> " +
             " AND pt.Power=#{searchOptions.power} " +
             "</if>" +
@@ -89,9 +85,7 @@ public interface EndUser_DB_ProductMapper {
             "select * from Product_User pu" +
             "inner join Product pt on pu.ProductId=pt.Id" +
             "<where> pu.UserId=#{userId} " +
-            "<if test='searchOptions.categoryId != null'> " +
-            " AND pt.ProductCategoryId=#{searchOptions.categoryId} " +
-            "</if>" +
+
             "<if test='searchOptions.power != null'> " +
             " AND pt.Power=#{searchOptions.power} " +
             "</if>" +
@@ -110,7 +104,7 @@ public interface EndUser_DB_ProductMapper {
     List<ProductTypeAmountClass> getProductTypeAmountByUserId(@Param("userId") int userId);
 
     @Insert("INSERT into Product(OrgId,BoilerNo,NickName,ControllerNo,TonnageNum,Media,Power,CreateDateTime) " +
-            " VALUES(#{orgId},#{boilerNo},#{nickName},#{controllerNo},#{tonnageNum},#{media},#{power}#{createDateTime})")
+            " VALUES(#{orgId},#{boilerNo},#{nickName},#{controllerNo},#{tonnageNum},#{media},#{power},#{createDateTime})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createProduct(Product product);
 

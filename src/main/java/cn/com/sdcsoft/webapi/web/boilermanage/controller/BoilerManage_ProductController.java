@@ -151,7 +151,7 @@ public class BoilerManage_ProductController {
             if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
                 productService.createProduct(product);
             } else {
-                productService.createProduct(product, user.getOrgId());
+                productService.createProduct(product, user.getId());
             }
             return Result.getSuccessResult();
         }

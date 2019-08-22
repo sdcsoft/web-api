@@ -26,7 +26,6 @@ public class Product implements Serializable {
     List<ProductPartInfo> ProductAuxiliaryMachineInfoList = new ArrayList<>();
 
 
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Timestamp getCreateDateTime() {
         return createDateTime;
@@ -35,8 +34,6 @@ public class Product implements Serializable {
     public void setCreateDateTime(Timestamp createDateTime) {
         this.createDateTime = createDateTime;
     }
-
-
 
     public Integer getOrgId() {
         return orgId;

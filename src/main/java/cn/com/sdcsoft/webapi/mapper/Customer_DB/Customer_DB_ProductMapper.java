@@ -55,8 +55,8 @@ public interface Customer_DB_ProductMapper {
 
 
     @Select("<script>" +
-            "select pt.* from Product_User pu" +
-            "inner join Product pt on pu.ProductId=pt.Id" +
+            "select pt.* from Product_User pu " +
+            "inner join Product pt on pu.ProductId=pt.Id " +
             "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
             "left join Customer c on pt.CustomerId=c.Id" +
             "<where>" +

@@ -16,7 +16,7 @@ public interface Customer_DB_ProductUserMapper {
     List<ProductUser> getProductUserListByProduct(@Param("productId") int productId);
 
     @Insert("insert into Product_User (UserId,ProductId) values (#{userId},#{productId})")
-    void createProductUser(int userId, int productId);
+    void createProductUser(@Param("userId")int userId, @Param("productId")int productId);
 
     @Insert("<script>" +
             "insert into Product_User(UserId,ProductId) "

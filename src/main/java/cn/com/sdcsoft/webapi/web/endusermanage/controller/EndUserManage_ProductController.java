@@ -59,15 +59,15 @@ public class EndUserManage_ProductController {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
         if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
-            PageHelper.startPage(pageNum, pageSize);
+            //PageHelper.startPage(pageNum, pageSize);
             List<Product> list = productMapper.searchForAdmin(user.getOrgId(), product);
-            PageInfo pageInfo = new PageInfo(list);
-            return Result.getSuccessResult(pageInfo);
+            //PageInfo pageInfo = new PageInfo(list);
+            return Result.getSuccessResult(list);
         } else {
-            PageHelper.startPage(pageNum, pageSize);
+            //PageHelper.startPage(pageNum, pageSize);
             List<Product> list = productMapper.search(user.getId(), product);
-            PageInfo pageInfo = new PageInfo(list);
-            return Result.getSuccessResult(pageInfo);
+            //PageInfo pageInfo = new PageInfo(list);
+            return Result.getSuccessResult(list);
         }
 
     }
@@ -154,7 +154,7 @@ public class EndUserManage_ProductController {
             if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
                 endUserManageProductService.createProduct(product);
             } else {
-                endUserManageProductService.createProduct(product, user.getOrgId());
+                endUserManageProductService.createProduct(product, user.getId());
             }
             return Result.getSuccessResult();
         }

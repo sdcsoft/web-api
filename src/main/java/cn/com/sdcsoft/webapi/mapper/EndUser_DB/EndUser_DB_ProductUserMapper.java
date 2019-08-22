@@ -1,10 +1,7 @@
 package cn.com.sdcsoft.webapi.mapper.EndUser_DB;
 
 import cn.com.sdcsoft.webapi.web.endusermanage.entity.ProductUser;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,8 +12,10 @@ public interface EndUser_DB_ProductUserMapper {
     @Select("select pu.* from Product_User pu where ProductId=#{productId} ")
     List<ProductUser> getProductUserListByProduct(@Param("productId") int productId);
 
-    @Insert("insert into Product_User (UserId,ProductId) values (#{userId},#{productId})")
-    void createProductUser(int userId, int productId);
+    //@Insert("insert into Product_User (UserId,ProductId) values (#{userId},#{productId})")
+    @Insert("INSERT into Product_User(UserId,ProductId) " +
+            " VALUES(#{userId},#{productId})")
+    void createProductUser(@Param("userId")int userId, @Param("productId")int productId);
 
     @Insert("<script>" +
             "insert into Product_User(UserId,ProductId) "
@@ -25,6 +24,7 @@ public interface EndUser_DB_ProductUserMapper {
             + "(#{i.userId},#{i.productId}) "
             + "</foreach > " +
             "</script>")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "Id")
     void createProductUserMap(@Param("productUserList") List<ProductUser> productUserList);
 
     @Delete("delete from Product_User where ProductId=#{productId}")
