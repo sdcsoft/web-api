@@ -108,7 +108,7 @@ public interface LAN_API {
     Result employeeFindWechat(@RequestParam("openId") String openId);
 
     @PostMapping(value = "/datacore/employee/wechat/bind")
-    Result employeeBindWechat(@RequestParam("loginId") String loginId,@RequestParam("openId") String openId);
+    Result employeeBindWechat(@RequestParam("loginId") String loginId,@RequestParam("openId") String openId,@RequestParam("unionId") String unionId);
 
     @GetMapping(value = "/datacore/employee/find/company")
     String employeeFindCompanyUser(@RequestParam("loginId") String loginId);

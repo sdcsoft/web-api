@@ -3,7 +3,9 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceUserControlMapMapper;
+import cn.com.sdcsoft.webapi.web.wechatlogin.util.AesCbcUtil;
 import cn.com.sdcsoft.webapi.wechat.client.TemplateClient;
+import com.alibaba.fastjson.JSONObject;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,6 +51,38 @@ public class Wechat_DeviceController {
         map.put("grant_type","authorization_code");
         return wxClient.post(map);
     }
+    @GetMapping(value = "/getUnionId")
+    public Result getUnionId(String encryptedData, String iv, String code) {
+        if (code == null || code.length() == 0) {
+            return Result.getFailResult("code 不能为空");
+        }
+        TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl,"/sns/jscode2session"));
+        Map<String,String> map=new HashMap<>();
+        map.put("appid","wxec5096c52525bffb");
+        map.put("secret","b23d65a821c165ed7cc9b7e56b501b6e");
+        map.put("js_code",code);
+        map.put("grant_type","authorization_code");
+        JSONObject json = JSONObject.parseObject(wxClient.post(map));
+        String session_key = json.get("session_key").toString();
+        Map<String,String> data=new HashMap<>();
+        String openid = (String) json.get("openid");
+        data.put("openid",openid);
+        try {
+            String result = AesCbcUtil.decrypt(encryptedData, session_key, iv, "UTF-8");
+            if (null != result && result.length() > 0) {
+                JSONObject json1 = JSONObject.parseObject(result);
+                String unionid = (String) json1.get("unionId");
+                data.put("unionId",unionid);
+            } else {
+                return Result.getFailResult("解密失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.getSuccessResult(data);
+    }
+
+
     @Autowired
     LAN_API lan_api;
     @GetMapping(value = "/getdecode", produces = { "application/json;charset=UTF-8" })

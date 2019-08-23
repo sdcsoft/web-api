@@ -112,8 +112,8 @@ public class Wechat_UserController {
      * @return
      */
     @GetMapping(value = "/bind/wechat")
-    public Result bindWechat(String mobileNumber,String openId){
-        Result result = lan_api.employeeBindWechat(mobileNumber,openId);
+    public Result bindWechat(String mobileNumber,String openId,String unionId){
+        Result result = lan_api.employeeBindWechat(mobileNumber,openId,unionId);
         return result;
     }
 }
