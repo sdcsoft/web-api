@@ -17,6 +17,16 @@ public class Employee implements Serializable {
     private String password, mobile, email, weiXin, qQ, realName, mark;
     private String OrgName;
 
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
+
+    private String unionId;
+
     public Integer getIsAdmin() {
         return isAdmin;
     }

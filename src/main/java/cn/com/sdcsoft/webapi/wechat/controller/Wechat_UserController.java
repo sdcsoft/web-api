@@ -44,18 +44,15 @@ public class Wechat_UserController {
     /**
      * 微信注册用户
      *
-     * @param validate
      * @param password
      * @param realName
      * @param mobile
      * @param openid
-     * @param wxEnterpriseName
-     * @param request
-     * @param map
+     * @param unionId
      * @return
      */
     @GetMapping(value = "/saveEmployee")
-    public Result saveEmployee(String validate, String password, String realName, String mobile, String openid, String wxEnterpriseName, HttpServletRequest request, Map<String, String> map) {
+    public Result saveEmployee(String password, String realName, String mobile, String openid, String unionId) {
         //从session中获取验证码
         //String code = request.getSession().getAttribute(SmsCode).toString();
         Employee employee = new Employee();
@@ -67,6 +64,7 @@ public class Wechat_UserController {
         employee.setOrgType(5);
         employee.setStatus(1);
         employee.setWeiXin(openid);
+        employee.setUnionId(unionId);
         Result result = JSONObject.parseObject(lan_api.employeeCreate(employee), Result.class);
         if (result.getCode() == Result.RESULT_CODE_SUCCESS) {
             // TODO 用户注册成功后，微信数据库需要进行的操作
@@ -112,8 +110,8 @@ public class Wechat_UserController {
      * @return
      */
     @GetMapping(value = "/bind/wechat")
-    public Result bindWechat(String mobileNumber,String openId){
-        Result result = lan_api.employeeBindWechat(mobileNumber,openId,"");
+    public Result bindWechat(String mobileNumber,String openId,String unionId){
+        Result result = lan_api.employeeBindWechat(mobileNumber,openId,unionId);
         return result;
     }
 }
