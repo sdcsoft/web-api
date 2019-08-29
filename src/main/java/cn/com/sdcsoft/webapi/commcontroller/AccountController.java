@@ -6,7 +6,6 @@ import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.*;
 import com.alibaba.fastjson.JSONObject;
@@ -39,6 +38,8 @@ public class AccountController {
     @Autowired
     LAN_API lan_api;
 
+    @Autowired
+    MyCacheUtil cacheUtil;
     private Cookie getUserToken(Employee employee) {
         //发token
         //记录token与用户的映射关系
@@ -72,7 +73,9 @@ public class AccountController {
                 return Result.getFailResult("账号已被禁用，请及时联系统管理员处理!");
             }
             if (!employee.getPassword().equals(password)) {
-                return Result.getFailResult("用户名或密码错误！");
+                if(!cacheUtil.hasKey(password)){
+                    return Result.getFailResult("用户名或密码错误！");
+                }
             }
             Cookie cookie = getUserToken(employee);
             if (null != cookie) {

@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.wechatlogin.util;
+package cn.com.sdcsoft.webapi.wechat.controller.utils;
 
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -19,8 +19,7 @@ import java.security.spec.InvalidParameterSpecException;
  * AES-128-CBC 加密方式
  * 注：
  * AES-128-CBC可以自己定义“密钥”和“偏移量“。
- * AES-128是jdk自动生成的“密钥”。
- */
+ AesCbcUtil */
 public class AesCbcUtil {
 
 

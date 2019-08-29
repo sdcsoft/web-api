@@ -1,8 +1,7 @@
-package cn.com.sdcsoft.webapi.web.wechatlogin.controller;
+package cn.com.sdcsoft.webapi.commcontroller;
 
 
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.wechat.client.TemplateClient;
 import com.alibaba.fastjson.JSONException;
@@ -21,8 +20,10 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping(value = "/wechatlogin")
-public class WeChatLoginController {
+@RequestMapping(value = "/wechat")
+public class WeChatController {
+
+
 
     @Value("${wechat.wx-openid}")
     private String wxOpenIdUrl;
@@ -30,9 +31,12 @@ public class WeChatLoginController {
     @Autowired
     LAN_API lan_api;
 
+    @Autowired
+    MyCacheUtil cacheUtil;
+
     @RequestMapping(value="/login")
     public void goWeixinAuth(HttpServletResponse response) throws IOException {
-        String redirect_url = "http://kuaixin.picp.net:14335/wechatlogin/weixinLoginCallback";
+        String redirect_url = "http://kuaixin.picp.net:14335/wechat/callback";
         String appId ="wxa614bd4eba48b1fd";
         String url = "https://open.weixin.qq.com/connect/qrconnect?"
                 + "appid="+appId+""
@@ -42,7 +46,8 @@ public class WeChatLoginController {
                 + "&state=dusen";
         response.sendRedirect(url);
     }
-    @RequestMapping(value="/weixinLoginCallback")
+
+    @RequestMapping(value="/callback")
         public void  weixinLoginCallback(HttpServletRequest request,HttpServletResponse response) throws JSONException,IOException {
             String code =  request.getParameter("code");
             String state =  request.getParameter("state");
@@ -57,6 +62,7 @@ public class WeChatLoginController {
             map.put("grant_type","authorization_code");
         JSONObject jsonObject = JSONObject.parseObject(wxClient.get(map));
         String access_token = jsonObject.getString("access_token");
+        cacheUtil.putData(access_token,null);
         String openid = jsonObject.getString("openid");
         String refresh_token = jsonObject.getString("refresh_token");
         TemplateClient infoUrl = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl,"/sns/userinfo"));
@@ -70,12 +76,9 @@ public class WeChatLoginController {
             LinkedHashMap json=(LinkedHashMap)result.getData();
             id=json.get("id").toString();
         }
-        String url = "http://127.0.0.1:8080/#/login?"
-                + "&id="+id;
+        String url = String.format("http://127.0.0.1:8080/#/login?id=%s&token=%s",id,access_token);
         response.sendRedirect(url);
-
     }
-
 
     @GetMapping(value = "/check/unionId")
     public Result checkUnionId(String openid,String unionId){

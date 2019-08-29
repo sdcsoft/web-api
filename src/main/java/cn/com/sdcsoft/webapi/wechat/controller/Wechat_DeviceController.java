@@ -3,7 +3,7 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceUserControlMapMapper;
-import cn.com.sdcsoft.webapi.web.wechatlogin.util.AesCbcUtil;
+import cn.com.sdcsoft.webapi.wechat.controller.utils.AesCbcUtil;
 import cn.com.sdcsoft.webapi.wechat.client.TemplateClient;
 import com.alibaba.fastjson.JSONObject;
 import feign.Feign;
