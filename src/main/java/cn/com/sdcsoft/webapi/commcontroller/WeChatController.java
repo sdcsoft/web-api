@@ -34,25 +34,23 @@ public class WeChatController {
     @Autowired
     MyCacheUtil cacheUtil;
 
-    @RequestMapping(value="/login")
-    public void goWeixinAuth(HttpServletResponse response) throws IOException {
-        String redirect_url = "https://apis.sdcsoft.com.cn/wechat/callback";
+    @GetMapping(value="/login")
+    public void goWeixinAuth(HttpServletResponse response,String url) throws IOException {
+        String redirect_url = "https://apis.sdcsoft.com.cn/wechat/callback?url="+url;
         String appId ="wxa614bd4eba48b1fd";
-        String url = "https://open.weixin.qq.com/connect/qrconnect?"
+        String responseUrl = "https://open.weixin.qq.com/connect/qrconnect?"
                 + "appid="+appId+""
                 + "&redirect_uri="+redirect_url+""
                 + "&response_type=code"
                 + "&scope=snsapi_login"
                 + "&state=dusen";
-        response.sendRedirect(url);
+        response.sendRedirect(responseUrl);
     }
 
-    @RequestMapping(value="/callback")
-        public void  weixinLoginCallback(HttpServletRequest request,HttpServletResponse response) throws JSONException,IOException {
-            String code =  request.getParameter("code");
-            String state =  request.getParameter("state");
+    @GetMapping(value="/callback")
+        public void  weixinLoginCallback(HttpServletRequest request,HttpServletResponse response,String code,String state,String url) throws JSONException,IOException {
             if(code == null || !"dusen".equals(state)){
-                ///return null;
+                return ;
             }
             TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl,"/sns/oauth2/access_token"));
             Map<String,String> map=new HashMap<>();
@@ -60,24 +58,23 @@ public class WeChatController {
             map.put("secret","4b3e56f7410168f4e357948e8e04f32a");
             map.put("code",code);
             map.put("grant_type","authorization_code");
-        JSONObject jsonObject = JSONObject.parseObject(wxClient.get(map));
-        String access_token = jsonObject.getString("access_token");
-        cacheUtil.putData(access_token,null);
-        String openid = jsonObject.getString("openid");
-        String refresh_token = jsonObject.getString("refresh_token");
-        TemplateClient infoUrl = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl,"/sns/userinfo"));
-        Map<String,String> infomap=new HashMap<>();
-        infomap.put("access_token",access_token);
-        infomap.put("openid",openid);
-        JSONObject infoObject = JSONObject.parseObject(infoUrl.get(infomap));
-        Result result =lan_api.employeeFindWechat2(infoObject.get("unionid").toString());
-        String mobile="0";
-        if(result.getCode() == Result.RESULT_CODE_SUCCESS){
-            LinkedHashMap json=(LinkedHashMap)result.getData();
-            mobile=json.get("mobile").toString();
-        }
-        String url = String.format("http://127.0.0.1:8080/#/login?mobile=%s&token=%s",mobile,access_token);
-        response.sendRedirect(url);
+            JSONObject jsonObject = JSONObject.parseObject(wxClient.get(map));
+            String access_token = jsonObject.getString("access_token");
+            cacheUtil.putData(access_token,null);
+            String openid = jsonObject.getString("openid");
+            TemplateClient infoUrl = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl,"/sns/userinfo"));
+            Map<String,String> infomap=new HashMap<>();
+            infomap.put("access_token",access_token);
+            infomap.put("openid",openid);
+            JSONObject infoObject = JSONObject.parseObject(infoUrl.get(infomap));
+            Result result =lan_api.employeeFindWechat2(infoObject.get("unionid").toString());
+            String mobile="0";
+            if(result.getCode() == Result.RESULT_CODE_SUCCESS){
+                LinkedHashMap json=(LinkedHashMap)result.getData();
+                mobile=json.get("mobile").toString();
+            }
+            String responseUrl = String.format(url+"?mobile=%s&token=%s",mobile,access_token);
+            response.sendRedirect(responseUrl);
     }
     @GetMapping(value = "/check/unionId")
     public Result checkUnionId(String openid,String unionId){
