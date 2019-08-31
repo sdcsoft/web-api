@@ -36,7 +36,7 @@ public class WeChatController {
 
     @GetMapping(value="/login")
     public void goWeixinAuth(HttpServletResponse response,String url) throws IOException {
-        String redirect_url = "https://apis.sdcsoft.com.cn/wechat/callback?url="+url;
+        String redirect_url = "http://kuaixin.picp.net:14335/wechat/callback?url="+url;
         String appId ="wxa614bd4eba48b1fd";
         String responseUrl = "https://open.weixin.qq.com/connect/qrconnect?"
                 + "appid="+appId+""
@@ -50,7 +50,7 @@ public class WeChatController {
     @GetMapping(value="/callback")
         public void  weixinLoginCallback(HttpServletRequest request,HttpServletResponse response,String code,String state,String url) throws JSONException,IOException {
             if(code == null || !"dusen".equals(state)){
-                return ;
+                return;
             }
             TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl,"/sns/oauth2/access_token"));
             Map<String,String> map=new HashMap<>();
@@ -76,7 +76,7 @@ public class WeChatController {
             String responseUrl = String.format(url+"?mobile=%s&token=%s",mobile,access_token);
             response.sendRedirect(responseUrl);
     }
-    @GetMapping(value = "/check/unionId")
+    @PostMapping(value = "/check/unionId")
     public Result checkUnionId(String openid,String unionId){
         Result result = lan_api.employeeFindWechat(openid);
         if(result.getCode() == Result.RESULT_CODE_SUCCESS){
@@ -87,7 +87,7 @@ public class WeChatController {
         }
          return Result.getFailResult("用户未注册");
     }
-    @GetMapping(value = "/check/openId")
+    @PostMapping(value = "/check/openId")
     public Result checkopenId(String openid){
         Result result = lan_api.employeeFindWechat(openid);
         if(result.getCode() == Result.RESULT_CODE_SUCCESS){
