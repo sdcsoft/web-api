@@ -19,8 +19,8 @@ public class Wechat_EmployeeController {
     private Wechat_DB_DevicePermissionMapMapper relation_devicePermissionMapMapper;
 
     @PostMapping(value = "/getwx")
-    public Result getWx(String openid) {
-        Result result = lan_api.employeeFindWechat(openid);
+    public Result getWx(String openId) {
+        Result result = lan_api.employeeFindWechat(openId);
         if (result.getCode() > 0){//微信未绑定或其他错误
             return result;
         }
