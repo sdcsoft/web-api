@@ -82,8 +82,8 @@ public class WeChatController {
         if(result.getCode() == Result.RESULT_CODE_SUCCESS){
             LinkedHashMap json=(LinkedHashMap)result.getData();
              String mobile= json.get("mobile").toString();
-            Result result1 =lan_api.employeeBindWechat(mobile,openId,unionId);
-            return result1;
+             result =lan_api.employeeBindWechat(mobile,openId,unionId);
+            return result;
         }
          return Result.getFailResult("用户未注册");
     }
