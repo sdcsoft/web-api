@@ -93,13 +93,25 @@ public class WeChatController {
         if(result.getCode() == Result.RESULT_CODE_SUCCESS){
             LinkedHashMap json=(LinkedHashMap)result.getData();
             Object value = json.get("unionId");
+            String OrgType = json.get("orgType").toString();
             if(value==null||value.toString().equals("")){
-                return Result.getFailResult("unionId未绑定");
+                return Result.getFailResult(OrgType);
             }else{
                 return Result.getSuccessResult();
             }
         }
-        return Result.getFailResult("用户未注册");
+        return Result.getFailResult(2,"用户未注册");
+    }
+    @PostMapping(value = "/modify/unionId")
+    public Result modifyOpenId(String openId,String unionId){
+        Result result = lan_api.employeeFindWechat(openId);
+        if(result.getCode() == Result.RESULT_CODE_SUCCESS){
+            LinkedHashMap json=(LinkedHashMap)result.getData();
+            String mobile = json.get("mobile").toString();
+            Result bindResult = lan_api.employeeBindWechat(mobile,openId,unionId);
+            return bindResult;
+        }
+        return Result.getFailResult(2,"用户未注册");
     }
 }
 
