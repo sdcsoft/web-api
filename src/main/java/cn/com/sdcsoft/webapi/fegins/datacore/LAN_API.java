@@ -72,7 +72,7 @@ public interface LAN_API {
     String deviceFindBySuffixForEnterpriseUser(@RequestParam("suffix") String suffix);
 
     @PostMapping(value = "/datacore/device/fix/modify")
-    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media);
+    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media,@RequestParam("iMEI") String iMEI);
 
     @PostMapping(value = "/datacore/device/create")
     String deviceCreate(@RequestBody List<Device> deviceList);
@@ -104,10 +104,10 @@ public interface LAN_API {
     @GetMapping(value = "/datacore/employee/find")
     String employeeFind(@RequestParam("loginId") String loginId);
 
-    @GetMapping(value = "/datacore/employee/wechat")
+    @PostMapping(value = "/datacore/employee/wechat")
     Result employeeFindWechat(@RequestParam("openId") String openId);
 
-    @GetMapping(value = "/datacore/employee/wechat2")
+    @PostMapping(value = "/datacore/employee/wechat2")
     Result employeeFindWechat2(@RequestParam("unionId") String unionId);
 
     @PostMapping(value = "/datacore/employee/wechat/bind")

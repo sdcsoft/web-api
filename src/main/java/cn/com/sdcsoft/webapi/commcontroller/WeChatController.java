@@ -50,7 +50,7 @@ public class WeChatController {
     @GetMapping(value="/callback")
         public void  weixinLoginCallback(HttpServletRequest request,HttpServletResponse response,String code,String state,String url) throws JSONException,IOException {
             if(code == null || !"dusen".equals(state)){
-                return ;
+                return;
             }
             TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl,"/sns/oauth2/access_token"));
             Map<String,String> map=new HashMap<>();
@@ -76,31 +76,42 @@ public class WeChatController {
             String responseUrl = String.format(url+"?mobile=%s&token=%s",mobile,access_token);
             response.sendRedirect(responseUrl);
     }
-    @GetMapping(value = "/check/unionId")
-    public Result checkUnionId(String openid,String unionId){
-        Result result = lan_api.employeeFindWechat(openid);
+    @PostMapping(value = "/check/unionId")
+    public Result checkUnionId(String openId,String unionId){
+        Result result = lan_api.employeeFindWechat(openId);
         if(result.getCode() == Result.RESULT_CODE_SUCCESS){
             LinkedHashMap json=(LinkedHashMap)result.getData();
              String mobile= json.get("mobile").toString();
-            Result result1 =lan_api.employeeBindWechat(mobile,openid,unionId);;
-            return result1;
+             result =lan_api.employeeBindWechat(mobile,openId,unionId);
+            return result;
         }
          return Result.getFailResult("用户未注册");
     }
-    @GetMapping(value = "/check/openId")
-    public Result checkopenId(String openid){
-        Result result = lan_api.employeeFindWechat(openid);
+    @PostMapping(value = "/check/openId")
+    public Result checkopenId(String openId){
+        Result result = lan_api.employeeFindWechat(openId);
         if(result.getCode() == Result.RESULT_CODE_SUCCESS){
             LinkedHashMap json=(LinkedHashMap)result.getData();
-            String unionId= json.get("unionId").toString();
-            if(unionId.equals("null")){
-                return Result.getFailResult("unionId未绑定");
-            }else {
+            Object value = json.get("unionId");
+            String OrgType = json.get("orgType").toString();
+            if(value==null||value.toString().equals("")){
+                return Result.getFailResult(OrgType);
+            }else{
                 return Result.getSuccessResult();
             }
-
         }
-        return Result.getFailResult("用户未注册");
+        return Result.getFailResult(2,"用户未注册");
+    }
+    @PostMapping(value = "/modify/unionId")
+    public Result modifyOpenId(String openId,String unionId){
+        Result result = lan_api.employeeFindWechat(openId);
+        if(result.getCode() == Result.RESULT_CODE_SUCCESS){
+            LinkedHashMap json=(LinkedHashMap)result.getData();
+            String mobile = json.get("mobile").toString();
+            Result bindResult = lan_api.employeeBindWechat(mobile,openId,unionId);
+            return bindResult;
+        }
+        return Result.getFailResult(2,"用户未注册");
     }
 }
 
