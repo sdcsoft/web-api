@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "LAN-API")
+@FeignClient(name = "LAN-API2")
 public interface LAN_API {
 
     @GetMapping("/datacore/agent/list")
@@ -72,7 +72,7 @@ public interface LAN_API {
     String deviceFindBySuffixForEnterpriseUser(@RequestParam("suffix") String suffix);
 
     @PostMapping(value = "/datacore/device/fix/modify")
-    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media);
+    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media,@RequestParam("iMEI") String iMEI);
 
     @PostMapping(value = "/datacore/device/create")
     String deviceCreate(@RequestBody List<Device> deviceList);
