@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.wechat.controller.utils;
+package cn.com.sdcsoft.webapi.wechat.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
