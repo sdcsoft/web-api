@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class AddDeviceRecord implements Serializable {
+public class UserAddDeviceHistory implements Serializable {
 
 
     private Integer id;
