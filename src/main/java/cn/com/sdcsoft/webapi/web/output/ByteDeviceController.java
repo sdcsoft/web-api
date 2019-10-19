@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "/device")
+@RequestMapping(value = "/webapi/output/device")
 public class ByteDeviceController {
 
     @Autowired

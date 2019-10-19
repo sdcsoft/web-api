@@ -2,31 +2,31 @@ spring:
   datasource:
     customer-db:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/Customer_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      jdbc-url: jdbc:mysql://192.168.0.110:3306/Customer_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: root
       password: ROOT
     enduser-db:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/EndUser_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      jdbc-url: jdbc:mysql://192.168.0.110:3306/EndUser_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: root
       password: ROOT
     wechat-db:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/Wx_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      jdbc-url: jdbc:mysql://192.168.0.110:3306/Wechat_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: root
       password: ROOT
   data:
     mongodb:
-      uri: mongodb://tomcat:80201288@127.0.0.1:27077/
+      uri: mongodb://tomcat:80201288@setting.dtu.aichaowei.com:27027
       authentication-database: admin
-      database: test_db
+      database: wechat_db
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
+      defaultZone: http://192.168.0.110:8761/eureka
   instance:
     prefer-ip-address: true
-    ip-address: 192.168.0.117
+    ip-address: 192.168.0.116
 server:
   port: 8080
 token:

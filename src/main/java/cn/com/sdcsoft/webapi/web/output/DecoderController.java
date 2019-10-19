@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value = "/decoder")
+@RequestMapping(value = "/webapi/output/decoder")
 public class DecoderController {
 
     @Autowired
