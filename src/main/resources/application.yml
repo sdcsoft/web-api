@@ -6,5 +6,5 @@ spring:
 wechat:
   wx-openid: https://api.weixin.qq.com
 device:
-  cache: http://output.sdcsoft.com.cn
+  cache: http://172.17.201.251:8080/device/get
   command: http://commands.sdcsoft.com.cn

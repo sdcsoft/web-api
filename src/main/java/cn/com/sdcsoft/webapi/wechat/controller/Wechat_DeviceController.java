@@ -1,5 +1,6 @@
 package cn.com.sdcsoft.webapi.wechat.controller;
 
+import cn.com.sdcsoft.webapi.commservice.DeviceCacheService;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceUserControlMapMapper;
@@ -23,8 +24,10 @@ import java.util.Map;
 @RequestMapping(value = "/wechat/device")
 public class Wechat_DeviceController {
 
-    @Value("${device.cache}")
-    private String deviceCacheUrl;
+//    @Value("${device.cache}")
+//    private String deviceCacheUrl;
+    @Autowired
+    DeviceCacheService deviceCacheService;
 
     @Value("${device.command}")
     private  String deviceCommandUrl;
@@ -35,10 +38,7 @@ public class Wechat_DeviceController {
 
     @GetMapping(value = "/getdata")
     public byte[] getData(String deviceNo) {
-        TemplateClient deviceInfoClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", deviceCacheUrl,"/device2/get2"));
-        Map<String,String> map=new HashMap<>();
-        map.put("id",deviceNo);
-        return deviceInfoClient.getBytes(map);
+        return deviceCacheService.getDeviceCacheData(deviceNo);
     }
 
     @GetMapping(value = "/getopenid")
