@@ -10,7 +10,7 @@ import java.util.List;
 public interface Wechat_DB_OnlineRecordMapper {
 
 
-    @Insert("insert into OnlineRecord (MobileNo,BeginDatetime,EndDatetime,Minutes) values (#{mobileNo},#{beginDatetime},#{endDatetime},#{minutes})")
+    @Insert("insert into OnlineRecord (OpenId,BeginDatetime,EndDatetime,Minutes) values (#{openId},#{beginDatetime},#{endDatetime},#{minutes})")
     int insertOnlineRecord(OnlineRecord onlineRecord);
 
 }

@@ -9,7 +9,7 @@ public class OnlineRecord implements Serializable {
 
 
     private Integer id,minutes;
-    private String mobileNo;
+    private String openId;
     private Timestamp beginDatetime,endDatetime;
 
 
@@ -29,12 +29,12 @@ public class OnlineRecord implements Serializable {
         this.minutes = minutes;
     }
 
-    public String getMobileNo() {
-        return mobileNo;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")

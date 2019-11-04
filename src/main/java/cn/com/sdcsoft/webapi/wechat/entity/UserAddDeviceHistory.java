@@ -9,7 +9,7 @@ public class UserAddDeviceHistory implements Serializable {
 
 
     private Integer id;
-    private String mobileNo,deviceNo;
+    private String openId,deviceNo;
 
     public Integer getId() {
         return id;
@@ -19,12 +19,12 @@ public class UserAddDeviceHistory implements Serializable {
         this.id = id;
     }
 
-    public String getMobileNo() {
-        return mobileNo;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     public String getDeviceNo() {

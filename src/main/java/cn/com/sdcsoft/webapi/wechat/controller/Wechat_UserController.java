@@ -44,32 +44,21 @@ public class Wechat_UserController {
     /**
      * 微信注册用户
      *
-     * @param password
      * @param realName
-     * @param mobile
      * @param openid
-     * @param unionId
      * @return
      */
     @GetMapping(value = "/saveEmployee")
-    public Result saveEmployee(String password, String realName, String mobile, String openid, String unionId) {
-        //从session中获取验证码
-        //String code = request.getSession().getAttribute(SmsCode).toString();
+    public Result saveEmployee(String realName,String openid){
         Employee employee = new Employee();
-        employee.setMobile(mobile);
-        employee.setEmail(mobile);
+        employee.setMobile(openid);
+        employee.setEmail(openid);
         employee.setRealName(realName);
-        employee.setPassword(password);
         employee.setOrgId(0);
         employee.setOrgType(5);
         employee.setStatus(1);
         employee.setWeiXin(openid);
-        employee.setUnionId(unionId);
         Result result = JSONObject.parseObject(lan_api.employeeCreate(employee), Result.class);
-        if (result.getCode() == Result.RESULT_CODE_SUCCESS) {
-            // TODO 用户注册成功后，微信数据库需要进行的操作
-            // TODO ........
-        }
         return result;
     }
 

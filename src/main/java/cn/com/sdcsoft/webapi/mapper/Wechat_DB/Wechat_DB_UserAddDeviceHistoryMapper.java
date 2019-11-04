@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public interface Wechat_DB_UserAddDeviceHistoryMapper {
 
 
-    @Insert("insert into UserAddDeviceHistory (MobileNo,DeviceNo) values (#{mobileNo},#{deviceNo})")
+    @Insert("insert into UserAddDeviceHistory (OpenId,DeviceNo) values (#{openId},#{deviceNo})")
     int insertUserAddDeviceHistory(UserAddDeviceHistory userAddDeviceHistory);
 
 }
