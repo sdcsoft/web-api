@@ -17,9 +17,9 @@ spring:
       password: ROOT
   data:
     mongodb:
-      uri: mongodb://tomcat:80201288@setting.dtu.aichaowei.com:27027
+      uri: mongodb://tomcat:80201288@127.0.0.1:27077
       authentication-database: admin
-      database: wechat_db
+      database: test_db
 eureka:
   client:
     service-url:

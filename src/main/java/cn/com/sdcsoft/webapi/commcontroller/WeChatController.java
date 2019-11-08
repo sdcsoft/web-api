@@ -43,13 +43,13 @@ public class WeChatController {
                 + "&redirect_uri="+redirect_url+""
                 + "&response_type=code"
                 + "&scope=snsapi_login"
-                + "&state=dusen";
+                + "&state=wxlogin";
         response.sendRedirect(responseUrl);
     }
 
     @GetMapping(value="/callback")
         public void  weixinLoginCallback(HttpServletRequest request,HttpServletResponse response,String code,String state,String url) throws JSONException,IOException {
-            if(code == null || !"dusen".equals(state)){
+            if(code == null || !"wxlogin".equals(state)){
                 return;
             }
             TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl,"/sns/oauth2/access_token"));

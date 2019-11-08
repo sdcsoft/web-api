@@ -38,6 +38,8 @@ public class Report_DeviceController {
         calendar.add(Calendar.DATE, day);
         Date endTime = calendar.getTime();
         if (day == 0) {
+            calendar.add(Calendar.DATE, 1);
+             endTime = calendar.getTime();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Aggregation aggregation = Aggregation.newAggregation(
                     Aggregation.match(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime)),
