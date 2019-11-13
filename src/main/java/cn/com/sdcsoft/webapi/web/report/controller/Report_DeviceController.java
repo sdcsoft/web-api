@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -23,6 +24,9 @@ public class Report_DeviceController {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+
+
 
     @RequestMapping(value = "/mock", method = RequestMethod.GET)
     public Result mock(String deviceNo, String key, long timestamp, int day) throws Exception {
@@ -40,7 +44,6 @@ public class Report_DeviceController {
         if (day == 0) {
             calendar.add(Calendar.DATE, 1);
              endTime = calendar.getTime();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Aggregation aggregation = Aggregation.newAggregation(
                     Aggregation.match(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime)),
                     Aggregation.unwind(key),
@@ -49,10 +52,10 @@ public class Report_DeviceController {
             AggregationResults<Map> result = mongoTemplate.aggregate(aggregation, "dayinfos", Map.class);
             List<Map> mappedResults = result.getMappedResults();
             DecimalFormat df = new DecimalFormat("#.00");
+
             if (mappedResults != null && mappedResults.size() > 0) {
-                SimpleDateFormat formatter = new SimpleDateFormat("HH:00");
                 for (int i = 0; i < mappedResults.size(); i++) {
-                    dateList.add(formatter.format(sdf.parse(mappedResults.get(i).get("date").toString())));
+                    dateList.add(mappedResults.get(i).get("date").toString());
                     avgList.add(Double.parseDouble(df.format(mappedResults.get(i).get("avg"))));
                     maxList.add(mappedResults.get(i).get("max"));
                     minList.add(mappedResults.get(i).get("min"));
@@ -160,9 +163,10 @@ public class Report_DeviceController {
         Date startTime = new Date(timestamp);
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(startTime);
-        calendar.add(Calendar.DATE, day);
-        Date endTime = calendar.getTime();
+
         if (day == 0) {
+            calendar.add(Calendar.DATE, 1);
+            Date endTime = calendar.getTime();
             Query query = Query.query(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime));
             String mapFuncString = "function(){for(var key in this){if(key.substr(0, 2)==\"ex\"){emit(key,this[key]);}}}";
             String reduceFuncString = "function(key,val){return Array}";
@@ -179,6 +183,8 @@ public class Report_DeviceController {
             map.put("sumList", sumList);
             return Result.getSuccessResult(map);
         } else {
+            calendar.add(Calendar.DATE, day);
+            Date endTime = calendar.getTime();
             Query query = Query.query(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime));
             String mapFuncString = "function(){for(var key in this){if(key.substr(0, 2)==\"ex\"){emit(key,this[key].length);}}}";
             String reduceFuncString = "function(key,val){return Array.sum(val)}";
@@ -194,4 +200,16 @@ public class Report_DeviceController {
         }
 
     }
+    public  Date parse(String str, String pattern, Locale locale) {
+        if (str == null || pattern == null) {
+            return null;
+        }
+        try {
+            return new SimpleDateFormat(pattern, locale).parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

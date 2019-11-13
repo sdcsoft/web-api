@@ -99,7 +99,11 @@ public class Report_CustomerController {
                 if (list.size() > 0) {
                     Map<Object, Object> map = new HashMap<>();
                     map.put("deviceNo",mappedResults.get(i).get("_id"));
-                    map.put(key, list.get(0));
+                    ArrayList allList=new ArrayList();
+                    for(int k =0;k<list.size();k++){
+                        allList.addAll((ArrayList)list.get(k));
+                    }
+                    map.put(key, allList);
                     dataList.add(map);
                 }
             }
