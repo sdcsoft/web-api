@@ -88,9 +88,10 @@ public class Report_CustomerController {
         Date endTime = calendar.getTime();
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.match(Criteria.where("CustomerId").is(CustomerId).and("CreateDate").gte(startTime).lte(endTime)),
-                Aggregation.group("DeviceNo").addToSet("" + key).as("list")
+                Aggregation.group("DeviceNo").push("" + key).as("list")
         );
         AggregationResults<Map> result = mongoTemplate.aggregate(aggregation, "dayinfos", Map.class);
+
 
         List<Map> mappedResults = result.getMappedResults();
         if (mappedResults != null && mappedResults.size() > 0) {
