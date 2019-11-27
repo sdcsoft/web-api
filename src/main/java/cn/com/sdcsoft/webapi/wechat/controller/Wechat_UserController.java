@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
+import java.sql.Timestamp;
 
 @RestController
 @RequestMapping(value = "/wechat/user")
@@ -58,6 +58,8 @@ public class Wechat_UserController {
         employee.setOrgType(5);
         employee.setStatus(1);
         employee.setWeiXin(openid);
+        Timestamp d = new Timestamp(System.currentTimeMillis());
+        employee.setCreateDatetime(d);
         Result result = JSONObject.parseObject(lan_api.employeeCreate(employee), Result.class);
         return result;
     }

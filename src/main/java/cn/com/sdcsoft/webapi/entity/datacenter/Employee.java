@@ -1,8 +1,10 @@
 package cn.com.sdcsoft.webapi.entity.datacenter;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -16,6 +18,16 @@ public class Employee implements Serializable {
     private int id, orgType, orgId, status;
     private String password, mobile, email, weiXin, qQ, realName, mark;
     private String OrgName;
+    private Timestamp createDatetime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    public Timestamp getCreateDatetime() {
+        return createDatetime;
+    }
+
+    public void setCreateDatetime(Timestamp createDatetime) {
+        this.createDatetime = createDatetime;
+    }
 
     public String getUnionId() {
         return unionId;
