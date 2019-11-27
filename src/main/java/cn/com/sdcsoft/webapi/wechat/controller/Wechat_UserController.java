@@ -3,6 +3,8 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_WechatUserMapper;
+import cn.com.sdcsoft.webapi.wechat.entity.WechatUser;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ public class Wechat_UserController {
 
     @Autowired
     LAN_API lan_api;
+
+    @Autowired
+    private Wechat_DB_WechatUserMapper wechat_db_wechatUserMapper;
 
     private Result getSmsSendResult(Result result,HttpServletRequest request) {
         if (result.getCode() == Result.RESULT_CODE_SUCCESS) {
@@ -58,9 +63,13 @@ public class Wechat_UserController {
         employee.setOrgType(5);
         employee.setStatus(1);
         employee.setWeiXin(openid);
-        Timestamp d = new Timestamp(System.currentTimeMillis());
-        employee.setCreateDatetime(d);
         Result result = JSONObject.parseObject(lan_api.employeeCreate(employee), Result.class);
+        WechatUser wechatUser=new WechatUser();
+        wechatUser.setOpenId(openid);
+        wechatUser.setRealName(realName);
+        Timestamp d = new Timestamp(System.currentTimeMillis());
+        wechatUser.setCreateDatetime(d);
+        wechat_db_wechatUserMapper.insertWechatUser(wechatUser);
         return result;
     }
 

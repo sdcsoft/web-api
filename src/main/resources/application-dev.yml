@@ -12,7 +12,7 @@ spring:
       password: Test@163.com
     wechat-db:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://47.94.5.49:3306/wx_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      jdbc-url: jdbc:mysql://47.94.5.49:3306/Wechat_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: dba_user
       password: Test@163.com
   data:
