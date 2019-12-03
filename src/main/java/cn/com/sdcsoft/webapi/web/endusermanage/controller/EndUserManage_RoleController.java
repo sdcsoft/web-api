@@ -44,7 +44,7 @@ public class EndUserManage_RoleController {
      * @param role
      * @return
      */
-    @PostMapping("/create")
+    @PostMapping(value ="/create")
     public Result getUserResources(@RequestBody Role role, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         role.setOrgId(orgId);
@@ -61,7 +61,7 @@ public class EndUserManage_RoleController {
      * @param role
      * @return
      */
-    @PostMapping("/modify")
+    @PostMapping(value ="/modify")
     public Result modify(@RequestBody Role role, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         role.setOrgId(orgId);
@@ -106,7 +106,7 @@ public class EndUserManage_RoleController {
      * @param roleResources
      * @return
      */
-    @PostMapping("/resource/map")
+    @PostMapping(value ="/resource/map")
     public Result map(Integer roleId, @RequestBody List<RoleResource> roleResources) {
         roleMapper.clearRoleResourceMap(roleId);
         if(roleResources.size()>0) {

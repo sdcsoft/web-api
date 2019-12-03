@@ -54,7 +54,7 @@ public class EndUserManage_ProductController {
      * @param pageSize
      * @return
      */
-    @PostMapping("/search")
+    @PostMapping(value ="/search")
     public Result search(@RequestBody Product product, int pageNum, int pageSize, HttpServletRequest request) {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
@@ -90,7 +90,7 @@ public class EndUserManage_ProductController {
      * @param productUsers
      * @return
      */
-    @PostMapping("/users/modify")
+    @PostMapping(value ="/users/modify")
     public Result modifyProductUsers(int productId, @RequestBody List<ProductUser> productUsers) {
         productUserMapper.clearProductMap(productId);
         if (productUsers.size() > 0) {
@@ -105,7 +105,7 @@ public class EndUserManage_ProductController {
      * @param request
      * @return
      */
-    @PostMapping("/sold")
+    @PostMapping(value ="/sold")
     public Result sold(@RequestBody SoldProductSearchOptions searchOptions, HttpServletRequest request) {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
@@ -122,7 +122,7 @@ public class EndUserManage_ProductController {
      * @param product
      * @return
      */
-    @PostMapping("/modify")
+    @PostMapping(value ="/modify")
     public Result editProduct(@RequestBody Product product) {
         productMapper.modifyProductInfo(product);
         return Result.getSuccessResult();
@@ -143,7 +143,7 @@ public class EndUserManage_ProductController {
      * @param product
      * @return
      */
-    @PostMapping("/create")
+    @PostMapping(value ="/create")
     public Result create(@RequestBody Product product, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         JSONObject obj = JSONObject.parseObject(lan_api.deviceModifyEndUserId(product.getControllerNo(), orgId));
@@ -168,7 +168,7 @@ public class EndUserManage_ProductController {
      * @param id
      * @return
      */
-    @PostMapping("/remove")
+    @PostMapping(value ="/remove")
     public Result deleteProductById(@RequestParam int id, @RequestParam String controllerNo) {
         int code = endUserManageProductService.deleteProduct(id, controllerNo);
         if (0 == code){

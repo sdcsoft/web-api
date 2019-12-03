@@ -66,7 +66,7 @@ public class EndUserManage_UserController {
     }
 
 
-    @PostMapping("/resources")
+    @PostMapping(value ="/resources")
     public Result getUserResources(Integer employeeId){
         User user = userMapper.findUserByEmployeeId(employeeId);
         if(null != user){
@@ -110,7 +110,7 @@ public class EndUserManage_UserController {
      * @param user
      * @return
      */
-    @PostMapping("/modify")
+    @PostMapping(value ="/modify")
     public Result modify(@RequestBody User user) {
         userMapper.modifyUser(user);
         return Result.getSuccessResult();
@@ -122,7 +122,7 @@ public class EndUserManage_UserController {
      * @param role
      * @return
      */
-    @PostMapping("/role/modify")
+    @PostMapping(value ="/role/modify")
     public Result modifyUserRole(@RequestParam Integer userId,@RequestBody Role role) {
         userMapper.changeUserRole(userId,role.getId(),role.getRoleName());
         return Result.getSuccessResult();
