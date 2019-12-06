@@ -24,22 +24,18 @@ import java.io.FileNotFoundException;
 @RequestMapping(value = "/webapi/file")
 @Auth
 public class FileController {
+
     @Value("${fileupload.boiler.path}")
     private String boilerPath;//锅炉厂上传图片存储位置
-    @Value("${fileupload.boiler.return-image-prefix}")
-    private String boilerReturnImagePrefix;//上传完成后反馈的图片路径前缀
-    /**
-     * 文件上传
-     * @param picture
-     * @param request
-     * @return
-     */
-    @RequestMapping("/upload/boiler")
-    public Result boilerUpload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) throws FileNotFoundException {
-        String orgId = request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString();
-        String fileType = request.getParameter("type");
+    @Value("${fileupload.enduser.path}")
+    private String enduserPath;//锅炉厂上传图片存储位置
+
+    @Value("${fileupload.return-image-prefix}")
+    private String returnImagePrefix;//上传完成后反馈的图片路径前缀
+
+    private Result saveFile(String savePath, String orgId, String fileType,MultipartFile picture){
         try {
-            File path  = new File(ResourceUtils.getURL(boilerPath).getPath());
+            File path  = new File(ResourceUtils.getURL(savePath).getPath());
             //如果上传目录为/static/images/upload/，则可以如下获取：
             //File upload = new File(path.getAbsolutePath(),"\\"+orgId+"\\");
             File upload = new File(path.getAbsolutePath(),orgId);
@@ -61,7 +57,7 @@ public class FileController {
             //将文件在服务器的存储路径返回
             return Result.getSuccessResult(null,
                     String.format("%s/%s/%s",
-                            boilerReturnImagePrefix,
+                            returnImagePrefix,
                             orgId,
                             fileName));
         } catch (Exception e){
@@ -69,6 +65,55 @@ public class FileController {
             return Result.getFailResult("上传失败");
         }
     }
+    /**
+     * 文件上传
+     * @param picture
+     * @param request
+     * @return
+     */
+    @RequestMapping("/upload/boiler")
+    public Result boilerUpload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) throws FileNotFoundException {
+        String orgId = request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString();
+        String fileType = request.getParameter("type");
+        return saveFile(boilerPath,orgId,fileType,picture);
+//        try {
+//            File path  = new File(ResourceUtils.getURL(boilerPath).getPath());
+//            //如果上传目录为/static/images/upload/，则可以如下获取：
+//            //File upload = new File(path.getAbsolutePath(),"\\"+orgId+"\\");
+//            File upload = new File(path.getAbsolutePath(),orgId);
+//            if(!upload.exists()){
+//                upload.mkdirs();
+//            }
+//            //获取文件在服务器的储存位置
+//            File filePath = new File(upload.getAbsolutePath());
+//
+//            //获取原始文件名称(包含格式)
+////            String originalFileName = picture.getOriginalFilename();
+//
+//            //设置文件新名称: 当前时间+文件名称（不包含格式）
+//            String fileName = String.format("%s.jpg",fileType);
+//
+//            //在指定路径下创建一个文件
+//            File targetFile = new File(filePath, fileName);
+//            picture.transferTo(targetFile);
+//            //将文件在服务器的存储路径返回
+//            return Result.getSuccessResult(null,
+//                    String.format("%s/%s/%s",
+//                            returnImagePrefix,
+//                            orgId,
+//                            fileName));
+//        } catch (Exception e){
+//            e.printStackTrace();
+//            return Result.getFailResult("上传失败");
+//        }
+    }
+    @RequestMapping("/upload/enduser")
+    public Result enduserUpload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) throws FileNotFoundException {
+        String orgId = request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString();
+        String fileType = request.getParameter("type");
+        return saveFile(orgId,enduserPath,fileType,picture);
+    }
+
     // 删除文件
     @PostMapping("/delete/boiler")
     public Result boilerDelete(@RequestParam("orgId") String orgId){

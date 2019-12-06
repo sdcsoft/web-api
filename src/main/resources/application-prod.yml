@@ -30,6 +30,8 @@ token:
     domain:  sdcsoft.com.cn
     path: /
 fileupload:
+  return-image-prefix: /files #nginx中访问文件的路径
   boiler:
     path: /boiler #docker容器中文件上传目录
-    return-image-prefix: /files #nginx中访问文件的路径
+  enduser:
+    path: /enduser #docker容器中文件上传目录

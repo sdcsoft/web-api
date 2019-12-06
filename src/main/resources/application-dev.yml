@@ -35,9 +35,11 @@ token:
     domain:
     path: /
 fileupload:
+  return-image-prefix: /boiler
   boiler:
     path: E:/Projects/Github/Java/SdcSoft.com.cn/aupload/boiler/
-    return-image-prefix: /boiler
+  enduser:
+    path: E:/Projects/Github/Java/SdcSoft.com.cn/aupload/enduser #docker容器中文件上传目录
 logging:
   level:
     cn:
