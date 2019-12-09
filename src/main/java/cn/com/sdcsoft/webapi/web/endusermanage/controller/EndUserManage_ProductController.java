@@ -172,7 +172,7 @@ public class EndUserManage_ProductController {
     public Result deleteProductById(@RequestParam int id, @RequestParam String controllerNo) {
         int code = endUserManageProductService.deleteProduct(id, controllerNo);
         if (0 == code){
-            lan_api.deviceModifyCustomerId(controllerNo,null);
+            lan_api.deviceModifyEndUserId(controllerNo,null);
             return Result.getSuccessResult();
         }
         else

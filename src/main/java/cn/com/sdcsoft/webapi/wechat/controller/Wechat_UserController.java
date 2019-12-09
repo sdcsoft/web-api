@@ -45,7 +45,6 @@ public class Wechat_UserController {
         return getSmsSendResult(result,request);
     }
 
-
     /**
      * 微信注册用户
      *
