@@ -54,7 +54,12 @@ public class FileController {
             //在指定路径下创建一个文件
             File targetFile = new File(filePath, fileName);
             picture.transferTo(targetFile);
+            //System.out.println(targetFile.getAbsolutePath());
             //将文件在服务器的存储路径返回
+//            System.out.println(String.format("%s/%s/%s",
+//                    returnImagePrefix,
+//                    orgId,
+//                    fileName));
             return Result.getSuccessResult(null,
                     String.format("%s/%s/%s",
                             returnImagePrefix,
@@ -111,7 +116,7 @@ public class FileController {
     public Result enduserUpload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) throws FileNotFoundException {
         String orgId = request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString();
         String fileType = request.getParameter("type");
-        return saveFile(orgId,enduserPath,fileType,picture);
+        return saveFile(enduserPath,orgId,fileType,picture);
     }
 
     // 删除文件
