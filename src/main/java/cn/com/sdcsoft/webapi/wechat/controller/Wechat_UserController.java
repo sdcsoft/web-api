@@ -113,4 +113,15 @@ public class Wechat_UserController {
         Result result = lan_api.employeeBindWechat(mobileNumber,openId,unionId);
         return result;
     }
+
+    /**
+     * 根据openId查询所有用户
+     * @param openId
+     * @return
+     */
+    @GetMapping(value = "/find/openId")
+    public Result bindWechat(String openId){
+        Result result = lan_api.findWeChatEmployee(openId);
+        return result;
+    }
 }

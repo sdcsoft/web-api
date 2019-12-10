@@ -107,6 +107,9 @@ public interface LAN_API {
     @PostMapping(value = "/datacore/employee/wechat")
     Result employeeFindWechat(@RequestParam("openId") String openId);
 
+    @PostMapping(value = "/datacore/employee/find/openId")
+    Result findWeChatEmployee(@RequestParam("openId") String openId);
+
     @PostMapping(value = "/datacore/employee/wechat2")
     Result employeeFindWechat2(@RequestParam("unionId") String unionId);
 
