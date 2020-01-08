@@ -1,9 +1,8 @@
-package cn.com.sdcsoft.webapi.wechat.controller.utils;
+package cn.com.sdcsoft.webapi.wechat.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_Role_ResourceMapper;
-import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_StoreMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.Role_Resource;
 import cn.com.sdcsoft.webapi.wechat.entity.Store;
 import com.alibaba.fastjson.JSON;
@@ -51,11 +50,11 @@ public class Wechat_Role_ResourceController {
     @PostMapping("/create/many")
     public Result insertManyRole_Resource(String role_ResourceList){
         List<Role_Resource> list=JSON.parseArray(role_ResourceList,Role_Resource.class);
-        for(int i=0;i<list.size();i++){
+//        for(int i=0;i<list.size();i++){
 //           if(wechat_db_role_resourceMapper.getWxDeviceByopenIdAndDeviceNo(list.get(i).getOpenId(),list.get(i).getDeviceNo())!=null){
 //               list.remove(i);
 //           }
-        }
+//        }
         if(list.size()>0){
             wechat_db_role_resourceMapper.insertManyRole_Resource(list);
             return Result.getSuccessResult();

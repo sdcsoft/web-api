@@ -51,6 +51,16 @@ public class Wechat_DeviceController {
         map.put("grant_type","authorization_code");
         return wxClient.post(map);
     }
+    @GetMapping(value = "/wxshow/getopenid")
+    public String getWxShowOpenId(String js_code) {
+        TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl,"/sns/jscode2session"));
+        Map<String,String> map=new HashMap<>();
+        map.put("appid","wx41799f23dc99b67b");
+        map.put("secret","9f147c3e4d6acd5a36121f1b8317cd15");
+        map.put("js_code",js_code);
+        map.put("grant_type","authorization_code");
+        return wxClient.post(map);
+    }
     @GetMapping(value = "/getUnionId")
     public Result getUnionId(String encryptedData, String iv, String code) {
         if (code == null || code.length() == 0) {
