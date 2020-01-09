@@ -19,8 +19,8 @@ public class DeviceCacheService {
 
     public byte[] getDeviceCacheData(String deviceNo) {
         TemplateClient deviceInfoClient = Feign.builder().target(TemplateClient.class, deviceCacheUrl);
-        Map<String,String> map = new HashMap<>(1);
-        map.put("id",deviceNo);
+        Map<String, String> map = new HashMap<>(1);
+        map.put("id", deviceNo);
         return deviceInfoClient.getBytes(map);
     }
 }

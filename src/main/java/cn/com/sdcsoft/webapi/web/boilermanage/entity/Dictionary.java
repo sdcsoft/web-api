@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 /**
  * 字典
- * @date 2018-07-10
+ *
  * @author doudou
+ * @date 2018-07-10
  */
 public class Dictionary implements Serializable {
     private Integer id;         //id主键

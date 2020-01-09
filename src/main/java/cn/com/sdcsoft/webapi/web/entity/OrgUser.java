@@ -26,6 +26,7 @@ public class OrgUser implements Serializable {
 
     /**
      * 设置注册用户Id（非登录账号）
+     *
      * @param id
      */
     public void setId(Integer id) {
@@ -38,6 +39,7 @@ public class OrgUser implements Serializable {
 
     /**
      * 设置锅炉厂Id
+     *
      * @param orgId
      */
     public void setOrgId(Integer orgId) {
@@ -51,6 +53,7 @@ public class OrgUser implements Serializable {
 
     /**
      * 设置职务Id
+     *
      * @param roleId 0或null为管理员
      */
     public void setRoleId(Integer roleId) {

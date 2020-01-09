@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Role_Resource implements Serializable {
-    private Integer id,resId;
+    private Integer id, resId;
     private String openId;
     private Timestamp dueTime;
 
@@ -34,7 +34,8 @@ public class Role_Resource implements Serializable {
     public void setOpenId(String openId) {
         this.openId = openId;
     }
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Timestamp getDueTime() {
         return dueTime;
     }

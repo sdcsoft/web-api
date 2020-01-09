@@ -25,7 +25,6 @@ public class WeiWinManage_DeviceUserControlMapController {
     LAN_API lan_api;
 
 
-
     @GetMapping(value = "/list/page")
     public Result getRelation_DeviceControlMapMapperListByConditionAndPage(DeviceUserControlMap rdc, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
@@ -33,12 +32,12 @@ public class WeiWinManage_DeviceUserControlMapController {
     }
 
     @PostMapping("/edit")
-    public Result editRelation_DeviceControlMap(@RequestBody DeviceUserControlMap rdc){
-        if(rdc.getId()!=null){
+    public Result editRelation_DeviceControlMap(@RequestBody DeviceUserControlMap rdc) {
+        if (rdc.getId() != null) {
             rdcMapper.updateDeviceUserControlMap(rdc);
-        }else{
+        } else {
             JSONObject json = JSONObject.parseObject(lan_api.employeeFind(rdc.getEmployeeMobile()));
-            JSONObject employee=(JSONObject)json.get("data");
+            JSONObject employee = (JSONObject) json.get("data");
             Timestamp d = new Timestamp(System.currentTimeMillis());
             rdc.setCreateDatetime(d);
             rdc.setOpenId(employee.getString("weiXin"));
@@ -49,7 +48,7 @@ public class WeiWinManage_DeviceUserControlMapController {
 
 
     @PostMapping(value = "/delete")
-    public Result deleteRelation_DeviceControlMapById(@RequestParam int id){
+    public Result deleteRelation_DeviceControlMapById(@RequestParam int id) {
         rdcMapper.deleteDeviceUserControlMap(id);
         return Result.getSuccessResult();
     }

@@ -15,7 +15,7 @@ public interface Customer_DB_ProductPartInfoMapper {
             "where ProductId = #{productId}")
     List<ProductPartInfo> findByProductId(int productId);
 
-    @Insert("<script>"+
+    @Insert("<script>" +
             "insert into Product_Part_Info(ProductId,PartCategoryId,PartSubCategoryId,BrandName,ModelName,AmountOfUser,Supplier,Remarks)"
             + "values "
             + "<foreach collection =\"productPartInfos\" item=\"i\" index=\"index\" separator =\",\"> "

@@ -16,6 +16,6 @@ public class Wechat_ReportController {
 
     @GetMapping(value = "/device")
     public String getDeviceReportData(@RequestParam String deviceType, @RequestParam String begintime, @RequestParam String endtime, @RequestParam String deviceNo) {
-        return rptapi.getDeviceReportDataForWechat(deviceType,begintime, endtime, deviceNo);
+        return rptapi.getDeviceReportDataForWechat(deviceType, begintime, endtime, deviceNo);
     }
 }

@@ -30,6 +30,7 @@ public interface EndUser_DB_UserMapper {
 
     @Insert("insert into User (OrgId,EmployeeId,UserName) values (#{orgId},#{id},#{realName})")
     void createUser(OrgUser user);
+
     @Insert("insert into User (OrgId,EmployeeId,UserName,RoleId,RoleName,Mark) values (#{orgId},#{id},#{realName},1,'系统管理员','系统内置管理员，不能被删除')")
     void createAdmin(OrgUser user);
 }

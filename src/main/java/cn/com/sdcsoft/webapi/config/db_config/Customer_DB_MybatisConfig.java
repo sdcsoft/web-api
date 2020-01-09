@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@MapperScan(basePackages = "cn.com.sdcsoft.webapi.mapper.Customer_DB",sqlSessionFactoryRef = "customerDBSqlSessionFactory")
+@MapperScan(basePackages = "cn.com.sdcsoft.webapi.mapper.Customer_DB", sqlSessionFactoryRef = "customerDBSqlSessionFactory")
 public class Customer_DB_MybatisConfig {
     @Bean(name = "customerDBDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.customer-db")

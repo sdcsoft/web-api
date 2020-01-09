@@ -1,4 +1,5 @@
 package cn.com.sdcsoft.webapi.web.boilermanage.controller;
+
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_DictionaryValueMapper;
 import cn.com.sdcsoft.webapi.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class BoilerManage_DictionaryValueController {
 
 
     @GetMapping(value = "/list")
-    public Result getDictionaryValueListByType(String type){
-        return  Result.getSuccessResult(dictionaryValueMapper.findByType(type));
+    public Result getDictionaryValueListByType(String type) {
+        return Result.getSuccessResult(dictionaryValueMapper.findByType(type));
     }
 
 }

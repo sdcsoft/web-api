@@ -3,7 +3,7 @@ package cn.com.sdcsoft.webapi.web.boilermanage.entity;
 import java.io.Serializable;
 
 public class RoleResource implements Serializable {
-    private Integer id, roleId,resId;
+    private Integer id, roleId, resId;
 
     public Integer getId() {
         return id;

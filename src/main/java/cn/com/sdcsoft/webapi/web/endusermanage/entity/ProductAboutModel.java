@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProductAboutModel<T> implements Serializable {
 
-    private String orgType,orgId,userId;
+    private String orgType, orgId, userId;
     private List<T> list;
 
     public String getOrgType() {
@@ -43,18 +43,18 @@ public class ProductAboutModel<T> implements Serializable {
         this.list = list;
     }
 
-    public <T> Result<T> validateModelGetResult(){
+    public <T> Result<T> validateModelGetResult() {
         try {
-            if(StringUtils.isEmpty(this.getOrgId())){
+            if (StringUtils.isEmpty(this.getOrgId())) {
                 return Result.getFailResult("组织Id不能为空");
             }
-            if(StringUtils.isEmpty(this.getOrgType())){
+            if (StringUtils.isEmpty(this.getOrgType())) {
                 return Result.getFailResult("组织类型不能为空");
             }
-            if(StringUtils.isEmpty(this.getUserId())){
+            if (StringUtils.isEmpty(this.getUserId())) {
                 return Result.getFailResult("用户Id不能为空");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return Result.getFailResult(e.getMessage());
         }
         return Result.getSuccessResult();

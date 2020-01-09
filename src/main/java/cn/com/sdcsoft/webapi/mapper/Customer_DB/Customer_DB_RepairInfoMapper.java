@@ -26,10 +26,10 @@ public interface Customer_DB_RepairInfoMapper {
     @Select("select * from Repair where productId = #{productId} and RepairDatetime between #{startTime} and #{endTime}")
     List<RepairInfo> getProductRepairInfosByDate(@Param("productId") Integer productId, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
-   @Insert(
+    @Insert(
             "insert into Repair(RepairDatetime,RepairContent,UserId,UserName,ProductId,CreateUserId,CreateUserName,CreateDatetime)"
-            + "values "
-            + "(#{repairDatetime},#{repairContent},#{userId},#{userName},#{productId},#{createUserId},#{createUserName},#{createDatetime}) ")
+                    + "values "
+                    + "(#{repairDatetime},#{repairContent},#{userId},#{userName},#{productId},#{createUserId},#{createUserName},#{createDatetime}) ")
     void insertRepairInfo(RepairInfo RepairInfo);
 
     @Delete("delete from Repair where Id=#{id}")

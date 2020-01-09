@@ -74,7 +74,6 @@ public class User implements Serializable {
     }
 
 
-
     public List<Resource> getListResource() {
         return listResource;
     }
@@ -83,4 +82,4 @@ public class User implements Serializable {
         this.listResource = listResource;
     }
 
-    }
+}

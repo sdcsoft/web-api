@@ -3,7 +3,7 @@ package cn.com.sdcsoft.webapi.web.entity;
 import java.io.Serializable;
 
 public class OrgResource implements Serializable {
-    private Integer id, orgId,resId;
+    private Integer id, orgId, resId;
 
     public Integer getId() {
         return id;

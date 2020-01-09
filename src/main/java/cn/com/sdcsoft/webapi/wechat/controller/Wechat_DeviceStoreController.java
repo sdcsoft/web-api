@@ -28,43 +28,44 @@ public class Wechat_DeviceStoreController {
     public Result WxDevicelistbyemployeeMobile(String openId) {
         return Result.getSuccessResult(wechat_db_deviceStoreMapper.getWxDeviceListByopenId(openId));
     }
+
     @GetMapping(value = "/check/openId")
     public Result checkOpenId(String openId) {
-        List<DeviceStore> list= wechat_db_deviceStoreMapper.getWxDeviceListByopenId(openId);
-        if(list.size()>0){
+        List<DeviceStore> list = wechat_db_deviceStoreMapper.getWxDeviceListByopenId(openId);
+        if (list.size() > 0) {
             return Result.getSuccessResult();
-        }else{
+        } else {
             return Result.getFailResult("该用户更新缓存");
         }
     }
 
     @PostMapping("/create")
-    public Result editWxDevice(@RequestBody DeviceStore deviceStore){
+    public Result editWxDevice(@RequestBody DeviceStore deviceStore) {
         wechat_db_deviceStoreMapper.insertWxDevice(deviceStore);
         return Result.getSuccessResult();
     }
 
     @PostMapping("/modify")
-    public Result modifyWxDevice(@RequestBody DeviceStore deviceStore){
+    public Result modifyWxDevice(@RequestBody DeviceStore deviceStore) {
         wechat_db_deviceStoreMapper.updateDeviceStore(deviceStore);
         return Result.getSuccessResult();
     }
 
     @GetMapping(value = "/remove")
-    public Result deleteWxDevice(String openId,String deviceNo){
-        wechat_db_deviceStoreMapper.deleteWxDevice(deviceNo,openId);
+    public Result deleteWxDevice(String openId, String deviceNo) {
+        wechat_db_deviceStoreMapper.deleteWxDevice(deviceNo, openId);
         return Result.getSuccessResult();
     }
 
     @PostMapping("/create/many")
-    public Result insertManyStore(String storeList){
-        List<DeviceStore> list=JSON.parseArray(storeList,DeviceStore.class);
-        for(int i=0;i<list.size();i++){
-           if(wechat_db_deviceStoreMapper.getWxDeviceByopenIdAndDeviceNo(list.get(i).getOpenId(),list.get(i).getDeviceNo())!=null){
-               list.remove(i);
-           }
+    public Result insertManyStore(String storeList) {
+        List<DeviceStore> list = JSON.parseArray(storeList, DeviceStore.class);
+        for (int i = 0; i < list.size(); i++) {
+            if (wechat_db_deviceStoreMapper.getWxDeviceByopenIdAndDeviceNo(list.get(i).getOpenId(), list.get(i).getDeviceNo()) != null) {
+                list.remove(i);
+            }
         }
-        if(list.size()>0){
+        if (list.size() > 0) {
             wechat_db_deviceStoreMapper.insertManyStore(list);
             return Result.getSuccessResult();
         }

@@ -23,7 +23,7 @@ public class Wechat_OnlineRecordController {
     LAN_API lan_api;
 
     @PostMapping("/create")
-    public Result createOnlineRecord(@RequestBody OnlineRecord onlineRecord){
+    public Result createOnlineRecord(@RequestBody OnlineRecord onlineRecord) {
         wechat_db_onlineRecordMapper.insertOnlineRecord(onlineRecord);
         return Result.getSuccessResult();
     }

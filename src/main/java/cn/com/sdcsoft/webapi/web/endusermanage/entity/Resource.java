@@ -1,8 +1,8 @@
 package cn.com.sdcsoft.webapi.web.endusermanage.entity;
 
 public class Resource {
-    private Integer id,pId,hidden,sort;
-    private String resName,url,pageUrl,permission;
+    private Integer id, pId, hidden, sort;
+    private String resName, url, pageUrl, permission;
 
     public Integer getId() {
         return id;

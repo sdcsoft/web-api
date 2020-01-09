@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 /**
  * 字典值
- * @date 2018-07-10
+ *
  * @author doudou
+ * @date 2018-07-10
  */
 public class DictionaryValue implements Serializable {
 
@@ -38,6 +39,7 @@ public class DictionaryValue implements Serializable {
     public void setLabel(String label) {
         this.label = label;
     }
+
     public int getValue() {
         return value;
     }

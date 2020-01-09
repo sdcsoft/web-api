@@ -36,7 +36,6 @@ public interface EndUser_DB_ProductMapper {
     List<Product> searchForAdmin(@Param("orgId") Integer orgId, @Param("product") Product product);
 
 
-
     @Select("<script>" +
             "select pt.* from Product_User pu " +
             "inner join Product pt on pu.ProductId=pt.Id" +

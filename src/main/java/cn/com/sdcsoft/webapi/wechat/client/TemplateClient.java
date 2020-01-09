@@ -10,6 +10,7 @@ public interface TemplateClient {
 
     @RequestLine("GET")
     String get();
+
     @RequestLine("GET")
     String get(@QueryMap Map<String, String> map);
 

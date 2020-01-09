@@ -21,11 +21,12 @@ public class EndUserManage_PartSubCategoryController {
 
     /**
      * 查询数据列表-不带分页
+     *
      * @param partCategoryId
      * @return
      */
     @GetMapping(value = "/list")
     public Result getList(Integer partCategoryId) {
-            return Result.getSuccessResult(partSubCategoryMapper.findAllPartCategoryId(partCategoryId));
+        return Result.getSuccessResult(partSubCategoryMapper.findAllPartCategoryId(partCategoryId));
     }
 }

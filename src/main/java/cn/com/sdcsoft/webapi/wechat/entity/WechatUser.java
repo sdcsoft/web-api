@@ -9,7 +9,7 @@ public class WechatUser implements Serializable {
 
 
     private Integer id;
-    private String mobile,openId,realName;
+    private String mobile, openId, realName;
     private Timestamp createDatetime;
 
     public Integer getId() {
@@ -43,19 +43,15 @@ public class WechatUser implements Serializable {
     public void setRealName(String realName) {
         this.realName = realName;
     }
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Timestamp getCreateDatetime() {
         return createDatetime;
     }
+
     public void setCreateDatetime(Timestamp createDatetime) {
         this.createDatetime = createDatetime;
     }
-
-
-
-
-
-
 
 
 }

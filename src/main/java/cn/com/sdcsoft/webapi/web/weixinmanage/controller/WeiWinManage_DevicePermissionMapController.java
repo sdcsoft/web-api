@@ -32,12 +32,12 @@ public class WeiWinManage_DevicePermissionMapController {
 
 
     @PostMapping("/edit")
-    public Result editRelation_devicePermission(@RequestBody Relation_DevicePermissionMap rdc){
-        if(rdc.getId()!=null){
+    public Result editRelation_devicePermission(@RequestBody Relation_DevicePermissionMap rdc) {
+        if (rdc.getId() != null) {
             rdpMapper.updateRelation_DevicePermissionMap(rdc);
-        }else{
+        } else {
             JSONObject json = JSONObject.parseObject(lan_api.employeeFind(rdc.getEmployeeMobile()));
-            JSONObject employee=(JSONObject)json.get("data");
+            JSONObject employee = (JSONObject) json.get("data");
             Timestamp d = new Timestamp(System.currentTimeMillis());
             rdc.setCreateDatetime(d);
             rdc.setOpenId(employee.getString("weiXin"));
@@ -48,7 +48,7 @@ public class WeiWinManage_DevicePermissionMapController {
 
 
     @PostMapping(value = "/delete")
-    public Result deleteRelation_devicePermissionById(@RequestParam int id){
+    public Result deleteRelation_devicePermissionById(@RequestParam int id) {
         rdpMapper.deleteRelation_DevicePermissionMap(id);
         return Result.getSuccessResult();
     }

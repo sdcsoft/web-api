@@ -33,13 +33,13 @@ public class FileController {
     @Value("${fileupload.return-image-prefix}")
     private String returnImagePrefix;//上传完成后反馈的图片路径前缀
 
-    private Result saveFile(String savePath, String orgId, String fileType,MultipartFile picture){
+    private Result saveFile(String savePath, String orgId, String fileType, MultipartFile picture) {
         try {
-            File path  = new File(ResourceUtils.getURL(savePath).getPath());
+            File path = new File(ResourceUtils.getURL(savePath).getPath());
             //如果上传目录为/static/images/upload/，则可以如下获取：
             //File upload = new File(path.getAbsolutePath(),"\\"+orgId+"\\");
-            File upload = new File(path.getAbsolutePath(),orgId);
-            if(!upload.exists()){
+            File upload = new File(path.getAbsolutePath(), orgId);
+            if (!upload.exists()) {
                 upload.mkdirs();
             }
             //获取文件在服务器的储存位置
@@ -49,7 +49,7 @@ public class FileController {
 //            String originalFileName = picture.getOriginalFilename();
 
             //设置文件新名称: 当前时间+文件名称（不包含格式）
-            String fileName = String.format("%s.jpg",fileType);
+            String fileName = String.format("%s.jpg", fileType);
 
             //在指定路径下创建一个文件
             File targetFile = new File(filePath, fileName);
@@ -65,13 +65,15 @@ public class FileController {
                             returnImagePrefix,
                             orgId,
                             fileName));
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return Result.getFailResult("上传失败");
         }
     }
+
     /**
      * 文件上传
+     *
      * @param picture
      * @param request
      * @return
@@ -80,7 +82,7 @@ public class FileController {
     public Result boilerUpload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) throws FileNotFoundException {
         String orgId = request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString();
         String fileType = request.getParameter("type");
-        return saveFile(boilerPath,orgId,fileType,picture);
+        return saveFile(boilerPath, orgId, fileType, picture);
 //        try {
 //            File path  = new File(ResourceUtils.getURL(boilerPath).getPath());
 //            //如果上传目录为/static/images/upload/，则可以如下获取：
@@ -112,16 +114,17 @@ public class FileController {
 //            return Result.getFailResult("上传失败");
 //        }
     }
+
     @RequestMapping("/upload/enduser")
     public Result enduserUpload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) throws FileNotFoundException {
         String orgId = request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString();
         String fileType = request.getParameter("type");
-        return saveFile(enduserPath,orgId,fileType,picture);
+        return saveFile(enduserPath, orgId, fileType, picture);
     }
 
     // 删除文件
     @PostMapping("/delete/boiler")
-    public Result boilerDelete(@RequestParam("orgId") String orgId){
+    public Result boilerDelete(@RequestParam("orgId") String orgId) {
         return Result.getFailResult("暂不支持文件删除操作！");
     }
 }

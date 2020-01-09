@@ -19,11 +19,11 @@ import java.io.UnsupportedEncodingException;
 @RestController
 @RequestMapping(value = "/account")
 public class AccountController {
-    static final int ORG_TYPE_Company =0;
-    static final int ORG_TYPE_Enterprise =1;
-    static final int ORG_TYPE_Customer =2;
-    static final int ORG_TYPE_Agent =3;
-    static final int ORG_TYPE_EndUser =4;
+    static final int ORG_TYPE_Company = 0;
+    static final int ORG_TYPE_Enterprise = 1;
+    static final int ORG_TYPE_Customer = 2;
+    static final int ORG_TYPE_Agent = 3;
+    static final int ORG_TYPE_EndUser = 4;
 
 
     interface IOrgInfo {
@@ -40,6 +40,7 @@ public class AccountController {
 
     @Autowired
     MyCacheUtil cacheUtil;
+
     private Cookie getUserToken(Employee employee) {
         //发token
         //记录token与用户的映射关系
@@ -73,7 +74,7 @@ public class AccountController {
                 return Result.getFailResult("账号已被禁用，请及时联系统管理员处理!");
             }
             if (!employee.getPassword().equals(password)) {
-                if(!cacheUtil.hasKey(password)){
+                if (!cacheUtil.hasKey(password)) {
                     return Result.getFailResult("用户名或密码错误！");
                 }
             }

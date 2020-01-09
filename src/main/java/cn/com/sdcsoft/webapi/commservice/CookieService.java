@@ -16,14 +16,14 @@ import java.util.Base64;
 public class CookieService {
 
 
-    public static final String COOKIE_NAME_USER_INFO="sdcsoft.userinfo";
+    public static final String COOKIE_NAME_USER_INFO = "sdcsoft.userinfo";
 
-    private static final int USER_INFO_FIELD_COUNT=2;
-    private static final int USER_INFO_FIELD_INDEX_EmployeeID=0;
-    private static final int USER_INFO_FIELD_INDEX_OrgID=1;
+    private static final int USER_INFO_FIELD_COUNT = 2;
+    private static final int USER_INFO_FIELD_INDEX_EmployeeID = 0;
+    private static final int USER_INFO_FIELD_INDEX_OrgID = 1;
 
-    public static final String USER_INFO_FIELD_NAME_EmployeeID="EmployeeID";
-    public static final String USER_INFO_FIELD_NAME_OrgID="OrgID";
+    public static final String USER_INFO_FIELD_NAME_EmployeeID = "EmployeeID";
+    public static final String USER_INFO_FIELD_NAME_OrgID = "OrgID";
 
     @Value("${token.cookie.name}")
     private String userTokenName;
@@ -32,60 +32,60 @@ public class CookieService {
     @Value("${token.cookie.path}")
     private String cookiePath;
 
-    public Cookie getUserToken(String userId){
+    public Cookie getUserToken(String userId) {
         Token token = Token.getInstance(userId);
-        Cookie cookie = new Cookie(userTokenName,token.getTokenString());
+        Cookie cookie = new Cookie(userTokenName, token.getTokenString());
         cookie.setDomain(cookieDomain);
         cookie.setPath(cookiePath);
         return cookie;
     }
 
-    public boolean verifyUserToken(HttpServletRequest request){
+    public boolean verifyUserToken(HttpServletRequest request) {
         return WebUtils.getCookie(request, userTokenName) != null;
     }
 
 
     public Cookie getUserCookie(Employee employee) throws UnsupportedEncodingException {
         String[] infos = getUseInfoString(employee);
-        String infoString = String.join(":",infos);
-        byte[] data = encryptKaiser(infoString,8).getBytes("utf-8");
+        String infoString = String.join(":", infos);
+        byte[] data = encryptKaiser(infoString, 8).getBytes("utf-8");
         infoString = Base64.getEncoder().encodeToString(data);
 
-        Cookie cookie = new Cookie(COOKIE_NAME_USER_INFO,infoString);
+        Cookie cookie = new Cookie(COOKIE_NAME_USER_INFO, infoString);
         cookie.setDomain(cookieDomain);
         cookie.setPath(cookiePath);
         return cookie;
     }
 
-    private static String[] getUseInfoString(Employee employee){
+    private static String[] getUseInfoString(Employee employee) {
         String[] infos = new String[2];
-        infos[USER_INFO_FIELD_INDEX_EmployeeID] = String.format("%s",employee.getId());
-        infos[USER_INFO_FIELD_INDEX_OrgID] = String.format("%s",employee.getOrgId());
+        infos[USER_INFO_FIELD_INDEX_EmployeeID] = String.format("%s", employee.getId());
+        infos[USER_INFO_FIELD_INDEX_OrgID] = String.format("%s", employee.getOrgId());
         return infos;
     }
 
     public static boolean verifyUserInfo(HttpServletRequest request) throws UnsupportedEncodingException {
         Cookie cookie = WebUtils.getCookie(request, COOKIE_NAME_USER_INFO);
-        if(null == cookie){
+        if (null == cookie) {
             return false;
         }
-        String str = new String(Base64.getDecoder().decode(cookie.getValue()),"utf-8");//.encodeToString(data).split(":");
-        String[] infos = decryptKaiser(str,8).split(":");
-        if(infos.length == USER_INFO_FIELD_COUNT){
-            request.setAttribute(USER_INFO_FIELD_NAME_EmployeeID,infos[USER_INFO_FIELD_INDEX_EmployeeID]);
-            request.setAttribute(USER_INFO_FIELD_NAME_OrgID,infos[USER_INFO_FIELD_INDEX_OrgID]);
+        String str = new String(Base64.getDecoder().decode(cookie.getValue()), "utf-8");//.encodeToString(data).split(":");
+        String[] infos = decryptKaiser(str, 8).split(":");
+        if (infos.length == USER_INFO_FIELD_COUNT) {
+            request.setAttribute(USER_INFO_FIELD_NAME_EmployeeID, infos[USER_INFO_FIELD_INDEX_EmployeeID]);
+            request.setAttribute(USER_INFO_FIELD_NAME_OrgID, infos[USER_INFO_FIELD_INDEX_OrgID]);
             return true;
         }
         return false;
     }
 
-    public static String getUserInfo(HttpServletRequest request,int user_info_field_index){
+    public static String getUserInfo(HttpServletRequest request, int user_info_field_index) {
         Cookie cookie = WebUtils.getCookie(request, COOKIE_NAME_USER_INFO);
-        if(null == cookie){
+        if (null == cookie) {
             return null;
         }
-        String[] infos = decryptKaiser(cookie.getValue(),8).split(":");
-        if(infos.length >user_info_field_index)
+        String[] infos = decryptKaiser(cookie.getValue(), 8).split(":");
+        if (infos.length > user_info_field_index)
             return infos[user_info_field_index];
         return null;
     }

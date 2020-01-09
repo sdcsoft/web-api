@@ -7,6 +7,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.method.HandlerTypePredicate;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
@@ -27,22 +28,22 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        if(o instanceof HandlerTypePredicate)
-        if (o instanceof HandlerMethod) {
-            HandlerMethod method = (HandlerMethod) o;
-            Permission permission = method.getMethodAnnotation(Permission.class);
-            if (null == permission || !permission.loginReqired())
-                return true;
-            else {
-                if (isLogin(request)) {
+        if (o instanceof HandlerTypePredicate)
+            if (o instanceof HandlerMethod) {
+                HandlerMethod method = (HandlerMethod) o;
+                Permission permission = method.getMethodAnnotation(Permission.class);
+                if (null == permission || !permission.loginReqired())
                     return true;
-                } else {
-                    response.setCharacterEncoding("utf-8");
-                    PrintWriter out = response.getWriter();
-                    out.print("{\"code\":0,\"login\":\"%s\",\"msg\":\"token无效！\"}");
+                else {
+                    if (isLogin(request)) {
+                        return true;
+                    } else {
+                        response.setCharacterEncoding("utf-8");
+                        PrintWriter out = response.getWriter();
+                        out.print("{\"code\":0,\"login\":\"%s\",\"msg\":\"token无效！\"}");
+                    }
                 }
             }
-        }
         return false;
     }
 

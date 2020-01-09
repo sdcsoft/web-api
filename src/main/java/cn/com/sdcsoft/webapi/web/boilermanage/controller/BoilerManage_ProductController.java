@@ -57,7 +57,7 @@ public class BoilerManage_ProductController {
         User user = userMapper.findUserByEmployeeId(employeeId);
         if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
             PageHelper.startPage(pageNum, pageSize);
-            List<Product> list = productMapper.searchForAdmin(user.getOrgId(), product,false);
+            List<Product> list = productMapper.searchForAdmin(user.getOrgId(), product, false);
             PageInfo pageInfo = new PageInfo(list);
             return Result.getSuccessResult(pageInfo);
         } else {
@@ -98,6 +98,7 @@ public class BoilerManage_ProductController {
 
     /**
      * 获取售出的产品信息
+     *
      * @param searchOptions
      * @param request
      * @return
@@ -107,9 +108,9 @@ public class BoilerManage_ProductController {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
         if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
-            return Result.getSuccessResult(productMapper.findSoldForAdmin(user.getOrgId(),searchOptions));
+            return Result.getSuccessResult(productMapper.findSoldForAdmin(user.getOrgId(), searchOptions));
         } else {
-            return Result.getSuccessResult(productMapper.find(user.getId(),searchOptions));
+            return Result.getSuccessResult(productMapper.find(user.getId(), searchOptions));
         }
     }
 
@@ -168,11 +169,10 @@ public class BoilerManage_ProductController {
     @PostMapping("/remove")
     public Result deleteProductById(@RequestParam int id, @RequestParam String controllerNo) {
         int code = productService.deleteProduct(id, controllerNo);
-        if (0 == code){
-            lan_api.deviceModifyCustomerId(controllerNo,null);
+        if (0 == code) {
+            lan_api.deviceModifyCustomerId(controllerNo, null);
             return Result.getSuccessResult();
-        }
-        else
+        } else
             return Result.getFailResult("删除失败");
     }
 }

@@ -22,20 +22,21 @@ public class EndUserManage_ResourceController {
     private EndUser_DB_ResourceMapper resourceMapper;
     @Autowired
     private EndUser_DB_UserMapper userMapper;
+
     /**
      * 通过角色Id获得角色资源列表
+     *
      * @param employeeId
      * @return
      */
     @GetMapping(value = "/user")
     public Result getUserResources(Integer employeeId) {
         User user = userMapper.findUserByEmployeeId(employeeId);
-        if(null != user){
-            if(Role.SYSTEM_ADMIN_ROLE_ID == user.getRoleId()){
+        if (null != user) {
+            if (Role.SYSTEM_ADMIN_ROLE_ID == user.getRoleId()) {
                 return Result.getSuccessResult(resourceMapper.getOrgResources(user.getOrgId()));
-            }
-            else{
-               return Result.getSuccessResult(resourceMapper.getUserResources(employeeId));
+            } else {
+                return Result.getSuccessResult(resourceMapper.getUserResources(employeeId));
             }
         }
         return Result.getFailResult("系统中不存在请求的用户及资源！");
@@ -43,6 +44,7 @@ public class EndUserManage_ResourceController {
 
     /**
      * 通过角色Id获得角色资源列表
+     *
      * @param roleId
      * @return
      */

@@ -12,12 +12,12 @@ public class DecoderController {
     @Autowired
     LAN_API lan_api;
 
-    @RequestMapping(value = "/decode", produces = { "application/json;charset=UTF-8" })
+    @RequestMapping(value = "/decode", produces = {"application/json;charset=UTF-8"})
     public String getDecode(String deviceNo) {
         return lan_api.deviceFindByDeviceNo(deviceNo);
     }
 
-    @RequestMapping(value = "/suffix", produces = { "application/json;charset=UTF-8" })
+    @RequestMapping(value = "/suffix", produces = {"application/json;charset=UTF-8"})
     public String getSuffix(@RequestParam("deviceNo") String id) {
         return lan_api.deviceFindSuffix(id);
     }
