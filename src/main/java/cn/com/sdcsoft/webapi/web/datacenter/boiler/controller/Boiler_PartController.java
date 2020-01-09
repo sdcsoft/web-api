@@ -19,36 +19,39 @@ public class Boiler_PartController {
      * 获取辅机大类列表
      */
     @GetMapping(value = "/list")
-    public Result List(){
+    public Result List() {
         return Result.getSuccessResult(partCategoryMapper.findAll());
     }
 
     /**
      * 创建一个辅机大类
+     *
      * @param partCategory
      */
     @PostMapping(value = "/create")
-    public Result create(@RequestBody PartCategory partCategory){
+    public Result create(@RequestBody PartCategory partCategory) {
         partCategoryMapper.create(partCategory);
         return Result.getSuccessResult();
     }
 
     /**
      * 修改一个辅机大类
+     *
      * @param partCategory
      */
     @PostMapping(value = "/modify")
-    public Result<Object> modify(@RequestBody PartCategory partCategory){
+    public Result<Object> modify(@RequestBody PartCategory partCategory) {
         partCategoryMapper.modify(partCategory);
         return Result.getSuccessResult();
     }
 
     /**
      * 删除一个辅机大类
+     *
      * @param partId
      */
     @PostMapping(value = "/remove")
-    public Result remove(@RequestParam Integer partId){
+    public Result remove(@RequestParam Integer partId) {
         partCategoryMapper.remove(partId);
         return Result.getSuccessResult();
     }

@@ -21,30 +21,34 @@ public class BoilerManage_RepairInfoController {
     Customer_DB_RepairInfoMapper repairInfoMapper;
 
     @GetMapping(value = "/list/product")
-    public Result getRepairInfoListByProductId(Integer productId){
-        return  Result.getSuccessResult(repairInfoMapper.getProductRepairInfos(productId));
-    }
-    @GetMapping(value = "/list/user")
-    public Result getRepairInfoListByUserId(Integer userId){
-        return  Result.getSuccessResult(repairInfoMapper.getUserRepairInfos(userId));
-    }
-    @GetMapping(value = "/list/product/date")
-    public Result getRepairInfoListByDate(Integer productId, Timestamp startTime, Timestamp endTime){
-        return  Result.getSuccessResult(repairInfoMapper.getProductRepairInfosByDate( productId, startTime, endTime));
-    }
-    @GetMapping(value = "/list/user/date")
-    public Result getRepairInfoListBydate(Integer userId, Timestamp startTime, Timestamp endTime){
-        return  Result.getSuccessResult(repairInfoMapper.getUserRepairInfosByDate( userId, startTime, endTime));
+    public Result getRepairInfoListByProductId(Integer productId) {
+        return Result.getSuccessResult(repairInfoMapper.getProductRepairInfos(productId));
     }
 
-   @PostMapping(value = "/create")
-    public Result insertRepairInfo(@RequestBody RepairInfo repairInfo){
-       repairInfoMapper.insertRepairInfo(repairInfo);
+    @GetMapping(value = "/list/user")
+    public Result getRepairInfoListByUserId(Integer userId) {
+        return Result.getSuccessResult(repairInfoMapper.getUserRepairInfos(userId));
+    }
+
+    @GetMapping(value = "/list/product/date")
+    public Result getRepairInfoListByDate(Integer productId, Timestamp startTime, Timestamp endTime) {
+        return Result.getSuccessResult(repairInfoMapper.getProductRepairInfosByDate(productId, startTime, endTime));
+    }
+
+    @GetMapping(value = "/list/user/date")
+    public Result getRepairInfoListBydate(Integer userId, Timestamp startTime, Timestamp endTime) {
+        return Result.getSuccessResult(repairInfoMapper.getUserRepairInfosByDate(userId, startTime, endTime));
+    }
+
+    @PostMapping(value = "/create")
+    public Result insertRepairInfo(@RequestBody RepairInfo repairInfo) {
+        repairInfoMapper.insertRepairInfo(repairInfo);
         return Result.getSuccessResult();
     }
+
     @PostMapping(value = "/remove")
-    public Result deleteRepairInfoByProductId(@RequestParam int id){
-        repairInfoMapper.removeRepairInfoById( id);
+    public Result deleteRepairInfoByProductId(@RequestParam int id) {
+        repairInfoMapper.removeRepairInfoById(id);
         return Result.getSuccessResult();
     }
 }

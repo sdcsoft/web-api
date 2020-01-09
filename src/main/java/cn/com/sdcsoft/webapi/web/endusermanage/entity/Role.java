@@ -15,8 +15,9 @@ public class Role {
     }
 
     private Integer orgId;
-    private String roleName,roleDesc;
+    private String roleName, roleDesc;
     private List<RoleResource> roleResourceList;
+
     public Integer getId() {
         return id;
     }

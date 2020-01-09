@@ -22,6 +22,7 @@ public class BoilerManage_DictionaryController {
 
     /**
      * 查询字典列表
+     *
      * @param dictionary
      * @param pageNum
      * @param pageSize
@@ -30,7 +31,7 @@ public class BoilerManage_DictionaryController {
     @GetMapping(value = "/list")
     public Result list(Dictionary dictionary, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Dictionary> list =dictionaryMapper.findAll();
+        List<Dictionary> list = dictionaryMapper.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return Result.getSuccessResult(pageInfo);
     }

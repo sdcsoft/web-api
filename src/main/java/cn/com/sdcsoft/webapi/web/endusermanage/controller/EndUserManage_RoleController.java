@@ -30,7 +30,7 @@ public class EndUserManage_RoleController {
     private EndUser_DB_ResourceMapper resourceMapper;
 
     @GetMapping("/list")
-    public Result list(Integer pageNum,Integer pageSize, HttpServletRequest request) {
+    public Result list(Integer pageNum, Integer pageSize, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         PageHelper.startPage(pageNum, pageSize);
         List<Role> list = roleMapper.list(orgId);
@@ -44,11 +44,11 @@ public class EndUserManage_RoleController {
      * @param role
      * @return
      */
-    @PostMapping(value ="/create")
+    @PostMapping(value = "/create")
     public Result getUserResources(@RequestBody Role role, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         role.setOrgId(orgId);
-        if(roleMapper.checkExist(role)>0){
+        if (roleMapper.checkExist(role) > 0) {
             return Result.getFailResult("该数据已存在！");
         }
         roleMapper.createRole(role);
@@ -61,19 +61,19 @@ public class EndUserManage_RoleController {
      * @param role
      * @return
      */
-    @PostMapping(value ="/modify")
+    @PostMapping(value = "/modify")
     public Result modify(@RequestBody Role role, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         role.setOrgId(orgId);
         Role item = roleMapper.findRole(role);
-        if(null == item){
+        if (null == item) {
             return Result.getFailResult("无法查询到有效数据并修改！");
         }
-        if(item.getRoleName().equals(role.getRoleName())){
+        if (item.getRoleName().equals(role.getRoleName())) {
             roleMapper.modifyRoleExtendsInfo(role);
             return Result.getSuccessResult();
         }
-        if(roleMapper.checkExist(role)>0){
+        if (roleMapper.checkExist(role) > 0) {
             return Result.getFailResult("该名称已经被占用！");
         }
         roleMapper.modifyRole(role);
@@ -89,7 +89,7 @@ public class EndUserManage_RoleController {
      * @return
      */
     @PostMapping(value = "/remove")
-    public Result remove(@RequestParam Integer roleId,HttpServletRequest request) {
+    public Result remove(@RequestParam Integer roleId, HttpServletRequest request) {
         if (0 < roleMapper.checkUsersInRole(roleId)) {
             return Result.getFailResult("因为该数据正在被使用，所以不能删除该数据！");
         }
@@ -106,10 +106,10 @@ public class EndUserManage_RoleController {
      * @param roleResources
      * @return
      */
-    @PostMapping(value ="/resource/map")
+    @PostMapping(value = "/resource/map")
     public Result map(Integer roleId, @RequestBody List<RoleResource> roleResources) {
         roleMapper.clearRoleResourceMap(roleId);
-        if(roleResources.size()>0) {
+        if (roleResources.size() > 0) {
             roleMapper.createRoleResourceMap(roleResources);
         }
         return Result.getSuccessResult();

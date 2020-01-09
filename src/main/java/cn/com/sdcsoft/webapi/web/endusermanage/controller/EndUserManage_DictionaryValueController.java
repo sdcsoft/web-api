@@ -19,8 +19,8 @@ public class EndUserManage_DictionaryValueController {
 
 
     @GetMapping(value = "/list")
-    public Result getDictionaryValueListByType(String type){
-        return  Result.getSuccessResult(dictionaryValueMapper.findByType(type));
+    public Result getDictionaryValueListByType(String type) {
+        return Result.getSuccessResult(dictionaryValueMapper.findByType(type));
     }
 
 }

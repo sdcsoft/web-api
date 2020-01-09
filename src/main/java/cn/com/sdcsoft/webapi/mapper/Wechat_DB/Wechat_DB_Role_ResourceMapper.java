@@ -1,4 +1,5 @@
 package cn.com.sdcsoft.webapi.mapper.Wechat_DB;
+
 import cn.com.sdcsoft.webapi.wechat.entity.Role_Resource;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
@@ -12,11 +13,10 @@ public interface Wechat_DB_Role_ResourceMapper {
     List<Role_Resource> getRole_ResourceListByopenId(@Param("openId") String openId);
 
 
-
     @Insert("insert into Role_Resource(OpenId,ResId,DueTime) values (#{openId},#{resId},#{dueTime})")
     int insertRole_Resource(Role_Resource role_resource);
 
-    @Insert("<script>"+
+    @Insert("<script>" +
             "insert into Role_Resource(OpenId,ResId,DueTime)"
             + "values "
             + "<foreach collection =\"rrList\" item=\"rr\" index=\"index\" separator =\",\"> "

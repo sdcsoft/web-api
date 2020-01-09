@@ -7,10 +7,10 @@ import java.sql.Timestamp;
 
 public class DeviceUserControlMap implements Serializable {
 
-    public static final int STATUS_ENABLE=1;
-    public static final int STATUS_DISABLE=0;
+    public static final int STATUS_ENABLE = 1;
+    public static final int STATUS_DISABLE = 0;
     private Integer id;
-    private String deviceNo,employeeMobile,openId;
+    private String deviceNo, employeeMobile, openId;
     private Timestamp createDatetime;
 
     public String getOpenId() {
@@ -44,7 +44,8 @@ public class DeviceUserControlMap implements Serializable {
     public void setEmployeeMobile(String employeeMobile) {
         this.employeeMobile = employeeMobile;
     }
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Timestamp getCreateDatetime() {
         return createDatetime;
     }
@@ -52,9 +53,6 @@ public class DeviceUserControlMap implements Serializable {
     public void setCreateDatetime(Timestamp createDatetime) {
         this.createDatetime = createDatetime;
     }
-
-
-
 
 
 }

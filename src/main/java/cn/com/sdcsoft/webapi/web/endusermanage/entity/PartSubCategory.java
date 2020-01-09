@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 /**
  * 辅机大类
- * @date 2018-07-10
+ *
  * @author doudou
+ * @date 2018-07-10
  */
 public class PartSubCategory implements Serializable {
 

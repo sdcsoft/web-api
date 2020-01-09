@@ -8,9 +8,9 @@ import java.sql.Timestamp;
 public class OnlineRecord implements Serializable {
 
 
-    private Integer id,minutes;
+    private Integer id, minutes;
     private String openId;
-    private Timestamp beginDatetime,endDatetime;
+    private Timestamp beginDatetime, endDatetime;
 
 
     public Integer getId() {
@@ -37,7 +37,7 @@ public class OnlineRecord implements Serializable {
         this.openId = openId;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Timestamp getBeginDatetime() {
         return beginDatetime;
     }
@@ -46,7 +46,7 @@ public class OnlineRecord implements Serializable {
         this.beginDatetime = beginDatetime;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Timestamp getEndDatetime() {
         return endDatetime;
     }
@@ -54,10 +54,6 @@ public class OnlineRecord implements Serializable {
     public void setEndDatetime(Timestamp endDatetime) {
         this.endDatetime = endDatetime;
     }
-
-
-
-
 
 
 }

@@ -17,6 +17,7 @@ public class Core_EndUserController extends BaseController {
 
     /**
      * 获取终端用户列表
+     *
      * @return
      */
     @GetMapping(value = "/list")
@@ -26,17 +27,19 @@ public class Core_EndUserController extends BaseController {
 
     /**
      * 创建终端用户
+     *
      * @param endUserName
      * @param status
      * @return
      */
     @PostMapping(value = "/create")
     public String create(String endUserName, int status) {
-        return lan_api.enduserCreate(endUserName,status);
+        return lan_api.enduserCreate(endUserName, status);
     }
 
     /**
      * 修改终端用户
+     *
      * @param id
      * @param endUserName
      * @param status
@@ -44,7 +47,7 @@ public class Core_EndUserController extends BaseController {
      */
     @PostMapping(value = "/modify")
     public String modify(int id, String endUserName, int status) {
-        return lan_api.enduserModify(id,endUserName,status);
+        return lan_api.enduserModify(id, endUserName, status);
     }
 
 

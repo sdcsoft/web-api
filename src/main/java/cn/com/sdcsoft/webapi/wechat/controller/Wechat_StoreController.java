@@ -30,32 +30,32 @@ public class Wechat_StoreController {
 
 
     @PostMapping("/create")
-    public Result editWxDevice(@RequestBody Store store){
+    public Result editWxDevice(@RequestBody Store store) {
         wechatDBDeviceMapper.insertWxDevice(store);
         return Result.getSuccessResult();
     }
 
     @PostMapping("/modify")
-    public Result modifyWxDevice(@RequestBody Store store){
+    public Result modifyWxDevice(@RequestBody Store store) {
         wechatDBDeviceMapper.updateStore(store);
         return Result.getSuccessResult();
     }
 
     @GetMapping(value = "/remove")
-    public Result deleteWxDevice(String openId,String deviceNo){
-        wechatDBDeviceMapper.deleteWxDevice(deviceNo,openId);
+    public Result deleteWxDevice(String openId, String deviceNo) {
+        wechatDBDeviceMapper.deleteWxDevice(deviceNo, openId);
         return Result.getSuccessResult();
     }
 
     @PostMapping("/create/many")
-    public Result insertManyStore(String storeList){
-        List<Store> list=JSON.parseArray(storeList,Store.class);
-        for(int i=0;i<list.size();i++){
-           if(wechatDBDeviceMapper.getWxDeviceByopenIdAndDeviceNo(list.get(i).getOpenId(),list.get(i).getDeviceNo())!=null){
-               list.remove(i);
-           }
+    public Result insertManyStore(String storeList) {
+        List<Store> list = JSON.parseArray(storeList, Store.class);
+        for (int i = 0; i < list.size(); i++) {
+            if (wechatDBDeviceMapper.getWxDeviceByopenIdAndDeviceNo(list.get(i).getOpenId(), list.get(i).getDeviceNo()) != null) {
+                list.remove(i);
+            }
         }
-        if(list.size()>0){
+        if (list.size() > 0) {
             wechatDBDeviceMapper.insertManyStore(list);
             return Result.getSuccessResult();
         }

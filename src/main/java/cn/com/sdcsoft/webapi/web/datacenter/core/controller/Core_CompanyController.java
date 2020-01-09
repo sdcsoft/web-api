@@ -18,6 +18,7 @@ public class Core_CompanyController extends BaseController {
 
     /**
      * 获取公司列表
+     *
      * @return
      */
     @GetMapping(value = "/list")
@@ -27,24 +28,26 @@ public class Core_CompanyController extends BaseController {
 
     /**
      * 创建公司
+     *
      * @param companyName
      * @param status
      * @return
      */
     @PostMapping(value = "/create")
-    public String create(String companyName,int status) {
-        return lan_api.companyCreate(companyName,status);
+    public String create(String companyName, int status) {
+        return lan_api.companyCreate(companyName, status);
     }
 
     /**
      * 修改公司信息
+     *
      * @param id
      * @param companyName
      * @param status
      * @return
      */
     @PostMapping(value = "/modify")
-    public String modifyCompany(int id,String companyName,int status) {
-        return lan_api.agentModify(id,companyName,status);
+    public String modifyCompany(int id, String companyName, int status) {
+        return lan_api.agentModify(id, companyName, status);
     }
 }

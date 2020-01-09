@@ -54,7 +54,7 @@ public class EndUserManage_ProductController {
      * @param pageSize
      * @return
      */
-    @PostMapping(value ="/search")
+    @PostMapping(value = "/search")
     public Result search(@RequestBody Product product, int pageNum, int pageSize, HttpServletRequest request) {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
@@ -90,7 +90,7 @@ public class EndUserManage_ProductController {
      * @param productUsers
      * @return
      */
-    @PostMapping(value ="/users/modify")
+    @PostMapping(value = "/users/modify")
     public Result modifyProductUsers(int productId, @RequestBody List<ProductUser> productUsers) {
         productUserMapper.clearProductMap(productId);
         if (productUsers.size() > 0) {
@@ -101,18 +101,19 @@ public class EndUserManage_ProductController {
 
     /**
      * 获取售出的产品信息
+     *
      * @param searchOptions
      * @param request
      * @return
      */
-    @PostMapping(value ="/sold")
+    @PostMapping(value = "/sold")
     public Result sold(@RequestBody SoldProductSearchOptions searchOptions, HttpServletRequest request) {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
         if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
-            return Result.getSuccessResult(productMapper.findSoldForAdmin(user.getOrgId(),searchOptions));
+            return Result.getSuccessResult(productMapper.findSoldForAdmin(user.getOrgId(), searchOptions));
         } else {
-            return Result.getSuccessResult(productMapper.find(user.getId(),searchOptions));
+            return Result.getSuccessResult(productMapper.find(user.getId(), searchOptions));
         }
     }
 
@@ -122,7 +123,7 @@ public class EndUserManage_ProductController {
      * @param product
      * @return
      */
-    @PostMapping(value ="/modify")
+    @PostMapping(value = "/modify")
     public Result editProduct(@RequestBody Product product) {
         productMapper.modifyProductInfo(product);
         return Result.getSuccessResult();
@@ -143,7 +144,7 @@ public class EndUserManage_ProductController {
      * @param product
      * @return
      */
-    @PostMapping(value ="/create")
+    @PostMapping(value = "/create")
     public Result create(@RequestBody Product product, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         JSONObject obj = JSONObject.parseObject(lan_api.deviceModifyEndUserId(product.getControllerNo(), orgId));
@@ -168,14 +169,13 @@ public class EndUserManage_ProductController {
      * @param id
      * @return
      */
-    @PostMapping(value ="/remove")
+    @PostMapping(value = "/remove")
     public Result deleteProductById(@RequestParam int id, @RequestParam String controllerNo) {
         int code = endUserManageProductService.deleteProduct(id, controllerNo);
-        if (0 == code){
-            lan_api.deviceModifyEndUserId(controllerNo,null);
+        if (0 == code) {
+            lan_api.deviceModifyEndUserId(controllerNo, null);
             return Result.getSuccessResult();
-        }
-        else
+        } else
             return Result.getFailResult("删除失败");
     }
 }

@@ -20,6 +20,7 @@ public class Core_CustomerController extends BaseController {
 
     /**
      * 获取锅炉厂列表
+     *
      * @return
      */
     @GetMapping(value = "/list")
@@ -29,24 +30,26 @@ public class Core_CustomerController extends BaseController {
 
     /**
      * 创建锅炉厂
+     *
      * @param customerName
      * @param status
      * @return
      */
     @PostMapping(value = "/create")
     public String create(String customerName, int status) {
-        return lan_api.customerCreate(customerName,status);
+        return lan_api.customerCreate(customerName, status);
     }
 
     /**
      * 修改锅炉厂信息
+     *
      * @param id
      * @param customerName
      * @param status
      * @return
      */
     @PostMapping(value = "/modify")
-    public String modify(int id,String customerName,int status) {
-        return lan_api.customerModify(id,customerName,status);
+    public String modify(int id, String customerName, int status) {
+        return lan_api.customerModify(id, customerName, status);
     }
 }

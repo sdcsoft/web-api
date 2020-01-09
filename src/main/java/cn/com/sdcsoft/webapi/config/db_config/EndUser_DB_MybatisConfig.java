@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@MapperScan(basePackages = "cn.com.sdcsoft.webapi.mapper.EndUser_DB",sqlSessionFactoryRef = "EndUser_DB_SqlSessionFactory")
+@MapperScan(basePackages = "cn.com.sdcsoft.webapi.mapper.EndUser_DB", sqlSessionFactoryRef = "EndUser_DB_SqlSessionFactory")
 public class EndUser_DB_MybatisConfig {
     @Bean(name = "EndUser_DB_DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.enduser-db")

@@ -1,4 +1,5 @@
 package cn.com.sdcsoft.webapi.web.weixinmanage.controller;
+
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DeviceSmsMapMapper;
 import cn.com.sdcsoft.webapi.web.weixinmanage.entity.Relation_DeviceSmsMap;
@@ -13,12 +14,8 @@ import java.sql.Timestamp;
 @RestController
 @RequestMapping(value = "/webapi/weixinmanage/deviceSms")
 public class WeiWinManage_DeviceSmsMapController {
-    @Autowired(required=true)
+    @Autowired(required = true)
     private Wechat_DB_DeviceSmsMapMapper deviceSmsMapMapper;
-
-
-
-
 
 
     @GetMapping(value = "/list/page")
@@ -28,12 +25,11 @@ public class WeiWinManage_DeviceSmsMapController {
     }
 
 
-
     @PostMapping("/edit")
-    public Result editRelation_DeviceSmsMap(@RequestBody Relation_DeviceSmsMap rdc){
-        if(rdc.getId()!=null){
+    public Result editRelation_DeviceSmsMap(@RequestBody Relation_DeviceSmsMap rdc) {
+        if (rdc.getId() != null) {
             deviceSmsMapMapper.updateRelation_DeviceSmsMap(rdc);
-        }else{
+        } else {
             Timestamp d = new Timestamp(System.currentTimeMillis());
             rdc.setCreateDatetime(d);
             deviceSmsMapMapper.insertRelation_DeviceSmsMap(rdc);
@@ -43,7 +39,7 @@ public class WeiWinManage_DeviceSmsMapController {
 
 
     @PostMapping(value = "/delete")
-    public Result deleteRelation_DeviceSmsMapById(@RequestParam int id){
+    public Result deleteRelation_DeviceSmsMapById(@RequestParam int id) {
         deviceSmsMapMapper.deleteRelation_DeviceSmsMap(id);
         return Result.getSuccessResult();
     }

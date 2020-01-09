@@ -60,7 +60,7 @@ public interface LAN_API {
     String deviceFindByCustomer(@RequestParam("customerId") int customerId);
 
     @GetMapping(value = "/datacore/device/list/suffix5")
-    Result deviceFindBySuffix5(@RequestParam("suffix5")  String suffix5);
+    Result deviceFindBySuffix5(@RequestParam("suffix5") String suffix5);
 
     @GetMapping(value = "/datacore/device/get/deviceno")
     String deviceFindByDeviceNo(@RequestParam("deviceNo") String deviceNo);
@@ -72,7 +72,7 @@ public interface LAN_API {
     String deviceFindBySuffixForEnterpriseUser(@RequestParam("suffix") String suffix);
 
     @PostMapping(value = "/datacore/device/fix/modify")
-    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media,@RequestParam("iMEI") String iMEI);
+    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media, @RequestParam("iMEI") String iMEI);
 
     @PostMapping(value = "/datacore/device/create")
     String deviceCreate(@RequestBody List<Device> deviceList);
@@ -114,7 +114,7 @@ public interface LAN_API {
     Result employeeFindWechat2(@RequestParam("unionId") String unionId);
 
     @PostMapping(value = "/datacore/employee/wechat/bind")
-    Result employeeBindWechat(@RequestParam("loginId") String loginId,@RequestParam("openId") String openId,@RequestParam("unionId") String unionId);
+    Result employeeBindWechat(@RequestParam("loginId") String loginId, @RequestParam("openId") String openId, @RequestParam("unionId") String unionId);
 
     @GetMapping(value = "/datacore/employee/find/company")
     String employeeFindCompanyUser(@RequestParam("loginId") String loginId);
@@ -135,7 +135,7 @@ public interface LAN_API {
     String employeeModify(@RequestParam("employee") Employee employee);
 
     @PostMapping(value = "/datacore/employee/modify/org")
-    Result employeeModifyOrg(@RequestParam("employeeId") Integer employeeId,@RequestParam("orgType") int orgType,@RequestParam("orgId") int orgId);
+    Result employeeModifyOrg(@RequestParam("employeeId") Integer employeeId, @RequestParam("orgType") int orgType, @RequestParam("orgId") int orgId);
 
     @PostMapping(value = "/datacore/employee/change/status")
     String employeeChangeStatus(@RequestParam("loginId") String loginId, @RequestParam("status") int status);
@@ -207,9 +207,11 @@ public interface LAN_API {
     @PostMapping("/datacore/org/modify")
     String orgModify(@RequestParam("orgType") int orgType, @RequestParam("orgTypeName") String orgTypeName);
 
-    @GetMapping(value="/datacore/sms/send/zh")
-    Result smsSendZh(@RequestParam("number") String number);
+    @GetMapping(value = "/datacore/sms/send/vcode")
+    Result smsSendVcode(@RequestParam("lang") String lang, @RequestParam("msg") String[] msg);
 
-    @GetMapping(value="/datacore/sms/send/en")
-    Result smsSendEn(@RequestParam("number") String number);
+    @GetMapping(value = "/datacore/sms/send/exception")
+    Result smsSendExpection(@RequestParam("lang") String lang, @RequestParam("msg") String[] msg);
+
+
 }

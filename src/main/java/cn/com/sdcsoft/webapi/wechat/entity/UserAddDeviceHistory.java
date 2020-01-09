@@ -9,7 +9,7 @@ public class UserAddDeviceHistory implements Serializable {
 
 
     private Integer id;
-    private String openId,deviceNo;
+    private String openId, deviceNo;
 
     public Integer getId() {
         return id;

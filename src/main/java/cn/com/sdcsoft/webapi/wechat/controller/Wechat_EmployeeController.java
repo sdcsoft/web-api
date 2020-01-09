@@ -6,6 +6,7 @@ import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DevicePermissionMapMappe
 import cn.com.sdcsoft.webapi.wechat.entity.Relation_DevicePermissionMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -21,23 +22,25 @@ public class Wechat_EmployeeController {
     @PostMapping(value = "/getwx")
     public Result getWx(String openId) {
         Result result = lan_api.employeeFindWechat(openId);
-        if (result.getCode() > 0){//微信未绑定或其他错误
+        if (result.getCode() > 0) {//微信未绑定或其他错误
             return result;
         }
         // TODO 检索微信自己的库，进行相关处理
         // TODO ......
         return result;
     }
+
     @GetMapping(value = "/getSoldPermissions")
     public int getSoldPermissions(String openid) {
-        List<Relation_DevicePermissionMap> list=relation_devicePermissionMapMapper.getRelation_DevicePermissionMapListByOpenId(openid);
-        if(list.size()>0){
+        List<Relation_DevicePermissionMap> list = relation_devicePermissionMapMapper.getRelation_DevicePermissionMapListByOpenId(openid);
+        if (list.size() > 0) {
             return Result.RESULT_CODE_SUCCESS;
-        }else{
+        } else {
             return Result.RESULT_CODE_FAIL;
         }
     }
-    @GetMapping(value = "/find", produces = { "application/json;charset=UTF-8" })
+
+    @GetMapping(value = "/find", produces = {"application/json;charset=UTF-8"})
     public String find(String loginId) {
         return lan_api.employeeFind(loginId);
     }

@@ -76,10 +76,10 @@ public class BoilerManage_CustomerController {
      * @return
      */
     @PostMapping("/modify")
-    public Result modify(@RequestBody Customer customer,HttpServletRequest request) {
+    public Result modify(@RequestBody Customer customer, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         customer.setOrgId(orgId);
-        if(0 < customerMapper.checkExist(customer)){
+        if (0 < customerMapper.checkExist(customer)) {
             customerMapper.modifyCustomerExtendsInfo(customer);
             return Result.getSuccessResult();
         }
@@ -95,7 +95,7 @@ public class BoilerManage_CustomerController {
      */
     @PostMapping(value = "/remove")
     public Result remove(@RequestParam Integer id, HttpServletRequest request) {
-        if(0 < customerMapper.checkProductExist(id)){
+        if (0 < customerMapper.checkProductExist(id)) {
             return Result.getFailResult("因为该客户用户锅炉数据，所以不能删除！");
         }
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());

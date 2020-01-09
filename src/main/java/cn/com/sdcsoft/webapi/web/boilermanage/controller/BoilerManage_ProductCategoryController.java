@@ -62,7 +62,7 @@ public class BoilerManage_ProductCategoryController {
      * @return
      */
     @PostMapping("/create")
-    public Result create(@RequestBody ProductCategory productCategory,HttpServletRequest request) {
+    public Result create(@RequestBody ProductCategory productCategory, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
 
         productCategory.setOrgId(orgId);

@@ -10,16 +10,16 @@ import java.util.List;
 public interface Wechat_DB_DeviceUserControlMapMapper {
 
     @Select("<script>" +
-            "select ee.* from DeviceUserControlMap ee "+
-            "<where>"+
-            " 1=1 "+
-            "<if test='deviceNo != null '> "+
-            " AND ee.DeviceNo LIKE CONCAT(CONCAT('%',#{deviceNo}),'%')"+
-            "</if>"+
-            "<if test='employeeMobile != null'> "+
-            " AND ee.EmployeeMobile LIKE CONCAT(CONCAT('%',#{employeeMobile}),'%')"+
-            "</if>"+
-            "</where>"+
+            "select ee.* from DeviceUserControlMap ee " +
+            "<where>" +
+            " 1=1 " +
+            "<if test='deviceNo != null '> " +
+            " AND ee.DeviceNo LIKE CONCAT(CONCAT('%',#{deviceNo}),'%')" +
+            "</if>" +
+            "<if test='employeeMobile != null'> " +
+            " AND ee.EmployeeMobile LIKE CONCAT(CONCAT('%',#{employeeMobile}),'%')" +
+            "</if>" +
+            "</where>" +
             "</script>")
     List<DeviceUserControlMap> getDeviceUserControlMapListByCondition(DeviceUserControlMap deviceUserControlMap);
 

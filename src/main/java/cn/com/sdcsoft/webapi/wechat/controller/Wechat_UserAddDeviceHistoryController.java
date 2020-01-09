@@ -22,7 +22,7 @@ public class Wechat_UserAddDeviceHistoryController {
     LAN_API lan_api;
 
     @PostMapping("/create")
-    public Result createUserAddDeviceHistory(@RequestBody UserAddDeviceHistory userAddDeviceHistory){
+    public Result createUserAddDeviceHistory(@RequestBody UserAddDeviceHistory userAddDeviceHistory) {
         wechat_db_User_addDeviceHistoryMapper.insertUserAddDeviceHistory(userAddDeviceHistory);
         return Result.getSuccessResult();
     }

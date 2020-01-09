@@ -20,6 +20,13 @@ spring:
       uri: mongodb://tomcat:80201288@127.0.0.1:27077
       authentication-database: admin
       database: test_db
+  rabbitmq:
+    base:
+      host: 192.168.0.110
+      port: 5672
+      username: tomcat
+      password: 80201288
+      virtual-host: MsgCenter
 eureka:
   client:
     service-url:

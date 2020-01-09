@@ -1,7 +1,6 @@
 package cn.com.sdcsoft.webapi.wechat.controller.utils;
 
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_Role_ResourceMapper;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_StoreMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.Role_Resource;
@@ -20,9 +19,6 @@ public class Wechat_Role_ResourceController {
     @Autowired
     private Wechat_DB_Role_ResourceMapper wechat_db_role_resourceMapper;
 
-    @Autowired
-    LAN_API lan_api;
-
 
     @GetMapping(value = "/list")
     public Result Role_ResourcelistbyemployeeMobile(String openId) {
@@ -31,32 +27,32 @@ public class Wechat_Role_ResourceController {
 
 
     @PostMapping("/create")
-    public Result editRole_Resource(@RequestBody Role_Resource role_resource){
+    public Result editRole_Resource(@RequestBody Role_Resource role_resource) {
         wechat_db_role_resourceMapper.insertRole_Resource(role_resource);
         return Result.getSuccessResult();
     }
 
     @PostMapping("/modify")
-    public Result modifyRole_Resource(@RequestBody Role_Resource role_resource){
+    public Result modifyRole_Resource(@RequestBody Role_Resource role_resource) {
         wechat_db_role_resourceMapper.updateRole_Resource(role_resource);
         return Result.getSuccessResult();
     }
 
     @GetMapping(value = "/remove")
-    public Result deleteRole_Resource(String openId,String deviceNo){
-        wechat_db_role_resourceMapper.deleteWxDevice(deviceNo,openId);
+    public Result deleteRole_Resource(String openId, String deviceNo) {
+        wechat_db_role_resourceMapper.deleteWxDevice(deviceNo, openId);
         return Result.getSuccessResult();
     }
 
     @PostMapping("/create/many")
-    public Result insertManyRole_Resource(String role_ResourceList){
-        List<Role_Resource> list=JSON.parseArray(role_ResourceList,Role_Resource.class);
-        for(int i=0;i<list.size();i++){
+    public Result insertManyRole_Resource(String role_ResourceList) {
+        List<Role_Resource> list = JSON.parseArray(role_ResourceList, Role_Resource.class);
+        for (int i = 0; i < list.size(); i++) {
 //           if(wechat_db_role_resourceMapper.getWxDeviceByopenIdAndDeviceNo(list.get(i).getOpenId(),list.get(i).getDeviceNo())!=null){
 //               list.remove(i);
 //           }
         }
-        if(list.size()>0){
+        if (list.size() > 0) {
             wechat_db_role_resourceMapper.insertManyRole_Resource(list);
             return Result.getSuccessResult();
         }

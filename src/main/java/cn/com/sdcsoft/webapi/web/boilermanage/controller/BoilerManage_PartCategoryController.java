@@ -21,14 +21,14 @@ public class BoilerManage_PartCategoryController {
 
     /**
      * 查询数据列表-不带分页
+     *
      * @return
      */
     @GetMapping(value = "/list")
     public Result getList() {
-        try{
+        try {
             return Result.getSuccessResult(partCategoryMapper.findAll());
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             return Result.getFailResult(ex.getMessage());
         }
     }

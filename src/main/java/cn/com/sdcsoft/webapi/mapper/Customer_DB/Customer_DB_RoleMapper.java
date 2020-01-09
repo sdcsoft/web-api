@@ -42,8 +42,10 @@ public interface Customer_DB_RoleMapper {
 
     @Select("select * from Role where OrgId=#{orgId} and Id=#{id}")
     Role findRole(Role role);
+
     @Select("select count(*) from User where RoleId=#{roleId}")
     int checkUsersInRole(@Param("roleId") Integer roleId);
+
     @Delete("Delete from Role_Resource  where RoleId=#{roleId}")
     void clearRoleResourceMap(@Param("roleId") Integer roleId);
 

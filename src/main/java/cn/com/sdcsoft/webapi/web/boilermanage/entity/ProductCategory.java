@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 /**
  * 锅炉型号
- * @date 2018-08-17
+ *
  * @author doudou
+ * @date 2018-08-17
  */
 public class ProductCategory implements Serializable {
 

@@ -19,18 +19,19 @@ public class Boiler_UserController {
 
     @Autowired
     UserService userService;
+
     /**
      * 变更注册用户到锅炉厂用户
+     *
      * @param orgUser
      */
     @PostMapping(value = "/change")
-    public Result change(@RequestBody OrgUser orgUser){
-        Result result = lan_api.employeeModifyOrg(orgUser.getId(),OrgType.ORG_TYPE_Boiler,orgUser.getOrgId());
-        if(Result.RESULT_CODE_SUCCESS == result.getCode()){
-            if(null == orgUser.getRoleId() || 0 == orgUser.getRoleId()){
+    public Result change(@RequestBody OrgUser orgUser) {
+        Result result = lan_api.employeeModifyOrg(orgUser.getId(), OrgType.ORG_TYPE_Boiler, orgUser.getOrgId());
+        if (Result.RESULT_CODE_SUCCESS == result.getCode()) {
+            if (null == orgUser.getRoleId() || 0 == orgUser.getRoleId()) {
                 userService.createAdmin(orgUser);
-            }
-            else{
+            } else {
                 userService.createUser(orgUser);
             }
             return Result.getSuccessResult();

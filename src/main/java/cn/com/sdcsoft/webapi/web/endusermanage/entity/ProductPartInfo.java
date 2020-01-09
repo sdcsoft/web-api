@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class ProductPartInfo implements Serializable {
 
-    private Integer id,productId, partCategoryId, partSubCategoryId,amountOfUser;
-    private String brandName,modelName,supplier,remarks;
-    private String partCategoryName ,partSubCategoryName;
+    private Integer id, productId, partCategoryId, partSubCategoryId, amountOfUser;
+    private String brandName, modelName, supplier, remarks;
+    private String partCategoryName, partSubCategoryName;
 
     public String getPartCategoryName() {
         return partCategoryName;

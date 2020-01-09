@@ -31,12 +31,11 @@ public class MyCacheUtil {
     }
 
 
-
     public void putData(String key, String value) {
         Cache cache = getCache();
         Cache.ValueWrapper element = cache.get(key);
 
-        if (null == element){
+        if (null == element) {
             getCache().put(key, value);
         }
     }

@@ -77,7 +77,7 @@ public class RepairInfo implements Serializable {
     }
 
     private Integer createUserId;
-    private String userName,repairContent,boilerNo,createUserName,controllerNo;
+    private String userName, repairContent, boilerNo, createUserName, controllerNo;
     private Timestamp repairDatetime;
 
     public String getCreateUserName() {

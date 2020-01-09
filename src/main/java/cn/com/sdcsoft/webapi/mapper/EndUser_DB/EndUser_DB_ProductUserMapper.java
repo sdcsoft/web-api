@@ -15,7 +15,7 @@ public interface EndUser_DB_ProductUserMapper {
     //@Insert("insert into Product_User (UserId,ProductId) values (#{userId},#{productId})")
     @Insert("INSERT into Product_User(UserId,ProductId) " +
             " VALUES(#{userId},#{productId})")
-    void createProductUser(@Param("userId")int userId, @Param("productId")int productId);
+    void createProductUser(@Param("userId") int userId, @Param("productId") int productId);
 
     @Insert("<script>" +
             "insert into Product_User(UserId,ProductId) "

@@ -15,30 +15,33 @@ public class Boiler_SubPartController {
 
     @Autowired
     Customer_DB_PartSubCategoryMapper subCategoryMapper;
+
     /**
      * 获取辅机小类列表
      */
     @GetMapping(value = "/list")
-    public Result List(@RequestParam Integer partId){
+    public Result List(@RequestParam Integer partId) {
         return Result.getSuccessResult(subCategoryMapper.findAllPartCategoryId(partId));
     }
 
     /**
      * 创建一个辅机大类
+     *
      * @param partSubCategory
      */
     @PostMapping(value = "/create")
-    public Result create(@RequestBody PartSubCategory partSubCategory){
+    public Result create(@RequestBody PartSubCategory partSubCategory) {
         subCategoryMapper.create(partSubCategory);
         return Result.getSuccessResult();
     }
 
     /**
      * 修改一个辅机小类
+     *
      * @param partSubCategory
      */
     @PostMapping(value = "/modify")
-    public Result modify(@RequestBody PartSubCategory partSubCategory){
+    public Result modify(@RequestBody PartSubCategory partSubCategory) {
         subCategoryMapper.modify(partSubCategory);
         return Result.getSuccessResult();
     }
@@ -46,10 +49,11 @@ public class Boiler_SubPartController {
 
     /**
      * 删除一个辅机小类
+     *
      * @param subPartId
      */
     @PostMapping(value = "/remove")
-    public Result remove(@RequestParam Integer subPartId){
+    public Result remove(@RequestParam Integer subPartId) {
         subCategoryMapper.remove(subPartId);
         return Result.getSuccessResult();
     }

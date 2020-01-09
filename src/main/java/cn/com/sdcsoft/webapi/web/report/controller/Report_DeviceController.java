@@ -35,38 +35,39 @@ public class Report_DeviceController {
         }
         return date;
     }
+
     @RequestMapping(value = "/wechat/mock", method = RequestMethod.GET)
-    public Result wechatMock(String deviceNo,String begintime,String endtime,String key) throws Exception {
+    public Result wechatMock(String deviceNo, String begintime, String endtime, String key) throws Exception {
         List<Object> dataList = new ArrayList<>();
         List<Object> dateList = new ArrayList<>();
         List<Object> avgList = new ArrayList<>();
 
 
-        Date startTime = strToDate(begintime+" 00:00:00");
-        Date endTime = strToDate(endtime+" 00:00:00");
+        Date startTime = strToDate(begintime + " 00:00:00");
+        Date endTime = strToDate(endtime + " 00:00:00");
 
-            Aggregation aggregation = Aggregation.newAggregation(
-                    Aggregation.match(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime)),
-                    Aggregation.unwind(key),
-                    Aggregation.project(key + ".date", key + ".avg").andExclude("_id")
-            );
-            AggregationResults<Map> result = mongoTemplate.aggregate(aggregation, "dayinfos", Map.class);
-            List<Map> mappedResults = result.getMappedResults();
-            DecimalFormat df = new DecimalFormat("#.00");
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.match(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime)),
+                Aggregation.unwind(key),
+                Aggregation.project(key + ".date", key + ".avg").andExclude("_id")
+        );
+        AggregationResults<Map> result = mongoTemplate.aggregate(aggregation, "dayinfos", Map.class);
+        List<Map> mappedResults = result.getMappedResults();
+        DecimalFormat df = new DecimalFormat("#.00");
 
-            if (mappedResults != null && mappedResults.size() > 0) {
-                for (int i = 0; i < mappedResults.size(); i++) {
-                    dateList.add(mappedResults.get(i).get("date").toString());
-                    avgList.add(Double.parseDouble(df.format(mappedResults.get(i).get("avg"))));
-                }
-                dataList.add(avgList);
-                Map<String, List> map = new HashMap<>();
-                map.put("date", dateList);
-                map.put("data", dataList);
-                return Result.getSuccessResult(map);
-            } else {
-                return Result.getFailResult("未能查询到符合条件的数据");
+        if (mappedResults != null && mappedResults.size() > 0) {
+            for (int i = 0; i < mappedResults.size(); i++) {
+                dateList.add(mappedResults.get(i).get("date").toString());
+                avgList.add(Double.parseDouble(df.format(mappedResults.get(i).get("avg"))));
             }
+            dataList.add(avgList);
+            Map<String, List> map = new HashMap<>();
+            map.put("date", dateList);
+            map.put("data", dataList);
+            return Result.getSuccessResult(map);
+        } else {
+            return Result.getFailResult("未能查询到符合条件的数据");
+        }
 
     }
 
@@ -85,7 +86,7 @@ public class Report_DeviceController {
         Date endTime = calendar.getTime();
         if (day == 0) {
             calendar.add(Calendar.DATE, 1);
-             endTime = calendar.getTime();
+            endTime = calendar.getTime();
             Aggregation aggregation = Aggregation.newAggregation(
                     Aggregation.match(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime)),
                     Aggregation.unwind(key),
@@ -242,7 +243,8 @@ public class Report_DeviceController {
         }
 
     }
-    public  Date parse(String str, String pattern, Locale locale) {
+
+    public Date parse(String str, String pattern, Locale locale) {
         if (str == null || pattern == null) {
             return null;
         }

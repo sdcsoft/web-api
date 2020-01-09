@@ -1,7 +1,7 @@
 package cn.com.sdcsoft.webapi.entity;
 
 public class SoldProductSearchOptions {
-    Integer customerId,power,media, categoryId;
+    Integer customerId, power, media, categoryId;
     String boilerNo;
 
     public Integer getCustomerId() {

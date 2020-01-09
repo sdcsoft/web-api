@@ -22,10 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping(value = "/webapi/datacenter/core/enterprise", produces = "application/json;charset=utf-8")
 @Auth
-public class Core_EnterpriseController extends BaseController{
+public class Core_EnterpriseController extends BaseController {
 
     /**
      * 获取企业列表
+     *
      * @return
      */
     @GetMapping(value = "/list")
@@ -36,31 +37,34 @@ public class Core_EnterpriseController extends BaseController{
 
     /**
      * 创建企业
+     *
      * @param enterpriseName
      * @param status
      * @return
      */
     @PostMapping(value = "/create")
-    public String create(String enterpriseName,int status) {
-        return lan_api.enterpriseCreate(enterpriseName,status);
+    public String create(String enterpriseName, int status) {
+        return lan_api.enterpriseCreate(enterpriseName, status);
     }
 
     /**
      * 修改企业信息
+     *
      * @param id
      * @param enterpriseName
      * @param status
      * @return
      */
     @PostMapping(value = "/modify")
-    public String modifyEnterprise(int id,String enterpriseName,int status) {
-        return lan_api.enterpriseModify(id,enterpriseName,status);
+    public String modifyEnterprise(int id, String enterpriseName, int status) {
+        return lan_api.enterpriseModify(id, enterpriseName, status);
     }
 
 
     /**
      * 获取企业编号号段列表
      * 说明：该功能属于企业管理系统，临时放在核心接口中。在企业管理系统完成后会迁出
+     *
      * @return
      */
     @GetMapping(value = "/prefix/list")
@@ -71,31 +75,34 @@ public class Core_EnterpriseController extends BaseController{
     /**
      * 修改企业编号号段信息，只能改：状态是否可用
      * 说明：该功能属于企业管理系统，临时放在核心接口中。在企业管理系统完成后会迁出
+     *
      * @param enterpriseId
      * @param status
      * @return
      */
     @PostMapping(value = "/prefix/modify")
     public String changePrefixStatus(int enterpriseId, int status) {
-        return lan_api.enterprisePrefixModify(enterpriseId,status);
+        return lan_api.enterprisePrefixModify(enterpriseId, status);
     }
 
     /**
      * 创建企业设备编号号段
      * 说明：该功能属于企业管理系统，临时放在核心接口中。在企业管理系统完成后会迁出
+     *
      * @param enterpriseId
      * @param prefix
      * @return
      */
     @PostMapping(value = "/prefix/create")
     public String createPrefix(int enterpriseId, String prefix) {
-        return lan_api.enterprisePrefixCreate(enterpriseId,prefix);
+        return lan_api.enterprisePrefixCreate(enterpriseId, prefix);
     }
 
     /**
      * 获取企业的客户列表
      * 说明：该功能属于企业管理系统，临时放在核心接口中。在企业管理系统完成后会迁出
-     *       企业的客户是由企业自行维护的数据，不属于核心库
+     * 企业的客户是由企业自行维护的数据，不属于核心库
+     *
      * @param enterpriseId
      * @return
      */
@@ -107,6 +114,7 @@ public class Core_EnterpriseController extends BaseController{
     /**
      * 创建企业客户
      * 说明：该功能属于企业管理系统，临时放在核心接口中。在企业管理系统完成后会迁出
+     *
      * @param enterpriseId
      * @param customerName
      * @param status
@@ -114,24 +122,26 @@ public class Core_EnterpriseController extends BaseController{
      */
     @PostMapping(value = "/customer/create")
     public String create(int enterpriseId, String customerName, int status) {
-        return lan_api.enterpriseCustomerCreate(enterpriseId,customerName,status);
+        return lan_api.enterpriseCustomerCreate(enterpriseId, customerName, status);
     }
 
     /**
      * 修改企业客户信息
      * 说明：该功能属于企业管理系统，临时放在核心接口中。在企业管理系统完成后会迁出
+     *
      * @param id
      * @param customerName
      * @return
      */
     @PostMapping(value = "/customer/modify")
     public String modifyCustomer(int id, String customerName) {
-        return lan_api.enterpriseCustomerModify(id,customerName);
+        return lan_api.enterpriseCustomerModify(id, customerName);
     }
 
 
     /**
      * 获取企业客户号段列表
+     *
      * @param enterpriseCustomerId
      * @return
      */
@@ -143,15 +153,15 @@ public class Core_EnterpriseController extends BaseController{
     /**
      * 创建企业客户号段
      * 说明：该功能属于企业管理系统，临时放在核心接口中。在企业管理系统完成后会迁出
+     *
      * @param enterpriseCustomerId
      * @param code
      * @return
      */
     @PostMapping(value = "/customer/prefix/create")
     public String createEnterpriseCustomerPrefix(int enterpriseCustomerId, String code, HttpServletResponse response) {
-        return lan_api.enterpriseCustomerPrefixCreate(enterpriseCustomerId,code);
+        return lan_api.enterpriseCustomerPrefixCreate(enterpriseCustomerId, code);
     }
-
 
 
 }

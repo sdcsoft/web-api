@@ -3,8 +3,8 @@ package cn.com.sdcsoft.webapi.wechat.entity;
 import java.io.Serializable;
 
 public class Store implements Serializable {
-    private Integer id,imgStyle;
-    private String deviceNo,openId,deviceName,deviceType,mqttName;
+    private Integer id, imgStyle;
+    private String deviceNo, openId, deviceName, deviceType, mqttName;
 
     public Integer getId() {
         return id;
@@ -61,12 +61,6 @@ public class Store implements Serializable {
     public void setMqttName(String mqttName) {
         this.mqttName = mqttName;
     }
-
-
-
-
-
-
 
 
 }
