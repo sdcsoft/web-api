@@ -1,6 +1,5 @@
 package cn.com.sdcsoft.webapi.mapper.Wechat_DB;
 import cn.com.sdcsoft.webapi.wechat.entity.DeviceStore;
-import cn.com.sdcsoft.webapi.wechat.entity.Store;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 

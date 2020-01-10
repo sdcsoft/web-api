@@ -46,7 +46,7 @@ public class Wechat_UserController {
     }
 
     /**
-     * 微信注册用户
+     * 正式版微信注册用户
      *
      * @param realName
      * @param openid
@@ -71,7 +71,25 @@ public class Wechat_UserController {
         wechat_db_wechatUserMapper.insertWechatUser(wechatUser);
         return result;
     }
-
+    /**
+     * 展会版微信注册用户
+     *
+     * @param realName
+     * @param openid
+     * @return
+     */
+    @GetMapping(value = "/wxShow/saveEmployee")
+    public Result saveWxShowEmployee(String realName,String openid){
+        WechatUser wechatUser=new WechatUser();
+        wechatUser.setOpenId(openid);
+        wechatUser.setRealName(realName);
+        Timestamp d = new Timestamp(System.currentTimeMillis());
+        wechatUser.setCreateDatetime(d);
+        if(wechat_db_wechatUserMapper.insertWechatUser(wechatUser)>0){
+            return Result.getSuccessResult();
+        }
+        return Result.getFailResult("添加失败");
+    }
     /**
      * 获取绑定微信到已注册账号的短信(中文版)
      * @param mobileNumber 已注册账号手机号
