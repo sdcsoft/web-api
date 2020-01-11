@@ -2,7 +2,7 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
-import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_UserWechatDeviceStoreMapper;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_UserWechatDeviceStore2Mapper;
 import cn.com.sdcsoft.webapi.wechat.entity.DeviceStore;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +12,11 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = {"/webapi/wechat/store/device","/webapi/wechat/devicestore"})
-public class Wechat_DeviceStoreController {
+@RequestMapping(value = {"/webapi/wechat/store2/device","/webapi/wechat/showDeviceStore"})
+public class Wechat_DeviceStore2Controller {
 
     @Autowired
-    private Wechat_DB_UserWechatDeviceStoreMapper wechat_db_deviceStoreMapper;
+    private Wechat_DB_UserWechatDeviceStore2Mapper wechat_db_deviceStoreMapper;
 
     @Autowired
     LAN_API lan_api;

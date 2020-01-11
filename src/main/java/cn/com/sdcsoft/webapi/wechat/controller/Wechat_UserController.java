@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/wechat/user")
@@ -51,7 +53,7 @@ public class Wechat_UserController {
     }
 
     /**
-     * 微信注册用户
+     * 正式版微信注册用户
      *
      * @param realName
      * @param openid
@@ -76,7 +78,34 @@ public class Wechat_UserController {
         wechat_db_wechatUserMapper.insertWechatUser(wechatUser);
         return result;
     }
-
+    /**
+     * 展会版微信注册用户
+     *
+     * @param realName
+     * @param openid
+     * @return
+     */
+    @GetMapping(value = "/wxShow/saveEmployee")
+    public Result saveWxShowEmployee(String realName,String openid){
+        WechatUser wechatUser=new WechatUser();
+        wechatUser.setOpenId(openid);
+        wechatUser.setRealName(realName);
+        Timestamp d = new Timestamp(System.currentTimeMillis());
+        wechatUser.setCreateDatetime(d);
+        if(wechat_db_wechatUserMapper.insertWechatUser(wechatUser)>0){
+            return Result.getSuccessResult();
+        }
+        return Result.getFailResult("添加失败");
+    }
+    @PostMapping(value = "/wxShow/check/openId")
+    public Result checkopenId(String openId){
+       List<WechatUser> list= wechat_db_wechatUserMapper.getWechatUserListByopenId(openId);
+            if(list.size()>0){
+                return Result.getSuccessResult();
+            }else{
+                return Result.getFailResult("该用户未注册");
+            }
+    }
     /**
      * 获取绑定微信到已注册账号的短信(中文版)
      *

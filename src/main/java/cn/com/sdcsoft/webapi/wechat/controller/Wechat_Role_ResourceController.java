@@ -3,7 +3,6 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_Role_ResourceMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.Role_Resource;
-import cn.com.sdcsoft.webapi.wechat.entity.Store;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

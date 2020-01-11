@@ -2,10 +2,9 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
-import cn.com.sdcsoft.webapi.wechat.entity.Store;
-import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_StoreMapper;
+import cn.com.sdcsoft.webapi.wechat.entity.DeviceStore;
+import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_UserWechatDeviceStoreMapper;
 import com.alibaba.fastjson.JSON;
-import com.mysql.cj.xdevapi.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +12,11 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/store")
+@RequestMapping(value = "/webapi/wechat/store/device")
 public class Wechat_StoreController {
 
     @Autowired
-    private Wechat_DB_StoreMapper wechatDBDeviceMapper;
+    private Wechat_DB_UserWechatDeviceStoreMapper wechatDBDeviceMapper;
 
     @Autowired
     LAN_API lan_api;
@@ -30,14 +29,14 @@ public class Wechat_StoreController {
 
 
     @PostMapping("/create")
-    public Result editWxDevice(@RequestBody Store store) {
-        wechatDBDeviceMapper.insertWxDevice(store);
+    public Result editWxDevice(@RequestBody DeviceStore DeviceStore) {
+        wechatDBDeviceMapper.insertWxDevice(DeviceStore);
         return Result.getSuccessResult();
     }
 
     @PostMapping("/modify")
-    public Result modifyWxDevice(@RequestBody Store store) {
-        wechatDBDeviceMapper.updateStore(store);
+    public Result modifyWxDevice(@RequestBody DeviceStore DeviceStore) {
+        wechatDBDeviceMapper.updateStore(DeviceStore);
         return Result.getSuccessResult();
     }
 
@@ -49,7 +48,7 @@ public class Wechat_StoreController {
 
     @PostMapping("/create/many")
     public Result insertManyStore(String storeList) {
-        List<Store> list = JSON.parseArray(storeList, Store.class);
+        List<DeviceStore> list = JSON.parseArray(storeList, DeviceStore.class);
         for (int i = 0; i < list.size(); i++) {
             if (wechatDBDeviceMapper.getWxDeviceByopenIdAndDeviceNo(list.get(i).getOpenId(), list.get(i).getDeviceNo()) != null) {
                 list.remove(i);
