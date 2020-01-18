@@ -3,6 +3,7 @@ package cn.com.sdcsoft.webapi.commcontroller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
+import cn.com.sdcsoft.webapi.utils.WechatTokenCacheUtil;
 import cn.com.sdcsoft.webapi.wechat.client.TemplateClient;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
@@ -31,7 +32,7 @@ public class WeChatController {
     LAN_API lan_api;
 
     @Autowired
-    MyCacheUtil cacheUtil;
+    WechatTokenCacheUtil cacheUtil;
 
     @GetMapping(value = "/login")
     public void goWeixinAuth(HttpServletResponse response, String url) throws IOException {
@@ -59,7 +60,7 @@ public class WeChatController {
         map.put("grant_type", "authorization_code");
         JSONObject jsonObject = JSONObject.parseObject(wxClient.get(map));
         String access_token = jsonObject.getString("access_token");
-        cacheUtil.putData(access_token, null);
+        cacheUtil.putCacheItem(access_token, null);
         String openid = jsonObject.getString("openid");
         TemplateClient infoUrl = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl, "/sns/userinfo"));
         Map<String, String> infomap = new HashMap<>();

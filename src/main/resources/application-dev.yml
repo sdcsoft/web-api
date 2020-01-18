@@ -22,7 +22,7 @@ spring:
       database: test_db
   rabbitmq:
     base:
-      host: 192.168.0.110
+      host: 47.94.5.49
       port: 5672
       username: tomcat
       password: 80201288

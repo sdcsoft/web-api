@@ -22,7 +22,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
         //注册自定义拦截器，添加拦截路径和排除拦截路径
         registry.addInterceptor(authInterceptor).
                 addPathPatterns("/webapi/**").
-                excludePathPatterns("/account/**");
+                excludePathPatterns("/account/**","/cache/**","/test/**");
         super.addInterceptors(registry);
     }
 

@@ -8,6 +8,11 @@
            timeToIdleSeconds="30"
            timeToLiveSeconds="60"
            memoryStoreEvictionPolicy="LRU"/>
+    <cache name="device_sms" maxElementsInMemory="20000"
+           overflowToDisk="false"
+           timeToIdleSeconds="1200"
+           timeToLiveSeconds="0"
+           memoryStoreEvictionPolicy="LRU"/>
     <!-- maxElementsInMemory 内存中最大缓存对象数，看着自己的heap大小来搞 -->
     <!-- eternal：true表示对象永不过期，此时会忽略timeToIdleSeconds和timeToLiveSeconds属性，默认为false -->
     <!-- maxElementsOnDisk：硬盘中最大缓存对象数，若是0表示无穷大 -->
