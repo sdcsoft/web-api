@@ -95,6 +95,20 @@ public interface LAN_API {
     @PostMapping(value = "/datacore/device/modify/enduserid")
     String deviceModifyEndUserId(@RequestParam("suffix") String suffix, @RequestParam("endUserId") Integer endUserId);
 
+
+    @GetMapping(value = "/datacore/device/count/system/devices/amount")
+    Result countSystemDevicesAmount();
+    @GetMapping(value = "/datacore/device/count/enterprise/devices/amount")
+    Result countEnterpriseDevicesAmount(@RequestParam("enterpriseId") Integer enterpriseId);
+    @GetMapping(value = "/datacore/device/count/customer/devices/amount")
+    Result countCustomerDevicesAmount(@RequestParam("enterpriseId") Integer enterpriseId,@RequestParam("customerId") Integer customerId);
+    @GetMapping(value = "/datacore/device/count/system/devices/mediapowergroups")
+    Result countSystemDevicesInfo();
+    @GetMapping(value = "/count/enterprise/devices/mediapowergroups")
+    Result countEnterpriseDevicesInfo(@RequestParam("enterpriseId") Integer enterpriseId);
+    @GetMapping(value = "/datacore/device/count/customer/devices/mediapowergroups")
+    Result countCustomerDevicesInfo(@RequestParam("enterpriseId") Integer enterpriseId,@RequestParam("customerId") Integer customerId);
+
     @GetMapping(value = "/datacore/employee/list")
     String employeeList();
 
@@ -148,6 +162,11 @@ public interface LAN_API {
 
     @PostMapping(value = "/datacore/employee/change/password")
     String employeeChangePassword(@RequestParam("id") String id, @RequestParam("password") String password);
+
+    @GetMapping(value = "/datacore/employee/wechat/users/amount")
+    Result countWechatUsersAmount();
+    @GetMapping(value = "/datacore/employee/wechat/users")
+    Result countWechatUsers();
 
 
     @GetMapping("/datacore/enduser/list")
