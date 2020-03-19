@@ -15,7 +15,7 @@ public class WeChatPayConfig {
     //获取微信Openid的请求地址
     public static String WxGetOpenIdUrl = "";
     //支付成功后的服务器回调url
-    public static final String notify_url="http://kuaixin.picp.net/webapi/wechat/PayOrder/callback";
+    public static final String notify_url="https://apis.sdcsoft.com.cn/webapi/wechat/PayOrder/callback";
     //签名方式
     public static final String SIGNTYPE = "MD5";
     //交易类型
