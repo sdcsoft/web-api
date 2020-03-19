@@ -15,4 +15,11 @@ public interface Wechat_DB_WechatUserMapper {
 
     @Select("select * from WechatUser where OpenId=#{openId}")
     List<WechatUser> getWechatUserListByopenId(@Param("openId") String openId);
+
+    @Select("select * from WechatUser where OpenId=#{openId}")
+   WechatUser getWechatUserByopenId(@Param("openId") String openId);
+
+
+    @Select("select * from WechatUser where Mobile=#{moblie}")
+    WechatUser getWechatUserListByMobile(@Param("mobile") String moblie);
 }

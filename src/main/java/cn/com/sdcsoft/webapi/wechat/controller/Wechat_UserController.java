@@ -106,6 +106,15 @@ public class Wechat_UserController {
                 return Result.getFailResult("该用户未注册");
             }
     }
+    @PostMapping(value = "/find/moblie")
+    public String getWechatUserListByMobile(String moblie){
+        return lan_api.employeeFind(moblie);
+    }
+    @PostMapping(value = "/find/openId")
+    public Result getWechatUserByopenId(String openId){
+       ;
+        return Result.getSuccessResult( wechat_db_wechatUserMapper.getWechatUserByopenId(openId));
+    }
     /**
      * 获取绑定微信到已注册账号的短信(中文版)
      *
