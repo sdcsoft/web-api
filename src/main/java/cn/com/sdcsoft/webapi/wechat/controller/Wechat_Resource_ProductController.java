@@ -34,6 +34,10 @@ public class Wechat_Resource_ProductController {
         return Result.getSuccessResult(wechat_db_resource_productMapper.getResource_ProductList());
     }
 
+    @GetMapping(value = "/list/resid")
+    public Result getResource_ProductlistByResId(Integer resId) {
+        return Result.getSuccessResult( wechat_db_resource_productMapper.getResource_ProductlistByResId(resId));
+    }
 
     @PostMapping("/create")
     public Result editRole_Resource(@RequestBody Resource_Product resource_product) {
@@ -52,6 +56,7 @@ public class Wechat_Resource_ProductController {
         wechat_db_resource_productMapper.deleteResource_Product(openId);
         return Result.getSuccessResult();
     }
+
 
 }
 

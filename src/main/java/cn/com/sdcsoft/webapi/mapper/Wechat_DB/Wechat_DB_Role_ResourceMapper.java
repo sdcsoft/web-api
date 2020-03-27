@@ -18,6 +18,9 @@ public interface Wechat_DB_Role_ResourceMapper {
     @Select("select * from Role_Resource where DeviceNo=#{deviceNo} and OpenId=#{openId}")
     List<Role_Resource> getRole_ResourceListByDeviceNoAndOpenId(@Param("deviceNo") String deviceNo,@Param("openId") String openId);
 
+    @Select("select * from Role_Resource where DeviceNo=#{deviceNo} and OpenId=#{openId}and ResId=#{resId}")
+    List<Role_Resource> getRole_ResourceListByDeviceNoAndOpenIdAndResId(@Param("deviceNo") String deviceNo,@Param("openId") String openId,@Param("resId") String resId);
+
     @Select("select * from Role_Resource where DeviceNo=#{deviceNo} and OpenId=#{openId} and ResId=#{resId}")
     Role_Resource getRole_ResourceListByitem(@Param("deviceNo") String deviceNo,@Param("openId") String openId,@Param("resId") String resId);
 

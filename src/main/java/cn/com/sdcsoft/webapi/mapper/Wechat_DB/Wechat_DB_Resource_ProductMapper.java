@@ -14,6 +14,9 @@ public interface Wechat_DB_Resource_ProductMapper {
     @Select("select * from Resource_Product")
     List<Resource_Product> getResource_ProductList();
 
+    @Select("select * from Resource_Product where ResourceId=#{resId} ")
+    List<Resource_Product> getResource_ProductlistByResId(@Param("resId") Integer resId);
+
     @Insert("insert into Resource_Product(ResourceId,RangeType,Price,Resource_Product.Range,ResourceName) values (#{resourceId},#{rangeType},#{price},#{range},#{resourceName})")
     int insertResource_ProductResource_Product(Resource_Product resource_product);
 

@@ -33,6 +33,8 @@ public class Wechat_Role_ResourceController {
         return Result.getSuccessResult(wechat_db_role_resourceMapper.getRole_ResourceListByDeviceNo(deviceNo));
     }
 
+
+
     @PostMapping("/create")
     public Result editRole_Resource(@RequestBody Role_Resource role_resource) {
         wechat_db_role_resourceMapper.insertRole_Resource(role_resource);
@@ -56,6 +58,10 @@ public class Wechat_Role_ResourceController {
         return Result.getSuccessResult(wechat_db_role_resourceMapper.getRole_ResourceListByDeviceNoAndOpenId(deviceNo,openId));
     }
 
+    @GetMapping(value = "/find/deviceNo/openId/resId")
+    public Result getRole_ResourceListByDeviceNoAndOpenId(String deviceNo,String openId,String resId ) {
+        return Result.getSuccessResult(wechat_db_role_resourceMapper.getRole_ResourceListByDeviceNoAndOpenIdAndResId(deviceNo,openId,resId));
+    }
 
     @GetMapping(value = "/wechat/remove")
     public Result deleteRole_ResourceBywx(String id) {

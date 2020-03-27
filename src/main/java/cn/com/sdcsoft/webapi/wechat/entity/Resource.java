@@ -6,8 +6,16 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Resource implements Serializable {
-    private Integer id;
+    private Integer id,Status;
     private String ResName;
+
+    public Integer getStatus() {
+        return Status;
+    }
+
+    public void setStatus(Integer status) {
+        Status = status;
+    }
 
     public Integer getId() {
         return id;
