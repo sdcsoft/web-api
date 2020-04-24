@@ -9,6 +9,9 @@ import java.util.List;
 @Component
 public interface Wechat_DB_UserWechatDeviceStore2Mapper {
 
+    @Select("select DeviceNo from UserWechatDeviceStore2")
+    List<String> getWxDeviceMapping();
+
     @Select("select ImgStyle,DeviceNo,DeviceName,DeviceType,MqttName from UserWechatDeviceStore2 where OpenId=#{openId}")
     List<DeviceStore> getWxDeviceListByopenId(@Param("openId") String openId);
 

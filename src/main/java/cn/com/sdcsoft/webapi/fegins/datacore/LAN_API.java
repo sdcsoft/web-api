@@ -95,7 +95,8 @@ public interface LAN_API {
     @PostMapping(value = "/datacore/device/modify/enduserid")
     String deviceModifyEndUserId(@RequestParam("suffix") String suffix, @RequestParam("endUserId") Integer endUserId);
 
-
+    @GetMapping(value = "/datacore/device/snapshots")
+    Result deviceSnapshots();
     @GetMapping(value = "/datacore/device/count/system/devices/amount")
     Result countSystemDevicesAmount();
     @GetMapping(value = "/datacore/device/count/enterprise/devices/amount")

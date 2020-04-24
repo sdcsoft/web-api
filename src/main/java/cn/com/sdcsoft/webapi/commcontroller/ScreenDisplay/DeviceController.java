@@ -14,6 +14,12 @@ public class DeviceController {
     @Autowired
     LAN_API lan_api;
 
+    @RequestMapping("/snapshots")
+    public Result getDeviceSnapshots(){
+        return lan_api.deviceSnapshots();
+    }
+
+
     @RequestMapping("/system/amount")
     public Result getSystemDevicesAmount(){
         return lan_api.countSystemDevicesAmount();
