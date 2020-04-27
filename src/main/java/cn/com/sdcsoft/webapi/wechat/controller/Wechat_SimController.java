@@ -20,9 +20,9 @@ public class Wechat_SimController {
 
     @GetMapping(value = "/iMEI")
     public String getSimfindOne(String iMEI) {
-        TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", "http://simapi.sdcsoft.com.cn","/device/balancerealsingle"));
+        TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", "http://simapi.sdcsoft.com.cn","/sim/find/iMEI"));
         Map<String,String> map=new HashMap<>();
-        map.put("iccid",iMEI);
+        map.put("iMEI",iMEI);
         return wxClient.get(map);
     }
 
