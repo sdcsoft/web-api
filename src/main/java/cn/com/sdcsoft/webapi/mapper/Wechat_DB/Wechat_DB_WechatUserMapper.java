@@ -1,7 +1,10 @@
 package cn.com.sdcsoft.webapi.mapper.Wechat_DB;
 
 import cn.com.sdcsoft.webapi.wechat.entity.WechatUser;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,4 +25,7 @@ public interface Wechat_DB_WechatUserMapper {
 
     @Select("select * from WechatUser where Mobile=#{moblie}")
     WechatUser getWechatUserListByMobile(@Param("mobile") String moblie);
+
+    @Update("update WechatUser set mobile=#{mobile} where OpenId = #{openId}")
+    int updateWechatUser(@Param("mobile") String moblie,@Param("openId") String openId);
 }

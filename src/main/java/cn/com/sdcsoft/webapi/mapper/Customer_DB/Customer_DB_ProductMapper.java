@@ -10,7 +10,8 @@ import java.util.List;
 
 @Component
 public interface Customer_DB_ProductMapper {
-
+    @Select("select * from Product where OrgId=#{orgId} and  ControllerNo=#{controllerNo}")
+    Product findProductByorgId(@Param("orgId") Integer orgId,@Param("controllerNo") String controllerNo);
     @Select("<script>" +
             "select pt.* from Product pt " +
             "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +

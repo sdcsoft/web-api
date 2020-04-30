@@ -77,7 +77,7 @@ public class RepairInfo implements Serializable {
     }
 
     private Integer createUserId;
-    private String userName, repairContent, boilerNo, createUserName, controllerNo;
+    private String userName, repairContent, boilerNo, createUserName, controllerNo,latitude,longitude;
     private Timestamp repairDatetime;
 
     public String getCreateUserName() {
@@ -108,4 +108,19 @@ public class RepairInfo implements Serializable {
 
     private Timestamp createDatetime;
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 }

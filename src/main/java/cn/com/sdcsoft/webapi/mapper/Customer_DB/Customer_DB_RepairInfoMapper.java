@@ -1,10 +1,7 @@
 package cn.com.sdcsoft.webapi.mapper.Customer_DB;
 
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.RepairInfo;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -30,8 +27,10 @@ public interface Customer_DB_RepairInfoMapper {
             "insert into Repair(RepairDatetime,RepairContent,UserId,UserName,ProductId,CreateUserId,CreateUserName,CreateDatetime)"
                     + "values "
                     + "(#{repairDatetime},#{repairContent},#{userId},#{userName},#{productId},#{createUserId},#{createUserName},#{createDatetime}) ")
-    void insertRepairInfo(RepairInfo RepairInfo);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insertRepairInfo(RepairInfo RepairInfo);
 
     @Delete("delete from Repair where Id=#{id}")
     void removeRepairInfoById(int id);
+
 }

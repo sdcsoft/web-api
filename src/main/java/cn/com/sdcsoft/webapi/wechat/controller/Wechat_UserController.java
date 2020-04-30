@@ -7,12 +7,14 @@ import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_WechatUserMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.WechatUser;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 @RestController
@@ -163,6 +165,7 @@ public class Wechat_UserController {
     @GetMapping(value = "/bind/wechat")
     public Result bindWechat(String mobileNumber, String openId, String unionId) {
         Result result = lan_api.employeeBindWechat(mobileNumber, openId, unionId);
+        wechat_db_wechatUserMapper.updateWechatUser(mobileNumber,openId);
         return result;
     }
 
