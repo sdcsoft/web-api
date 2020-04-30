@@ -21,7 +21,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/Repair")
+@RequestMapping(value = "/wechat/Repair")
 public class Wechat_RepairController {
 
     @Autowired

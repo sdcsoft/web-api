@@ -3,7 +3,6 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_JinRong_OrderItemMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.JinRong_OrderItem;
-import cn.com.sdcsoft.webapi.wechat.entity.Role_Resource;
 import com.alibaba.fastjson.JSON;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/JinRong_OrderItem")
+@RequestMapping(value = "/wechat/JinRong_OrderItem")
 public class Wechat_JinRong_OrderItemController {
 
     @Autowired

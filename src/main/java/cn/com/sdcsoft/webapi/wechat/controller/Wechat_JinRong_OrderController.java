@@ -2,10 +2,7 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_JinRong_OrderMapper;
-import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_ResourceMapper;
-import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_Resource_ProductMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.JinRong_Order;
-import cn.com.sdcsoft.webapi.wechat.entity.Resource_Product;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +13,7 @@ import java.util.Date;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/JinRong_Order")
+@RequestMapping(value = "/wechat/JinRong_Order")
 public class Wechat_JinRong_OrderController {
 
     @Autowired

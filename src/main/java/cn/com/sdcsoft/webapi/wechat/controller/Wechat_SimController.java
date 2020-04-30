@@ -11,7 +11,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/Sim")
+@RequestMapping(value = "/wechat/Sim")
 public class Wechat_SimController {
 
 

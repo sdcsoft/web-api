@@ -2,7 +2,6 @@
 package cn.com.sdcsoft.webapi.wechat.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_ResourceMapper;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_Role_ResourceMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.Role_Resource;
 import com.alibaba.fastjson.JSON;
@@ -16,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/RoleResource")
+@RequestMapping(value = "/wechat/RoleResource")
 public class Wechat_Role_ResourceController {
 
     @Autowired

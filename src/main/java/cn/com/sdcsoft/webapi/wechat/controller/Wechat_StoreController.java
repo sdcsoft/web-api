@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/store/device")
+@RequestMapping(value = "/wechat/store/device")
 public class Wechat_StoreController {
 
     @Autowired

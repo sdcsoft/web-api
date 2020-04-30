@@ -2,18 +2,19 @@ package cn.com.sdcsoft.webapi.wechat.controller;
 
 
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_JinRong_OrderMapper;
+import cn.com.sdcsoft.webapi.wechat.config.WeChatPayConfig;
+import cn.com.sdcsoft.webapi.wechat.controller.utils.WeChatPayUtil;
 import cn.com.sdcsoft.webapi.wechat.entity.JinRong_Order;
-import org.apache.commons.lang.time.DateUtils;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
-import cn.com.sdcsoft.webapi.wechat.config.WeChatPayConfig;
-import cn.com.sdcsoft.webapi.wechat.controller.utils.WeChatPayUtil;
-import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -21,13 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/PayOrder")
+@RequestMapping(value = "/wechat/PayOrder")
 public class Wechat_PayOrderController {
 
     @Autowired

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/userAddDeviceHistory")
+@RequestMapping(value = "/wechat/userAddDeviceHistory")
 public class Wechat_UserAddDeviceHistoryController {
 
     @Autowired

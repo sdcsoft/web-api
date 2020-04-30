@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/onlineRecord")
+@RequestMapping(value = "/wechat/onlineRecord")
 public class Wechat_OnlineRecordController {
 
     @Autowired

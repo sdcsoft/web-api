@@ -5,16 +5,13 @@ import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_DiscountStrategyMapper;
 import cn.com.sdcsoft.webapi.mapper.Wechat_DB.Wechat_DB_JinRong_OrderMapper;
 import cn.com.sdcsoft.webapi.wechat.entity.DiscountStrategy;
 import cn.com.sdcsoft.webapi.wechat.entity.JinRong_Order;
-import cn.com.sdcsoft.webapi.wechat.interfaces.Order;
 import cn.com.sdcsoft.webapi.wechat.services.DiscountStrategyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/DiscountStrategy")
+@RequestMapping(value = "/wechat/DiscountStrategy")
 public class Wechat_DiscountStrategyController {
 
     @Autowired

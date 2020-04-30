@@ -11,7 +11,7 @@ import java.util.Calendar;
 
 
 @RestController
-@RequestMapping(value = "/webapi/wechat/smsPaymentRecords")
+@RequestMapping(value = "/wechat/smsPaymentRecords")
 public class Wechat_SmsPaymentRecordsController {
 
     @Autowired
