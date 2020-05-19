@@ -1,5 +1,10 @@
 spring:
   datasource:
+    enterprise-db:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://47.94.5.49:3306/test_sdcsoft_db?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      username: dba_user
+      password: Test@163.com
     customer-db:
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://47.94.5.49:3306/Customer_DB?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
@@ -30,12 +35,12 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
+      defaultZone: http://192.168.0.127:8761/eureka
   instance:
     prefer-ip-address: true
-    ip-address: 127.0.0.1
+    ip-address: 192.168.0.127
 server:
-  port: 8080
+  port: 8081
 token:
   cookie:
     name: sdcsoft.ucookie
@@ -43,6 +48,8 @@ token:
     path: /
 fileupload:
   return-image-prefix: /boiler
+  enterprise:
+    path: /enterprise
   boiler:
     path: E:/Projects/Github/Java/SdcSoft.com.cn/aupload/boiler/
   enduser:

@@ -72,7 +72,7 @@ public interface LAN_API {
     String deviceFindBySuffixForEnterpriseUser(@RequestParam("suffix") String suffix);
 
     @PostMapping(value = "/datacore/device/fix/modify")
-    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media, @RequestParam("iMEI") String iMEI);
+    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media, @RequestParam("iMEI") String iMEI,@RequestParam("isCanCtl") Integer isCanCtl,@RequestParam("isDeviceDataMap") Integer isDeviceDataMap);
 
     @PostMapping(value = "/datacore/device/create")
     String deviceCreate(@RequestBody List<Device> deviceList);
@@ -85,6 +85,10 @@ public interface LAN_API {
 
     @PostMapping("/datacore/device/type/modify")
     String deviceTypeModify(@RequestParam("id") int id, @RequestParam("typeName") String typeName);
+
+    @PostMapping(value = "/datacore/device/check/enterprise")
+    Result deviceCheckEnterprise(@RequestParam("suffix") String suffix, @RequestParam("enterpriseId") Integer enterpriseId);
+
 
     @PostMapping(value = "/datacore/device/modify/customerid")
     String deviceModifyCustomerId(@RequestParam("suffix") String suffix, @RequestParam("customerId") Integer customerId);

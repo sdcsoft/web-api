@@ -25,6 +25,8 @@ import java.io.FileNotFoundException;
 @Auth
 public class FileController {
 
+    @Value("${fileupload.enterprise.path}")
+    private String enterprisePath;//企业上传图片存储位置
     @Value("${fileupload.boiler.path}")
     private String boilerPath;//锅炉厂上传图片存储位置
     @Value("${fileupload.enduser.path}")
@@ -113,6 +115,13 @@ public class FileController {
 //            e.printStackTrace();
 //            return Result.getFailResult("上传失败");
 //        }
+    }
+
+    @RequestMapping("/upload/enterprise")
+    public Result enterpriseUpload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) throws FileNotFoundException {
+        String orgId = request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString();
+        String fileType = request.getParameter("type");
+        return saveFile(enterprisePath, orgId, fileType, picture);
     }
 
     @RequestMapping("/upload/enduser")

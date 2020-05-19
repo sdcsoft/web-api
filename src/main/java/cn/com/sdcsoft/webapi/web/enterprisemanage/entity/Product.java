@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.web.boilermanage.entity;
+package cn.com.sdcsoft.webapi.web.enterprisemanage.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

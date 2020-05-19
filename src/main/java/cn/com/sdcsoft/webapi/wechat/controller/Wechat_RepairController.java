@@ -48,7 +48,7 @@ public class Wechat_RepairController {
         if(user==null){
             return Result.getFailResult("请您是否为有效维保人员");
         }
-        Product p=  customer_db_productMapper.findProductByorgId(user.getOrgId(),repairInfo.getBoilerNo());
+        Product p=  customer_db_productMapper.findProductByOrgId(user.getOrgId(),repairInfo.getBoilerNo());
         if(p==null){
             return Result.getFailResult("维保信息录入失败");
         }

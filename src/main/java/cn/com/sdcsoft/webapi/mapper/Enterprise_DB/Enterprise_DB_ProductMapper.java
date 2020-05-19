@@ -1,17 +1,17 @@
-package cn.com.sdcsoft.webapi.mapper.Customer_DB;
+package cn.com.sdcsoft.webapi.mapper.Enterprise_DB;
 
 import cn.com.sdcsoft.webapi.entity.SoldProductSearchOptions;
-import cn.com.sdcsoft.webapi.web.boilermanage.entity.Product;
-import cn.com.sdcsoft.webapi.web.boilermanage.entity.ProductTypeAmountClass;
+import cn.com.sdcsoft.webapi.web.enterprisemanage.entity.Product;
+import cn.com.sdcsoft.webapi.web.enterprisemanage.entity.ProductTypeAmountClass;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public interface Customer_DB_ProductMapper {
+public interface Enterprise_DB_ProductMapper {
     @Select("select * from Product where OrgId=#{orgId} and  ControllerNo=#{controllerNo}")
-    Product findProductByOrgId(@Param("orgId") Integer orgId,@Param("controllerNo") String controllerNo);
+    Product findProductByorgId(@Param("orgId") Integer orgId, @Param("controllerNo") String controllerNo);
     @Select("<script>" +
             "select pt.* from Product pt " +
             "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
