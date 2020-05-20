@@ -5,6 +5,8 @@ import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductMapper;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_RepairInfoMapper;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_UserMapper;
+import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_RepairInfoMapper;
+import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_UserMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Product;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.RepairInfo;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.User;
@@ -36,6 +38,11 @@ public class Wechat_RepairController {
     @Autowired
     private Customer_DB_ProductMapper customer_db_productMapper;
 
+    @Autowired
+    private Enterprise_DB_UserMapper enterprise_db_userMapper;
+
+    @Autowired
+    private Enterprise_DB_RepairInfoMapper enterprise_db_repairInfoMapper;
 
 
     @PostMapping("/create")
@@ -44,24 +51,50 @@ public class Wechat_RepairController {
         ArrayList arrayList=(ArrayList)result.getData();
 
         LinkedHashMap json = (LinkedHashMap) arrayList.get(0);
-        User user=customer_db_userMapper.findUserByEmployeeId((Integer) json.get("id"));
-        if(user==null){
-            return Result.getFailResult("请您是否为有效维保人员");
+        int orgId=(Integer) json.get("orgId");
+        if(orgId==2){
+            User user=customer_db_userMapper.findUserByEmployeeId((Integer) json.get("id"));
+            if(user==null){
+                return Result.getFailResult("请您是否为有效维保人员");
+            }
+            Product p=  customer_db_productMapper.findProductByOrgId(user.getOrgId(),repairInfo.getBoilerNo());
+            if(p==null){
+                return Result.getFailResult("维保信息录入失败");
+            }
+            repairInfo.setProductId(p.getId());
+            repairInfo.setCreateUserId(user.getEmployeeId());
+            repairInfo.setUserId(user.getId());
+            repairInfo.setUserName(user.getUserName());
+            Timestamp d = new Timestamp(System.currentTimeMillis());
+            repairInfo.setCreateDatetime(d);
+            repairInfo.setRepairDatetime(d);
+            repairInfo.setCreateUserName( json.get("realName").toString());
+            customer_db_repairInfoMapper.insertRepairInfo(repairInfo);
+            return Result.getSuccessResult(repairInfo);
+        }else if(orgId==1){
+            cn.com.sdcsoft.webapi.web.enterprisemanage.entity.RepairInfo  r=new cn.com.sdcsoft.webapi.web.enterprisemanage.entity.RepairInfo();
+            r.setRepairContent(repairInfo.getRepairContent());
+            r.setLatitude(repairInfo.getLatitude());
+            r.setLongitude(repairInfo.getLongitude());
+
+            cn.com.sdcsoft.webapi.web.enterprisemanage.entity.User user=enterprise_db_userMapper.findUserByEmployeeId((Integer) json.get("id"));
+            if(user==null){
+                return Result.getFailResult("请您是否为有效维保人员");
+            }
+
+            r.setProductId(Integer.parseInt(repairInfo.getBoilerNo()));
+            r.setCreateUserId(user.getEmployeeId());
+            r.setUserId(user.getId());
+            r.setUserName(user.getUserName());
+            Timestamp d = new Timestamp(System.currentTimeMillis());
+            r.setCreateDatetime(d);
+            r.setRepairDatetime(d);
+            r.setCreateUserName( json.get("realName").toString());
+            enterprise_db_repairInfoMapper.insertRepairInfo(r);
+            return Result.getSuccessResult(r);
+
         }
-        Product p=  customer_db_productMapper.findProductByOrgId(user.getOrgId(),repairInfo.getBoilerNo());
-        if(p==null){
-            return Result.getFailResult("维保信息录入失败");
-        }
-        repairInfo.setProductId(p.getId());
-        repairInfo.setCreateUserId(user.getEmployeeId());
-        repairInfo.setUserId(user.getId());
-        repairInfo.setUserName(user.getUserName());
-        Timestamp d = new Timestamp(System.currentTimeMillis());
-        repairInfo.setCreateDatetime(d);
-        repairInfo.setRepairDatetime(d);
-        repairInfo.setCreateUserName( json.get("realName").toString());
-        customer_db_repairInfoMapper.insertRepairInfo(repairInfo);
-        return Result.getSuccessResult(repairInfo);
+        return Result.getFailResult("您当前没有维保录入权限");
     }
 
 
