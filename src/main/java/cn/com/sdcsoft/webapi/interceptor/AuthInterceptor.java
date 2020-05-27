@@ -3,6 +3,7 @@ package cn.com.sdcsoft.webapi.interceptor;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.annotation.Permission;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
+import cn.com.sdcsoft.webapi.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -37,10 +38,11 @@ public class AuthInterceptor implements HandlerInterceptor {
             if (isLogin(request)) {
                 return true;
             } else {
+                Result result = Result.getFailResult("请先登录，再次执行该功能！");
                 response.setCharacterEncoding("utf-8");
                 response.setContentType("application/json;charset=utf-8");
                 PrintWriter out = response.getWriter();
-                out.print("{\"code\":-1,\"msg\":\"请登录，再次执行该功能！\"}");
+                out.print(result.toString());
                 return false;
             }
         }

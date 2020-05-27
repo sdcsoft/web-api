@@ -17,8 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
-@RequestMapping(value = "/webapi/report/customer")
-public class Report_CustomerController {
+@RequestMapping(value = "/webapi/report/enterprise")
+public class Report_EnterpriseController {
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -33,7 +33,7 @@ public class Report_CustomerController {
         Date endTime = calendar.getTime();
 
         Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.match(Criteria.where("CustomerId").is(orgId).and("CreateDate").gte(startTime).lte(endTime))
+                Aggregation.match(Criteria.where("EnterpriseId").is(orgId).and("CreateDate").gte(startTime).lte(endTime))
         );
         AggregationResults<Map> result = mongoTemplate.aggregate(aggregation, "dayinfos", Map.class);
         List<Map> mappedResults = result.getMappedResults();
@@ -63,7 +63,7 @@ public class Report_CustomerController {
         calendar.add(Calendar.DATE, day);
         Date endTime = calendar.getTime();
 
-        Query query = Query.query(Criteria.where("CustomerId").is(orgId).and("CreateDate").gte(startTime).lte(endTime));
+        Query query = Query.query(Criteria.where("EnterpriseId").is(orgId).and("CreateDate").gte(startTime).lte(endTime));
         String map = "function(){for(var key in this){if(key.substr(0, 2)==\"ex\"){emit(key,this[key].length);}}}";
         String reduce = "function(key,val){return Array.sum(val)}";
         MapReduceResults<Map> results = mongoTemplate.mapReduce(query, "dayinfos", map, reduce, Map.class);
@@ -79,7 +79,7 @@ public class Report_CustomerController {
     }
 
     @RequestMapping(value = "/exception/devices", method = RequestMethod.GET)
-    public Result customerDevicesCausedTheException(Integer orgId, String key, long timestamp, int day) throws Exception {
+    public Result enterpriseDevicesCausedTheException(Integer orgId, String key, long timestamp, int day) throws Exception {
         List<Object> dataList = new ArrayList<>();
         Date startTime = new Date(timestamp);
         Calendar calendar = new GregorianCalendar();
@@ -87,7 +87,7 @@ public class Report_CustomerController {
         calendar.add(Calendar.DATE, day);
         Date endTime = calendar.getTime();
         Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.match(Criteria.where("CustomerId").is(orgId).and("CreateDate").gte(startTime).lte(endTime)),
+                Aggregation.match(Criteria.where("EnterpriseId").is(orgId).and("CreateDate").gte(startTime).lte(endTime)),
                 Aggregation.group("DeviceNo").push("" + key).as("list")
         );
         AggregationResults<Map> result = mongoTemplate.aggregate(aggregation, "dayinfos", Map.class);

@@ -55,18 +55,16 @@ public class BoilerManage_ProductController {
     public Result search(@RequestBody Product product, int pageNum, int pageSize, HttpServletRequest request) {
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
         User user = userMapper.findUserByEmployeeId(employeeId);
+        PageHelper.startPage(pageNum, pageSize);
         if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
-            PageHelper.startPage(pageNum, pageSize);
             List<Product> list = productMapper.searchForAdmin(user.getOrgId(), product, false);
             PageInfo pageInfo = new PageInfo(list);
             return Result.getSuccessResult(pageInfo);
         } else {
-            PageHelper.startPage(pageNum, pageSize);
             List<Product> list = productMapper.search(user.getId(), product);
             PageInfo pageInfo = new PageInfo(list);
             return Result.getSuccessResult(pageInfo);
         }
-
     }
 
     /**
@@ -144,8 +142,8 @@ public class BoilerManage_ProductController {
     @PostMapping("/create")
     public Result create(@RequestBody Product product, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
-        JSONObject obj = JSONObject.parseObject(lan_api.deviceModifyCustomerId(product.getControllerNo(), orgId));
-        if (0 == obj.getIntValue("code")) {
+        try {
+            JSONObject obj = JSONObject.parseObject(lan_api.deviceModifyCustomerId(product.getControllerNo(), orgId));
             product.setOrgId(orgId);
             Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());
             User user = userMapper.findUserByEmployeeId(employeeId);
@@ -156,7 +154,9 @@ public class BoilerManage_ProductController {
             }
             return Result.getSuccessResult();
         }
-        return Result.getFailResult(obj.getString("msg"));
+        catch (Exception ex) {
+            return Result.getFailResult(ex.getMessage());
+        }
     }
 
 

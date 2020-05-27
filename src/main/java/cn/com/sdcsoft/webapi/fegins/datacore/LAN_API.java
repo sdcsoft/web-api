@@ -4,10 +4,7 @@ import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Device;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,11 +38,14 @@ public interface LAN_API {
     @GetMapping(value = "/datacore/customer/find")
     String customerFindById(@RequestParam("id") int id);
 
-    @PostMapping("/datacore/customer/create")
-    String customerCreate(@RequestParam("customerName") String customerName, @RequestParam("status") int status);
+    @GetMapping(value = "/datacore/customer/prefix")
+    String customerPrefix(@RequestParam("id") Integer id);
+
+    @PostMapping("/datacore/customer/init")
+    String customerInit(@RequestParam("customerName") String customerName, @RequestParam("codePrefix") String codePrefix);
 
     @PostMapping("/datacore/customer/modify")
-    String customerModify(@RequestParam("id") int id, @RequestParam("customerName") String customerName, @RequestParam("status") int status);
+    String customerModify(@RequestParam("id") int id, @RequestParam("status") int status);
 
     @PostMapping(value = "/datacore/device/modify/type")
     String deviceModifyType(@RequestParam("suffix") String suffix, @RequestParam("deviceType") String deviceType, @RequestParam("subType") String subType);
@@ -200,6 +200,9 @@ public interface LAN_API {
 
     @GetMapping(value = "/datacore/enterprise/prefix/list")
     String enterprisePrefixList();
+
+    @RequestMapping(value = "/datacore/enterprise/prefix")
+    Result enterprisePrefix(@RequestParam("enterpriseId") Integer enterpriseId);
 
     @PostMapping(value = "/datacore/enterprise/prefix/modify")
     String enterprisePrefixModify(@RequestParam("enterpriseId") int enterpriseId, @RequestParam("status") int status);

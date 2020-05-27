@@ -84,4 +84,9 @@ public class Result<T> implements Serializable {
     public T getData() {
         return data;
     }
+
+    @Override
+    public String toString() {
+        return String.format("{\"code\":%d,\"msg\":\"%s\"}",this.code,this.msg);
+    }
 }

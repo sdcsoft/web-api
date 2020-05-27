@@ -32,12 +32,12 @@ public class Core_CustomerController extends BaseController {
      * 创建锅炉厂
      *
      * @param customerName
-     * @param status
+     * @param codePrefix
      * @return
      */
-    @PostMapping(value = "/create")
-    public String create(String customerName, int status) {
-        return lan_api.customerCreate(customerName, status);
+    @PostMapping(value = "/init")
+    public String create(String customerName, String codePrefix) {
+        return lan_api.customerInit(customerName, codePrefix);
     }
 
     /**
@@ -50,6 +50,6 @@ public class Core_CustomerController extends BaseController {
      */
     @PostMapping(value = "/modify")
     public String modify(int id, String customerName, int status) {
-        return lan_api.customerModify(id, customerName, status);
+        return lan_api.customerModify(id, status);
     }
 }
