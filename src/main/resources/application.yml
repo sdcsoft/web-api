@@ -12,3 +12,5 @@ wechat:
 device:
   cache: http://47.94.5.49:8080/device/get
   command: http://commands.sdcsoft.com.cn
+sms:
+  interval: 5

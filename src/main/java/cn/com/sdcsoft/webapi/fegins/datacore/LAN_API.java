@@ -39,7 +39,7 @@ public interface LAN_API {
     String customerFindById(@RequestParam("id") int id);
 
     @GetMapping(value = "/datacore/customer/prefix")
-    String customerPrefix(@RequestParam("id") Integer id);
+    Result customerPrefix(@RequestParam("id") Integer id);
 
     @PostMapping("/datacore/customer/init")
     String customerInit(@RequestParam("customerName") String customerName, @RequestParam("codePrefix") String codePrefix);

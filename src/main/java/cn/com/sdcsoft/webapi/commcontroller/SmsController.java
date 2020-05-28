@@ -12,29 +12,29 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 
 
-@RestController
-@RequestMapping(value = "/cache/sms/device/exception")
-public class SmsController {
-
-    @Autowired
-    DeviceSmsCacheUtil deviceSmsCacheUtil;
-
-    @GetMapping("/get")
-    public Result getDeviceSmsCache(String deviceNo,String exceptionName){
-        String key = String.format("%s-%s",deviceNo,exceptionName);
-        Object item = deviceSmsCacheUtil.getCacheItem(key);
-        if(null == item){
-            return Result.getSuccessResult();
-        }
-        return Result.getSuccessResult(item);
-    }
-
-    @PostMapping("/update")
-    public Result createDeviceSmsCache(String deviceNo,String exceptionName){
-        String key = String.format("%s-%s",deviceNo,exceptionName);
-        deviceSmsCacheUtil.putCacheItem(key,new Date().getTime());
-        return Result.getSuccessResult();
-    }
-
-
-}
+//@RestController
+//@RequestMapping(value = "/cache/sms/device/exception")
+//public class SmsController {
+//
+//    @Autowired
+//    DeviceSmsCacheUtil deviceSmsCacheUtil;
+//
+//    @GetMapping("/get")
+//    public Result getDeviceSmsCache(String deviceNo,String exceptionName){
+//        String key = String.format("%s-%s",deviceNo,exceptionName);
+//        Object item = deviceSmsCacheUtil.getCacheItem(key);
+//        if(null == item){
+//            return Result.getSuccessResult();
+//        }
+//        return Result.getSuccessResult(item);
+//    }
+//
+//    @PostMapping("/update")
+//    public Result createDeviceSmsCache(String deviceNo,String exceptionName){
+//        String key = String.format("%s-%s",deviceNo,exceptionName);
+//        deviceSmsCacheUtil.putCacheItem(key,new Date().getTime());
+//        return Result.getSuccessResult();
+//    }
+//
+//
+//}
