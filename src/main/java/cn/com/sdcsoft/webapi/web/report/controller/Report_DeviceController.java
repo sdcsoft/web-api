@@ -145,57 +145,37 @@ public class Report_DeviceController {
 
     @RequestMapping(value = "/exception", method = RequestMethod.GET)
     public Result exception(String deviceNo, String key, long timestamp, int day) throws Exception {
-        List<Object> dateList = new ArrayList<>();
-        List<Object> sumList = new ArrayList<>();
+        List<Object> dataList = new ArrayList<>();
         Date startTime = new Date(timestamp);
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(startTime);
         calendar.add(Calendar.DATE, day);
         Date endTime = calendar.getTime();
-        if (day == 0) {
-            Aggregation aggregation = Aggregation.newAggregation(
-                    Aggregation.match(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime)),
-                    Aggregation.sort(Sort.Direction.ASC, "CreateDate")
-            );
-            AggregationResults<Map> result = mongoTemplate.aggregate(aggregation, "dayinfos", Map.class);
-            List<Map> mappedResults = result.getMappedResults();
-            if (mappedResults != null && mappedResults.size() > 0) {
-                ArrayList list = (ArrayList) mappedResults.get(0).get(key);
-                if (list != null) {
-                    for (int i = 0; i < list.size(); i++) {
-                        sumList.add(list.get(i));
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.match(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime)),
+                Aggregation.group("DeviceNo").push("" + key).as("list")
+        );
+        AggregationResults<Map> result = mongoTemplate.aggregate(aggregation, "dayinfos", Map.class);
+
+
+        List<Map> mappedResults = result.getMappedResults();
+        if (mappedResults != null && mappedResults.size() > 0) {
+            for (int i = 0; i < mappedResults.size(); i++) {
+                ArrayList list = (ArrayList) mappedResults.get(i).get("list");
+                if (list.size() > 0) {
+                    Map<Object, Object> map = new HashMap<>();
+                    map.put("deviceNo", mappedResults.get(i).get("_id"));
+                    ArrayList allList = new ArrayList();
+                    for (int k = 0; k < list.size(); k++) {
+                        allList.addAll((ArrayList) list.get(k));
                     }
-                    Map<String, List> map = new HashMap<>();
-                    map.put("data", sumList);
-                    return Result.getSuccessResult(map);
-                } else {
-                    return Result.getFailResult("未能查询到符合条件的数据");
+                    map.put(key, allList);
+                    dataList.add(map);
                 }
-            } else {
-                return Result.getFailResult("未能查询到符合条件的数据");
             }
+            return Result.getSuccessResult(dataList);
         } else {
-            Aggregation aggregation = Aggregation.newAggregation(
-                    Aggregation.match(Criteria.where("DeviceNo").is(deviceNo).and("CreateDate").gte(startTime).lte(endTime)),
-                    Aggregation.sort(Sort.Direction.ASC, "CreateDate")
-            );
-            AggregationResults<Map> results = mongoTemplate.aggregate(aggregation, "dayinfos", Map.class);
-            List<Map> mappedResults = results.getMappedResults();
-            if (mappedResults != null && mappedResults.size() > 0) {
-                for (int i = 0; i < mappedResults.size(); i++) {
-                    ArrayList map = (ArrayList) mappedResults.get(i).get(key);
-                    if (map != null) {
-                        dateList.add(mappedResults.get(i).get("CreateDate"));
-                        sumList.add(map.size());
-                    }
-                }
-                Map<String, List> result = new HashMap<>();
-                result.put("date", dateList);
-                result.put("data", sumList);
-                return Result.getSuccessResult(result);
-            } else {
-                return Result.getFailResult("未能查询到符合条件的数据");
-            }
+            return Result.getFailResult("未能查询到符合条件的数据");
         }
     }
 

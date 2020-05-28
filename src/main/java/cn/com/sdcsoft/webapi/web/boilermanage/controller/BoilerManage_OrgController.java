@@ -22,7 +22,7 @@ public class BoilerManage_OrgController {
     public Result getOrgCodePrefix(HttpServletRequest request){
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
         try{
-            return  Result.getSuccessResult(lan_api.customerPrefix(orgId));
+            return  lan_api.customerPrefix(orgId);
         }
         catch (Exception ex){
             return Result.getFailResult(ex.getMessage());
