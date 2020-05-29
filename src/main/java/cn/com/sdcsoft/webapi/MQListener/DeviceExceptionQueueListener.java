@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 public class DeviceExceptionQueueListener {
 
-    private static final int Msg_Length = 4;
+    private static final int Msg_Length = 5;
     private static final int Msg_PhoneNumber_Index = 0;
     private static final int Msg_DateTime_Index = 1;
     private static final int Msg_DeviceName_Index = 2;
@@ -49,7 +49,7 @@ public class DeviceExceptionQueueListener {
         }
         //更新缓存信息
         deviceSmsCacheUtil.putCacheItem(key, now);
-        //System.out.println(String.format("%d %s", msg.length, msg[0]));
+        System.out.println(String.format("%s %s", msg[2], msg[0]));
         if (Msg_Length == msg.length) {
             lan_api.smsSendExpection(
                     "ZH",
