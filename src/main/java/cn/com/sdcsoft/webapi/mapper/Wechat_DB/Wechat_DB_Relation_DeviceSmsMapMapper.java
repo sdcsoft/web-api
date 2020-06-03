@@ -1,7 +1,6 @@
 package cn.com.sdcsoft.webapi.mapper.Wechat_DB;
 
 import cn.com.sdcsoft.webapi.wechat.entity.Relation_DeviceSmsMap;
-import cn.com.sdcsoft.webapi.wechat.entity.Role_Resource;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +9,8 @@ import java.util.List;
 @Component
 public interface Wechat_DB_Relation_DeviceSmsMapMapper {
 
+    @Select("select * from Relation_DeviceSmsMap ")
+    List<Relation_DeviceSmsMap> getRelation_DeviceSmsMap();
 
 
     @Select("select * from Relation_DeviceSmsMap where DeviceNo=#{deviceNo} and EmployeeMobile=#{employeeMobile}")
@@ -31,4 +32,6 @@ public interface Wechat_DB_Relation_DeviceSmsMapMapper {
     @Update("update Relation_DeviceSmsMap set DeviceNo=#{deviceNo},EmployeeMobile=#{employeeMobile},CreateDatetime=#{createDatetime} ,DueTime=#{dueTime}where DeviceNo = #{deviceNo} and EmployeeMobile = #{employeeMobile} ")
     int updateRelation_DeviceSmsMap(Relation_DeviceSmsMap relation_deviceSmsMap);
 
+    @Delete("delete from Relation_DeviceSmsMap where Id=#{id}")
+    int deleteRelation_DeviceSmsMap(Integer id);
 }

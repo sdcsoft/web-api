@@ -7,6 +7,14 @@ spring:
     type: ehcache
     ehcache:
       config: classpath:ehcache.xml
+  rabbitmq:
+    host: 47.94.5.49
+    port: 5672
+    username: tomcat
+    password: 80201288
+    virtual-host: MsgCenter
+    template:
+      exchange: WechatDeviceExMapMobileExchange
 wechat:
   wx-openid: https://api.weixin.qq.com
 device:
