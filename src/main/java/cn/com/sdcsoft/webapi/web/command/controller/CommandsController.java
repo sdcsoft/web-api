@@ -23,14 +23,14 @@ public class CommandsController {
         //logger.error(String.format("%s\r\n",msg));
     }
 
+//    @PostMapping(value = "/send2")
+//    public void addCommand(@RequestHeader(name = "DeviceSuffix") String key,
+//                           @RequestParam String command){
+//        addCommand2("noName",key,command);
+//    }
+//
+
     @PostMapping(value = "/send")
-    public void addCommand(@RequestHeader(name = "DeviceSuffix") String key,
-                           @RequestParam String command){
-        addCommand2("noName",key,command);
-    }
-
-
-    @PostMapping(value = "/send2")
     public void addCommand2(@RequestHeader(name = "UserId") String userId,
                            @RequestHeader(name = "DeviceSuffix") String key,
                            @RequestParam String command){
