@@ -29,13 +29,13 @@ public abstract class CacheUtil {
 
     public void putCacheItem(String key, Object value) {
         Cache cache = getCache();
-//        Cache.ValueWrapper element = cache.get(key);
-//
-//        if (null == element) {
-//            cache.put(key, value);
-//            return;
-//        }
         cache.put(key, value);
     }
 
+    public void removeCacheItem(Object key){
+        Cache cache = getCache();
+        if(null != cache){
+            cache.evict(key);
+        }
+    }
 }
