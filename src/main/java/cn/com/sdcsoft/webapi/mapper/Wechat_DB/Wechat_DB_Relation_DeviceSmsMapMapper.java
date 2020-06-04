@@ -34,4 +34,8 @@ public interface Wechat_DB_Relation_DeviceSmsMapMapper {
 
     @Delete("delete from Relation_DeviceSmsMap where Id=#{id}")
     int deleteRelation_DeviceSmsMap(Integer id);
+
+
+    @Delete(" delete from Relation_DeviceSmsMap where cast(DueTime  as datetime)<#{time}")
+    int deleteRelation_DeviceSmsMapByTime(String time);
 }

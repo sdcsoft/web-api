@@ -95,18 +95,13 @@ public class Wechat_Relation_DeviceSmsMapController {
         return Result.getFailResult("插入失败");
     }
     //每天凌晨一点检索到期服务删除并发送队列消息
-    //0 0 1 * * ?
+    //*/5 * * * * ?
     @Scheduled(cron="0 0 1 * * ?")
     public void check() throws IOException {
         Timestamp nowTime=new Timestamp(System.currentTimeMillis());
-        List<Relation_DeviceSmsMap> list=wechat_db_relation_deviceSmsMapMapper.getRelation_DeviceSmsMap();
-        for( int i=0 ;i < list.size();i++){
-            if(list.get(i).getDueTime().before(nowTime)){
-                rabbitTemplate.convertAndSend("WechatDeviceExMapMobileExchange","","DEL-"+list.get(i).getDeviceNo()+"-"+list.get(i).getEmployeeMobile());
-                wechat_db_relation_deviceSmsMapMapper.deleteRelation_DeviceSmsMap(list.get(i).getId());
-            }
+        if(wechat_db_relation_deviceSmsMapMapper.deleteRelation_DeviceSmsMapByTime(nowTime.toString())>0){
+            rabbitTemplate.convertAndSend("WechatDeviceExMapMobileExchange","","Reload");
         }
-
     }
 
 }
