@@ -2,6 +2,7 @@ package cn.com.sdcsoft.webapi.fegins.datacore;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Device;
+import cn.com.sdcsoft.webapi.entity.datacenter.DeviceDataMap;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -240,5 +241,25 @@ public interface LAN_API {
     @GetMapping(value = "/datacore/sms/send/exception")
     Result smsSendExpection(@RequestParam("lang") String lang, @RequestParam("msg") String[] msg);
 
+    //新点位协议相关接口
+    @RequestMapping("/datacore/device/modify/datalength")
+    Result deviceModifyDataLength(String deviceSuffix,Integer dataLength);
 
+    @RequestMapping("/datacore/device/modify/datamap")
+    Result deviceModifyDataLength(String deviceSuffix,Integer mapCn,Integer mapEN);
+
+    @PostMapping("/datacore/datamap/create")
+    Result dataMapCreate(@RequestBody DeviceDataMap dataMap);
+
+    @RequestMapping("/datacore/datamap/search")
+    Result dataMapSearch(String title,String author);
+
+    @RequestMapping("/datacore/datamap/get")
+    Result dataMapGet(Integer id);
+
+    @RequestMapping("/datacore/datamap/modify/map")
+    Result dataMapModifyMap(Integer id,String dataMap);
+
+    @RequestMapping("/datacore/datamap/modify/other")
+    Result dataMapModifyOther(Integer id,String pointIndexMap,Integer dataLength);
 }
