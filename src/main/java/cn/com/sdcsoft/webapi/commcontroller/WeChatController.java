@@ -69,11 +69,13 @@ public class WeChatController {
         JSONObject infoObject = JSONObject.parseObject(infoUrl.get(infomap));
         Result result = lan_api.employeeFindWechat2(infoObject.get("unionid").toString());
         String mobile = "0";
+        String openId = "0";
         if (result.getCode() == Result.RESULT_CODE_SUCCESS) {
             LinkedHashMap json = (LinkedHashMap) result.getData();
             mobile = json.get("mobile").toString();
+            openId=json.get("weiXin").toString();
         }
-        String responseUrl = String.format(url + "?mobile=%s&token=%s", mobile, access_token);
+        String responseUrl = String.format(url + "?mobile=%s&token=%s&openId=%s", mobile, access_token,openId);
         response.sendRedirect(responseUrl);
     }
 
