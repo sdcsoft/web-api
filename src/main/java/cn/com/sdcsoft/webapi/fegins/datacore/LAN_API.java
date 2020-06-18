@@ -242,24 +242,24 @@ public interface LAN_API {
     Result smsSendExpection(@RequestParam("lang") String lang, @RequestParam("msg") String[] msg);
 
     //新点位协议相关接口
-    @RequestMapping("/datacore/device/modify/datalength")
-    Result deviceModifyDataLength(String deviceSuffix,Integer dataLength);
+    @GetMapping("/datacore/device/modify/datalength")
+    Result deviceModifyDataLength(@RequestParam("deviceSuffix") String deviceSuffix,@RequestParam("dataLength") Integer dataLength);
 
-    @RequestMapping("/datacore/device/modify/datamap")
-    Result deviceModifyDataLength(String deviceSuffix,Integer mapCn,Integer mapEN);
+    @GetMapping("/datacore/device/modify/datamap")
+    Result deviceModifyDataLength(@RequestParam("deviceSuffix") String deviceSuffix,@RequestParam("mapCn") Integer mapCn,@RequestParam("mapEN") Integer mapEN);
 
     @PostMapping("/datacore/datamap/create")
     Result dataMapCreate(@RequestBody DeviceDataMap dataMap);
 
-    @RequestMapping("/datacore/datamap/search")
-    Result dataMapSearch(String title,String author);
+    @PostMapping("/datacore/datamap/search")
+    Result dataMapSearch(@RequestParam("title") String title,@RequestParam("author") String author);
 
-    @RequestMapping("/datacore/datamap/get")
-    Result dataMapGet(Integer id);
+    @GetMapping("/datacore/datamap/get")
+    Result dataMapGet(@RequestParam("id") Integer id);
 
-    @RequestMapping("/datacore/datamap/modify/map")
-    Result dataMapModifyMap(Integer id,String dataMap);
+    @PostMapping("/datacore/datamap/modify/map")
+    Result dataMapModifyMap(@RequestParam("id") Integer id,@RequestParam("dataMap") String dataMap);
 
-    @RequestMapping("/datacore/datamap/modify/other")
-    Result dataMapModifyOther(Integer id,String pointIndexMap,Integer dataLength);
+    @PostMapping("/datacore/datamap/modify/other")
+    Result dataMapModifyOther(@RequestParam("id") Integer id,@RequestParam("pointIndexMap") String pointIndexMap,@RequestParam("dataLength") Integer dataLength);
 }

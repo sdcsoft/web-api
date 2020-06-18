@@ -61,7 +61,7 @@ public class AccountController {
         if (0 == jsonObject.getIntValue("code")) {
             Employee employee = JSONObject.parseObject(jsonObject.getString("data"), Employee.class);
             if (null == employee) {
-                return Result.getFailResult("用户名或密码错误！");
+                return Result.getFailResult("用户名或密码错误！.");
             }
             JSONObject orgObj = iOrgInfo.getOrgInfo(employee.getOrgId());
             if (orgType != employee.getOrgType()) {
@@ -75,7 +75,7 @@ public class AccountController {
             }
             if (!employee.getPassword().equals(password)) {
                 if (!cacheUtil.hasKey(password)) {
-                    return Result.getFailResult("用户名或密码错误！");
+                    return Result.getFailResult("用户名或密码错误！..");
                 }
             }
             Cookie cookie = getUserToken(employee);
@@ -91,12 +91,13 @@ public class AccountController {
 
     @PostMapping(value = "/datamanage/login")
     public Result dataManageLogin(String loginId, String password, HttpServletResponse response) {
+        System.out.println("login id:"+loginId);
         JSONObject obj = JSONObject.parseObject(lan_api.employeeFindCompanyUser(loginId));
+        System.out.println(obj);
         return getLoginResult(obj, password, ORG_TYPE_Company,
                 (orgId) -> JSON.parseObject("{\"code\":0,\"data\":{\"status\":1}}"),
                 response);
     }
-
 
     @PostMapping(value = "/enterprise/login")
     public Result enterpriseLogin(String loginId, String password, HttpServletResponse response) {
@@ -130,47 +131,9 @@ public class AccountController {
                 response);
     }
 
-    static class Student implements Serializable {
-        String name;
-        int age;
-
-        public Student() {
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-    }
-
     @RequestMapping(value = "/hello")
     public String hello() {
         return "hello world.";
     }
 
-//    @PostMapping(value = "/test/json")
-//    public Result testJson(@RequestBody Student stu){
-//        return Result.getSuccessResult(stu);
-//    }
-//
-//    @PostMapping(value = "/test/post")
-//    public Result testPost(@RequestParam String no,@RequestParam Integer id){
-//        return Result.getSuccessResult();
-//    }
-//
-//    @GetMapping(value = "/test/get")
-//    public Result testGet(@RequestParam String no,@RequestParam Integer id){
-//        return Result.getSuccessResult();
-//    }
 }
