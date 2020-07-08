@@ -254,6 +254,9 @@ public interface LAN_API {
     @PostMapping("/datacore/datamap/search")
     Result dataMapSearch(@RequestParam("title") String title,@RequestParam("author") String author);
 
+    @PostMapping("/datacore/datamap/search/author")
+    Result dataMapsearchByauthor(@RequestParam("author") String author);
+
     @GetMapping("/datacore/datamap/get")
     Result dataMapGet(@RequestParam("id") Integer id);
 

@@ -28,6 +28,10 @@ public class Wechat_DeviceDataMapController {
     public Result dataMapSearch(@RequestParam("title") String title, @RequestParam("author") String author) {
         return lan_api.dataMapSearch(title,author);
     }
+    @GetMapping("/search/author")
+    public Result dataMapSearch(String author) {
+        return lan_api.dataMapsearchByauthor(author);
+    }
     @GetMapping("/get")
     public Result dataMapGet(@RequestParam("id") Integer id) {
         return lan_api.dataMapGet(id);
