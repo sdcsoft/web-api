@@ -30,7 +30,7 @@ public class Wechat_DeviceDataMapController {
     }
     @GetMapping("/search/author")
     public Result dataMapSearch(String author) {
-        return lan_api.dataMapsearchByauthor(author);
+        return lan_api.dataMapSearchByAuthor(author);
     }
     @GetMapping("/get")
     public Result dataMapGet(@RequestParam("id") Integer id) {

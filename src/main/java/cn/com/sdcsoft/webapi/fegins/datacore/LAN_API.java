@@ -4,6 +4,7 @@ import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Device;
 import cn.com.sdcsoft.webapi.entity.datacenter.DeviceDataMap;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
+import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,7 +74,7 @@ public interface LAN_API {
     String deviceFindBySuffixForEnterpriseUser(@RequestParam("suffix") String suffix);
 
     @PostMapping(value = "/datacore/device/fix/modify")
-    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media, @RequestParam("iMEI") String iMEI,@RequestParam("isCanCtl") Integer isCanCtl,@RequestParam("isDeviceDataMap") Integer isDeviceDataMap);
+    String deviceModifyForEnterpriseUser(@RequestParam("suffix") String suffix, @RequestParam("prefix") int prefix, @RequestParam("deviceType") String deviceType, @RequestParam("saleStatus") int saleStatus, @RequestParam("power") int power, @RequestParam("media") int media, @RequestParam("iMEI") String iMEI,@RequestParam("isCanCtl") Integer isCanCtl,@RequestParam("cnId") Integer cnId,@RequestParam("enId") Integer enId);
 
     @PostMapping(value = "/datacore/device/create")
     String deviceCreate(@RequestBody List<Device> deviceList);
@@ -255,13 +256,13 @@ public interface LAN_API {
     Result dataMapSearch(@RequestParam("title") String title,@RequestParam("author") String author);
 
     @PostMapping("/datacore/datamap/search/author")
-    Result dataMapsearchByauthor(@RequestParam("author") String author);
+    Result dataMapSearchByAuthor(@RequestParam("author") String author);
 
     @GetMapping("/datacore/datamap/get")
     Result dataMapGet(@RequestParam("id") Integer id);
 
-    @PostMapping("/datacore/datamap/modify/map")
-    Result dataMapModifyMap(@RequestParam("id") Integer id,@RequestParam("dataMap") String dataMap);
+    @PostMapping("/datacore/datamap/modify/map/{id}")
+    Result dataMapModifyMap(@PathVariable("id") Integer id, @RequestBody String dataMap);
 
     @PostMapping("/datacore/datamap/modify/other")
     Result dataMapModifyOther(@RequestParam("id") Integer id,@RequestParam("pointIndexMap") String pointIndexMap,@RequestParam("dataLength") Integer dataLength);

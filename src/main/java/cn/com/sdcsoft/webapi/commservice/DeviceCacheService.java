@@ -4,7 +4,6 @@ import cn.com.sdcsoft.webapi.wechat.client.TemplateClient;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,11 +13,11 @@ import java.util.Map;
  */
 @Service
 public class DeviceCacheService {
-    @Value("${device.cache}")
-    private String deviceCacheUrl;
+    @Value("${device.cache.data}")
+    private String deviceCacheDataUrl;
 
     public byte[] getDeviceCacheData(String deviceNo) {
-        TemplateClient deviceInfoClient = Feign.builder().target(TemplateClient.class, deviceCacheUrl);
+        TemplateClient deviceInfoClient = Feign.builder().target(TemplateClient.class, deviceCacheDataUrl);
         Map<String, String> map = new HashMap<>(1);
         map.put("id", deviceNo);
         return deviceInfoClient.getBytes(map);

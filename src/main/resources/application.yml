@@ -18,7 +18,10 @@ spring:
 wechat:
   wx-openid: https://api.weixin.qq.com
 device:
-  cache: http://47.94.5.49:8080/device/get
+  cache:
+    url: http://47.94.5.49:8080
+    data: ${device.cache.url}/device/get
+    online: ${device.cache.url}/device/online
   command: http://commands.sdcsoft.com.cn
 sms:
   interval: 5
