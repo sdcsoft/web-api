@@ -6,10 +6,12 @@ import cn.com.sdcsoft.webapi.entity.datacenter.DeviceDataMap;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Component
 @FeignClient(name = "LAN-API")
 public interface LAN_API {
 

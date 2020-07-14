@@ -95,8 +95,8 @@ public class Wechat_DeviceController {
     }
 
     @GetMapping(value = "/modify", produces = {"application/json;charset=UTF-8"})
-    public String modifyDevice(String deviceNo, int prefix, String deviceType, int status, int power, int media, String iMEI,Integer isCanCtl,Integer isDeviceDataMap) {
-        return lan_api.deviceModifyForEnterpriseUser(deviceNo, prefix, deviceType, status, power, media, iMEI,isCanCtl,isDeviceDataMap);
+    public String modifyDevice(String deviceNo, int prefix, String deviceType, int status, int power, int media, String iMEI,Integer isCanCtl,Integer cnId,Integer enId) {
+        return lan_api.deviceModifyForEnterpriseUser(deviceNo, prefix, deviceType, status, power, media, iMEI,isCanCtl,cnId,enId);
     }
 
     @GetMapping(value = "/modify/type", produces = {"application/json;charset=UTF-8"})
