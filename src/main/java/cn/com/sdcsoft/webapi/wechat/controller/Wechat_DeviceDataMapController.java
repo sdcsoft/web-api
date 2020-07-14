@@ -36,10 +36,12 @@ public class Wechat_DeviceDataMapController {
     public Result dataMapGet(@RequestParam("id") Integer id) {
         return lan_api.dataMapGet(id);
     }
+
     @PostMapping("/modify/map")
     public Result dataMapModifyMap(@RequestParam("id") Integer id,@RequestParam("dataMap") String dataMap) {
         return lan_api.dataMapModifyMap(id,dataMap);
     }
+
     @PostMapping("/modify/other")
     public Result dataMapModifyOther(@RequestParam("id") Integer id,@RequestParam("pointIndexMap") String pointIndexMap,@RequestParam("dataLength") Integer dataLength) {
         return lan_api.dataMapModifyOther(id,pointIndexMap,dataLength);

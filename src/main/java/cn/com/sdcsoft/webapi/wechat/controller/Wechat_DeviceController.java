@@ -40,10 +40,6 @@ public class Wechat_DeviceController {
     @Value("${wechat.wx-openid}")
     private String wxOpenIdUrl;
 
-    @GetMapping(value = "/getdata")
-    public byte[] getData(String deviceNo) {
-        return deviceCacheService.getDeviceCacheData(deviceNo);
-    }
 
     @GetMapping(value = "/getopenid")
     public String getOpenId(String js_code) {
@@ -97,14 +93,6 @@ public class Wechat_DeviceController {
         }
         return Result.getSuccessResult(data);
     }
-
-
-
-    @GetMapping(value = "/getdecode", produces = {"application/json;charset=UTF-8"})
-    public String getDecode(String deviceNo) {
-        return lan_api.deviceFindByDeviceNo(deviceNo);
-    }
-
 
     @GetMapping(value = "/modify", produces = {"application/json;charset=UTF-8"})
     public String modifyDevice(String deviceNo, int prefix, String deviceType, int status, int power, int media, String iMEI,Integer isCanCtl,Integer isDeviceDataMap) {
