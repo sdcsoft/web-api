@@ -4,7 +4,6 @@ import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Device;
 import cn.com.sdcsoft.webapi.entity.datacenter.DeviceDataMap;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
-import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -265,6 +264,10 @@ public interface LAN_API {
 
     @PostMapping("/datacore/datamap/modify/map/{id}")
     Result dataMapModifyMap(@PathVariable("id") Integer id, @RequestBody String dataMap);
+
+    @PostMapping("/datacore/datamap/modify/share")
+    Result dataMapModifyShare(@RequestParam("id") Integer id,@RequestParam("share") Integer share);
+
 
     @PostMapping("/datacore/datamap/modify/other")
     Result dataMapModifyOther(@RequestParam("id") Integer id,@RequestParam("pointIndexMap") String pointIndexMap,@RequestParam("dataLength") Integer dataLength);
