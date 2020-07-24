@@ -34,4 +34,9 @@ public class ByteDeviceController {
                 Feign.builder().target(TemplateClient.class, onlinePathUrl);
         return client.get();
     }
+
+    @GetMapping(value = "/test")
+    public  String test(){
+        return "hello";
+    }
 }

@@ -96,6 +96,9 @@ public class Wechat_DeviceController {
 
     @GetMapping(value = "/modify", produces = {"application/json;charset=UTF-8"})
     public String modifyDevice(String deviceNo, int prefix, String deviceType, int status, int power, int media, String iMEI,Integer isCanCtl,Integer cnId,Integer enId) {
+        System.out.println(
+                String.format("web-apis %d-%d",cnId,enId)
+        );
         return lan_api.deviceModifyForEnterpriseUser(deviceNo, prefix, deviceType, status, power, media, iMEI,isCanCtl,cnId,enId);
     }
 
@@ -132,4 +135,14 @@ public class Wechat_DeviceController {
     public Result getControlList(String openid) {
         return Result.getSuccessResult(rdcMapper.getDeviceUserControlMapListByopenId(openid));
     }
+
+    @GetMapping(value = "/getdata")
+    public byte[] getData(String deviceNo) {
+        return deviceCacheService.getDeviceCacheData(deviceNo);
+    }
+    @GetMapping(value = "/getdecode", produces = {"application/json;charset=UTF-8"})
+    public String getDecode(String deviceNo) {
+        return lan_api.deviceFindByDeviceNo(deviceNo);
+    }
+
 }
