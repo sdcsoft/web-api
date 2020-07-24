@@ -3,6 +3,7 @@ package cn.com.sdcsoft.webapi.web.datacenter.core.controller;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Device;
+import com.alibaba.fastjson.JSON;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -110,6 +111,17 @@ public class Core_DeviceController extends BaseController {
     /**
      * 批量创建设备
      *
+     * @return
+     */
+    @PostMapping("/create/wechat")
+    public String insertManyDeviceWechat(String deviceList) {
+        List<Device> list = JSON.parseArray(deviceList, Device.class);
+        return lan_api.deviceCreate(list);
+    }
+
+    /**
+     * 批量创建设备
+     *
      * @param deviceList 要创建的设备列表
      * @return
      */
@@ -117,7 +129,6 @@ public class Core_DeviceController extends BaseController {
     public String insertManyDevice(@RequestBody List<Device> deviceList) {
         return lan_api.deviceCreate(deviceList);
     }
-
     /**
      * 根据suffix修改设备类型信息,专为web端、微信端核对设备类型及修改掉用
      *
