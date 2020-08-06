@@ -163,5 +163,4 @@ public class Core_EnterpriseController extends BaseController {
         return lan_api.enterpriseCustomerPrefixCreate(enterpriseCustomerId, code);
     }
 
-
 }
