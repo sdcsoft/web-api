@@ -35,7 +35,7 @@ public class Core_CustomerController extends BaseController {
      * @param codePrefix
      * @return
      */
-    @PostMapping(value = "/init")
+    @PostMapping(value = "/create")
     public String create(String customerName, String codePrefix) {
         return lan_api.customerInit(customerName, codePrefix);
     }
