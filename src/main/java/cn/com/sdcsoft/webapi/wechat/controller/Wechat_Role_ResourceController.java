@@ -67,6 +67,10 @@ public class Wechat_Role_ResourceController {
         wechat_db_role_resourceMapper.deleteWxDeviceById(id);
         return Result.getSuccessResult();
     }
+    @PostMapping("newUser/create/many")
+    public Result insertNewUserManyRole_Resource(String role_ResourceList){
+        return Result.getSuccessResult(wechat_db_role_resourceMapper.insertManyRole_Resource(JSON.parseArray(role_ResourceList,Role_Resource.class)));
+    }
     @PostMapping("/create/many")
     public Result insertManyRole_Resource(String role_ResourceList){
         List<Role_Resource> list=JSON.parseArray(role_ResourceList,Role_Resource.class);

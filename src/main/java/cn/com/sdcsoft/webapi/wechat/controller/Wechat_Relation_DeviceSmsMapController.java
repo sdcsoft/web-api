@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -35,11 +32,20 @@ public class Wechat_Relation_DeviceSmsMapController {
 
 
     @GetMapping(value = "/find/deviceNo/employeeMobile")
-    public Result getRelation_DeviceSmsMapByDeviceNoAndOpenId(String deviceNo,String employeeMobile ) {
-        return Result.getSuccessResult(wechat_db_relation_deviceSmsMapMapper.getRelation_DeviceSmsMapByDeviceNoAndOpenId(deviceNo,employeeMobile));
+    public Result getRelation_DeviceSmsMapByDeviceNoAndEmployeeMobile(String deviceNo,String employeeMobile ) {
+        return Result.getSuccessResult(wechat_db_relation_deviceSmsMapMapper.getRelation_DeviceSmsMapByDeviceNoAndEmployeeMobile(deviceNo,employeeMobile));
     }
 
+    @GetMapping(value = "/find/deviceNo/openId")
+    public Result getRelation_DeviceSmsMapByDeviceNoAndOpenId(String deviceNo,String openId ) {
+        return Result.getSuccessResult(wechat_db_relation_deviceSmsMapMapper.getRelation_DeviceSmsMapByDeviceNoAndOpenId(deviceNo,openId));
+    }
 
+    @PostMapping("/modify")
+    public Result modifyRole_Resource(@RequestBody Relation_DeviceSmsMap relation_deviceSmsMap) {
+        wechat_db_relation_deviceSmsMapMapper.updateRelation_DeviceSmsMapById(relation_deviceSmsMap);
+        return Result.getSuccessResult();
+    }
 
 
     @PostMapping("/create/many")

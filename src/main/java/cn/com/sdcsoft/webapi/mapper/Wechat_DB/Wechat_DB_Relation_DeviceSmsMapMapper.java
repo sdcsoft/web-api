@@ -14,23 +14,29 @@ public interface Wechat_DB_Relation_DeviceSmsMapMapper {
 
 
     @Select("select * from Relation_DeviceSmsMap where DeviceNo=#{deviceNo} and EmployeeMobile=#{employeeMobile}")
-    List<Relation_DeviceSmsMap> getRelation_DeviceSmsMapByDeviceNoAndOpenId(@Param("deviceNo") String deviceNo, @Param("employeeMobile") String employeeMobile);
+    List<Relation_DeviceSmsMap> getRelation_DeviceSmsMapByDeviceNoAndEmployeeMobile(@Param("deviceNo") String deviceNo, @Param("employeeMobile") String employeeMobile);
+
+    @Select("select * from Relation_DeviceSmsMap where DeviceNo=#{deviceNo} and OpenId=#{openId}")
+    Relation_DeviceSmsMap getRelation_DeviceSmsMapByDeviceNoAndOpenId(@Param("deviceNo") String deviceNo, @Param("openId") String openId);
 
     @Select("select * from Relation_DeviceSmsMap where DeviceNo=#{deviceNo} and EmployeeMobile=#{employeeMobile}")
     Relation_DeviceSmsMap getRelation_DeviceSmsMapOneByDeviceNoAndOpenId(@Param("deviceNo") String deviceNo, @Param("employeeMobile") String employeeMobile);
 
 
     @Insert("<script>" +
-            "insert into Relation_DeviceSmsMap(DeviceNo,EmployeeMobile,CreateDatetime,DueTime)"
+            "insert into Relation_DeviceSmsMap(DeviceNo,EmployeeMobile,CreateDatetime,DueTime,OpenId)"
             + "values "
             + "<foreach collection =\"rrList\" item=\"rr\" index=\"index\" separator =\",\"> "
-            + "(#{rr.deviceNo},#{rr.employeeMobile},#{rr.createDatetime},#{rr.dueTime})"
+            + "(#{rr.deviceNo},#{rr.employeeMobile},#{rr.createDatetime},#{rr.dueTime},#{rr.openId})"
             + "</foreach > " +
             "</script>")
     int insertManyRelation_DeviceSmsMap(@Param("rrList") List<Relation_DeviceSmsMap> rrList);
 
-    @Update("update Relation_DeviceSmsMap set DeviceNo=#{deviceNo},EmployeeMobile=#{employeeMobile},CreateDatetime=#{createDatetime} ,DueTime=#{dueTime}where DeviceNo = #{deviceNo} and EmployeeMobile = #{employeeMobile} ")
+    @Update("update Relation_DeviceSmsMap set DeviceNo=#{deviceNo},EmployeeMobile=#{employeeMobile},CreateDatetime=#{createDatetime} ,DueTime=#{dueTime} where DeviceNo = #{deviceNo} and EmployeeMobile = #{employeeMobile} ")
     int updateRelation_DeviceSmsMap(Relation_DeviceSmsMap relation_deviceSmsMap);
+
+    @Update("update Relation_DeviceSmsMap set EmployeeMobile=#{employeeMobile} where Id = #{id}  ")
+    int updateRelation_DeviceSmsMapById(Relation_DeviceSmsMap relation_deviceSmsMap);
 
     @Delete("delete from Relation_DeviceSmsMap where Id=#{id}")
     int deleteRelation_DeviceSmsMap(Integer id);

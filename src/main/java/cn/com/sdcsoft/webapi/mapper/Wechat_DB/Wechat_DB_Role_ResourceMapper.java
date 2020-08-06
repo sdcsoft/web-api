@@ -37,8 +37,8 @@ public interface Wechat_DB_Role_ResourceMapper {
     int insertManyRole_Resource(@Param("rrList") List<Role_Resource> rrList);
 
 
-    @Delete("delete from Role_Resource where ResId=#{resId}and OpenId=#{openId}")
-    int deleteWxDevice(@Param("resId") String resId, @Param("openId") String openId);
+    @Delete("delete from Role_Resource where DeviceNo=#{deviceNo}and OpenId=#{openId}")
+    int deleteWxDevice(@Param("deviceNo") String deviceNo, @Param("openId") String openId);
 
     @Delete("delete from Role_Resource where Id=#{id}")
     int deleteWxDeviceById(@Param("id") String id);

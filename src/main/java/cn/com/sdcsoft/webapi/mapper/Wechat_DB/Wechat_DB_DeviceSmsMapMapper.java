@@ -36,10 +36,10 @@ public interface Wechat_DB_DeviceSmsMapMapper {
             "</script>")
     List<Relation_DeviceSmsMap> getRelation_DeviceSmsMapList(Relation_DeviceSmsMap relation_DeviceSmsMap);
 
-    @Insert("insert into Relation_DeviceSmsMap (DeviceNo,EmployeeMobile,CreateDatetime) values (#{deviceNo},#{employeeMobile},#{createDatetime})")
+    @Insert("insert into Relation_DeviceSmsMap (DeviceNo,EmployeeMobile,CreateDatetime,OpenId) values (#{deviceNo},#{employeeMobile},#{createDatetime},#{openId})")
     int insertRelation_DeviceSmsMap(Relation_DeviceSmsMap relation_DeviceSmsMap);
 
-    @Update("update Relation_DeviceSmsMap set DeviceNo=#{deviceNo},EmployeeMobile=#{employeeMobile},CreateDatetime=#{createDatetime} where Id = #{id}")
+    @Update("update Relation_DeviceSmsMap set DeviceNo=#{deviceNo},EmployeeMobile=#{employeeMobile},CreateDatetime=#{createDatetime},OpenId=#{openId} where Id = #{id}")
     int updateRelation_DeviceSmsMap(Relation_DeviceSmsMap relation_DeviceSmsMap);
 
     @Delete("delete from Relation_DeviceSmsMap where Id=#{id}")

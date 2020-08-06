@@ -1,7 +1,5 @@
 package cn.com.sdcsoft.webapi.wechat.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -10,6 +8,15 @@ public class UserAddDeviceHistory implements Serializable {
 
     private Integer id;
     private String openId, deviceNo;
+    private Timestamp bindTime;
+
+    public Timestamp getBindTime() {
+        return bindTime;
+    }
+
+    public void setBindTime(Timestamp bindTime) {
+        this.bindTime = bindTime;
+    }
 
     public Integer getId() {
         return id;

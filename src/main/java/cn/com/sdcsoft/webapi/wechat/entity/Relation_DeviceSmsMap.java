@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 public class Relation_DeviceSmsMap implements Serializable {
     private Integer id,range,rangeType,amount;
-    private String deviceNo,employeeMobile;
+    private String deviceNo,employeeMobile,openId;
     private Timestamp dueTime;
     private Timestamp createDatetime;
 
@@ -19,6 +19,14 @@ public class Relation_DeviceSmsMap implements Serializable {
 
     public void setDueTime(Timestamp dueTime) {
         this.dueTime = dueTime;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     public Integer getId() {
