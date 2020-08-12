@@ -47,6 +47,13 @@ public class Wechat_Relation_DeviceSmsMapController {
         return Result.getSuccessResult();
     }
 
+    @GetMapping(value = "/remove")
+    public Result deleteRelation_DeviceSmsMap(String openId, String deviceNo) {
+        if(wechat_db_relation_deviceSmsMapMapper.deleteRelation_DeviceSmsMapByDeviceNoAndOpenId(deviceNo, openId)>0){
+            return Result.getSuccessResult();
+        }
+        return Result.getFailResult("删除失败");
+    }
 
     @PostMapping("/create/many")
     public Result insertManyRelation_DeviceSmsMap(String deviceSmsMapList){
