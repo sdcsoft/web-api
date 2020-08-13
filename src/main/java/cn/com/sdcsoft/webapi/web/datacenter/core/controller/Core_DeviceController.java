@@ -128,6 +128,7 @@ public class Core_DeviceController extends BaseController {
      */
     @PostMapping("/create")
     public String insertManyDevice(@RequestBody List<Device> deviceList) {
+        lan_api.modifyLastDeviceNo(deviceList.get(deviceList.size()-1).getDeviceNo(),deviceList.get(deviceList.size()-1).getDeviceNo().substring(0,5));
         return lan_api.deviceCreate(deviceList);
     }
     /**
