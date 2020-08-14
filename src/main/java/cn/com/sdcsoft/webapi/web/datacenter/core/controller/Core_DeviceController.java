@@ -116,6 +116,7 @@ public class Core_DeviceController extends BaseController {
     @PostMapping("/create/wechat")
     public String insertManyDeviceWechat(String deviceList) {
         List<Device> list = JSON.parseArray(deviceList, Device.class);
+        lan_api.modifyLastDeviceNo(list.get(list.size()-1).getDeviceNo(),list.get(list.size()-1).getDeviceNo().substring(0,5));
         return lan_api.deviceCreate(list);
     }
 
@@ -127,6 +128,7 @@ public class Core_DeviceController extends BaseController {
      */
     @PostMapping("/create")
     public String insertManyDevice(@RequestBody List<Device> deviceList) {
+        lan_api.modifyLastDeviceNo(deviceList.get(deviceList.size()-1).getDeviceNo(),deviceList.get(deviceList.size()-1).getDeviceNo().substring(0,5));
         return lan_api.deviceCreate(deviceList);
     }
     /**

@@ -22,7 +22,6 @@ public interface Wechat_DB_Relation_DeviceSmsMapMapper {
     @Select("select * from Relation_DeviceSmsMap where DeviceNo=#{deviceNo} and EmployeeMobile=#{employeeMobile}")
     Relation_DeviceSmsMap getRelation_DeviceSmsMapOneByDeviceNoAndOpenId(@Param("deviceNo") String deviceNo, @Param("employeeMobile") String employeeMobile);
 
-
     @Insert("<script>" +
             "insert into Relation_DeviceSmsMap(DeviceNo,EmployeeMobile,CreateDatetime,DueTime,OpenId)"
             + "values "
@@ -38,9 +37,11 @@ public interface Wechat_DB_Relation_DeviceSmsMapMapper {
     @Update("update Relation_DeviceSmsMap set EmployeeMobile=#{employeeMobile} where Id = #{id}  ")
     int updateRelation_DeviceSmsMapById(Relation_DeviceSmsMap relation_deviceSmsMap);
 
+    @Delete("delete from Relation_DeviceSmsMap where DeviceNo=#{deviceNo}and OpenId=#{openId}")
+    int deleteRelation_DeviceSmsMapByDeviceNoAndOpenId(@Param("deviceNo") String deviceNo, @Param("openId") String openId);
+
     @Delete("delete from Relation_DeviceSmsMap where Id=#{id}")
     int deleteRelation_DeviceSmsMap(Integer id);
-
 
     @Delete(" delete from Relation_DeviceSmsMap where cast(DueTime  as datetime)<#{time}")
     int deleteRelation_DeviceSmsMapByTime(String time);
