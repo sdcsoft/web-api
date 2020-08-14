@@ -225,7 +225,7 @@ public interface LAN_API {
     @GetMapping(value = "/datacore/enterprise/customer/prefix/list")
     String enterpriseCustomerPrefixList(@RequestParam("enterpriseCustomerId") int enterpriseCustomerId);
 
-    @GetMapping(value = "/datacore/enterprise/modify/lastDeviceNo")
+    @GetMapping(value = "/datacore/enterprise/modify/lastdeviceno")
     String modifyLastDeviceNo(@RequestParam("lastDeviceNo") String lastDeviceNo,@RequestParam("code") String code);
 
     @PostMapping(value = "/datacore/enterprise/customer/prefix/create")
