@@ -271,6 +271,8 @@ public interface LAN_API {
     @PostMapping("/datacore/datamap/modify/share")
     Result dataMapModifyShare(@RequestParam("id") Integer id,@RequestParam("share") Integer share);
 
+    @PostMapping("/datacore/datamap/modify/share/title")
+    Result modifyShareAndTitle(@RequestParam("id") Integer id,@RequestParam("share") Integer share,@RequestParam("title") String title);
 
     @PostMapping("/datacore/datamap/modify/other")
     Result dataMapModifyOther(@RequestParam("id") Integer id,@RequestParam("pointIndexMap") String pointIndexMap,@RequestParam("dataLength") Integer dataLength);

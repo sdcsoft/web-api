@@ -46,6 +46,12 @@ public class Wechat_DeviceDataMapController {
     public Result dataMapModifyShare(@RequestParam("id") Integer id,@RequestParam("share") Integer share) {
         return lan_api.dataMapModifyShare(id,share);
     }
+
+    @PostMapping("/modify/share/title")
+    public Result modifyShareAndTitle(@RequestParam("id") Integer id,@RequestParam("share") Integer share,@RequestParam("title") String title) {
+        return lan_api.modifyShareAndTitle(id,share,title);
+    }
+
     @PostMapping("/modify/other")
     public Result dataMapModifyOther(@RequestParam("id") Integer id,@RequestParam("pointIndexMap") String pointIndexMap,@RequestParam("dataLength") Integer dataLength) {
         return lan_api.dataMapModifyOther(id,pointIndexMap,dataLength);
