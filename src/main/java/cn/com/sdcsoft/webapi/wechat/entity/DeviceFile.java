@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 public class DeviceFile implements Serializable {
     private Integer id;
-    private String deviceNo,filePath,employeeMobile;
+    private String deviceNo,fileName,employeeMobile;
     private Timestamp createDatetime;
 
     public Integer getId() {
@@ -26,12 +26,12 @@ public class DeviceFile implements Serializable {
         this.deviceNo = deviceNo;
     }
 
-    public String getFilePath() {
-        return filePath;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getEmployeeMobile() {
