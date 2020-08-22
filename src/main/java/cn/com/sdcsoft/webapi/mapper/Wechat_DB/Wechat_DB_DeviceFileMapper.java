@@ -9,8 +9,8 @@ import java.util.List;
 @Component
 public interface Wechat_DB_DeviceFileMapper {
 
-    @Select("select * from DeviceFile")
-    List<DeviceFile> getDeviceFileAll();
+    @Select("select * from DeviceFile where DeviceNo=#{deviceNo}")
+    List<DeviceFile> getDeviceFileByDeviceNo(@Param("deviceNo") String deviceNo);
 
     @Select("<script>" +
             "select ee.* from DeviceFile ee " +
@@ -26,7 +26,7 @@ public interface Wechat_DB_DeviceFileMapper {
             "</script>")
     List<DeviceFile> getDeviceFileListByCondition(DeviceFile deviceFile);
 
-    @Insert("insert into DeviceFile(DeviceNo,FilePath,CreateDatetime,Author) values (#{deviceNo},#{filePath},#{createDatetime},#{author})")
+    @Insert("insert into DeviceFile(DeviceNo,FileName,CreateDatetime,EmployeeMobile) values (#{deviceNo},#{fileName},#{createDatetime},#{employeeMobile})")
     int insertDeviceFile(DeviceFile deviceFile);
 
     @Delete("delete from DeviceFile where Id=#{id}")
