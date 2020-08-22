@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@MapperScan(basePackages = "cn.com.sdcsoft.webapi.mapper.Wechat_DB", sqlSessionFactoryRef = "Wechat_DB_SqlSessionFactory")
+@MapperScan(basePackages = {"cn.com.sdcsoft.webapi.mapper.Wechat_DB","cn.com.sdcsoft.webapi.web.docs.mapper"}, sqlSessionFactoryRef = "Wechat_DB_SqlSessionFactory")
 public class Wechat_DB_MybatisConfig {
     @Bean(name = "Wechat_DB_DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.wechat-db")

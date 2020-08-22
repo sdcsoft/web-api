@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.MQListener;
+package cn.com.sdcsoft.webapi.rabbitMQ.listener;
 
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.utils.DeviceSmsCacheUtil;

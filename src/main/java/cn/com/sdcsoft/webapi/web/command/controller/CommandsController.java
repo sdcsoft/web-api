@@ -1,5 +1,6 @@
 package cn.com.sdcsoft.webapi.web.command.controller;
 
+import cn.com.sdcsoft.webapi.rabbitMQ.sender.CmdMsgSender;
 import cn.com.sdcsoft.webapi.utils.CommandCacheUtil;
 import cn.com.sdcsoft.webapi.web.command.entity.DeviceCommandsItem;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import java.io.IOException;
 @RestController
 @RequestMapping(value = "/webapi/commands")
 public class CommandsController {
+    @Autowired
+    CmdMsgSender cmdMsgSender;
     @Autowired
     private CommandCacheUtil commandCacheUtil;
 
@@ -48,6 +51,11 @@ public class CommandsController {
             DeviceCommandsItem deviceCommandsItem = (DeviceCommandsItem)item;
             deviceCommandsItem.addCommand(command);
         }
+        Object[] msg = new Object[]{
+                key,
+                toBytes(command)
+        };
+        cmdMsgSender.send(msg);
     }
 
     @GetMapping(value = "/get")

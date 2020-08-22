@@ -276,4 +276,7 @@ public interface LAN_API {
 
     @PostMapping("/datacore/datamap/modify/other")
     Result dataMapModifyOther(@RequestParam("id") Integer id,@RequestParam("pointIndexMap") String pointIndexMap,@RequestParam("dataLength") Integer dataLength);
+
+    @GetMapping("/datacore/device/ids")
+    Result deviceIdList();
 }
