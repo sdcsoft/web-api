@@ -152,7 +152,7 @@ public class BoilerManage_ProductController {
             } else {
                 productService.createProduct(product, user.getId());
             }
-            return Result.getSuccessResult();
+            return Result.getSuccessResult(product.getId());
         }
         catch (Exception ex) {
             return Result.getFailResult(ex.getMessage());

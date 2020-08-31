@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/webapi/commands")
-public class CommandsController {
+public class InputController {
     @Autowired
     CmdMsgSender cmdMsgSender;
     @Autowired
@@ -26,12 +26,11 @@ public class CommandsController {
         //logger.error(String.format("%s\r\n",msg));
     }
 
-//    @PostMapping(value = "/send2")
-//    public void addCommand(@RequestHeader(name = "DeviceSuffix") String key,
-//                           @RequestParam String command){
-//        addCommand2("noName",key,command);
-//    }
-//
+    @PostMapping(value = "/send2")
+    public void addCommand(@RequestHeader(name = "DeviceSuffix") String key,
+                           @RequestParam String command){
+        addCommand2("noName",key,command);
+    }
 
     @PostMapping(value = "/send")
     public void addCommand2(@RequestHeader(name = "UserId") String userId,
@@ -58,19 +57,7 @@ public class CommandsController {
         cmdMsgSender.send(msg);
     }
 
-    @GetMapping(value = "/get")
-    public void getCommand(@RequestHeader(name = "DeviceSuffix") String key, HttpServletResponse response) throws IOException {
-        Object obj = commandCacheUtil.getCacheItem(key);
-        if(null != obj) {
-            commandCacheUtil.removeCacheItem(key);
-            DeviceCommandsItem item = (DeviceCommandsItem) obj;
-            String cmd = item.getCommands();
-            if(null == cmd || 0 == cmd.length())
-                return;
-            errorLog(String.format("%s->%s",key,cmd));
-            response.getOutputStream().write(toBytes(cmd));
-        }
-    }
+
 
     public static byte[] toBytes(String str) {
         if(str == null || str.trim().equals("")) {

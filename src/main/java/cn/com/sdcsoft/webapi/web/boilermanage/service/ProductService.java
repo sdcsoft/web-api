@@ -32,9 +32,9 @@ public class ProductService {
      * @param product
      * @return
      */
-    public boolean createProduct(Product product) {
-        productMapper.createProduct(product);
-        return true;
+    public int createProduct(Product product) {
+        int id = productMapper.createProduct(product);
+        return id;
     }
 
     /**
@@ -44,11 +44,10 @@ public class ProductService {
      * @param userId
      * @return
      */
-    public boolean createProduct(Product product, Integer userId) {
-        productMapper.createProduct(product);
-
+    public int createProduct(Product product, Integer userId) {
+        int id = productMapper.createProduct(product);
         productUserMapper.createProductUser(userId, product.getId());
-        return true;
+        return id;
     }
 
     public int deleteProduct(int id, String controllerNo) {
