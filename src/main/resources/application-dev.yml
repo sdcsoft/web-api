@@ -39,6 +39,8 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: 127.0.0.1
+cloud:
+  lan-api: LAN-API
 server:
   port: 8088
 token:

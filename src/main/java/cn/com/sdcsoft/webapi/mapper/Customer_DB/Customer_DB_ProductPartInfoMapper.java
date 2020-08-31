@@ -11,7 +11,7 @@ public interface Customer_DB_ProductPartInfoMapper {
 
     @Select("select i.*,c.Name PartCategoryName,s.Name PartSubCategoryName from Product_Part_Info i " +
             "inner join Part_Category c on i.PartCategoryId=c.id " +
-            "inner join Part_SubCategory s on i.PartSubCategoryId=s.id  " +
+            "left join Part_SubCategory s on i.PartSubCategoryId=s.id  " +
             "where ProductId = #{productId}")
     List<ProductPartInfo> findByProductId(int productId);
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Component
-@FeignClient(name = "LAN-API")
+@FeignClient(name = "${cloud.lan-api}")
 public interface LAN_API {
 
     @GetMapping("/datacore/agent/list")
