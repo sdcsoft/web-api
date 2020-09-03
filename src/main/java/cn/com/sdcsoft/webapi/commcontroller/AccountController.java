@@ -4,7 +4,9 @@ import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
+import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_UserMapper;
 import cn.com.sdcsoft.webapi.utils.WechatTokenCacheUtil;
+import cn.com.sdcsoft.webapi.web.boilermanage.entity.User;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -37,6 +39,9 @@ public class AccountController {
     private CookieService cookieService;
     @Autowired
     LAN_API lan_api;
+
+    @Autowired
+    Customer_DB_UserMapper userMapper;
 
     @Autowired
     WechatTokenCacheUtil cacheUtil;
@@ -91,7 +96,7 @@ public class AccountController {
 
     @PostMapping(value = "/datamanage/login")
     public Result dataManageLogin(String loginId, String password, HttpServletResponse response) {
-        System.out.println("login id:"+loginId);
+        System.out.println("login id:" + loginId);
         JSONObject obj = JSONObject.parseObject(lan_api.employeeFindCompanyUser(loginId));
         System.out.println(obj);
         return getLoginResult(obj, password, ORG_TYPE_Company,
@@ -131,6 +136,46 @@ public class AccountController {
                 response);
     }
 
+    /**
+     * 微信端锅炉厂管理系统登录
+     *
+     * @param openId
+     * @param response
+     * @return
+     */
+    @PostMapping(value = "/wechat/customer/login")
+    public Result weChatCustomerLogin(String openId, HttpServletResponse response) {
+        User user = userMapper.findUserByOpenId(openId);
+        if (null == user) {
+            return Result.getFailResult("系统中不存在当前用户信息！");
+        }
+        JSONObject obj = JSONObject.parseObject(lan_api.employeeGet(user.getEmployeeId()));
+        Employee employee = JSONObject.parseObject(obj.getString("data"), Employee.class);
+        if (null != employee) {
+            return getLoginResult(obj, employee.getPassword(), ORG_TYPE_Customer,
+                    (orgid) -> JSON.parseObject(lan_api.customerFindById(orgid)),
+                    response);
+        }
+        else{
+            return Result.getFailResult("core系统中不存在当前用户信息！");
+        }
+    }
+
+    /**
+     * 用户身份识别
+     *
+     * @param openId
+     * @return
+     */
+    @RequestMapping("/wechat/customer/openid")
+    public Result findUserByOpenId(String openId) {
+        User user = userMapper.findUserByOpenId(openId);
+        if (null != user) {
+            return Result.getSuccessResult(user);
+        } else {
+            return Result.getFailResult("系统中不存在当前用户信息！");
+        }
+    }
     @RequestMapping(value = "/hello")
     public String hello() {
         return "hello world.";

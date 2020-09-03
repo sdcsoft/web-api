@@ -10,10 +10,6 @@ public class UserService {
     @Autowired
     Customer_DB_UserMapper userMapper;
 
-    public void createUser(OrgUser user) {
-        userMapper.createUser(user);
-    }
-
     public void createAdmin(OrgUser user) {
         userMapper.createAdmin(user);
     }

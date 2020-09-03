@@ -25,17 +25,17 @@ public class Boiler_UserController {
      *
      * @param orgUser
      */
-    @PostMapping(value = "/change")
-    public Result change(@RequestBody OrgUser orgUser) {
-        Result result = lan_api.employeeModifyOrg(orgUser.getId(), OrgType.ORG_TYPE_Boiler, orgUser.getOrgId());
-        if (Result.RESULT_CODE_SUCCESS == result.getCode()) {
-            if (null == orgUser.getRoleId() || 0 == orgUser.getRoleId()) {
-                userService.createAdmin(orgUser);
-            } else {
-                userService.createUser(orgUser);
-            }
-            return Result.getSuccessResult();
-        }
-        return result;
-    }
+//    @PostMapping(value = "/change")
+//    public Result change(@RequestBody OrgUser orgUser) {
+//        Result result = lan_api.employeeModifyOrg(orgUser.getId(), OrgType.ORG_TYPE_Boiler, orgUser.getOrgId());
+//        if (Result.RESULT_CODE_SUCCESS == result.getCode()) {
+//            if (null == orgUser.getRoleId() || 0 == orgUser.getRoleId()) {
+//                userService.createAdmin(orgUser);
+//            } else {
+//                userService.createUser(orgUser);
+//            }
+//            return Result.getSuccessResult();
+//        }
+//        return result;
+//    }
 }

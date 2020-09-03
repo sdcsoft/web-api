@@ -39,17 +39,17 @@ public class Core_EmployeeController extends BaseController {
     @PostMapping(value = "/create")
     public String create(@RequestBody Employee employee) {
         String str = lan_api.employeeCreate(employee);
-        JSONObject obj = JSONObject.parseObject(str);
-        if (0 == obj.getIntValue("code")) {
-            OrgUser resultEmployee = JSONObject.parseObject(obj.getString("data"), OrgUser.class);
-            if (resultEmployee.getOrgType() == OrgType.ORG_TYPE_Boiler) {
-                if (null == employee.getIsAdmin() || employee.getIsAdmin() == 0) {
-                    boilerUserService.createUser(resultEmployee);
-                } else {
-                    boilerUserService.createAdmin(resultEmployee);
-                }
-            }
-        }
+//        JSONObject obj = JSONObject.parseObject(str);
+//        if (0 == obj.getIntValue("code")) {
+//            OrgUser resultEmployee = JSONObject.parseObject(obj.getString("data"), OrgUser.class);
+//            if (resultEmployee.getOrgType() == OrgType.ORG_TYPE_Boiler) {
+//                if (null == employee.getIsAdmin() || employee.getIsAdmin() == 0) {
+//                    boilerUserService.createUser(resultEmployee);
+//                } else {
+//                    boilerUserService.createAdmin(resultEmployee);
+//                }
+//            }
+//        }
         return str;
     }
 
