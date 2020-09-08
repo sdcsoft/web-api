@@ -19,6 +19,9 @@ public interface Customer_DB_UserMapper {
     @Select("select * from User where Id=#{userId}")
     User findUserById(@Param("userId") Integer userId);
 
+    @Select("select * from User where OpenId=#{openId}")
+    User findUserByOpenId(@Param("openId") String openId);
+
     @Update("update User set UserName=#{userName},Mark=#{mark} where Id=#{id}")
     void modifyUser(User user);
 
@@ -28,9 +31,12 @@ public interface Customer_DB_UserMapper {
     @Delete("delete from User where Id=#{id}")
     void removeUser(@Param("id") Integer id);
 
-    @Insert("insert into User (OrgId,EmployeeId,UserName) values (#{orgId},#{id},#{realName})")
-    void createUser(OrgUser user);
+    @Insert("insert into User (OpenId,OrgId,EmployeeId,UserName) values (#{invCode},#{orgId},0,NULL)")
+    void createInvCode(String invCode,Integer orgId);
 
-    @Insert("insert into User (OrgId,EmployeeId,UserName,RoleId,RoleName,Mark) values (#{orgId},#{id},#{realName},1,'系统管理员','系统内置管理员，不能被删除')")
+    @Update("update User set OpenId=#{openId},EmployeeId=#{employeeId},UserName=#{userName},Mark=#{mobile} where OpenId=#{invCode}")
+    int createUser(User user);
+
+    @Insert("insert into User (OpenId,OrgId,EmployeeId,UserName,RoleId,RoleName,Mark) values (#{openId},#{orgId},#{employeeId},#{userName},1,'系统管理员','系统内置管理员，不能被删除')")
     void createAdmin(OrgUser user);
 }

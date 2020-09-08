@@ -2,10 +2,14 @@ package cn.com.sdcsoft.webapi.web.boilermanage.controller;
 
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
+import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
+import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductUserMapper;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ResourceMapper;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_UserMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Role;
+import cn.com.sdcsoft.webapi.web.entity.OrgType;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.User;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 企业员工
@@ -23,6 +28,9 @@ import java.util.List;
 @RequestMapping(value = "/webapi/boilermanage/user", produces = "application/json;charset=utf-8")
 @Auth
 public class BoilerManage_UserController {
+
+    @Autowired
+    LAN_API lan_api;
 
     @Autowired
     private Customer_DB_ProductUserMapper productUserMapper;
@@ -37,7 +45,7 @@ public class BoilerManage_UserController {
         User user = userMapper.findUserByEmployeeId(employeeId);
         if (null != user) {
             //判断是否为企业管理员
-            if (1 == user.getRoleId()) {//企业管理员加载企业资源信息
+            if (null != user.getRoleId() && 1 == user.getRoleId()) {//企业管理员加载企业资源信息
                 user.setListResource(resourceMapper.getOrgResources(user.getOrgId()));
             } else {//非企业管理员，加载用户角色映射信息
                 user.setListResource(resourceMapper.getUserResources(employeeId));
@@ -62,13 +70,73 @@ public class BoilerManage_UserController {
         }
     }
 
+    /**
+     *  生成推荐码
+     * @param openId
+     * @return
+     */
+    @RequestMapping("/invcode/create")
+    public Result findUserByInvCode(String openId) {
+        try{
+            User user = userMapper.findUserByOpenId(openId);
+            if (null != user) {
+                if (null != user.getRoleId() && user.getRoleId() != Role.SYSTEM_ADMIN_ROLE_ID) {
+                    return Result.getFailResult("邀请码只允许超级管理员生成！");
+                }
+                String uuid = UUID.randomUUID().toString().replace("-", "");
+                userMapper.createInvCode(uuid,user.getOrgId());
+                return Result.getSuccessResult("",uuid);
+            } else {
+                return Result.getFailResult("系统中不存在该邀请码！");
+            }
+        }
+        catch (Exception ex){
+            return Result.getFailResult(ex.getMessage());
+        }
+    }
+
+    @RequestMapping("/create")
+    public Result create(@RequestBody User user) {
+        try {
+            User u = userMapper.findUserByOpenId(user.getInvCode());
+            if (null == u) {
+                return Result.getFailResult("系统中不存在该邀请码！");
+            }
+
+            Employee employee = new Employee();
+            employee.setOrgType(OrgType.ORG_TYPE_Boiler);
+            employee.setOrgId(u.getOrgId());
+            employee.setPassword(user.getMobile());
+            employee.setMobile(user.getMobile());
+            employee.setEmail(user.getMobile());
+            employee.setStatus(Employee.STATUS_ENABLE);
+            employee.setRealName(user.getUserName());
+
+            String str = lan_api.employeeCreate(employee);
+            JSONObject obj = JSONObject.parseObject(str);
+            if (Result.RESULT_CODE_SUCCESS == obj.getIntValue("code")) {
+                JSONObject data = obj.getJSONObject("data");
+                Integer employeeId = data.getInteger("id");
+                user.setEmployeeId(employeeId);
+                int count = userMapper.createUser(user);
+                if (1 == count) {
+                    return Result.getSuccessResult(employeeId);
+                }
+                return Result.getFailResult("用户创建失败！");
+            } else {
+                return Result.getFailResult("Core用户创建失败！");
+            }
+        } catch (Exception ex) {
+            return Result.getFailResult(ex.getMessage());
+        }
+    }
 
     @PostMapping("/resources")
     public Result getUserResources(Integer employeeId) {
         User user = userMapper.findUserByEmployeeId(employeeId);
         if (null != user) {
             ///判断是否为企业管理员
-            if (1 == user.getRoleId()) {//企业管理员加载企业资源信息
+            if (null != user.getRoleId() && 1 == user.getRoleId()) {//企业管理员加载企业资源信息
                 return Result.getSuccessResult(resourceMapper.getOrgResources(user.getOrgId()));
             } else {//非企业管理员，加载用户角色映射信息
                 return Result.getSuccessResult(resourceMapper.getUserResources(employeeId));
@@ -132,7 +200,7 @@ public class BoilerManage_UserController {
     @PostMapping(value = "/remove")
     public Result remove(@RequestParam int id, HttpServletRequest request) {
         User user = userMapper.findUserById(id);
-        if (user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
+        if (null != user.getRoleId() && user.getRoleId() == Role.SYSTEM_ADMIN_ROLE_ID) {
             return Result.getFailResult("系统管理员不允许删除！");
         }
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());

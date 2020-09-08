@@ -9,8 +9,36 @@ public class User implements Serializable {
     private Integer orgId;
     private Integer employeeId;
     private String userName;
+    private String openId;
     private Integer roleId;
+    private String mobile;
+    private  String invCode;
 
+    public String getInvCode() {
+        return invCode;
+    }
+
+    public void setInvCode(String invCode) {
+        this.invCode = invCode;
+    }
+
+
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
     public Integer getRoleId() {
         return roleId;
     }

@@ -123,6 +123,9 @@ public interface LAN_API {
     @PostMapping(value = "/datacore/employee/create")
     String employeeCreate(@RequestBody Employee employee);
 
+    @GetMapping(value = "/datacore/employee/get")
+    String employeeGet(@RequestParam("employeeId") Integer employeeId);
+
     @GetMapping(value = "/datacore/employee/find")
     String employeeFind(@RequestParam("loginId") String loginId);
 

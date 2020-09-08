@@ -18,6 +18,16 @@ public class OrgUser implements Serializable {
     private Integer roleId;
 
     private String realName;
+    private String openId;
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
 
 
     public Integer getId() {
