@@ -34,6 +34,58 @@ public class WeChatController {
     @Autowired
     WechatTokenCacheUtil cacheUtil;
 
+    @GetMapping(value = "/customer/login")
+    public void customerhLogin(HttpServletResponse response, String url) throws IOException {
+         String redirect_url = "http://sdcsoft.xicp.io/wechat/customer/callback?url=" + url;
+        String appId = "wx1c8926294bed5c78";
+        String responseUrl = "https://open.weixin.qq.com/connect/qrconnect?"
+                + "appid=" + appId + ""
+                + "&redirect_uri=" + redirect_url + ""
+                + "&response_type=code"
+                + "&scope=snsapi_login"
+                + "&state=customerlogin";
+        response.sendRedirect(responseUrl);
+    }
+
+    @GetMapping(value = "/customer/callback")
+    public void customerhLoginCallback(HttpServletRequest request, HttpServletResponse response, String code, String state, String url) throws JSONException, IOException {
+        if (code == null || !"customerlogin".equals(state)) {
+            return;
+        }
+        TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl, "/sns/oauth2/access_token"));
+        Map<String, String> map = new HashMap<>();
+        map.put("appid", "wx1c8926294bed5c78");
+        map.put("secret", "77813e8feea6b8ee3df30c9d0eeb1dd7");
+        map.put("code", code);
+        map.put("grant_type", "authorization_code");
+        JSONObject jsonObject = JSONObject.parseObject(wxClient.get(map));
+        String access_token = jsonObject.getString("access_token");
+        cacheUtil.putCacheItem(access_token, null);
+        TemplateClient infoUrl = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl, "/sns/userinfo"));
+        Map<String, String> infomap = new HashMap<>();
+        infomap.put("access_token", access_token);
+        infomap.put("openid",  jsonObject.getString("openid"));
+        JSONObject infoObject = JSONObject.parseObject(infoUrl.get(infomap));
+
+        String unionid ="0";
+        if(infoObject.get("unionid").toString()!=null& !infoObject.get("unionid").toString().equals("")){
+            unionid =infoObject.get("unionid").toString();
+        }
+        String responseUrl = String.format(url + "?unionid=%s&token=%s", unionid, access_token);
+        response.sendRedirect(responseUrl);
+    }
+    @PostMapping(value = "/check/unionId")
+    public Result checkUnionId(String openId, String unionId) {
+        Result result = lan_api.employeeFindWechat(openId);
+        if (result.getCode() == Result.RESULT_CODE_SUCCESS) {
+            LinkedHashMap json = (LinkedHashMap) result.getData();
+            String mobile = json.get("mobile").toString();
+            result = lan_api.employeeBindWechat(mobile, openId, unionId);
+            return result;
+        }
+        return Result.getFailResult("用户未注册");
+    }
+
     @GetMapping(value = "/login")
     public void goWeixinAuth(HttpServletResponse response, String url) throws IOException {
         String redirect_url = "https://apis.sdcsoft.com.cn/wechat/callback?url=" + url;
@@ -77,17 +129,8 @@ public class WeChatController {
         response.sendRedirect(responseUrl);
     }
 
-    @PostMapping(value = "/check/unionId")
-    public Result checkUnionId(String openId, String unionId) {
-        Result result = lan_api.employeeFindWechat(openId);
-        if (result.getCode() == Result.RESULT_CODE_SUCCESS) {
-            LinkedHashMap json = (LinkedHashMap) result.getData();
-            String mobile = json.get("mobile").toString();
-            result = lan_api.employeeBindWechat(mobile, openId, unionId);
-            return result;
-        }
-        return Result.getFailResult("用户未注册");
-    }
+
+
 
     @PostMapping(value = "/check/openId")
     public Result checkopenId(String openId) {
