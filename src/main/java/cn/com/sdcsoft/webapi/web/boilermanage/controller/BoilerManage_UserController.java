@@ -26,7 +26,6 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "/webapi/boilermanage/user", produces = "application/json;charset=utf-8")
-@Auth
 public class BoilerManage_UserController {
 
     @Autowired
@@ -40,6 +39,7 @@ public class BoilerManage_UserController {
     @Autowired
     private Customer_DB_ResourceMapper resourceMapper;
 
+    @Auth
     @GetMapping("/info")
     public Result getUserInfo(Integer employeeId) {
         User user = userMapper.findUserByEmployeeId(employeeId);
@@ -56,6 +56,7 @@ public class BoilerManage_UserController {
         }
     }
 
+    @Auth
     @GetMapping("/find")
     public Result findUserInfo(Integer userId) {
         User user = userMapper.findUserById(userId);
@@ -75,6 +76,7 @@ public class BoilerManage_UserController {
      * @param openId
      * @return
      */
+    @Auth
     @RequestMapping("/invcode/create")
     public Result findUserByInvCode(String openId) {
         try{
@@ -111,6 +113,7 @@ public class BoilerManage_UserController {
             employee.setEmail(user.getMobile());
             employee.setStatus(Employee.STATUS_ENABLE);
             employee.setRealName(user.getUserName());
+            employee.setUnionId(user.getUnionId());
 
             String str = lan_api.employeeCreate(employee);
             JSONObject obj = JSONObject.parseObject(str);
@@ -131,6 +134,7 @@ public class BoilerManage_UserController {
         }
     }
 
+    @Auth
     @PostMapping("/resources")
     public Result getUserResources(Integer employeeId) {
         User user = userMapper.findUserByEmployeeId(employeeId);
@@ -153,6 +157,7 @@ public class BoilerManage_UserController {
      * @param pageSize
      * @return
      */
+    @Auth
     @GetMapping("/list")
     public Result list(Integer pageNum, Integer pageSize, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
@@ -172,6 +177,7 @@ public class BoilerManage_UserController {
      * @param user
      * @return
      */
+    @Auth
     @PostMapping("/modify")
     public Result modify(@RequestBody User user) {
         userMapper.modifyUser(user);
@@ -185,6 +191,7 @@ public class BoilerManage_UserController {
      * @param role
      * @return
      */
+    @Auth
     @PostMapping("/role/modify")
     public Result modifyUserRole(@RequestParam Integer userId, @RequestBody Role role) {
         userMapper.changeUserRole(userId, role.getId(), role.getRoleName());
@@ -197,6 +204,7 @@ public class BoilerManage_UserController {
      * @param id
      * @return
      */
+    @Auth
     @PostMapping(value = "/remove")
     public Result remove(@RequestParam int id, HttpServletRequest request) {
         User user = userMapper.findUserById(id);
