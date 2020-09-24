@@ -15,7 +15,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 @RestController
@@ -41,7 +40,7 @@ public class AccountController {
     LAN_API lan_api;
 
     @Autowired
-    Customer_DB_UserMapper userMapper;
+    Customer_DB_UserMapper customerUserMapper;
 
     @Autowired
     WechatTokenCacheUtil cacheUtil;
@@ -145,7 +144,7 @@ public class AccountController {
      */
     @PostMapping(value = "/wechat/customer/login")
     public Result weChatCustomerLogin(String openId, HttpServletResponse response) {
-        User user = userMapper.findUserByOpenId(openId);
+        User user = customerUserMapper.findUserByOpenId(openId);
         if (null == user) {
             return Result.getFailResult("系统中不存在当前用户信息！");
         }
@@ -164,12 +163,12 @@ public class AccountController {
     /**
      * 用户身份识别
      *
-     * @param openId
+     * @param openId 锅炉厂微信用户openid或uuid
      * @return
      */
     @RequestMapping("/wechat/customer/openid")
     public Result findUserByOpenId(String openId) {
-        User user = userMapper.findUserByOpenId(openId);
+        User user = customerUserMapper.findUserByOpenId(openId);
         if (null != user) {
             return Result.getSuccessResult(user);
         } else {
