@@ -96,12 +96,13 @@ public class Wechat_DeviceController {
 
     @GetMapping(value = "/modify", produces = {"application/json;charset=UTF-8"})
     public String modifyDevice(String deviceNo, int prefix, String deviceType, int status, int power, int media, String iMEI,Integer isCanCtl,Integer cnId,Integer enId) {
-
-        TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", "http://simapi.sdcsoft.com.cn","/sim/wechat/update"));
-        Map<String,String> map=new HashMap<>();
-        map.put("simNo",iMEI);
-        map.put("topupState","0");
-         wxClient.post(map);
+        if(!iMEI.equals("")){
+            TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", "http://simapi.sdcsoft.com.cn","/sim/wechat/update"));
+            Map<String,String> map=new HashMap<>();
+            map.put("simNo",iMEI);
+            map.put("topupState","0");
+            wxClient.post(map);
+        }
         return lan_api.deviceModifyForEnterpriseUser(deviceNo, prefix, deviceType, status, power, media, iMEI,isCanCtl,cnId,enId);
     }
 
