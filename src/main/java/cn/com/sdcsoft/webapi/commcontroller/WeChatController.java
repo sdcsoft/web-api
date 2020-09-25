@@ -36,7 +36,7 @@ public class WeChatController {
 
     @GetMapping(value = "/customer/login")
     public void customerhLogin(HttpServletResponse response, String url) throws IOException {
-         String redirect_url = "http://sdcsoft.xicp.io/wechat/customer/callback?url=" + url;
+         String redirect_url = "https://apis.sdcsoft.com.cn/wechat/customer/callback?url=" + url;
         String appId = "wx1c8926294bed5c78";
         String responseUrl = "https://open.weixin.qq.com/connect/qrconnect?"
                 + "appid=" + appId + ""
