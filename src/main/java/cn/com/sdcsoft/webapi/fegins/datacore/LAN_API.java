@@ -282,4 +282,6 @@ public interface LAN_API {
 
     @GetMapping("/datacore/device/ids")
     Result deviceIdList();
+    @GetMapping("/datacore/device/uuid")
+    Result deviceUuid(@RequestParam("uuid") String uuid);
 }

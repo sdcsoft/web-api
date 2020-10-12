@@ -20,6 +20,30 @@
            timeToIdleSeconds="240"
            timeToLiveSeconds="300"
            memoryStoreEvictionPolicy="LRU"/>
+    <!-- 设备编号与点位表编号缓存 -->
+    <cache name="deviceMapPointMap" maxElementsInMemory="10000"
+           overflowToDisk="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="3600"
+           memoryStoreEvictionPolicy="LRU"/>
+    <!-- 设备点位表缓存 -->
+    <cache name="devicePointMap" maxElementsInMemory="1000"
+           overflowToDisk="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="3600"
+           memoryStoreEvictionPolicy="LRU"/>
+    <!-- 设备Json对象缓存 -->
+    <cache name="deviceJsonObject" maxElementsInMemory="10000"
+           overflowToDisk="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="3600"
+           memoryStoreEvictionPolicy="LRU"/>
+    <!-- 设备uuid缓存 -->
+    <cache name="deviceUUID" maxElementsInMemory="10000"
+           overflowToDisk="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="3600"
+           memoryStoreEvictionPolicy="LRU"/>
     <!-- maxElementsInMemory 内存中最大缓存对象数，看着自己的heap大小来搞 -->
     <!-- eternal：true表示对象永不过期，此时会忽略timeToIdleSeconds和timeToLiveSeconds属性，默认为false -->
     <!-- maxElementsOnDisk：硬盘中最大缓存对象数，若是0表示无穷大 -->
