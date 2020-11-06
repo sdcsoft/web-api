@@ -3,6 +3,7 @@ package cn.com.sdcsoft.webapi.mapper.Enterprise_DB;
 import cn.com.sdcsoft.webapi.entity.SoldProductSearchOptions;
 import cn.com.sdcsoft.webapi.web.enterprisemanage.entity.Product;
 import cn.com.sdcsoft.webapi.web.enterprisemanage.entity.ProductTypeAmountClass;
+import cn.com.sdcsoft.webapi.web.report.controller.NewFrame.entity.TypeResult;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,16 @@ import java.util.List;
 
 @Component
 public interface Enterprise_DB_ProductMapper {
+    @Select("select * from Product where OrgId=#{orgId}")
+    List<Product> findProductsByOrgId(@Param("orgId") Integer orgId);
+
+    @Select("SELECT count(*) AS value,( CASE  WHEN Power = 0 AND Media = 0   THEN '燃油热水' WHEN Power = 0 AND Media = 1 THEN '燃油蒸汽' WHEN Power = 0 AND Media = 2 THEN '燃油导热油' WHEN Power = 0 AND Media = 3 THEN '燃油热风' WHEN Power = 0 AND Media = 4 THEN '燃油真空' WHEN Power = 1 AND Media = 0 THEN '电热水' WHEN Power = 1 AND Media = 1 THEN '电蒸汽' WHEN Power = 1 AND Media = 2 THEN '电导热油' WHEN Power = 1 AND Media = 3 THEN '电热风' WHEN Power = 1 AND Media = 4 THEN '电真空' WHEN Power = 2 AND Media = 0 THEN '燃煤热水' WHEN Power = 2 AND Media = 1 THEN '燃煤蒸汽' WHEN Power = 2 AND Media = 2 THEN '燃煤导热油' WHEN Power = 2 AND Media = 3 THEN '燃煤热风' WHEN Power = 2 AND Media = 4 THEN '燃煤真空' WHEN Power = 3 AND Media = 0 THEN '生物质热水' WHEN Power = 3 AND Media = 1 THEN '生物质蒸汽' WHEN Power = 3 AND Media = 2 THEN '生物质导热油' WHEN Power = 3 AND Media = 3 THEN '生物质热风' WHEN Power = 3 AND Media = 4 THEN '生物质真空' WHEN Power = 5 AND Media = 0 THEN '换热器热水' WHEN Power = 5 AND Media = 1 THEN '换热器蒸汽' WHEN Power = 5 AND Media = 2 THEN '换热器导热油' WHEN Power = 5 AND Media = 3 THEN '换热器热风' WHEN Power = 5 AND Media = 4 THEN '换热器真空'  END) AS name FROM Product\n where OrgId=#{orgId} GROUP BY Power,Media")
+    List<TypeResult> findProductByType(@Param("orgId") Integer orgId);
+
+
+    @Select("SELECT count(*) AS value,CustomerName AS name FROM Product where OrgId=#{orgId} GROUP BY CustomerId,CustomerName")
+    List<TypeResult> findCustomerByOrgId(@Param("orgId") Integer orgId);
+
     @Select("select * from Product where OrgId=#{orgId} and  ControllerNo=#{controllerNo}")
     Product findProductByorgId(@Param("orgId") Integer orgId, @Param("controllerNo") String controllerNo);
     @Select("<script>" +

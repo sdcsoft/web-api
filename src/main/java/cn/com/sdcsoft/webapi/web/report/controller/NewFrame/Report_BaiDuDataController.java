@@ -2,8 +2,10 @@ package cn.com.sdcsoft.webapi.web.report.controller.NewFrame;
 
 
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductMapper;
+import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_ProductMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Product;
 import cn.com.sdcsoft.webapi.web.report.controller.NewFrame.entity.Result;
+import cn.com.sdcsoft.webapi.web.report.controller.NewFrame.entity.TypeResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -30,6 +32,80 @@ public class Report_BaiDuDataController {
     Customer_DB_ProductMapper productMapper;
 
 
+    @Autowired
+    Enterprise_DB_ProductMapper enterprise_db_productMapper;
+    @GetMapping("/enterprise/product/orgId")
+    public Result findEnterpriseProductByOrgId(int orgId) {
+        List<cn.com.sdcsoft.webapi.web.enterprisemanage.entity.Product> list=enterprise_db_productMapper.findProductsByOrgId(orgId);
+        List<Object> mapData=new ArrayList<>();
+        for (int i=0;i<list.size();i++){
+            Map<String, Object> map = new HashMap<>();
+            List<Double> coord=new ArrayList<>();
+            if(list.get(i).getLatitude()!=null){
+                coord.add(Double.parseDouble(list.get(i).getLongitude()));
+                coord.add(Double.parseDouble(list.get(i).getLatitude()));
+                map.put("coord",coord);
+                map.put("name",list.get(i).getBoilerNo());
+                mapData.add(map);
+            }
+        }
+        Map<String, List> mapResult = new HashMap<>();
+        mapResult.put("mapData",mapData);
+        return Result.getSuccessResult(mapResult);
+    }
+
+    @GetMapping("/enterprise/product/online")
+    public Result findEnterpriseProductOnline(int orgId) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("name","在线");
+        result.put("value",enterprise_db_productMapper.findProductsByOrgId(orgId).size());
+        Map<String, Object> result1 = new HashMap<>();
+        result1.put("name","离线");
+        result1.put("value",0);
+        List<Object> list = new ArrayList<>();
+        list.add(result);
+        list.add(result1);
+        return Result.getSuccessResult(list);
+    }
+    @GetMapping("/enterprise/Customer/orgId")
+    public Result findCustomerByOrgId(int orgId) {
+        List<TypeResult> list=enterprise_db_productMapper.findCustomerByOrgId(orgId);
+        List<Object> dataList = new ArrayList<>();
+        List<Object> dateList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getName()!=null){
+                dateList.add(list.get(i).getName());
+                dataList.add(list.get(i).getValue());
+            }
+
+        }
+        Map<String, Object> serie = new HashMap<>();
+        serie.put("data", dataList);
+        serie.put("name", "设备数量");
+        List<Object> series = new ArrayList<>();
+        series.add(serie);
+        Map<String, List> result = new HashMap<>();
+        result.put("series", series);
+        result.put("categories", dateList);
+        return Result.getSuccessResult(result);
+    }
+    @GetMapping("/enterprise/product/type")
+    public Result findEnterpriseProductType(int orgId) {
+        List<TypeResult> list= enterprise_db_productMapper.findProductByType(orgId);
+        int count=0;
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getName()==null){
+                count=Integer.parseInt(list.get(i).getValue());
+                list.remove(i);
+            }
+            if(list.get(i).getName().equals("燃油热水")){
+                int num =count+Integer.parseInt(list.get(i).getValue());
+               list[i]= new TypeResult();
+                list.remove(i);
+            }
+        }
+        return Result.getSuccessResult();
+    }
 
     @GetMapping("/product/orgId")
     public Result findProductByOrgId(int orgId) {
