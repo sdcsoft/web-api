@@ -94,19 +94,12 @@ public class Report_BaiDuDataController {
     @GetMapping("/enterprise/product/type")
     public Result findEnterpriseProductType(int orgId) {
         List<TypeResult> list= enterprise_db_productMapper.findProductByType(orgId);
-        int count=0;
         for (int i = 0; i < list.size(); i++) {
             if(list.get(i).getName()==null){
-                count=Integer.parseInt(list.get(i).getValue());
-                list.remove(i);
-            }
-            if(list.get(i).getName().equals("燃油热水")){
-                int num =count+Integer.parseInt(list.get(i).getValue());
-               list[i]= new TypeResult();
                 list.remove(i);
             }
         }
-        return Result.getSuccessResult();
+        return Result.getSuccessResult(list);
     }
 
     @GetMapping("/product/orgId")
