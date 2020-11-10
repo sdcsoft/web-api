@@ -1,8 +1,11 @@
-package com.aichaowei.dtu.newsetting.config;
+package cn.com.sdcsoft.webapi.config;
 
-import org.springframework.data.mongodb.MongoDatabaseFactory;
+
+import com.mongodb.MongoClientURI;
+import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+
 
 public abstract class AbstractMongoConfig {
     public String getUri() {
@@ -24,7 +27,8 @@ public abstract class AbstractMongoConfig {
     /**
      * 创建mongoDb工厂
      */
-    public MongoDatabaseFactory mongoDatabaseFactory() throws Exception {
-        return new SimpleMongoClientDatabaseFactory(uri);
+    public MongoDbFactory mongoDatabaseFactory() throws Exception {
+        MongoClientURI mongoclienturi = new MongoClientURI(uri);
+        return new SimpleMongoDbFactory(mongoclienturi);
     }
 }

@@ -1,6 +1,6 @@
-package cn.com.sdcsoft.webapi.dtusetting.service;
+package cn.com.sdcsoft.webapi.devicesetting.service;
 
-import cn.com.sdcsoft.webapi.dtusetting.entity.DeviceAttr;
+import cn.com.sdcsoft.webapi.devicesetting.entity.DeviceAttr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;

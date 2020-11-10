@@ -1,6 +1,6 @@
-package cn.com.sdcsoft.webapi.dtusetting.service;
+package cn.com.sdcsoft.webapi.devicesetting.service;
 
-import cn.com.sdcsoft.webapi.dtusetting.entity.DeviceSetting;
+import cn.com.sdcsoft.webapi.devicesetting.entity.DeviceSetting;
 import com.mongodb.client.result.DeleteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.dtusetting.entity;
+package cn.com.sdcsoft.webapi.devicesetting.entity;
 
 public class ModbusSetting {
     private String action,startAddress;

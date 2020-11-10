@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.dtusetting.entity;
+package cn.com.sdcsoft.webapi.devicesetting.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

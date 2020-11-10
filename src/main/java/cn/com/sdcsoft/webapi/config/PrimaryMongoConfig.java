@@ -1,4 +1,4 @@
-package com.aichaowei.dtu.newsetting.config;
+package cn.com.sdcsoft.webapi.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
