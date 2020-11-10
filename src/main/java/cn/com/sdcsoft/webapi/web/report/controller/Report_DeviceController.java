@@ -8,6 +8,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -33,6 +34,7 @@ import java.util.*;
 public class Report_DeviceController {
 
     @Autowired
+    @Qualifier(value = "primaryMongoTemplate")
     private MongoTemplate mongoTemplate;
 
     public static Date strToDate(String str) {

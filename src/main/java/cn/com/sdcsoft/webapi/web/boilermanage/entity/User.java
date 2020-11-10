@@ -1,10 +1,12 @@
 package cn.com.sdcsoft.webapi.web.boilermanage.entity;
 
 
+import cn.com.sdcsoft.webapi.web.entity.IEmployee;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class User implements Serializable {
+public class User implements Serializable,IEmployee {
     private Integer id;
     private Integer orgId;
     private Integer employeeId;

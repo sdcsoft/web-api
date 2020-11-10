@@ -16,6 +16,9 @@ public interface Enterprise_DB_UserMapper {
     @Select("select * from User where EmployeeId=#{employeeId}")
     User findUserByEmployeeId(@Param("employeeId") Integer employeeId);
 
+    @Select("select * from User where OpenId=#{openId} or UnionId=#{openId}")
+    User findUserByOpenId(@Param("openId") String openId);
+
     @Select("select * from User where Id=#{userId}")
     User findUserById(@Param("userId") Integer userId);
 
@@ -29,8 +32,14 @@ public interface Enterprise_DB_UserMapper {
     void removeUser(@Param("id") Integer id);
 
     @Insert("insert into User (OrgId,EmployeeId,UserName) values (#{orgId},#{id},#{realName})")
-    void createUser(OrgUser user);
+    void createUser2(OrgUser user);
 
     @Insert("insert into User (OrgId,EmployeeId,UserName,RoleId,RoleName,Mark) values (#{orgId},#{id},#{realName},1,'系统管理员','系统内置管理员，不能被删除')")
     void createAdmin(OrgUser user);
+
+    @Insert("insert into User (OpenId,OrgId,EmployeeId,UserName) values (#{invCode},#{orgId},0,NULL)")
+    void createInvCode(String invCode,Integer orgId);
+
+    @Update("update User set OpenId=#{openId},UnionId=#{unionId},EmployeeId=#{employeeId},UserName=#{userName},Mark=#{mobile} where OpenId=#{invCode}")
+    int createUser(User user);
 }

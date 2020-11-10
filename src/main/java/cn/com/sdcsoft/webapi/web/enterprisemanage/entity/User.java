@@ -1,15 +1,45 @@
 package cn.com.sdcsoft.webapi.web.enterprisemanage.entity;
 
 
+import cn.com.sdcsoft.webapi.web.entity.IEmployee;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class User implements Serializable {
+public class User implements Serializable,IEmployee {
     private Integer id;
     private Integer orgId;
     private Integer employeeId;
     private String userName;
     private Integer roleId;
+    private String invCode;
+    private String openId;
+    private String unionId;
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
+
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+    public String getInvCode() {
+        return invCode;
+    }
+
+    public void setInvCode(String invCode) {
+        this.invCode = invCode;
+    }
+
 
     public Integer getRoleId() {
         return roleId;
@@ -71,6 +101,17 @@ public class User implements Serializable {
 
     public void setEmployeeId(Integer employeeId) {
         this.employeeId = employeeId;
+    }
+
+    private String mobile;
+    @Override
+    public String getMobile() {
+        return mobile;
+    }
+
+    @Override
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
 

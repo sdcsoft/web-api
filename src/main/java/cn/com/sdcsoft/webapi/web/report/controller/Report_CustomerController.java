@@ -3,6 +3,7 @@ package cn.com.sdcsoft.webapi.web.report.controller;
 
 import cn.com.sdcsoft.webapi.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
@@ -21,6 +22,7 @@ import java.util.*;
 public class Report_CustomerController {
 
     @Autowired
+    @Qualifier(value = "primaryMongoTemplate")
     private MongoTemplate mongoTemplate;
     //private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

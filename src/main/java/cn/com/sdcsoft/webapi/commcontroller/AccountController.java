@@ -5,8 +5,9 @@ import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_UserMapper;
+import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_UserMapper;
 import cn.com.sdcsoft.webapi.utils.WechatTokenCacheUtil;
-import cn.com.sdcsoft.webapi.web.boilermanage.entity.User;
+import cn.com.sdcsoft.webapi.web.entity.IEmployee;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -135,16 +136,7 @@ public class AccountController {
                 response);
     }
 
-    /**
-     * 微信端锅炉厂管理系统登录
-     *
-     * @param openId
-     * @param response
-     * @return
-     */
-    @PostMapping(value = "/wechat/customer/login")
-    public Result weChatCustomerLogin(String openId, HttpServletResponse response) {
-        User user = customerUserMapper.findUserByOpenId(openId);
+    private Result wechatScanBarcodeToLoginPcClient(IEmployee user,HttpServletResponse response){
         if (null == user) {
             return Result.getFailResult("系统中不存在当前用户信息！");
         }
@@ -161,23 +153,63 @@ public class AccountController {
     }
 
     /**
+     * 微信端锅炉厂管理系统登录
+     *
+     * @param openId
+     * @param response
+     * @return
+     */
+    @PostMapping(value = "/wechat/customer/login")
+    public Result wechatScanBarcodeToLoginCustomerPcClient(String openId, HttpServletResponse response) {
+        IEmployee user = customerUserMapper.findUserByOpenId(openId);
+        return wechatScanBarcodeToLoginPcClient(user,response);
+    }
+
+    /**
      * 用户身份识别
      *
      * @param openId 锅炉厂微信用户openid或uuid
      * @return
      */
     @RequestMapping("/wechat/customer/openid")
-    public Result findUserByOpenId(String openId) {
-        User user = customerUserMapper.findUserByOpenId(openId);
+    public Result findCustomerUserByOpenId(String openId) {
+        cn.com.sdcsoft.webapi.web.boilermanage.entity.User user = customerUserMapper.findUserByOpenId(openId);
         if (null != user) {
             return Result.getSuccessResult(user);
         } else {
             return Result.getFailResult("系统中不存在当前用户信息！");
         }
     }
-    @RequestMapping(value = "/hello")
-    public String hello() {
-        return "hello world.";
+
+    @Autowired
+    Enterprise_DB_UserMapper enterprise_db_userMapper;
+    /**
+     * 用户身份识别
+     *
+     * @param openId 锅炉厂微信用户openid或uuid
+     * @return
+     */
+    @RequestMapping("/wechat/enterprise/openid")
+    public Result findEnterpriseUserByOpenId(String openId) {
+        cn.com.sdcsoft.webapi.web.enterprisemanage.entity.User user = enterprise_db_userMapper.findUserByOpenId(openId);
+        if (null != user) {
+            return Result.getSuccessResult(user);
+        } else {
+            return Result.getFailResult("系统中不存在当前用户信息！");
+        }
+    }
+
+    /**
+     * 微信端锅炉厂管理系统登录
+     *
+     * @param openId
+     * @param response
+     * @return
+     */
+    @PostMapping(value = "/wechat/enterprise/login")
+    public Result wechatScanBarcodeToLoginEnterprisePcClient(String openId, HttpServletResponse response) {
+        IEmployee user = enterprise_db_userMapper.findUserByOpenId(openId);
+        return wechatScanBarcodeToLoginPcClient(user,response);
     }
 
 }

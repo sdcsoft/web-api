@@ -32,7 +32,7 @@ public class Boiler_UserController {
 //            if (null == orgUser.getRoleId() || 0 == orgUser.getRoleId()) {
 //                userService.createAdmin(orgUser);
 //            } else {
-//                userService.createUser(orgUser);
+//                userService.createUser2(orgUser);
 //            }
 //            return Result.getSuccessResult();
 //        }

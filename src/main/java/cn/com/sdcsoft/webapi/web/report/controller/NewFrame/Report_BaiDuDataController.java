@@ -5,6 +5,7 @@ import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_ProductMapper;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.Product;
 import cn.com.sdcsoft.webapi.web.report.controller.NewFrame.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -24,6 +25,7 @@ import java.util.Map;
 public class Report_BaiDuDataController {
 
     @Autowired
+    @Qualifier(value = "primaryMongoTemplate")
     private MongoTemplate mongoTemplate;
 
     @Autowired

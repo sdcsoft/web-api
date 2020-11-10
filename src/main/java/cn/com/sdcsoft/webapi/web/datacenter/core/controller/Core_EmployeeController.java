@@ -44,7 +44,7 @@ public class Core_EmployeeController extends BaseController {
 //            OrgUser resultEmployee = JSONObject.parseObject(obj.getString("data"), OrgUser.class);
 //            if (resultEmployee.getOrgType() == OrgType.ORG_TYPE_Boiler) {
 //                if (null == employee.getIsAdmin() || employee.getIsAdmin() == 0) {
-//                    boilerUserService.createUser(resultEmployee);
+//                    boilerUserService.createUser2(resultEmployee);
 //                } else {
 //                    boilerUserService.createAdmin(resultEmployee);
 //                }

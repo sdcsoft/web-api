@@ -78,7 +78,7 @@ public class BoilerManage_UserController {
      */
     @Auth
     @RequestMapping("/invcode/create")
-    public Result findUserByInvCode(String openId) {
+    public Result createInvcode(String openId) {
         try{
             User user = userMapper.findUserByOpenId(openId);
             if (null != user) {

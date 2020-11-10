@@ -11,7 +11,7 @@ public class EnterpriseUserService {
     Enterprise_DB_UserMapper userMapper;
 
     public void createUser(OrgUser user) {
-        userMapper.createUser(user);
+        userMapper.createUser2(user);
     }
 
     public void createAdmin(OrgUser user) {

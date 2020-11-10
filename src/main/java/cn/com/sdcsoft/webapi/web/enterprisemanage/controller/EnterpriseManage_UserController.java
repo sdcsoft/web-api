@@ -3,11 +3,15 @@ package cn.com.sdcsoft.webapi.web.enterprisemanage.controller;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.entity.Result;
+import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
+import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_ProductUserMapper;
 import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_ResourceMapper;
 import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_UserMapper;
 import cn.com.sdcsoft.webapi.web.enterprisemanage.entity.Role;
 import cn.com.sdcsoft.webapi.web.enterprisemanage.entity.User;
+import cn.com.sdcsoft.webapi.web.entity.OrgType;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +19,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 企业员工
  */
 @RestController
 @RequestMapping(value = "/webapi/enterprise/user", produces = "application/json;charset=utf-8")
-@Auth
 public class EnterpriseManage_UserController {
 
+    @Autowired
+    LAN_API lan_api;
     @Autowired
     private Enterprise_DB_ProductUserMapper productUserMapper;
     @Autowired
@@ -32,6 +38,7 @@ public class EnterpriseManage_UserController {
     @Autowired
     private Enterprise_DB_ResourceMapper resourceMapper;
 
+    @Auth
     @GetMapping("/info")
     public Result getUserInfo(Integer employeeId) {
         User user = userMapper.findUserByEmployeeId(employeeId);
@@ -48,6 +55,7 @@ public class EnterpriseManage_UserController {
         }
     }
 
+    @Auth
     @GetMapping("/find")
     public Result findUserInfo(Integer userId) {
         User user = userMapper.findUserById(userId);
@@ -63,6 +71,7 @@ public class EnterpriseManage_UserController {
     }
 
 
+    @Auth
     @PostMapping("/resources")
     public Result getUserResources(Integer employeeId) {
         User user = userMapper.findUserByEmployeeId(employeeId);
@@ -85,6 +94,7 @@ public class EnterpriseManage_UserController {
      * @param pageSize
      * @return
      */
+    @Auth
     @GetMapping("/list")
     public Result list(Integer pageNum, Integer pageSize, HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
@@ -104,6 +114,7 @@ public class EnterpriseManage_UserController {
      * @param user
      * @return
      */
+    @Auth
     @PostMapping("/modify")
     public Result modify(@RequestBody User user) {
         userMapper.modifyUser(user);
@@ -117,6 +128,7 @@ public class EnterpriseManage_UserController {
      * @param role
      * @return
      */
+    @Auth
     @PostMapping("/role/modify")
     public Result modifyUserRole(@RequestParam Integer userId, @RequestBody Role role) {
         userMapper.changeUserRole(userId, role.getId(), role.getRoleName());
@@ -129,6 +141,7 @@ public class EnterpriseManage_UserController {
      * @param id
      * @return
      */
+    @Auth
     @PostMapping(value = "/remove")
     public Result remove(@RequestParam int id, HttpServletRequest request) {
         User user = userMapper.findUserById(id);
@@ -143,6 +156,69 @@ public class EnterpriseManage_UserController {
         productUserMapper.clearUserMap(id);
         userMapper.removeUser(id);
         return Result.getSuccessResult();
+    }
+
+    /**
+     *  生成推荐码
+     * @param openId
+     * @return
+     */
+    @Auth
+    @RequestMapping("/invcode/create")
+    public Result createInvCode(String openId) {
+        try{
+            User user = userMapper.findUserByOpenId(openId);
+            if (null != user) {
+                if (null != user.getRoleId() && user.getRoleId() != Role.SYSTEM_ADMIN_ROLE_ID) {
+                    return Result.getFailResult("邀请码只允许超级管理员生成！");
+                }
+                String uuid = UUID.randomUUID().toString().replace("-", "");
+                userMapper.createInvCode(uuid,user.getOrgId());
+                return Result.getSuccessResult("",uuid);
+            } else {
+                return Result.getFailResult("系统中不存在该邀请码！");
+            }
+        }
+        catch (Exception ex){
+            return Result.getFailResult(ex.getMessage());
+        }
+    }
+
+    @RequestMapping("/create")
+    public Result create(@RequestBody cn.com.sdcsoft.webapi.web.enterprisemanage.entity.User user) {
+        try {
+            User u = userMapper.findUserByOpenId(user.getInvCode());
+            if (null == u) {
+                return Result.getFailResult("系统中不存在该邀请码！");
+            }
+
+            Employee employee = new Employee();
+            employee.setOrgType(OrgType.ORG_TYPE_Enterprise);
+            employee.setOrgId(u.getOrgId());
+            employee.setPassword(user.getMobile());
+            employee.setMobile(user.getMobile());
+            employee.setEmail(user.getMobile());
+            employee.setStatus(Employee.STATUS_ENABLE);
+            employee.setRealName(user.getUserName());
+            employee.setUnionId(user.getUnionId());
+
+            String str = lan_api.employeeCreate(employee);
+            JSONObject obj = JSONObject.parseObject(str);
+            if (Result.RESULT_CODE_SUCCESS == obj.getIntValue("code")) {
+                JSONObject data = obj.getJSONObject("data");
+                Integer employeeId = data.getInteger("id");
+                user.setEmployeeId(employeeId);
+                int count = userMapper.createUser(user);
+                if (1 == count) {
+                    return Result.getSuccessResult(employeeId);
+                }
+                return Result.getFailResult("用户创建失败！");
+            } else {
+                return Result.getFailResult("Core用户创建失败！");
+            }
+        } catch (Exception ex) {
+            return Result.getFailResult(ex.getMessage());
+        }
     }
 
 
