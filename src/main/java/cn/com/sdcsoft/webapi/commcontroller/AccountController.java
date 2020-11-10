@@ -5,13 +5,16 @@ import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_UserMapper;
+import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_UserMapper;
 import cn.com.sdcsoft.webapi.utils.WechatTokenCacheUtil;
 import cn.com.sdcsoft.webapi.web.boilermanage.entity.User;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.web.bind.annotation.*;
-import com.alibaba.fastjson.JSONObject;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +44,7 @@ public class AccountController {
 
     @Autowired
     Customer_DB_UserMapper customerUserMapper;
+
 
     @Autowired
     WechatTokenCacheUtil cacheUtil;
@@ -135,6 +139,7 @@ public class AccountController {
                 response);
     }
 
+
     /**
      * 微信端锅炉厂管理系统登录
      *
@@ -159,7 +164,6 @@ public class AccountController {
             return Result.getFailResult("core系统中不存在当前用户信息！");
         }
     }
-
     /**
      * 用户身份识别
      *
