@@ -17,4 +17,8 @@ public class Wechat_IccidController {
     public String getIccid() {
         return wechat_db_iccidMapper.getIccid().getIccid();
     }
+    @GetMapping(value = "/version")
+    public String getVersion() {
+        return wechat_db_iccidMapper.getIccid().getVersion();
+    }
 }
