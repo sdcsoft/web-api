@@ -5,7 +5,6 @@ import cn.com.sdcsoft.webapi.entity.Result;
 import cn.com.sdcsoft.webapi.entity.datacenter.Employee;
 import cn.com.sdcsoft.webapi.fegins.datacore.LAN_API;
 import cn.com.sdcsoft.webapi.mapper.Customer_DB.Customer_DB_UserMapper;
-import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_UserMapper;
 import cn.com.sdcsoft.webapi.utils.WechatTokenCacheUtil;
 import cn.com.sdcsoft.webapi.web.entity.IEmployee;
 import com.alibaba.fastjson.JSON;
