@@ -24,7 +24,12 @@ public class DeviceIdService {
             Result result = api.deviceIdList();
             if (Result.RESULT_CODE_SUCCESS == result.getCode()) {
                 List<String> list = (List<String>) result.getData();
-                systemDeviceIds = new HashSet<>(list);
+                if(null != list && list.size()>0){
+                    systemDeviceIds = new HashSet<>(list);
+                }
+                else{
+                    systemDeviceIds = Collections.emptySet();
+                }
             }
         } catch (Exception e) {
             systemDeviceIds = Collections.emptySet();

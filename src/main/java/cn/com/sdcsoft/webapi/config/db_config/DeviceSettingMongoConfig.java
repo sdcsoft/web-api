@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.config;
+package cn.com.sdcsoft.webapi.config.db_config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -7,10 +7,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 @Configuration
 @ConfigurationProperties(prefix = "spring.data.mongodb.devicesetting")
-public class DtuSettingMongoConfig extends  AbstractMongoConfig{
+public class DeviceSettingMongoConfig extends AbstractMongoConfig {
 
     @Override
-    @Bean(name = "dtuSettingMongoTemplate")
+    @Bean(name = "deviceSettingMongoTemplate")
     public MongoTemplate getMongoTemplate() throws Exception {
         return new MongoTemplate(mongoDatabaseFactory());
     }

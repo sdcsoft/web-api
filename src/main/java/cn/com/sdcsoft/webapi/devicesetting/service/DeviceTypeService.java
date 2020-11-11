@@ -13,7 +13,7 @@ import java.util.List;
 public class DeviceTypeService {
 
     @Autowired
-    @Qualifier(value = "dtuSettingMongoTemplate")
+    @Qualifier(value = "deviceSettingMongoTemplate")
     private MongoTemplate mongoTemplate;
 
     public List<DeviceType> list(){

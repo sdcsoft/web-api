@@ -15,7 +15,7 @@ import java.util.List;
 public class DeviceMapService {
 
     @Autowired
-    @Qualifier(value = "dtuSettingMongoTemplate")
+    @Qualifier(value = "deviceSettingMongoTemplate")
     private MongoTemplate mongoTemplate;
 
     public boolean remove(String id) {

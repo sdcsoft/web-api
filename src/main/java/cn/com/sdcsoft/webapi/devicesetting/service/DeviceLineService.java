@@ -14,7 +14,7 @@ import java.util.List;
 public class DeviceLineService {
 
     @Autowired
-    @Qualifier(value = "dtuSettingMongoTemplate")
+    @Qualifier(value = "deviceSettingMongoTemplate")
     private MongoTemplate mongoTemplate;
 
     public List<DeviceLine> list(String factoryName){

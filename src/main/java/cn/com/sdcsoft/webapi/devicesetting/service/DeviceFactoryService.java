@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 @Service
 public class DeviceFactoryService {
     @Autowired
-    @Qualifier(value = "dtuSettingMongoTemplate")
+    @Qualifier(value = "deviceSettingMongoTemplate")
     private MongoTemplate mongoTemplate;
 
     public List<DeviceFactory> list(){

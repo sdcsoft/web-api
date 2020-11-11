@@ -1,4 +1,4 @@
-package cn.com.sdcsoft.webapi.config;
+package cn.com.sdcsoft.webapi.config.db_config;
 
 
 import com.mongodb.MongoClientURI;

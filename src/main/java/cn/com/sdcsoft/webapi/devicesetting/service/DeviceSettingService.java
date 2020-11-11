@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class DeviceSettingService {
 
     @Autowired
-    @Qualifier(value = "dtuSettingMongoTemplate")
+    @Qualifier(value = "deviceSettingMongoTemplate")
     private MongoTemplate mongoTemplate;
 
 

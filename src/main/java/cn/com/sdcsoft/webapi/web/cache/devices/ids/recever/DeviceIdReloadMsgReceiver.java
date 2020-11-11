@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
  * 消息格式：设备编号-操作
  * 操作：add新增 del删除
  */
-@Component
+//@Component
 public class DeviceIdReloadMsgReceiver {
     private static final String ADD = "ADD";
     private static final String DEL = "DEL";
@@ -19,8 +19,8 @@ public class DeviceIdReloadMsgReceiver {
     @Autowired
     DeviceIdService service;
 
-    @RabbitListener(queues = "${reload.queue}")
-    @RabbitHandler
+    //@RabbitListener(queues = "${reload.queue}")
+    //@RabbitHandler
     public void process(String msg) {
         try {
             if (!StringUtils.isEmpty(msg)) {

@@ -24,7 +24,7 @@ spring:
     mongodb:
       primary:
         uri: mongodb://tomcat:80201288@127.0.0.1:27077/test_db?authSource=admin
-      dtusetting:
+      devicesetting:
         uri: mongodb://tomcat:80201288@127.0.0.1:27077/deviceDb?authSource=admin
   rabbitmq:
     base:

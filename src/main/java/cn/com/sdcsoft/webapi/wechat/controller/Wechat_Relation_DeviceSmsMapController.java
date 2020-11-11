@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class Wechat_Relation_DeviceSmsMapController {
     @Autowired
     private Wechat_DB_Relation_DeviceSmsMapMapper wechat_db_relation_deviceSmsMapMapper;
     @Autowired
+    @Resource(name = "baseRabbitTemplate")
     private RabbitTemplate rabbitTemplate;
 
 
