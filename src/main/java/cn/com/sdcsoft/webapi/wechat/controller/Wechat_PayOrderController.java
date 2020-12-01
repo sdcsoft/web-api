@@ -33,13 +33,13 @@ public class Wechat_PayOrderController {
     private Wechat_DB_JinRong_OrderMapper wechat_db_jinRong_orderMapper;
 
     @PostMapping(value = "/createPayOrder")
-    public JSONObject createPayOrder(String openId,String money,String orderNo,HttpServletRequest request) {
+    public JSONObject createPayOrder(String openId,String money,String orderNo,String title,HttpServletRequest request) {
         JSONObject json = new JSONObject();
         try{
             //生成的随机字符串
             String nonce_str = WeChatPayUtil.getRandomStringByLength(32);
             //商品名称
-            String body = new String(WeChatPayConfig.title.getBytes("UTF-8"),"UTF-8");
+            String body = new String(title.getBytes("UTF-8"),"UTF-8");
             //获取本机的ip地址
             String spbill_create_ip = WeChatPayUtil.getIpAddr(request);
 

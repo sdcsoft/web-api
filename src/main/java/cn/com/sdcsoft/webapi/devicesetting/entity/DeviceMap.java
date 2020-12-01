@@ -18,7 +18,7 @@ public class DeviceMap {
     private String id;
 
     private String deviceType,deviceFactory,deviceLine,deviceAttr,title,pointIndexMap,deviceDataMap;
-    private int deviceDataLength,status;
+    private int deviceDataLength,status,share;
     private Date createDatetime;
     private List<String> otherCommands,params;
     private List<ModbusSetting> modbusSettings;
@@ -30,6 +30,14 @@ public class DeviceMap {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getShare() {
+        return share;
+    }
+
+    public void setShare(int share) {
+        this.share = share;
     }
 
     public String getDeviceType() {

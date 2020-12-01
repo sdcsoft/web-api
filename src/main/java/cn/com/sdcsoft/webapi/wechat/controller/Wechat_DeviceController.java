@@ -62,6 +62,36 @@ public class Wechat_DeviceController {
         map.put("grant_type","authorization_code");
         return wxClient.post(map);
     }
+    @GetMapping(value = "setting/getUnionId")
+    public Result getSettingUnionId(String encryptedData, String iv, String code) {
+        if (code == null || code.length() == 0) {
+            return Result.getFailResult("code 不能为空");
+        }
+        TemplateClient wxClient = Feign.builder().target(TemplateClient.class, String.format("%s%s", wxOpenIdUrl, "/sns/jscode2session"));
+        Map<String, String> map = new HashMap<>();
+        map.put("appid", "wxf3acea9614a59f27");
+        map.put("secret", "8af2e4972936db2cf752d42a25579701");
+        map.put("js_code", code);
+        map.put("grant_type", "authorization_code");
+        JSONObject json = JSONObject.parseObject(wxClient.post(map));
+        String session_key = json.get("session_key").toString();
+        Map<String, String> data = new HashMap<>();
+        String openid = (String) json.get("openid");
+        data.put("openid", openid);
+        try {
+            String result = AesCbcUtil.decrypt(encryptedData, session_key, iv, "UTF-8");
+            if (null != result && result.length() > 0) {
+                JSONObject json1 = JSONObject.parseObject(result);
+                String unionid = (String) json1.get("unionId");
+                data.put("unionId", unionid);
+            } else {
+                return Result.getFailResult("解密失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.getSuccessResult(data);
+    }
 
     @GetMapping(value = "/getUnionId")
     public Result getUnionId(String encryptedData, String iv, String code) {
