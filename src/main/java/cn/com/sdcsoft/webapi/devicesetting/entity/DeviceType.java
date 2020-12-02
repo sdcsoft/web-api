@@ -11,15 +11,6 @@ public class DeviceType {
 
     private String typeName;
 
-    private String deviceFactory;
-
-    public String getDeviceFactory() {
-        return deviceFactory;
-    }
-
-    public void setDeviceFactory(String deviceFactory) {
-        this.deviceFactory = deviceFactory;
-    }
 
 
     public String getId() {

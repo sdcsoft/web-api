@@ -45,7 +45,8 @@ public interface Wechat_DB_Role_ResourceMapper {
 
     @Update("update Role_Resource set OpenId=#{openId},ResId=#{resId},DueTime=#{dueTime} where OpenId = #{openId} and DeviceNo = #{deviceNo} ")
     int updateRole_Resource(Role_Resource role_resource);
-
+    @Update("update Role_Resource set DueTime=#{dueTime} where OpenId = #{openId} and DeviceNo = #{deviceNo} ")
+    int updateRole_ResourceDueTime(Role_Resource role_resource);
     @Update("update Role_Resource set OpenId=#{openId},ResId=#{resId},DueTime=#{dueTime} where Id = #{id}")
     int updateRole_ResourceById(Role_Resource role_resource);
 

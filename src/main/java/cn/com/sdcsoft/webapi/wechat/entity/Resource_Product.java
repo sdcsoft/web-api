@@ -3,7 +3,7 @@ package cn.com.sdcsoft.webapi.wechat.entity;
 import java.io.Serializable;
 
 public class Resource_Product implements Serializable {
-    private Integer id,resourceId,rangeType,range;
+    private Integer id,resourceId,rangeType,range,members;
     private String resourceName;
     private float price;
 
@@ -13,6 +13,14 @@ public class Resource_Product implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getMembers() {
+        return members;
+    }
+
+    public void setMembers(Integer members) {
+        this.members = members;
     }
 
     public Integer getResourceId() {
