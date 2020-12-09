@@ -21,8 +21,8 @@ public interface TemplateClient {
     String post(@QueryMap Map<String, String> map);
 
     @RequestLine("POST")
-    String post(@QueryMap Map<String, String> map, @HeaderMap Map<String, String> hmap);
-
+    String post(@QueryMap Map<String, String> map, @HeaderMap  Map<String, String> hmap);
+    
     @RequestLine("POST")
     byte[] getBytes();
 

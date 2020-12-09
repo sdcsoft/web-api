@@ -50,4 +50,5 @@ public class DeviceMapService {
         Query query = new Query(Criteria.where(DeviceMap.FIELD_ID).is(id));
         return mongoTemplate.findOne(query,DeviceMap.class);
     }
+
 }

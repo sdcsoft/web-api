@@ -16,6 +16,11 @@ public class DeviceMapController {
     @Autowired
     DeviceMapService deviceMapService;
 
+    @RequestMapping("/deviceMapId")
+    public Result listDeviceMapId(String deviceMapId){
+
+        return Result.getSuccessResult(deviceMapService.get(deviceMapId));
+    }
     @RequestMapping("/list")
     public Result listAttr(String deviceType,String deviceFactory,String deviceLine,String deviceAttr){
         if(StringUtils.isEmpty(deviceType)){
@@ -32,7 +37,6 @@ public class DeviceMapController {
         }
         return Result.getSuccessResult(deviceMapService.find(deviceType,deviceFactory,deviceLine,deviceAttr));
     }
-
     @PostMapping(value = {"/create","/save"})
     public Result create(DeviceMap map){
         try{

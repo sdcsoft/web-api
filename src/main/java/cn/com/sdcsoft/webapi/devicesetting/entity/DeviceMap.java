@@ -18,11 +18,19 @@ public class DeviceMap {
     private String id;
 
     private String deviceType,deviceFactory,deviceLine,deviceAttr,title,pointIndexMap,deviceDataMap;
-    private int deviceDataLength,status,share;
+    private int deviceDataLength,status,share,deviceMapId;
     private Date createDatetime;
     private List<String> otherCommands,params;
     private List<ModbusSetting> modbusSettings;
     private String author;
+
+    public int getDeviceMapId() {
+        return deviceMapId;
+    }
+
+    public void setDeviceMapId(int deviceMapId) {
+        this.deviceMapId = deviceMapId;
+    }
 
     public String getId() {
         return id;
