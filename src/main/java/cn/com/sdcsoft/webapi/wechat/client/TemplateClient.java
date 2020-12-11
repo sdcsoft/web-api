@@ -22,7 +22,7 @@ public interface TemplateClient {
 
     @RequestLine("POST")
     String post(@QueryMap Map<String, String> map, @HeaderMap  Map<String, String> hmap);
-    
+
     @RequestLine("POST")
     byte[] getBytes();
 

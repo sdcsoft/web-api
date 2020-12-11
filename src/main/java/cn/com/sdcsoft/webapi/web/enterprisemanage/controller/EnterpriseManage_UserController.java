@@ -184,6 +184,16 @@ public class EnterpriseManage_UserController {
         }
     }
 
+
+    @RequestMapping("/find/openId")
+    public Result find(String openId) {
+        User user = userMapper.findUserByOpenId(openId);
+        if (null != user) {
+            return Result.getSuccessResult();
+        } else {
+            return Result.getFailResult("");
+        }
+    }
     @RequestMapping("/create")
     public Result create(@RequestBody cn.com.sdcsoft.webapi.web.enterprisemanage.entity.User user) {
         try {
