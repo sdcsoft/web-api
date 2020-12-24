@@ -27,5 +27,10 @@ public class Wechat_UserAddDeviceHistoryController {
     public Result getUserAddDeviceHistoryByDeviceNoAndOpenId(String deviceNo,String openId ) {
         return Result.getSuccessResult(wechat_db_User_addDeviceHistoryMapper.getUserAddDeviceHistoryListByDeviceNoAndOpenId(deviceNo,openId));
     }
+
+    @GetMapping(value = "/find/openId")
+    public Result getUserAddDeviceHistoryByOpenId(String openId ) {
+        return Result.getSuccessResult(wechat_db_User_addDeviceHistoryMapper.getUserAddDeviceHistoryListByOpenId(openId));
+    }
 }
 

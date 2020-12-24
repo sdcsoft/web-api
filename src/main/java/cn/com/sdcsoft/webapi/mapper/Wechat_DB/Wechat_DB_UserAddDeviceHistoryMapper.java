@@ -18,4 +18,7 @@ public interface Wechat_DB_UserAddDeviceHistoryMapper {
     @Select("select * from UserAddDeviceHistory where DeviceNo=#{deviceNo} and OpenId=#{openId}")
     List<UserAddDeviceHistory> getUserAddDeviceHistoryListByDeviceNoAndOpenId(@Param("deviceNo") String deviceNo, @Param("openId") String openId);
 
+    @Select("select * from UserAddDeviceHistory where  OpenId=#{openId}")
+    List<UserAddDeviceHistory> getUserAddDeviceHistoryListByOpenId(@Param("openId") String openId);
+
 }
