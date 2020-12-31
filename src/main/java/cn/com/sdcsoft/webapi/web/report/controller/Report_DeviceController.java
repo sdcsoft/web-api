@@ -1,5 +1,6 @@
 package cn.com.sdcsoft.webapi.web.report.controller;
 
+import cn.com.sdcsoft.webapi.commcontroller.ExportExcelController;
 import cn.com.sdcsoft.webapi.entity.Result;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -31,7 +32,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping(value = "/webapi/report/device")
-public class Report_DeviceController {
+public class Report_DeviceController extends ExportExcelController {
 
     @Autowired
     @Qualifier(value = "primaryMongoTemplate")
@@ -353,12 +354,5 @@ public class Report_DeviceController {
 
     }
 
-    private void exportExcelDocument(String filename,HSSFWorkbook workbook,HttpServletResponse response) throws Exception{
-        response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(filename, "utf-8")+".xls");
-        OutputStream outputStream = response.getOutputStream();
-        workbook.write(outputStream);
-        outputStream.flush();
-        outputStream.close();
-    }
+
 }
