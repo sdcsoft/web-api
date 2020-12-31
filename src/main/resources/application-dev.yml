@@ -41,7 +41,7 @@ eureka:
     prefer-ip-address: true
     ip-address: 127.0.0.1
 cloud:
-  lan-api: LAN-API
+  lan-api: LAN-API2
 server:
   port: 8088
 token:

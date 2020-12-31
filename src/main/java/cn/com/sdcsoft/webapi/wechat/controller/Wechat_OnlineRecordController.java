@@ -23,5 +23,14 @@ public class Wechat_OnlineRecordController {
         wechat_db_onlineRecordMapper.insertOnlineRecord(onlineRecord);
         return Result.getSuccessResult();
     }
+    @GetMapping(value = "/tracking")
+    public Result tracking( ) {
+        return Result.getSuccessResult(wechat_db_onlineRecordMapper.OnlineRecordByUser());
+    }
+
+    @GetMapping(value = "/find/openId")
+    public Result OnlineRecordByOpenId(String openId) {
+        return Result.getSuccessResult(wechat_db_onlineRecordMapper.OnlineRecordByOpenId(openId));
+    }
 }
 
