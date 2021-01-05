@@ -29,7 +29,10 @@ public class Wechat_EmployeeController {
         // TODO ......
         return result;
     }
-
+    @GetMapping(value = "/find/unionId")
+    public Result getUnionId(String unionId) {
+        return lan_api.employeeFindWechat2(unionId);
+    }
     @GetMapping(value = "/getSoldPermissions")
     public int getSoldPermissions(String openid) {
         List<Relation_DevicePermissionMap> list = relation_devicePermissionMapMapper.getRelation_DevicePermissionMapListByOpenId(openid);
