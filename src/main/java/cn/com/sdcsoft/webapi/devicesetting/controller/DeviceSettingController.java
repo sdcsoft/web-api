@@ -92,8 +92,8 @@ public class DeviceSettingController {
                 ModbusSetting ms = modbusSettingList.get(i);
                 int action = Integer.parseInt(ms.getAction());
                 int address = Integer.parseInt(ms.getStartAddress());
-                int addr1 = (byte) (address & 0xff);
-                int addr2 = (byte) ((address >> 8) & 0xff);
+                int addr1 = address & 0xff;
+                int addr2 = (address >> 8) & 0xff;
                 int length = ms.getLength();
                 int len1 = (byte) (length & 0xff);
                 int len2 = (byte) ((length >> 8) & 0xff);
@@ -110,6 +110,9 @@ public class DeviceSettingController {
                 String cmd = String.format("AT+LOCALCMD=%d,%02X%02X%04X%04X%04X#",
                         i,stationNo,action,address,length,crc);
                 cmds.add(cmd);
+            }
+            if(cmds.size() < 20){
+                cmds.add(String.format("AT+LOCALCMD=%d,#",cmds.size()));
             }
             String modbusCommandString = String.join(";",cmds);
             String settingString = String.format("%s;%s",modbusCommandString,otherCommandString);
