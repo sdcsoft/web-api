@@ -17,9 +17,10 @@ spring:
       password: Test@163.com
   data:
     mongodb:
-      uri: mongodb://tomcat:80201288@172.17.201.251:27017/
-      authentication-database: admin
-      database: test_db
+      primary:
+        uri: mongodb://tomcat:80201288@172.17.201.251:27017/test_db?authSource=admin
+      devicesetting:
+        uri: mongodb://tomcat:80201288@172.17.201.251:27017/deviceDb?authSource=admin
   rabbitmq:
     base:
       host: 192.168.0.110

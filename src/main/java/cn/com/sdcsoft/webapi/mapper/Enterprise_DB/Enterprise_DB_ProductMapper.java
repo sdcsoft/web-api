@@ -164,14 +164,13 @@ public interface Enterprise_DB_ProductMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "Id")
     void createProduct(Product product);
 
-    @Update("update Product set BoilerNo=#{boilerNo},ProductCategoryId=#{productCategoryId}, TonnageNum=#{tonnageNum},Media=#{media}," +
-            "Power=#{power},IsSell=#{isSell},SaleDate=DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d'),Longitude=#{longitude},Latitude=#{latitude},Province=#{province},City=#{city}," +
-            "District=#{district},Street=#{street},EditDateTime=#{editDateTime},CustomerId=#{customerId}" +
+    @Update("update Product set BoilerNo=#{boilerNo}, TonnageNum=#{tonnageNum}," +
+            "SaleDate=DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d')," +
+            "EditDateTime=#{editDateTime},CustomerId=#{customerId},CustomerName=#{customerName}" +
             " where Id=#{id}")
     void modifyProductInfo(Product Product);
 
-    @Update("update Product set IsSell=#{isSell},SaleDate=DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d'),Longitude=#{longitude},Latitude=#{latitude},Province=#{province},City=#{city}," +
-            "District=#{district},Street=#{street},EditDateTime=#{editDateTime},CustomerId=#{customerId},CustomerName=#{customerName} where Id=#{id}")
+    @Update("update Product set Longitude=#{longitude},Latitude=#{latitude} where Id=#{id}")
     void modifyProductSellInfo(Product product);
 
     @Delete("delete from Product where Id =#{id}")
