@@ -23,6 +23,10 @@ public class EnterpriseProductService {
     Enterprise_DB_RoleMapper roleMapper;
 
 
+    public boolean checkProduct(String controllerNo) {
+        return productMapper.CountControllerAmount(controllerNo) == 0;
+    }
+
     /**
      * 管理员创建产品
      *
