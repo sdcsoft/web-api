@@ -189,7 +189,7 @@ public class EnterpriseManage_UserController {
     public Result find(String openId) {
         User user = userMapper.findUserByOpenId(openId);
         if (null != user) {
-            return Result.getSuccessResult();
+            return Result.getSuccessResult(user);
         } else {
             return Result.getFailResult("");
         }
