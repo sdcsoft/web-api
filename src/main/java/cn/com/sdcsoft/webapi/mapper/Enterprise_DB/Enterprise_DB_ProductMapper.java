@@ -151,6 +151,9 @@ public interface Enterprise_DB_ProductMapper {
     @Select("Select Count(*) as Amount from Product where ControllerNo = #{controllerNo}")
     int CountControllerAmount(String controllerNo);
 
+    @Select("SELECT DISTINCT BoilerNo as CategoryName FROM Product where OrgId=#{orgId} and BoilerNo is NULL")
+    List<String> getProductCategories(@Param("orgId") int orgId);
+
     @Insert("INSERT into Product(OrgId,BoilerNo,ControllerNo,TonnageNum,Media,Power,IsSell,SaleDate,Longitude,Latitude,Province,City,District,Street,CreateDateTime,EditDateTime,CustomerId,CustomerName) " +
             " VALUES(#{orgId},#{boilerNo},#{controllerNo},#{tonnageNum},#{media},#{power},#{isSell},DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d'),#{longitude},#{latitude},#{province},#{city}," +
             "#{district},#{street},#{createDateTime},#{editDateTime},#{customerId},#{customerName})")

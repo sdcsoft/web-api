@@ -3,7 +3,7 @@ package cn.com.sdcsoft.webapi.web.enterprisemanage.controller;
 import cn.com.sdcsoft.webapi.annotation.Auth;
 import cn.com.sdcsoft.webapi.commservice.CookieService;
 import cn.com.sdcsoft.webapi.entity.Result;
-import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_ProductCategoryMapper;
+import cn.com.sdcsoft.webapi.mapper.Enterprise_DB.Enterprise_DB_ProductMapper;
 import cn.com.sdcsoft.webapi.web.enterprisemanage.entity.ProductCategory;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -22,7 +22,7 @@ import java.util.List;
 public class EnterpriseManage_ProductCategoryController {
 
     @Autowired
-    private Enterprise_DB_ProductCategoryMapper productCategoryMapper;
+    private Enterprise_DB_ProductMapper productCategoryMapper;
 
 
     /**
@@ -37,7 +37,7 @@ public class EnterpriseManage_ProductCategoryController {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
 
         PageHelper.startPage(pageNum, pageSize);
-        List<ProductCategory> list = productCategoryMapper.findProductCategory(orgId);
+        List<String> list = productCategoryMapper.getProductCategories(orgId);
         PageInfo pageInfo = new PageInfo(list);
         return Result.getSuccessResult(pageInfo);
 
@@ -52,7 +52,7 @@ public class EnterpriseManage_ProductCategoryController {
     @GetMapping(value = "/list")
     public Result list(HttpServletRequest request) {
         Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
-        return Result.getSuccessResult(productCategoryMapper.findProductCategory(orgId));
+        return Result.getSuccessResult(productCategoryMapper.getProductCategories(orgId));
     }
 
     /**
@@ -63,11 +63,11 @@ public class EnterpriseManage_ProductCategoryController {
      */
     @PostMapping("/create")
     public Result create(@RequestBody ProductCategory productCategory, HttpServletRequest request) {
-        Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
-
-        productCategory.setOrgId(orgId);
-        productCategoryMapper.createProductCategory(productCategory);
-        return Result.getSuccessResult();
+//        Integer orgId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_OrgID).toString());
+//
+//        productCategory.setOrgId(orgId);
+//        productCategoryMapper.createProductCategory(productCategory);
+        return Result.getFailResult("不支持手动创建分类！");
     }
 
 
@@ -79,8 +79,8 @@ public class EnterpriseManage_ProductCategoryController {
      */
     @PostMapping("/modify")
     public Result modify(@RequestBody ProductCategory productCategory) {
-        productCategoryMapper.modifyProductCategory(productCategory);
-        return Result.getSuccessResult();
+        //productCategoryMapper.modifyProductCategory(productCategory);
+        return Result.getFailResult("不支持修改分类！");
     }
 
     /**
@@ -91,10 +91,11 @@ public class EnterpriseManage_ProductCategoryController {
      */
     @PostMapping(value = "/deleteboilermodelbyid")
     public Result deleteBoilerModelById(@RequestParam int id) {
-        if (0 < productCategoryMapper.checkProductCountOfTheCategory(id))
-            return Result.getFailResult("不能删除正在被使用的数据！");
-
-        productCategoryMapper.removeById(id);
-        return Result.getSuccessResult();
+        return Result.getFailResult("不支持删除分类！");
+//        if (0 < productCategoryMapper.checkProductCountOfTheCategory(id))
+//            return Result.getFailResult("不能删除正在被使用的数据！");
+//
+//        productCategoryMapper.removeById(id);
+//        return Result.getSuccessResult();
     }
 }
