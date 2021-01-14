@@ -17,7 +17,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableFeignClients
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @EnableCaching
-@SpringBootApplication(exclude={MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
+@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class} )
 @EnableConfigurationProperties({PrimaryMongoConfig.class,DeviceSettingMongoConfig.class})
 public class WebApiApplication {
 
