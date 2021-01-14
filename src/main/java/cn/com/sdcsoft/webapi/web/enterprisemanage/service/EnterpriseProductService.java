@@ -39,6 +39,16 @@ public class EnterpriseProductService {
     }
 
     /**
+     * 重新配置设备信息
+     * @param product
+     * @return
+     */
+    public boolean resetProduct(Product product) {
+        productMapper.resetProductInfo(product);
+        return true;
+    }
+
+    /**
      * 普通员工创建产品
      *
      * @param product

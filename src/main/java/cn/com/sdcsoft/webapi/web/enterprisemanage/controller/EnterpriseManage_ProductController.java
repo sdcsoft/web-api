@@ -150,9 +150,10 @@ public class EnterpriseManage_ProductController {
         if (Result.RESULT_CODE_FAIL == result.getCode()) {
             return result;
         }
-        //检查是否已经有了该设备
+        //检查是否已经有了该设备,有的话进行重配而不是再次创建
         if(!enterpriseProductService.checkProduct(product.getControllerNo())){
-            Result.getFailResult(String.format("%s对应的设备已存在！",product.getControllerNo()));
+            enterpriseProductService.resetProduct(product);
+            return Result.getSuccessResult();
         }
         product.setOrgId(orgId);
         Integer employeeId = Integer.parseInt(request.getAttribute(CookieService.USER_INFO_FIELD_NAME_EmployeeID).toString());

@@ -151,17 +151,21 @@ public interface Enterprise_DB_ProductMapper {
     @Select("Select Count(*) as Amount from Product where ControllerNo = #{controllerNo}")
     int CountControllerAmount(String controllerNo);
 
-    @Insert("INSERT into Product(OrgId,BoilerNo,ProductCategoryId,ControllerNo,TonnageNum,Media,Power,IsSell,SaleDate,Longitude,Latitude,Province,City,District,Street,CreateDateTime,EditDateTime,CustomerId,CustomerName) " +
-            " VALUES(#{orgId},#{boilerNo},#{productCategoryId},#{controllerNo},#{tonnageNum},#{media},#{power},#{isSell},DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d'),#{longitude},#{latitude},#{province},#{city}," +
+    @Insert("INSERT into Product(OrgId,BoilerNo,ControllerNo,TonnageNum,Media,Power,IsSell,SaleDate,Longitude,Latitude,Province,City,District,Street,CreateDateTime,EditDateTime,CustomerId,CustomerName) " +
+            " VALUES(#{orgId},#{boilerNo},#{controllerNo},#{tonnageNum},#{media},#{power},#{isSell},DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d'),#{longitude},#{latitude},#{province},#{city}," +
             "#{district},#{street},#{createDateTime},#{editDateTime},#{customerId},#{customerName})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "Id")
     void createProduct(Product product);
 
-    @Update("update Product set BoilerNo=#{boilerNo}, TonnageNum=#{tonnageNum}," +
+    @Update("update Product set TonnageNum=#{tonnageNum}," +
             "SaleDate=DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d')," +
             "EditDateTime=#{editDateTime},CustomerId=#{customerId},CustomerName=#{customerName}" +
             " where Id=#{id}")
     void modifyProductInfo(Product Product);
+
+    @Update("update Product set BoilerNo=#{boilerNo},Media=#{media},Power=#{power}" +
+            " where Id=#{id}")
+    void resetProductInfo(Product Product);
 
     @Update("update Product set Longitude=#{longitude},Latitude=#{latitude} where Id=#{id}")
     void modifyProductSellInfo(Product product);
