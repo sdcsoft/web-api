@@ -33,8 +33,7 @@ public class WeChatController {
 
     @Autowired
     WechatTokenCacheUtil cacheUtil;
-
-    @GetMapping(value = "/customer/login")
+    @GetMapping(value={"/customer/login","/scan/login"})
     public void customerhLogin(HttpServletResponse response, String url) throws IOException {
          String redirect_url = "https://apis.sdcsoft.com.cn/wechat/customer/callback?url=" + url;
         String appId = "wx1c8926294bed5c78";
