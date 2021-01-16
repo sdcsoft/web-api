@@ -23,6 +23,10 @@ public class EnterpriseProductService {
     Enterprise_DB_RoleMapper roleMapper;
 
 
+    public boolean checkProduct(String controllerNo) {
+        return productMapper.CountControllerAmount(controllerNo) == 0;
+    }
+
     /**
      * 管理员创建产品
      *
@@ -31,6 +35,16 @@ public class EnterpriseProductService {
      */
     public boolean createProduct(Product product) {
         productMapper.createProduct(product);
+        return true;
+    }
+
+    /**
+     * 重新配置设备信息
+     * @param product
+     * @return
+     */
+    public boolean resetProduct(Product product) {
+        productMapper.resetProductInfo(product);
         return true;
     }
 

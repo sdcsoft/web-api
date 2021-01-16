@@ -25,7 +25,6 @@ public interface Enterprise_DB_ProductMapper {
     Product findProductByorgId(@Param("orgId") Integer orgId, @Param("controllerNo") String controllerNo);
     @Select("<script>" +
             "select pt.* from Product pt " +
-            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
             "left join Customer c on pt.CustomerId=c.Id " +
             "<where>" +
             "pt.OrgId=#{orgId} " +
@@ -43,9 +42,6 @@ public interface Enterprise_DB_ProductMapper {
             "</if>" +
             "<if test='product.boilerNo != null and product.boilerNo.length>0'> " +
             " AND BoilerNo LIKE CONCAT('%',#{product.boilerNo},'%') " +
-            "</if>" +
-            "<if test='product.productCategoryId != null'> " +
-            " AND ProductCategoryId=#{product.productCategoryId} " +
             "</if>" +
             "<if test='product.controllerNo != null and product.controllerNo.length>0'> " +
             " AND ControllerNo LIKE CONCAT('%',#{product.controllerNo},'%') " +
@@ -68,7 +64,6 @@ public interface Enterprise_DB_ProductMapper {
     @Select("<script>" +
             "select pt.* from Product_User pu " +
             "inner join Product pt on pu.ProductId=pt.Id " +
-            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
             "left join Customer c on pt.CustomerId=c.Id" +
             "<where>" +
             "pu.UserId=#{userId} " +
@@ -83,9 +78,6 @@ public interface Enterprise_DB_ProductMapper {
             "</if>" +
             "<if test='product.boilerNo != null and product.boilerNo.length>0'> " +
             " AND BoilerNo LIKE CONCAT('%',#{product.boilerNo},'%') " +
-            "</if>" +
-            "<if test='product.productCategoryId != null'> " +
-            " AND ProductCategoryId=#{product.productCategoryId} " +
             "</if>" +
             "<if test='product.controllerNo != null and product.controllerNo.length>0'> " +
             " AND ControllerNo LIKE CONCAT('%',#{product.controllerNo},'%') " +
@@ -106,7 +98,6 @@ public interface Enterprise_DB_ProductMapper {
 
 
     @Select("<script>select pt.* from Product pt " +
-            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
             "left join Customer c on pt.CustomerId=c.Id " +
             "<where>" +
             "pt.OrgId=#{orgId}  AND pt.IsSell = 1 " +
@@ -132,7 +123,6 @@ public interface Enterprise_DB_ProductMapper {
     @Select("<script>" +
             "select * from Product_User pu" +
             "inner join Product pt on pu.ProductId=pt.Id" +
-            "inner join Product_Category pc on pt.ProductCategoryId= pc.Id " +
             "left join Customer c on pt.CustomerId=c.Id" +
             "<where> pu.UserId=#{userId} " +
             "<if test='searchOptions.customerId != null'> " +
@@ -158,17 +148,27 @@ public interface Enterprise_DB_ProductMapper {
     @Select("SELECT COUNT(*) AS Amount,case Media WHEN 0 THEN '热水' when 1 then '蒸汽' when 2 then '导热油' when 3 then '热风' ELSE '真空' END as mediaType,case Power WHEN 0 THEN '燃油气' when 1 then '电' when 2 then '煤' when 3 then '生物质' ELSE '余热' END powerType FROM (SELECT ControllerNo,Media,Power FROM Product INNER JOIN Product_User ON Product.Id = Product_User.ProductId WHERE UserId = #{userId}) AS tb GROUP BY Media,Power")
     List<ProductTypeAmountClass> getProductTypeAmountByUserId(@Param("userId") int userId);
 
-    @Insert("INSERT into Product(OrgId,BoilerNo,ProductCategoryId,ControllerNo,TonnageNum,Media,Power,IsSell,SaleDate,Longitude,Latitude,Province,City,District,Street,CreateDateTime,EditDateTime,CustomerId,CustomerName) " +
-            " VALUES(#{orgId},#{boilerNo},#{productCategoryId},#{controllerNo},#{tonnageNum},#{media},#{power},#{isSell},DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d'),#{longitude},#{latitude},#{province},#{city}," +
+    @Select("Select Count(*) as Amount from Product where ControllerNo = #{controllerNo}")
+    int CountControllerAmount(String controllerNo);
+
+    @Select("SELECT DISTINCT BoilerNo as CategoryName FROM Product where OrgId=#{orgId} and BoilerNo is NULL")
+    List<String> getProductCategories(@Param("orgId") int orgId);
+
+    @Insert("INSERT into Product(OrgId,BoilerNo,ControllerNo,TonnageNum,Media,Power,IsSell,SaleDate,Longitude,Latitude,Province,City,District,Street,CreateDateTime,EditDateTime,CustomerId,CustomerName) " +
+            " VALUES(#{orgId},#{boilerNo},#{controllerNo},#{tonnageNum},#{media},#{power},#{isSell},DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d'),#{longitude},#{latitude},#{province},#{city}," +
             "#{district},#{street},#{createDateTime},#{editDateTime},#{customerId},#{customerName})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "Id")
     void createProduct(Product product);
 
-    @Update("update Product set BoilerNo=#{boilerNo}, TonnageNum=#{tonnageNum}," +
+    @Update("update Product set TonnageNum=#{tonnageNum}," +
             "SaleDate=DATE_FORMAT(DATE_ADD(#{saleDate},INTERVAL 1 DAY), '%Y-%m-%d')," +
             "EditDateTime=#{editDateTime},CustomerId=#{customerId},CustomerName=#{customerName}" +
             " where Id=#{id}")
     void modifyProductInfo(Product Product);
+
+    @Update("update Product set BoilerNo=#{boilerNo},Media=#{media},Power=#{power}" +
+            " where Id=#{id}")
+    void resetProductInfo(Product Product);
 
     @Update("update Product set Longitude=#{longitude},Latitude=#{latitude} where Id=#{id}")
     void modifyProductSellInfo(Product product);
