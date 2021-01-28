@@ -6,12 +6,14 @@ import cn.com.sdcsoft.webapi.devicesetting.entity.ModbusSetting;
 import cn.com.sdcsoft.webapi.devicesetting.service.*;
 import cn.com.sdcsoft.webapi.devicesetting.utils.CRC16;
 import cn.com.sdcsoft.webapi.entity.Result;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,10 @@ public class DeviceSettingController {
     DeviceAttrService deviceAttrService;
     @Autowired
     DeviceMapService deviceMapService;
+
+    @Autowired
+    @Resource(name = "baseRabbitTemplate")
+    private RabbitTemplate rabbitTemplate;
 
     @PostMapping("/create")
     public Result create(@RequestBody DeviceSetting setting) {
@@ -62,6 +68,11 @@ public class DeviceSettingController {
         return Result.getSuccessResult(deviceAttrService.list(line));
     }
 
+    @RequestMapping("/send/rabbitmq")
+    public Result sendRabbitmqMsg(String deviceNo) {
+        rabbitTemplate.convertAndSend("DeviceSettingExchange","",deviceNo);
+        return Result.getSuccessResult();
+    }
     @RequestMapping("/get")
     public Result get(String deviceNo) {
         DeviceSetting setting = deviceSettingService.get(deviceNo);
